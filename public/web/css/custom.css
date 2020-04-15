@@ -1,0 +1,55 @@
+/*For Developer Use*/
+
+body[dir="rtl"] header .navbar .logo-wrap .site-logo {
+    left: auto;
+    right: 8px;
+} 
+
+body[dir="rtl"]  .account-wrap
+{
+    display:none;
+}
+header.nav-up {
+      top: -133px !important; 
+}
+
+body[dir="rtl"] .slick-arrow.slick-next {
+    right: auto;
+    left: 50px;
+}
+body[dir="rtl"]  .slick-arrow.slick-prev {
+    left: 0;
+    right: auto;
+}
+
+body[dir="rtl"]  .payment-wrap {
+    margin-left: 0;
+    margin-right: 30px;
+}
+body[dir="rtl"] .sm-icon-wrap ul
+{
+    margin: 0 auto 0 0;
+}
+body[dir="rtl"] .sm-icon-wrap ul li
+{
+    margin-right: 0;
+    margin-left: 29px;
+}
+body[dir="rtl"] .sm-icon-wrap ul li:nth-child(4n+4)
+{
+    margin-left: 0;
+}
+body[dir="rtl"]  .store-paymate-wrap
+{
+    justify-content: flex-end;
+}
+
+body[dir="rtl"]  header .navbar .navbar-collapse ul>li {
+    margin-left: 40px;
+    margin-right: 0;
+}
+
+body[dir="rtl"]  header .navbar .navbar-collapse ul>li:last-child {
+    margin-left:0;
+}
+

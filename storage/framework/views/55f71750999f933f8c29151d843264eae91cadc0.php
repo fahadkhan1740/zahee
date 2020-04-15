@@ -1,0 +1,53 @@
+<section class="info-boxes-content">
+    <div class="container">
+        <div class="info-box-full bg-info-boxes-content">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-3 pl-xl-0">
+                <div class="info-box">
+                    <div class="panel">
+                        <h3 class="fas fa-truck"></h3>
+                        <div class="block">
+                            <h4 class="title"><?php echo app('translator')->get('website.bannerLabel1'); ?></h4>
+                            <p><?php echo app('translator')->get('website.bannerLabel1Text'); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 pl-xl-0">
+                <div class="info-box">
+                    <div class="panel">
+                        <h3 class="fas fa-money-bill-alt"></h3>
+                        <div class="block">
+                            <h4 class="title"><?php echo app('translator')->get('website.bannerLabel2'); ?></h4>
+                            <p><?php echo app('translator')->get('website.bannerLabel2Text'); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 pl-xl-0">
+              <div class="info-box">
+                  <div class="panel">
+                      <h3 class="fas fa-life-ring"></h3>
+                      <div class="block">
+                          <h4 class="title"><?php echo app('translator')->get('website.bannerLabel3'); ?></h4>
+                          <p><?php echo app('translator')->get('website.hotline'); ?>&nbsp;:&nbsp;(<?php echo e($result['commonContent']['setting'][11]->value); ?>)</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 pl-xl-0">
+                <div class="info-box last">
+                    <div class="panel">
+                        <h3 class="fas fa-credit-card"></h3>
+                        <div class="block">
+                            <h4 class="title"><?php echo app('translator')->get('website.bannerLabel4'); ?></h4>
+                            <p><?php echo app('translator')->get('website.bannerLabel4Text'); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+<?php /**PATH /var/www/html/zaheeecomm/resources/views/web/product-sections/info_boxes.blade.php ENDPATH**/ ?>
