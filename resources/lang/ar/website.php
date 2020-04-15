@@ -55,7 +55,7 @@ return [
 
 	'Profile'=>'الملف الشخصي',
 
-	'Logout'=>'الخروج',
+	''=>'الخروج',
 
 	'Login/Register'=>'دخولتسجيل',
 
@@ -766,4 +766,9 @@ return [
 	'Are you sure you want to return this order?'=>'هل أنت متأكد من أنك تريد إرجاع هذا الطلب؟',
 	'return order'=>'طلب المرتجعات',
 	'Avail free shpping on'=>'الاستفادة الشحن المجاني على',
+    'Pet Services' => 'خدمات الحيوانات الأليفة',
+    'Grocery'=> 'بقالة',
+    'Cosmetic & Perfumes' => 'مستحضرات التجميل والعطور',
+    'Health Supplements' => 'المكملات الغذائية',
+    'Protein & others' => 'البروتين وغيره'
 ];

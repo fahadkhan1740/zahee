@@ -750,7 +750,10 @@ return [
 	'You have already subscribed.'=>'You have already subscribed.',
 	'Some problem occurred, please try again.'=>'Some problem occurred, please try again.',
 	'Please enter your email address'=>'Please enter your email address.',
-	'If you do note want to apply this coupon just click cross button of this alert.'=>'If you do note want to apply this coupon just click cross button of this alert.'
-
-
+	'If you do note want to apply this coupon just click cross button of this alert.'=>'If you do note want to apply this coupon just click cross button of this alert.',
+    'Pet Services' => 'Pet Services',
+    'Grocery'=> 'Grocery',
+    'Cosmetic & Perfumes' => 'Cosmetic & Perfumes',
+    'Health Supplements' => 'Health Supplements',
+    'Protein & others' => 'Protein & others'
 ];

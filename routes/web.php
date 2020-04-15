@@ -34,6 +34,8 @@ Route::group(['namespace' => 'Web'], function () {
 		Route::post('/updatesinglecart', 'CartController@updatesinglecart');
 		Route::get('/cartButton', 'CartController@cartButton');
 
+		Route::get('/all-category', 'CategoryController@getAllCategories');
+
 		Route::get('/profile', 'CustomersController@profile')->middleware('Customer');
 		Route::get('/wishlist', 'CustomersController@wishlist')->middleware('Customer');
 		Route::post('/updateMyProfile', 'CustomersController@updateMyProfile')->middleware('Customer');
@@ -99,5 +101,3 @@ Route::group(['namespace' => 'Web'], function () {
 		Route::post('/processContactUs', 'IndexController@processContactUs');
 
 	});
-
-	Route::get('/test', 'Web\IndexController@test1');

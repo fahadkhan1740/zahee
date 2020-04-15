@@ -57,7 +57,7 @@ class CustomersController extends Controller
 		}
 	}
 
-	public function login(Request $request){  
+	public function login(Request $request){
 		if(auth()->guard('customer')->check()){
 			return redirect('/');
 		}
@@ -166,11 +166,11 @@ class CustomersController extends Controller
 		return redirect()->intended('/');
 	}
 
-  public function socialLogin($social){
+    public function socialLogin($social){
         return Socialite::driver($social)->redirect();
     }
 
-  public function handleSocialLoginCallback($social){
+    public function handleSocialLoginCallback($social){
 		  $result =  $this->customer->handleSocialLoginCallback($social);
 			if(!empty($result)){
 				return redirect()->intended('/')->with('result', $result);
@@ -356,16 +356,16 @@ class CustomersController extends Controller
 									return redirect('/login')->withInput($request->input())->with('error', Lang::get("website.Email already exist"));
 								}else{
 
-									
-									if( $res['insert'] == "true"){ 
+
+									if( $res['insert'] == "true"){
 										if($res['auth'] == "true"){
 											$result = $res['result'];
 											return redirect()->intended('/')->with('result', $result);
-										}else{ 
-											
+										}else{
+
 											return redirect('login')->with('loginError', Lang::get("website.Email or password is incorrect"));
 										}
-									}else{ 
+									}else{
 										return redirect('/login')->with('error', Lang::get("website.something is wrong"));
 									}
 								}

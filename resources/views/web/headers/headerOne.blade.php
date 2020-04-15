@@ -3,32 +3,55 @@
         <div class="container">
             <div class="headerTopLeft"></div>
             <div class="headerTopRight">
-                <ul>
-                    <li><a href="#">Wishlist</a></li>
-                    <li class="divide">|</li>
-                    <li>
-                        <select class="selectpicker" data-width="fit">
-                            <option data-content='<span class="flag-icon flag-icon-us"></span> English'></option>
-                            <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'></option>
-                        </select>
-                    </li>
-		<li>
-		 <select>
-                            <option> Kuwait</option>
-                            <option> Qatar</option>
-			                <option> UAE</option>
-                            <option> Bahrain</option>
-                            <option> Saudi Arabia</option>
-                            <option> Oman</option>
-                        </select>
-                    </li>
-                </ul>
+                            <div class="navbar-lang">
+                                <!--  CHANGE LANGUAGE CODE SECTION -->
+                                @if(count($languages) > 1)
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <img src="{{asset('').session('language_image')}}" width="17px" />
+                                            {{	session('language_name')}}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @foreach($languages as $language)
+                                                <li  @if(session('locale')==$language->code) style="background:lightgrey;" @endif>
+                                                    <button  onclick="myFunction1({{$language->languages_id}})" class="btn" style="background:none;" href="#">
+                                                        <img style="margin-left:10px; margin-right:10px;"src="{{asset('').$language->image_path}}" width="17px" />
+                                                        <span>{{$language->name}}</span>
+                                                    </button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @include('web.common.scripts.changeLanguage')
+                                @endif
+                            </div>
+{{--                <ul>--}}
+{{--                    <li><a href="#">Wishlist</a></li>--}}
+{{--                    <li class="divide">|</li>--}}
+{{--                    <li>--}}
+{{--                        <select class="form-control">--}}
+{{--                            <option><span class="flag-icon flag-icon-us"></span>English</option>--}}
+{{--                            <option><span class="flag-icon flag-icon-us"></span>English</option>--}}
+{{--                        </select>--}}
+{{--                    </li>--}}
+{{--		<li>--}}
+{{--		                 <select class="form-control">--}}
+{{--                            <option> Kuwait</option>--}}
+{{--                            <option> Qatar</option>--}}
+{{--			                <option> UAE</option>--}}
+{{--                            <option> Bahrain</option>--}}
+{{--                            <option> Saudi Arabia</option>--}}
+{{--                            <option> Oman</option>--}}
+{{--                        </select>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
             </div>
         </div>
     </div>
     <div class="headerBottom">
         <div class="container">
             <div class="headerBottomLeft">
+                <!-- <a href="index.html" class="site-logo"><img src="images/logo.png" alt="logo.png" /></a> -->
             </div>
             <div class="headerBottomRight">
                 <div class="search-wrap">
@@ -41,9 +64,28 @@
                 </div>
                 <div class="account-wrap">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Login & Signup</a></li>
-                        <li class="divide">|</li>
-                        <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a></li>
+                    @if(auth()->guard('customer')->check())
+                        <li>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    @if(auth()->guard('customer')->user()->avatar == null)
+                                        <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{asset('web/images/miscellaneous/avatar.jpg')}}">
+                                    @else
+                                        <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{auth()->guard('customer')->user()->avatar}}">
+                                    @endif
+                                        <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp;! {{auth()->guard('customer')->user()->first_name}} <?php }?> </span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url('/profile') }}"> <i class="fa fa-user" aria-hidden="true"></i> @lang('website.Profile')</a></li>
+                                    <li><a href="{{ url('/viewcart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> @lang('website.Profile')</a></li>
+                                    <li><a href="{{ url('/wishlist') }}"> <i class="fa fa-heart" aria-hidden="true"></i> @lang('website.Wishlist')</a></li>
+                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> @lang('website.Logout')</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        @else
+                        <li><a href="{{url('/login')}}"><i class="fa fa-user" aria-hidden="true"></i>@lang('website.Login/Register')</a></li>
+                  @endif
                     </ul>
                 </div>
             </div>
@@ -61,22 +103,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">All Categories </a>
+                        <a class="nav-link" href="{{ url('/all-category/1') }}">@lang('website.All Categories')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pet Services</a>
+                        <a class="nav-link" href="{{url('/shop?category=pet-services')}}">@lang('website.Pet Services')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Grocery</a>
+                        <a class="nav-link" href="{{url('/shop?category=grocery')}}">@lang('website.Grocery')</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Cosmetic & Perfumes   </a>
+                        <a class="nav-link" href="{{url('/shop?category=cosmetic-perfumes')}}">@lang('website.Cosmetic & Perfumes')   </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Health Supplements</a>
+                        <a class="nav-link" href="{{url('/shop?category=health-supplements')}}">@lang('website.Health Supplements')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Protein &others</a>
+                        <a class="nav-link" href="{{url('/shop?category=protein-others')}}">@lang('website.Protein & others')</a>
                     </li>
                 </ul>
             </div>

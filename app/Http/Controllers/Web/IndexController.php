@@ -51,7 +51,7 @@ class IndexController extends Controller
 /*********************************************************************/
 		$result = array();
 		$result['commonContent'] = $this->index->commonContent();
-		$title = array('pageTitle' => Lang::get("website.Home"));
+//		$title = array('pageTitle' => Lang::get("website.Home"));
 /********************************************************************/
 
 /*********************************************************************/
