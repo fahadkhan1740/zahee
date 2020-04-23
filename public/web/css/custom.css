@@ -1,4 +1,10 @@
+
 /*For Developer Use*/
+
+body
+{
+    padding-top: 206px !important;
+}
 
 body[dir="rtl"] header .navbar .logo-wrap .site-logo {
     left: auto;
@@ -88,7 +94,7 @@ body[dir="rtl"]  header .navbar .navbar-collapse ul>li:last-child {
 .box:hover .imgbox img
 {
     opacity: .5;
-    transform: translateY(-40px);
+    /* transform: translateY(-40px); */
 }
 
 .box .content
@@ -142,6 +148,40 @@ body[dir="rtl"]  header .navbar .navbar-collapse ul>li:last-child {
 
 section
 {
-    padding: 120px 0 0;
-
+    /* padding: 120px 0 0; */
+    padding: 50px 0;
 }
+  
+#back-to-top {
+    width: 40px; 
+    height: 40px;
+    border-radius: 100%;
+    background-color: #f00;    
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+    color: #fff;
+    position: fixed;
+    bottom: 20px;  
+    right: 20px;
+    font-size: 20px;
+}
+.box .imgbox
+{
+    height: 100%;
+    width: 100%;
+}
+.box .imgbox img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.page-area a {
+    color: #000;
+    font-weight: 500;
+}
+.page-area a:hover
+{
+    color:#ff521b;
+}   

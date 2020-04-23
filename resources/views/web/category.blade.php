@@ -1,7 +1,6 @@
 @extends('web.layout')
 @section('content')
-    <section>
-        <div class="container-fluid">
+    <section class="section category__section">
         <div class="container">
             <div class="row">
                 @if(count($result['categoryArray']) > 0)
@@ -21,6 +20,5 @@
                 @endif
             </div>
         </div>
-    </div>
     </section>
 @endsection

@@ -127,14 +127,6 @@ return [
 	'AddingNews' => 'Adding News',
 	'inventory' => 'Inventory',
 	'Save_And_Continue' => 'Save And Continue',
-	'Save_And_complete' => 'Save And Complete',
-	'login_text' => 'Sign in to start your session',
-	'welcome_message'	 =>	'Welcome',
-	'welcome_message_to'=>'To Admin Panel',
-	'login'=>'Login',
-	'login_page_name'=>'Login',
-
-
 	//login page
 	'login_text' => 'Sign in to start your session',
 	'welcome_message'	 =>	'Welcome',
@@ -2099,6 +2091,9 @@ return [
 	'Purchase Code'=>'Purchase Code',
 	'Purchase Code Text'=>'Please enter your purchase Code.',
 	'Are You Sure You Bought This Product? Because Your Purchase Code Is Wrong!'=>'Are You Sure You Bought This Product? Because Your Purchase Code Is Wrong!',
-	'Your purchase code does not match to the uploaded Zip file source code.'=>'Your purchase code does not match to the uploaded Zip file source code!'
+	'Your purchase code does not match to the uploaded Zip file source code.'=>'Your purchase code does not match to the uploaded Zip file source code!',
+	'ListingContent'=>'Listing All The Contents',
+    'Contents' => 'Contents',
+	'ListingAllContents' => 'Listing All The Contents',
 
 ];

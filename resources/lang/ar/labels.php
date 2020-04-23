@@ -1564,4 +1564,8 @@ return [
 	'Side Banner 12'=>'Side Banner 12',
 	'Side Banner 13'=>'Side Banner 13',
 
+    'ListingContent'=>'Listing All The Contents',
+    'Contents' => 'Contents',
+	'ListingAllContents' => 'Listing All The Contents',
+
 ];

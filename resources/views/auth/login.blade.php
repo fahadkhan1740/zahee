@@ -7,14 +7,13 @@
 
 			<div class="row">
 					<div class="col-12 col-sm-12">
-							<div class="row justify-content-end">
-									<nav aria-label="breadcrumb">
-											<ol class="breadcrumb">
-												<li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-												<li class="breadcrumb-item active" aria-current="page">@lang('website.Login')</li>
-											</ol>
-										</nav>
-							</div>
+							<nav aria-label="breadcrumb mb-5">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+										<li class="breadcrumb-item active" aria-current="page">@lang('website.Login')</li>
+									</ol>
+								</nav>
+
 					</div>
 				<div class="col-12 col-sm-12 col-md-6">
 					@if(Session::has('loginError'))
@@ -65,19 +64,36 @@
 									</div>
 
 									<div class="col-12 col-sm-12">
-										<button type="submit" class="btn btn-secondary">@lang('website.Login')</button>
+										<button type="submit" class="btn btn-default">@lang('website.Login')</button>
 									<a href="{{ URL::to('/forgotPassword')}}" class="btn btn-link">@lang('website.Forgot Password')</a>
-									@if($result['checkout_button'] == 1)
-									<p style="text-align:center; margin-top:30px;">
-										<strong>OR</strong>
-									</p>
-									<a href="{{url('/guest_checkout')}}" type="submit" class="btn btn-primary btn-block">
-										@lang('website.Guest Checkout')
-									</a>
-									@endif
+{{--									@if($result['checkout_button'] == 1)--}}
+{{--									<p style="text-align:center; margin-top:30px;">--}}
+{{--										<strong>OR</strong>--}}
+{{--									</p>--}}
+{{--									<a href="{{url('/guest_checkout')}}" type="submit" class="btn btn-primary btn-block">--}}
+{{--										@lang('website.Guest Checkout')--}}
+{{--									</a>--}}
+{{--									@endif--}}
 								</div>
-						</form>
+						</form> 
 					</div>
+					<div class="col-12 col-sm-12 my-5">
+						<div class="registration-socials">
+					<div class="row align-items-center justify-content-between">
+									<div class="col-12 col-sm-12 mb-3">
+											Access Your Account Through Your Social Networks
+									</div>
+									<div class="col-12 col-sm-12">
+										  @if($result['commonContent']['setting'][61]->value==1)
+											<a href="login/google" type="button" class=" btn-google"><i class="fab fa-google-plus-g"></i>&nbsp;Google</a>
+											@endif
+											@if($result['commonContent']['setting'][2]->value==1)
+											<a  href="login/facebook" type="button" class=" btn-facebook"><i class="fab fa-facebook-f"></i>&nbsp;Facebook</a>
+											@endif
+									</div>
+							</div>
+					</div>
+				</div>
 				</div>
 
 				<div class="col-12 col-sm-12 col-md-6">
@@ -102,9 +118,9 @@
 										<span class="sr-only">@lang('website.Error'):</span>
 										{!! session('error') !!}
 
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-																			<span aria-hidden="true">&times;</span>
-																	</button>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+												</button>
 								</div>
 							@endif
 
@@ -196,29 +212,13 @@
 													</div>
 												</div>
 										<div class="col-12 col-sm-12">
-												<button type="submit" class="btn btn-primary">Create an Account</button>
+												<button type="submit" class="btn btn-default">Create an Account</button>
 
 										</div>
 							</form>
 						</div>
 				</div>
-				<div class="col-12 col-sm-12 my-5">
-						<div class="registration-socials">
-					<div class="row align-items-center justify-content-between">
-									<div class="col-12 col-sm-6">
-											Access Your Account Through Your Social Networks
-									</div>
-									<div class="col-12 col-sm-6 right">
-										  @if($result['commonContent']['setting'][61]->value==1)
-											<a href="login/google" type="button" class="btn btn-google"><i class="fab fa-google-plus-g"></i>&nbsp;Google</a>
-											@endif
-											@if($result['commonContent']['setting'][2]->value==1)
-											<a  href="login/facebook" type="button" class="btn btn-facebook"><i class="fab fa-facebook-f"></i>&nbsp;Facebook</a>
-											@endif
-									</div>
-							</div>
-					</div>
-				</div>
+				
 			</div>
 
 	</div>

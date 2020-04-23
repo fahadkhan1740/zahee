@@ -177,6 +177,8 @@
                    </div>
                </div>
 
+
+
                <div class="items-list text-center">
                    <div class="items-box-wrap">
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
@@ -192,6 +194,7 @@
                        </a>
                    </div>
                </div>
+
 
                <div class="items-list text-center">
                    <div class="items-box-wrap">
@@ -209,6 +212,7 @@
                    </div>
                </div>
 
+
                <div class="items-list text-center">
                    <div class="items-box-wrap">
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
@@ -224,6 +228,7 @@
                        </a>
                    </div>
                </div>
+
 
                <div class="items-list text-center">
                    <div class="items-box-wrap">
@@ -241,6 +246,7 @@
                    </div>
                </div>
 
+
                <div class="items-list text-center">
                    <div class="items-box-wrap">
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
@@ -257,7 +263,12 @@
                    </div>
                </div>
            </div>
+           
 
        </div>
-       @include('web.common.scripts.Like')
+
+       </div>
+       </section>
+
+@include('web.common.scripts.Like')
 @endsection

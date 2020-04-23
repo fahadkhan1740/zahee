@@ -44,16 +44,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'facebook' => [
-      'client_id' => 'FB_CLIENT_ID',
-      'client_secret' => 'FB_SECRET_KEY',
-      'redirect' => 'http://YOUR_DOMAIN_NAME/login/facebook/callback',
+      'client_id' => '150819416358499',
+      'client_secret' => '3491ca578a7c25198d72cd2c57bb9171',
+      'redirect' => 'https://clientstagingdev.com/zaheeecomm/public/login/facebook/callback',
     ],
 
 
     'google' => [
-      'client_id' => 'GOOGLE_CLIENT_ID',
-      'client_secret' => 'GOOGLE_SECRET_KEY',
-      'redirect' => 'http://localhost:8000/login/google/callback',
+      'client_id' => '241507832628-rs55u237ciras7qlcq8davu1p2g2tbrl.apps.googleusercontent.com',
+      'client_secret' => 'GDS5KsgJLFJLTo3GtgUXcHxZ',
+      'redirect' => 'https://clientstagingdev.com/zaheeecomm/public/login/google/callback',
     ],
 
 ];

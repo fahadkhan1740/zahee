@@ -80,6 +80,4 @@ class CustomersController extends Controller
 		$userResponse = Customer::updatepassword($request);
 		print $userResponse;
 	}
-
-
 }

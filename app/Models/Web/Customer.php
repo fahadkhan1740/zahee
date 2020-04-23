@@ -142,19 +142,19 @@ class Customer extends Model
 					}
 
 						$img = file_get_contents($user->getAvatar());
-						$dir="resources/assets/images/user_profile/";
+						$dir=public_path('resources/assets/images/user_profile/');
 						if (!file_exists($dir) and !is_dir($dir)) {
 							mkdir($dir);
 						}
 
-						$uploadfile = $dir."/pic_".time().".jpg";
-						$temp_upload_path = base_path().'/'.$uploadfile;
+						$uploadfile = $dir."pic_".time().".jpg";
+						$temp_upload_path = $uploadfile;
 						file_put_contents($temp_upload_path, $img);
 						$profile_photo=$uploadfile;
 
 					if($social == 'facebook'){
 
-						$existUser = DB::table('customers')->where('fb_id', '=', $social_id)->orWhere('email', '=', $email)->get();
+						$existUser = DB::table('customers')->where('fb_id', '=', $social_id)->get();
 
 											if(count($existUser)>0){
 
@@ -165,11 +165,12 @@ class Customer extends Model
 													'first_name' => $customers_firstname,
 													'last_name' => $customers_lastname,
 													'email' => $email,
-													'isActive' => '1',
+													'password' => bcrypt($password),
+													'status' => '1',
 													'avatar' => $profile_photo,
 													'created_at' =>	 time()
 												]);
-												DB::table('customer')->where('user_id','=',$customers_id)->update([
+												DB::table('customers')->where('user_id','=',$customers_id)->update([
 													'fb_id' => $social_id,
 												]);
 											}else{
@@ -179,7 +180,8 @@ class Customer extends Model
 													'first_name' => $customers_firstname,
 													'last_name' => $customers_lastname,
 													'email' => $email,
-													'isActive' => '1',
+													'password' => bcrypt($password),
+													'status' => '1',
 													'avatar' => $profile_photo,
 													'created_at' =>	 time()
 												]);
@@ -192,7 +194,7 @@ class Customer extends Model
 
 					if($social == 'google'){
 
-						$existUser = DB::table('customers')->where('google_id', '=', $social_id)->orWhere('email', '=', $email)->get();
+						$existUser = DB::table('customers')->where('google_id', '=', $social_id)->get();
 
 											if(count($existUser)>0){
 
@@ -203,11 +205,12 @@ class Customer extends Model
 													'first_name' => $customers_firstname,
 													'last_name' => $customers_lastname,
 													'email' => $email,
-													'isActive' => '1',
+                                                    'password' => bcrypt($password),
+													'status' => '1',
 													'avatar' => $profile_photo,
 													'created_at' =>	 time()
 												]);
-												DB::table('customer')->where('user_id','=',$customers_id)->update([
+												DB::table('customers')->where('user_id','=',$customers_id)->update([
 													'google_id' => $social_id,
 												]);
 											}else{
@@ -217,7 +220,8 @@ class Customer extends Model
 													'first_name' => $customers_firstname,
 													'last_name' => $customers_lastname,
 													'email' => $email,
-													'isActive' => '1',
+                                                    'password' => bcrypt($password),
+													'status' => '1',
 													'avatar' => $profile_photo,
 													'created_at' =>	 time()
 												]);
@@ -265,13 +269,13 @@ class Customer extends Model
 						DB::table('whos_online')
 							->where('customer_id', $customers_id)
 							->update([
-									'full_name'  => $userData[0]->customers_firstname.' '.$userData[0]->customers_lastname,
+									'full_name'  => $userData[0]->first_name.' '.$userData[0]->last_name,
 									'time_entry'   => date('Y-m-d H:i:s'),
 							]);
 					}else{
 						DB::table('whos_online')
 							->insert([
-									'full_name'  => $userData[0]->customers_firstname.' '.$userData[0]->customers_lastname,
+									'full_name'  => $userData[0]->first_name.' '.$userData[0]->last_name,
 									'time_entry' => date('Y-m-d H:i:s'),
 									'customer_id'    => $customers_id
 							]);
@@ -280,10 +284,11 @@ class Customer extends Model
 					$customerInfo = array("email" => $email, "password" => $password);
 					$old_session = Session::getId();
 
-					if(auth()->attempt($customerInfo)) {
+					if(auth()->guard('customer')->attempt($customerInfo)) {
 							$customer = auth()->guard('customer')->user();
 
 							//set session
+//                        dd($customer);
 							session(['customers_id' => $customer->id]);
 
 							//cart
@@ -316,12 +321,17 @@ class Customer extends Model
 							}
 
 							$result['customers'] = DB::table('users')->where('id', $customer->id)->get();
+//							dd($result);
 							return  $result;
-						}
-            $result="";
-            return  $result;
+					}
+					$result = '';
+					return $result;
+  }
 
-    }
+  public function createRandomPassword() {
+        $pass = substr(md5(uniqid(mt_rand(), true)) , 0, 8);
+        return $pass;
+  }
 
   public function likeMyProduct($request){
 

@@ -142,9 +142,6 @@ class Kernel extends HttpKernel
         'add_categories' => \App\Http\Middleware\categories\add_categories::class,
         'view_reviews' => \App\Http\Middleware\reviews\view_reviews::class,
         'edit_reviews' => \App\Http\Middleware\reviews\edit_reviews::class,
-        
-
-
     ];
 
     /**

@@ -19,7 +19,7 @@ class view_manufacturer
     {
       $check =  DB::table('manage_role')
                  ->where('user_types_id',Auth()->user()->role_id)
-                 ->where('manufacturer_view',1)
+                 ->where('content_view',1)
                  ->first();
         if($check == null){
           return  redirect('not_allowed');

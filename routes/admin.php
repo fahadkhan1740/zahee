@@ -147,7 +147,7 @@ Route::group(['middleware' => ['installer']], function () {
         Route::post('/update', 'CurrencyController@update')->middleware('edit_general_setting');
         Route::post('/delete', 'CurrencyController@delete')->middleware('edit_general_setting');
 
-        
+
     });
 
     Route::group(['prefix' => 'admin/products', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
@@ -482,17 +482,4 @@ Route::group(['middleware' => ['installer']], function () {
 
         Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     });
-
-    Route::group(['prefix' => 'admin/managements', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
-        Route::get('/merge', 'ManagementsController@merge')->middleware('edit_management');
-        Route::get('/backup', 'ManagementsController@backup')->middleware('edit_management');
-        Route::post('/take_backup', 'ManagementsController@take_backup')->middleware('edit_management');
-        Route::get('/import', 'ManagementsController@import')->middleware('edit_management');
-        Route::post('/importdata', 'ManagementsController@importdata')->middleware('edit_management');
-        Route::post('/mergecontent', 'ManagementsController@mergecontent')->middleware('edit_management');
-        Route::get('/updater', 'ManagementsController@updater')->middleware('edit_management');
-        Route::post('/checkpassword', 'ManagementsController@checkpassword')->middleware('edit_management');
-        Route::post('/updatercontent', 'ManagementsController@updatercontent')->middleware('edit_management');
-    });
-
 });

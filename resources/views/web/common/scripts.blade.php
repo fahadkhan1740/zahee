@@ -20,6 +20,35 @@ if($default_currency->id == Session::get('currency_id')){
 
 @endif
 
+<!--- google map-->
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=geometry&key=AIzaSyCQq_d3bPGfsIAlenXUG5RtZsKZKzOmrMw"></script>
+<!-- Include js plugin -->
+<!-- Include js plugin -->
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="{{asset('web/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('web/js/owl.carousel.min.js')}}"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+
+<script src="{{asset('web/js/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/api/fancybox/source/jquery.fancybox.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/popper.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/aos.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/custom.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/api/fancybox/source/jquery.fancybox.js')}}"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.min.js"></script>
+
+
 <script type="application/javascript">
 
 @if(Request::path() != 'shop')
@@ -655,29 +684,6 @@ function getQuantity(){
 
 </script>
 
-<!--- google map-->
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=geometry&key=AIzaSyCQq_d3bPGfsIAlenXUG5RtZsKZKzOmrMw"></script>
-<!-- Include js plugin -->
-<!-- Include js plugin -->
-
-<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script src="{{asset('web/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('web/js/owl.carousel.min.js')}}"></script>
-<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-
-<script src="{{asset('web/js/slick.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/api/fancybox/source/jquery.fancybox.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/aos.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/slick.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/custom.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/api/fancybox/source/jquery.fancybox.js')}}"></script>
 
 
 @if(session('direction') == 'rtl')
@@ -759,7 +765,29 @@ jQuery(function(){
     jQuery('.ex1').zoom();
 
 });
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBttfQixBsmyVJJzdVd3YzSLwx75e-7_Mc",
+        authDomain: "zaahee-ce982.firebaseapp.com",
+        databaseURL: "https://zaahee-ce982.firebaseio.com",
+        projectId: "zaahee-ce982",
+        storageBucket: "zaahee-ce982.appspot.com",
+        messagingSenderId: "241507832628",
+        appId: "1:241507832628:web:994a96a6d954de820b4b61",
+        measurementId: "G-ZCRSSWC09R"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.min.js"></script>
+</script>

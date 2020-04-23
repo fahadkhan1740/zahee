@@ -31,18 +31,18 @@
 				<link rel="stylesheet" href="{{asset('web/css/slick.css') }}">
 			<link rel="stylesheet" href="{{asset('web/css/slick-theme.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{asset('web/css/stripe.css') }}" data-rel-css="" />
+	    <link rel="stylesheet" href="{{asset('web/api/fancybox/source/jquery.fancybox.css')}}"  media="all"/>
 	    <link rel="stylesheet" href="{{asset('web/css/responsive.css') }}">
 	    <link rel="stylesheet" href="{{asset('web/css/rtl.css')}}">
-		<link rel="stylesheet" href="{{asset('web/css/custom.css')}}">
 	    <link rel="stylesheet" href="{{asset('web/css/main.css')}}">
-	    <link rel="stylesheet" href="{{asset('web/api/fancybox/source/jquery.fancybox.css')}}"  media="all"/>
+        <link rel="stylesheet" href="{{asset('web/css/custom.css')}}">
 
 
 
     <!--------- stripe js ------>
 	<script src="https://js.stripe.com/v3/"></script>
 
-    <link rel="stylesheet" type="text/css" href="{{asset('web/css/stripe.css') }}" data-rel-css="" />
 
     <!------- paypal ---------->
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
