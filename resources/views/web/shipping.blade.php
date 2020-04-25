@@ -6,14 +6,12 @@
   <div class="container">
     <div class="row">
         <div class="col-12 col-sm-12">
-            <div class="row justify-content-end">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">@lang('website.Shipping Address')</li>
-                    </ol>
-                  </nav>
-            </div>
+          <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@lang('website.Shipping Address')</li>
+              </ol>
+            </nav>
         </div>
       <div class="col-12 col-lg-3">
         <div class="heading">
@@ -81,7 +79,7 @@
             <thead>
               <tr>
                 <th scope="col">@lang('website.Default')</th>
-                <th scope="col" class="d-none d-md-block">@lang('website.Action')</th>
+                <th scope="col" class="d-none d-md-block acton_col">@lang('website.Action')</th>
               </tr>
             </thead>
             <tbody>
@@ -100,7 +98,7 @@
                 <ul>
                   <li><a href="{{ URL::to('/shipping-address?address_id='.$address_data->address_id)}}"> <i class="fas fa-pen"></i> Edit</a></li>
                   @if($address_data->default_address == 0)
-                  <a  href="{{url('delete-address')}}/{{$address_data->address_id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+                 <li> <a  href="{{url('delete-address')}}/{{$address_data->address_id}}" ><i class="fa fa-trash" aria-hidden="true"></i>Delete</a></li>
                   @endif
                 </ul>
                 @include('web.common.scripts.deleteAddress')
@@ -226,7 +224,7 @@
                   @if(!empty($result['editAddress']))
                       <a href="{{ URL::to('/shipping-address')}}" class="btn btn-default">@lang('website.cancel')</a>
                   @endif
-                      <button type="submit" class="btn btn-dark">@if(!empty($result['editAddress']))  @lang('website.Update')  @else @lang('website.Add Address') @endif </button>
+                      <button type="submit" class="btn btn-default">@if(!empty($result['editAddress']))  @lang('website.Update')  @else @lang('website.Add Address') @endif </button>
                   </div>
                 </form>
           </div>

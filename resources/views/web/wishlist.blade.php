@@ -57,7 +57,9 @@
 					<div class="col-12 media-main">
 						@foreach($result['products']['product_data'] as $key=>$products)
 								<div class="media">
+									<div class="media__pro">
 										<img class="img-fluid" src="{{asset('').$products->image_path}}" alt="{{$products->products_name}}">
+										</div>
 										<div class="media-body">
 											<div class="row">
 												<div class="col-12 col-md-8  texting">
@@ -115,16 +117,16 @@
 													<div class="buttons">
 															@if($products->products_type==0)
 																	@if(!in_array($products->products_id,$result['cartArray']))
-																			<a  class="btn btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+																			<a  class="btn btn-default cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
 																	@elseif($products->products_min_order>1)
-																			<a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+																			<a class="btn btn-block btn-default" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
 																	@else
-																			<a  class="btn btn-secondary active">@lang('website.Added')</a>
+																			<a  class="btn btn-default active">@lang('website.Added')</a>
 																	@endif
 															@elseif($products->products_type==1)
-																	<a class="btn  btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+																	<a class="btn  btn-default" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
 															@elseif($products->products_type==2)
-																	<a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
+																	<a href="{{$products->products_url}}" target="_blank" class="btn btn-default">@lang('website.External Link')</a>
 															@endif
 													</div>
 												</div>

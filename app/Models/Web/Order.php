@@ -369,7 +369,7 @@ class Order extends Model
 													DB::table('orders_products_attributes')->insert(
 													[
 														 'orders_id' => $orders_id,
-														
+
 														 'products_id'  => $products->products_id,
 														 'orders_products_id'  => $orders_products_id,
 														 'products_options' =>$attribute->attribute_name,
@@ -463,7 +463,7 @@ class Order extends Model
 	}
 
 
-//get product vendor id 
+//get product vendor id
 
 	public function getvendorID($id) {
 		$product = 	DB::SELECT('SELECT vendor_id from products where  products_id=' . $id);
@@ -638,11 +638,11 @@ class Order extends Model
     return $count;
 	}
 
-	public function getPages($request){
+	public function getPages($slug){
 		$pages = DB::table('pages')
 					->leftJoin('pages_description','pages_description.page_id','=','pages.page_id')
-					->where([['pages.status','1'],['type',2],['pages_description.language_id',session('language_id')],['pages.slug',$request->name]])
-					->orwhere([['pages.status','1'],['type',2],['pages_description.language_id',1],['pages.slug',$request->name]])
+					->where([['pages.status','1'],['type',2],['pages_description.language_id',session('language_id')],['pages.slug',$slug]])
+					->orwhere([['pages.status','1'],['type',2],['pages_description.language_id',1],['pages.slug',$slug]])
 					->get();
      return $pages;
 	}

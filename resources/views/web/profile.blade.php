@@ -5,18 +5,19 @@
    <div class="container">
      <div class="row">
          <div class="col-12 col-sm-12">
-             <div class="row justify-content-end">
-                 <nav aria-label="breadcrumb">
-                     <ol class="breadcrumb">
-                       <li class="breadcrumb-item"><a href="#">@lang('website.Home')</a></li>
-                       <li class="breadcrumb-item active" aria-current="page">@lang('website.myProfile')</li>
-                     </ol>
-                   </nav>
-             </div>
+           <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                 <li class="breadcrumb-item"><a href="#">@lang('website.Home')</a></li>
+                 <li class="breadcrumb-item active" aria-current="page">@lang('website.myProfile')</li>
+               </ol>
+             </nav>
+             
          </div>
          <div class="col-12 media-main">
              <div class="media">
-                 <img src="{{auth()->guard('customer')->user()->avatar}}" alt="avatar">
+               <div class="media__pro">
+                   <img src="{{auth()->guard('customer')->user()->avatar}}" alt="avatar">
+                 </div>
                  <div class="media-body">
                    <div class="row">
                      <div class="col-12 col-sm-4 col-md-6">
@@ -24,11 +25,11 @@
                          <small>{{auth()->guard('customer')->user()->email}} </small></h4>
                      </div>
                      <div class="col-12 col-sm-8 col-md-6 detail">
-
                        <p>E-mail:<span><a href="#">{{auth()->guard('customer')->user()->email}}</a></span></p>
+
                      </div>
                      </div>
-                 </div>
+                 </div> 
 
              </div>
          </div>
@@ -142,8 +143,10 @@
                         @else
                           <input type="hidden" name="customers_old_picture" value="">
                         @endif
+                        <div class="media__pro">
                           <img style="margin-bottom:-50px;" src="{{auth()->guard('customer')->user()->avatar}}" alt="avatar">
-                          <div class="media-body"style="margin-left:70px; margin-bottom:-50px;">
+                          </div>
+                          <div class="media-body">
                             <div class="row">
                               <div class="col-12 col-sm-4 col-md-6">
                                  <input name="picture" id="userImage" type="file" class="inputFile" onChange="showPreview(this);" /><br>
@@ -201,12 +204,12 @@
                        </div>
                      </div>
 
-                   <button type="submit" class="btn btn-primary">@lang('website.Update')</button>
+                   <button type="submit" class="btn btn-default">@lang('website.Update')</button>
              </form>
 
          <!-- ............the end..... -->
        </div>
-       <div style="margin-top:20px;"class="col-12 col-lg-9 offset-3 ">
+       <div class="password__update__warper col-12 col-lg-9 offset-lg-3 ">
            <div class="heading">
                <h2>
                    @lang('website.Change Password')
@@ -216,14 +219,14 @@
              <form name="updateMyPassword" class="" enctype="multipart/form-data" action="{{ URL::to('/updateMyPassword')}}" method="post">
                  @csrf
                  <div class="form-group row">
-                     <label for="new_password" class="col-sm-4 col-form-label">@lang('website.New Password')</label>
-                     <div class="col-sm-8">
+                     <label for="new_password" class="col-sm-3 col-form-label">@lang('website.New Password')</label>
+                     <div class="col-sm-6">
                          <input name="new_password" type="password" class="form-control" id="new_password" placeholder="@lang('website.New Password')">
                          <span class="help-block error-content" hidden>@lang('website.Please enter your password and should be at least 6 characters long')</span>
                      </div>
                  </div>
                  <div class="button">
-                     <button type="submit" class="btn btn-dark">@lang('website.Update')</button>
+                     <button type="submit" class="btn btn-default">@lang('website.Update')</button>
                  </div>
              </form>
 

@@ -34,6 +34,8 @@ class Index extends Model
   }
 
   public function slidesByCarousel($currentDate,$carousel_id){
+      $indicator_count = 0;
+      $indicator_output = '';
     $slides = DB::table('sliders_images')
 			 ->leftJoin('image_categories','sliders_images.sliders_image','=','image_categories.image_id')
 			 ->select('sliders_id as id',

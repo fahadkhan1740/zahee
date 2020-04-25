@@ -54,11 +54,12 @@ Route::group(['namespace' => 'Web'], function () {
 		Route::post('/update-address', 'ShippingAddressController@updateAddress')->middleware('Customer');
 		Route::get('/delete-address/{id}', 'ShippingAddressController@deleteAddress')->middleware('Customer');
 		Route::post('/ajaxZones', 'ShippingAddressController@ajaxZones');
+
 		//news section
 		Route::get('/news', 'NewsController@news');
 		Route::get('/news-detail/{slug}', 'NewsController@newsDetail');
 		Route::post('/loadMoreNews', 'NewsController@loadMoreNews');
-		Route::get('/page', 'IndexController@page');
+		Route::get('/page/{slug}', 'IndexController@page');
 		Route::get('/shop', 'ProductsController@shop');
 		Route::post('/shop', 'ProductsController@shop');
 		Route::get('/product-detail/{slug}', 'ProductsController@productDetail');

@@ -30,15 +30,15 @@
                     <div class="footer-col quick-links">
                         <h6>Company Information</h6>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Sitemap </a></li>
-                            <li><a href="#">Delivery Terms</a></li>
-                            <li><a href="#">How to Order</a></li>
-                            <li><a href="#">Customer Service</a></li>
-                            <li><a href="#">Exchange and Returns</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms and Conditions</a></li>
+                            <li><a href="{{ url('/page/about-us') }}">About Us</a></li>
+                            <li><a href="{{ url('/page/about-us') }}">FAQ</a></li>
+                            <li><a href="{{ url('/page/about-us') }}">Sitemap </a></li>
+                            <li><a href="{{ url('/page/about-us') }}">Delivery Terms</a></li>
+                            <li><a href="{{ url('/page/about-us') }}">How to Order</a></li>
+                            <li><a href="{{ url('/page/about-us') }}">Customer Service</a></li>
+                            <li><a href="{{ url('/page/refund-policy') }}">Exchange and Returns</a></li>
+                            <li><a href="{{ url('/page/privacy-policy') }}">Privacy Policy</a></li>
+                            <li><a href="{{ url('/page/term-services') }}">Terms and Conditions</a></li>
                         </ul>
 
                         <div class="store-paymate-wrap">

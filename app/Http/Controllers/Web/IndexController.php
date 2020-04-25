@@ -326,9 +326,9 @@ $currentDate = $currentDate->toDateTimeString();
 		return $footer;
 	}
 	//page
-	public function page(Request $request){
+	public function page($slug){
 
-		$pages = $this->order->getPages($request);
+		$pages = $this->order->getPages($slug);
 		if(count($pages)>0){
 			$title = array('pageTitle' => $pages[0]->name);
 			$final_theme = $this->theme->theme();

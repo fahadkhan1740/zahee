@@ -211,6 +211,7 @@ private function recursivecategories1(){
       return  $tree;
     }
 }
+
   //products
 	public function products($data){
     		if(empty($data['page_number']) or $data['page_number'] == 0 ){

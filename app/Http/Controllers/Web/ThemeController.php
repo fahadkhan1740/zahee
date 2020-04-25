@@ -149,22 +149,22 @@ class ThemeController extends Controller
 		$result['cat'] = $cates;
 
 		$result['slides'] = $slides;
-		if($carousel_id == 1){
-			$carousel = (string)View::make('web.carousels.boot-carousel-content-full-screen',['result' => $result])->render();
-		}
-		elseif ($carousel_id == 2) {
-			$carousel = (string)View::make('web.carousels.boot-carousel-content-full-width',['result' => $result])->render();
-		}
-		elseif ($carousel_id == 3) {
-			$carousel = (string)View::make('web.carousels.boot-carousel-content-with-left-banner',['result' => $result])->render();
-		}
-		elseif ($carousel_id == 4) {
-
-			$carousel = (string)View::make('web.carousels.boot-carousel-content-with-navigation',['result' => $result])->render();
-		}
-		else{
-			$carousel = (string)View::make('web.carousels.boot-carousel-content-with-right-banner',['result' => $result])->render();
-		}
+//		if($carousel_id == 1){
+			$carousel =(string)View::make('web.carousels.boot-carousel-content-full-screen',['result' => $result])->render();
+//		}
+//		elseif ($carousel_id == 2) {
+//			$carousel = (string)View::make('web.carousels.boot-carousel-content-full-width',['result' => $result])->render();
+//		}
+//		elseif ($carousel_id == 3) {
+//			$carousel = (string)View::make('web.carousels.boot-carousel-content-with-left-banner',['result' => $result])->render();
+//		}
+//		elseif ($carousel_id == 4) {
+//
+//			$carousel = (string)View::make('web.carousels.boot-carousel-content-with-navigation',['result' => $result])->render();
+//		}
+//		else{
+//			$carousel = (string)View::make('web.carousels.boot-carousel-content-with-right-banner',['result' => $result])->render();
+//		}
 		return $carousel;
 	}
 

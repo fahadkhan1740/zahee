@@ -24,12 +24,6 @@
           @include($r)
       <?php
           }
-          if($product_section_order['order'] == 2 && $product_section_order['status'] == 1){
-          $r =   'web.product-sections.' . $product_section_order['file_name'];
-       ?>
-          @include($r)
-      <?php
-          }
           if($product_section_order['order'] == 3 && $product_section_order['status'] == 1){
           $r =   'web.product-sections.' . $product_section_order['file_name'];
        ?>
@@ -263,12 +257,11 @@
                    </div>
                </div>
            </div>
-           
 
        </div>
 
        </div>
        </section>
-
+       </main>
 @include('web.common.scripts.Like')
 @endsection

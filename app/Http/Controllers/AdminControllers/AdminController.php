@@ -60,7 +60,7 @@ class AdminController extends Controller
 			$orders[$index]->orders_status_id = $orders_status_history->orders_status_id;
 			$orders[$index]->orders_status = $orders_status_history->orders_status_name;
 
-			
+
 
 			$orders_products = DB::table('orders_products')
 				->select('final_price', DB::raw('SUM(final_price) as total_price') ,'products_id','products_quantity' )
@@ -68,7 +68,7 @@ class AdminController extends Controller
 				->groupBy('final_price')
 				->get();
 
-			
+
 			if(count($orders_products)>0 and !empty($orders_products[0]->total_price)){
 				$orders[$index]->total_price = $orders_products[0]->total_price;
 			}else{
@@ -87,14 +87,14 @@ class AdminController extends Controller
 					}
 					$purchased_price += $single_product_purchase_price*$orders_product->products_quantity;
 					//$purchased_price += $purchased_price;
-	
-				}	
+
+				}
 			}
-			
+
 			$index++;
 
 		  }
-		  
+
 
   		//products profit
   		if($purchased_price==0){
@@ -353,7 +353,6 @@ class AdminController extends Controller
 		$admins = DB::table('users')
 			->leftJoin('user_types','user_types.user_types_id','=','users.role_id')
 			->select('users.*','user_types.*')
-			->where('users.role_id','>','10')
 			->paginate(50);
 
 
@@ -378,7 +377,7 @@ class AdminController extends Controller
 		$myVar = new AddressController();
 		$result['countries'] = $myVar->getAllCountries();
 
-		$adminTypes = DB::table('user_types')->where('isActive', 1)->where('user_types_id','>','10')->get();
+		$adminTypes = DB::table('user_types')->where('user_types_id','!=','2')->where('isActive', 1)->get();
 		$result['adminTypes'] = $adminTypes;
 
 		return view("admin.admins.add",$title)->with('result', $result);
@@ -437,7 +436,7 @@ class AdminController extends Controller
 		$myVar = new AddressController();
 		$result['countries'] = $myVar->getAllCountries();
 
-		$adminTypes = DB::table('user_types')->where('isActive', 1)->where('user_types_id','>','10')->get();
+		$adminTypes = DB::table('user_types')->where('isActive', 1)->where('user_types_id','!=','2')->get();
 
 		$result['adminTypes'] = $adminTypes;
 
@@ -575,8 +574,7 @@ class AdminController extends Controller
 		$message = array();
 		$errorMessage = array();
 
-		$adminTypes = DB::table('user_types')->where('user_types_id','>','10')->paginate(50);
-
+		$adminTypes = DB::table('user_types')->where('user_types_id','!=','2')->paginate(50);
 		$result['message'] = $message;
 		$result['errorMessage'] = $errorMessage;
 		$result['adminTypes'] = $adminTypes;
@@ -598,7 +596,7 @@ class AdminController extends Controller
 		$myVar = new AddressController();
 		$result['countries'] = $myVar->getAllCountries();
 
-		$adminTypes = DB::table('user_types')->where('isActive', 1)->get();
+		$adminTypes = DB::table('user_types')->where('user_types_id','!=','2')->where('isActive', 1)->get();
 		$result['adminTypes'] = $adminTypes;
 
 		return view("admin.admins.roles.addadmintype",$title)->with('result', $result);
@@ -769,7 +767,7 @@ class AdminController extends Controller
 			$admintype_update = $roles[0]->admintype_update;
 			$admintype_delete = $roles[0]->language_delete;
 			$manage_admins_role = $roles[0]->manage_admins_role;
-			
+
 			$reviews_view = $roles[0]->reviews_view;
 			$reviews_update = $roles[0]->reviews_update;
 
@@ -1110,10 +1108,10 @@ class AdminController extends Controller
 						'admintype_update' => $request->admintype_update,
 						'admintype_delete' => $request->admintype_delete,
 						'manage_admins_role' => $request->manage_admins_role,
-						
+
 						'reviews_view' => $request->reviews_view,
 						'reviews_update' => $request->reviews_update,
-						
+
 						]);
 
 		$message = Lang::get("labels.Roles has been added successfully");

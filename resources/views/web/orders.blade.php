@@ -5,14 +5,12 @@
       <div class="container">
         <div class="row">
             <div class="col-12 col-sm-12">
-                <div class="row justify-content-end">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">@lang('website.My Orders')</li>
-                        </ol>
-                      </nav>
-                </div>
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@lang('website.My Orders')</li>
+                  </ol>
+                </nav>
             </div>
           <div class="col-12 col-lg-3  d-none d-lg-block d-xl-block">
             <div class="heading">

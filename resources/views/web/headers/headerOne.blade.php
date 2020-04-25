@@ -7,14 +7,14 @@
                                 <!--  CHANGE LANGUAGE CODE SECTION -->
                                 @if(count($languages) > 1)
                                     <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <a href= "#" class="dropdown-toggle"  data-toggle="dropdown" >
                                             <img src="{{asset('').session('language_image')}}" width="17px" />
                                             {{	session('language_name')}}
-                                        </button>
-                                        <ul class="dropdown-menu">
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
                                             @foreach($languages as $language)
                                                 <li  @if(session('locale')==$language->code) style="background:lightgrey;" @endif>
-                                                    <button  onclick="myFunction1({{$language->languages_id}})" class="btn" style="background:none;" href="#">
+                                                    <button  onclick="myFunction1({{$language->languages_id}})" style="background:none;">
                                                         <img style="margin-left:10px; margin-right:10px;"src="{{asset('').$language->image_path}}" width="17px" />
                                                         <span>{{$language->name}}</span>
                                                     </button>
@@ -67,17 +67,16 @@
                     @if(auth()->guard('customer')->check())
                         <li>
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                <a class="dropdown-toggle" href="dropdown-toggle " data-toggle="dropdown">
                                     @if(auth()->guard('customer')->user()->avatar == null)
                                         <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{asset('web/images/miscellaneous/avatar.jpg')}}">
                                     @else
-                                        <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{auth()->guard('customer')->user()->avatar}}">
+                                        <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{url('/').'/'.auth()->guard('customer')->user()->avatar}}">
                                     @endif
-                                        <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp;! {{auth()->guard('customer')->user()->first_name}} <?php }?> </span>
-                                </button>
-                                <ul class="dropdown-menu">
+                                        <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp;! {{auth()->guard('customer')->user()->first_name}} <?php }?> </span></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a href="{{ url('/profile') }}"> <i class="fa fa-user" aria-hidden="true"></i> @lang('website.Profile')</a></li>
-                                    <li><a href="{{ url('/viewcart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> @lang('website.Profile')</a></li>
+                                    <li><a href="{{ url('/viewcart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> @lang('website.Cart')</a></li>
                                     <li><a href="{{ url('/wishlist') }}"> <i class="fa fa-heart" aria-hidden="true"></i> @lang('website.Wishlist')</a></li>
                                     <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> @lang('website.Logout')</a></li>
                                 </ul>
@@ -103,22 +102,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('/all-category/1') }}">@lang('website.All Categories')</a>
+                        <a class="nav-link" href="{{ url('/all-category') }}">@lang('website.All Categories')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/shop?category=pet-services')}}">@lang('website.Pet Services')</a>
+                        <a class="nav-link" href="javascript:void(0)">@lang('website.Pet Services')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/shop?category=grocery')}}">@lang('website.Grocery')</a>
+                        <a class="nav-link" href="javascript:void(0)">@lang('website.Grocery')</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{url('/shop?category=cosmetic-perfumes')}}">@lang('website.Cosmetic & Perfumes')   </a>
+                        <a class="nav-link" href="javascript:void(0)">@lang('website.Cosmetic & Perfumes')   </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/shop?category=health-supplements')}}">@lang('website.Health Supplements')</a>
+                        <a class="nav-link" href="javascript:void(0)">@lang('website.Health Supplements')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/shop?category=protein-others')}}">@lang('website.Protein & others')</a>
+                        <a class="nav-link" href="javascript:void(0)">@lang('website.Protein & others')</a>
                     </li>
                 </ul>
             </div>
