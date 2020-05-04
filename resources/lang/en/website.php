@@ -755,5 +755,6 @@ return [
     'Grocery'=> 'Grocery',
     'Cosmetic & Perfumes' => 'Cosmetic & Perfumes',
     'Health Supplements' => 'Health Supplements',
-    'Protein & others' => 'Protein & others'
+    'Protein & others' => 'Protein & others',
+    'Go to Cart' => 'Go to Cart'
 ];

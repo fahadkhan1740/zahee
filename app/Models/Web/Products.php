@@ -651,6 +651,7 @@ private function recursivecategories1(){
     				}else{
     					$responseData = array('success'=>'0', 'product_data'=>$result,  'message'=>Lang::get('website.Empty record'), 'total_record'=>count($total_record));
     				}
+//    			dd($responseData);
 
     		return($responseData);
     }

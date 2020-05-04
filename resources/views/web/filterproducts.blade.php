@@ -65,7 +65,6 @@
  					 @endforeach
  				 </span>
  				 <h2 class="title text-center"><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h2>
- 				 <p class="discription">{{$products->products_description}}</p>
 
  				 <div class="price">
  					 @if(!empty($products->discount_price))
@@ -74,26 +73,6 @@
  					 @else
  					 {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
  					 @endif
- 					 <div class="buttons listview-btn">
- 						 @if($products->products_type==0)
- 								@if(!in_array($products->products_id,$result['cartArray']))
- 										@if($products->defaultStock==0)
-
- 												<button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
- 										@elseif($products->products_min_order>1)
- 										 <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
- 										@else
- 												<button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>
- 										@endif
- 								@else
- 										<button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
- 								@endif
- 						@elseif($products->products_type==1)
- 								<a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
- 						@elseif($products->products_type==2)
- 								<a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
- 						@endif
- 					 </div>
  				 </div>
  				 <div class="product-hover d-none d-lg-block d-xl-block">
  						 <div class="icons">
@@ -107,7 +86,7 @@
  								 <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
  							 </div>
  					 <div class="buttons">
- 						 @if($products->products_type==0)
+{{-- 						 @if($products->products_type==0)--}}
  								@if(!in_array($products->products_id,$result['cartArray']))
  										@if($products->defaultStock==0)
 
@@ -120,12 +99,12 @@
  								@else
  										<button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
  								@endif
- 						@elseif($products->products_type==1)
- 								<a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
- 						@elseif($products->products_type==2)
- 								<a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
- 						@endif
- 					 </div>
+{{-- 						@elseif($products->products_type==1)--}}
+{{-- 								<a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>--}}
+{{-- 						@elseif($products->products_type==2)--}}
+{{-- 								<a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>--}}
+{{-- 						@endif--}}
+{{-- 					 </div>--}}
  				 </div>
  				 <div class="mobile-buttons d-lg-none d-xl-none">
  					 @if($products->products_type==0)

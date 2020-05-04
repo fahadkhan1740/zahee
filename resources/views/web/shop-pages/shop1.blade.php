@@ -1,22 +1,5 @@
 <section class="shop-content shop-four">
    <div class="container">
-       <div class="row align-items-center justify-content-between">
-
-           <ul class="list-group">
-              @if(!empty($result['category_name']) and !empty($result['sub_category_name']))
-              <li class="list-group-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-              <li  class="list-group-item"><a href="{{ URL::to('/shop')}}">@lang('website.Shop')</a></li>
-             <li  class="list-group-item"><a href="{{ URL::to('/shop?category='.$result['category_slug'])}}">{{$result['category_name']}}</a></li>
-             <li  class="list-group-item active">{{$result['sub_category_name']}}</li>
-             @elseif(!empty($result['category_name']) and empty($result['sub_category_name']))
-             <li class="list-group-item active">{{$result['category_name']}}</li>
-             @else
-             <li class="list-group-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-             <li class="list-group-item active">@lang('website.Shop')</li>
-             @endif
-           </ul>
-         </div>
-
        <div class="row">
          <div class="col-12 col-lg-3  d-lg-block d-xl-block right-menu">
            <div class="right-menu-categories">
@@ -90,7 +73,9 @@
                </div>
              </div>
              @endif
+               @section('scripts')
              @include('web.common.scripts.slider')
+               @endsection
                    @if(count($result['filters']['attr_data'])>0)
                    @foreach($result['filters']['attr_data'] as $key=>$attr_data)
                    <div class="color-range-main">
@@ -136,12 +121,7 @@
                }
              ?>
                  <a href="{{ URL::to('/shop')}}" class="btn btn-dark" id="apply_options"> @lang('website.Reset') </a>
-                    @if(app('request')->input('filters_applied')==1)
                  <button type="button" class="btn btn-secondary" id="apply_options_btn"> @lang('website.Apply')</button>
-                   @else
-                 <!--<button type="button" class="btn btn-secondary" id="apply_options_btn" disabled> @lang('website.Apply')</button>-->
-                   <button type="button" class="btn btn-secondary" id="apply_options_btn" > @lang('website.Apply')</button>
-                   @endif
                </div>
              </div>
                    @if(count($result['commonContent']['homeBanners'])>0)
@@ -158,16 +138,20 @@
          </div>
          <div class="col-12 col-lg-9">
              <div class="breadcum-area">
-               @if(!empty($result['category_name']) and !empty($result['sub_category_name']))
-                 <h2>{{$result['category_name']}}</h2>
-                 <h5>{{$result['sub_category_name']}} and much more...</h5>
-                 @elseif(!empty($result['category_name']) and empty($result['sub_category_name']))
-                 <h2>{{$result['category_name']}}</h2>
-                 <h5>{{$result['category_name']}} and much more...</h5>
-                 @else
-                 <h2>Watches & Accessories</h2>
-                 <h5>Sunglasses,watches,men's clothing and much more...</h5>
-                 @endif
+                 <ul class="arrows">
+                     @if(!empty($result['category_name']) and !empty($result['sub_category_name']))
+                         <li class=""><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+                         <li  class=""><a href="{{ URL::to('/shop')}}">@lang('website.Shop')</a></li>
+                         <li  class=""><a href="{{ URL::to('/shop?category='.$result['category_slug'])}}">{{$result['category_name']}}</a></li>
+                         <li  class="active">{{$result['sub_category_name']}}</li>
+                     @elseif(!empty($result['category_name']) and empty($result['sub_category_name']))
+                         <li class=""><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+                         <li class="active">{{$result['category_name']}}</li>
+                     @else
+                         <li class=""><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+                         <li class="active">@lang('website.Shop')</li>
+                     @endif
+                 </ul>
              </div>
              <div class="products-area">
                  <div class="top-bar">
@@ -216,8 +200,10 @@
                                    </select>
                              </div>
                              <label>@lang('website.per page')</label>
-
+                                 @section('scripts')
                            @include('web.common.scripts.shop_page_load_products')
+                                 @endsection
+                           </form>
                         </div>
                        </div>
                        </div>
@@ -225,7 +211,7 @@
                    </div>
                    @if(!empty(app('request')->input('search')))
                        <div class="search-result">
-                           <h4>@lang('website.Search result for') '{{app('request')->input('search')}}' @if($result['products']['total_record']>0) {{$result['products']['total_record']}} @else 0 @endif @lang('website.item found') <h4>
+                           <h4>@lang('website.Search result for') '{{app('request')->input('search')}}' @if($result['products']['total_record']>0) {{$result['products']['total_record']}} @else 0 @endif @lang('website.item found') </h4>
                        </div>
                    @endif
                    <div class="row">
@@ -252,7 +238,9 @@
                                        </div>
                                    <img class="img-fluid" src="{{asset('').$products->image_path}}" alt="{{$products->products_name}}">
                                  </div>
+                                   @section('scripts')
                                  @include('web.common.scripts.addToCompare')
+                                   @endsection
                                  <?php
                                     $default_currency = DB::table('currencies')->where('is_default',1)->first();
                                     if($default_currency->id == Session::get('currency_id')){
@@ -277,7 +265,6 @@
                                        $discounted_price = 0;
                                    }
                                  ?>
-                                 <span class="discount-tag"><?php echo (int)$discount_percentage; ?>%</span>
                                 <?php }
                                 $current_date = date("Y-m-d", strtotime("now"));
 
@@ -299,36 +286,34 @@
                                        {{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif
                                    @endforeach
                                  </span>
-                                 <h2 class="title text-center"><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h2>
-                                 <p class="discription">{{$products->products_description}}</p>
-
+                                 <h4 class="title text-center"><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h4>
                                  <div class="price">
-                                   @if(!empty($products->discount_price))
-                                   {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
-                                   <span> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
+                                   @if(empty($products->discount_price))
+                                         {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
                                    @else
-                                   {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
+                                         {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
+                                         <span class="old-price"> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
                                    @endif
-                                   <div class="buttons listview-btn">
-                                     @if($products->products_type==0)
-                                        @if(!in_array($products->products_id,$result['cartArray']))
-                                            @if($products->defaultStock==0)
+{{--                                   <div class="buttons listview-btn">--}}
+{{--                                     @if($products->products_type==0)--}}
+{{--                                        @if(!in_array($products->products_id,$result['cartArray']))--}}
+{{--                                            @if($products->defaultStock==0)--}}
 
-                                                <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
-                                            @elseif($products->products_min_order>1)
-                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                            @else
-                                                <button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>
-                                            @endif
-                                        @else
-                                            <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
-                                        @endif
-                                    @elseif($products->products_type==1)
-                                        <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                    @elseif($products->products_type==2)
-                                        <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
-                                    @endif
-                                   </div>
+{{--                                                <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>--}}
+{{--                                            @elseif($products->products_min_order>1)--}}
+{{--                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>--}}
+{{--                                            @else--}}
+{{--                                                <button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>--}}
+{{--                                            @endif--}}
+{{--                                        @else--}}
+{{--                                            <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>--}}
+{{--                                        @endif--}}
+{{--                                    @elseif($products->products_type==1)--}}
+{{--                                        <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>--}}
+{{--                                    @elseif($products->products_type==2)--}}
+{{--                                        <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>--}}
+{{--                                    @endif--}}
+{{--                                   </div>--}}
                                  </div>
                                  <div class="product-hover d-none d-lg-block d-xl-block">
                                      <div class="icons">
@@ -339,47 +324,47 @@
                                          </a>
                                        </div>
                                        <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="{{$products->products_id}}"><i class="fas fa-eye"></i></div>
-                                         <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
+{{--                                         <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>--}}
                                        </div>
                                    <div class="buttons">
-                                     @if($products->products_type==0)
+{{--                                     @if($products->products_type==0)--}}
                                         @if(!in_array($products->products_id,$result['cartArray']))
                                             @if($products->defaultStock==0)
 
                                                 <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
-                                            @elseif($products->products_min_order>1)
-                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+{{--                                            @elseif($products->products_min_order>1)--}}
+{{--                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>--}}
                                             @else
                                                 <button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>
                                             @endif
                                         @else
-                                            <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
+                                           <a class="btn btn-block btn-secondary active" href="{{ URL::to('/viewcart')}}">@lang('website.Go to Cart')</a>
                                         @endif
-                                    @elseif($products->products_type==1)
-                                        <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                    @elseif($products->products_type==2)
-                                        <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
-                                    @endif
+{{--                                    @elseif($products->products_type==1)--}}
+{{--                                        <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>--}}
+{{--                                    @elseif($products->products_type==2)--}}
+{{--                                        <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>--}}
+{{--                                    @endif--}}
                                    </div>
                                  </div>
                                  <div class="mobile-buttons d-lg-none d-xl-none">
-                                   @if($products->products_type==0)
+{{--                                   @if($products->products_type==0)--}}
                                       @if(!in_array($products->products_id,$result['cartArray']))
                                           @if($products->defaultStock==0)
                                               <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
-                                          @elseif($products->products_min_order>1)
-                                           <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+{{--                                          @elseif($products->products_min_order>1)--}}
+{{--                                           <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>--}}
                                           @else
                                               <button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>
                                           @endif
                                       @else
-                                          <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
+                                         <a class="btn btn-block btn-secondary active" href="{{ URL::to('/viewcart')}}">@lang('website.Go to Cart')</a>
                                       @endif
-                                  @elseif($products->products_type==1)
-                                      <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                  @elseif($products->products_type==2)
-                                      <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
-                                  @endif
+{{--                                  @elseif($products->products_type==1)--}}
+{{--                                      <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>--}}
+{{--                                  @elseif($products->products_type==2)--}}
+{{--                                      <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>--}}
+{{--                                  @endif--}}
                                    </div>
                                </article>
 
@@ -387,13 +372,15 @@
                          </div>
                          @endforeach
                          @endif
+                             @section('scripts')
                          @include('web.common.scripts.addToCompare')
+                             @endsection
                        </div>
                      </div>
                    </div>
              </div>
              <div class="toolbar mt-3">
-                               <div class="form-inline">
+                 <div class="form-inline">
                                    <div class="form-group  justify-content-start col-6">
                                      <input id="record_limit" type="hidden" value="{{$result['limit']}}">
                                      <input id="total_record" type="hidden" value="{{$result['products']['total_record']}}">
@@ -416,13 +403,7 @@
                                    </div>
                                </div>
              </div>
-           </form>
-         </div>
-
-
-
          </div>
        </div>
-
    </div>
- </section>
+</section>

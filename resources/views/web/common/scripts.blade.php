@@ -9,23 +9,10 @@ if($default_currency->id == Session::get('currency_id')){
 	$currency_value = $session_currency->value;
 }
 @endphp
-
-<!--- one signal-->
-@if(Request::path() == 'checkout')
-<!------- //paypal -------->
-
-
-
-
-
-@endif
-
-<!--- google map-->
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=geometry&key=AIzaSyCQq_d3bPGfsIAlenXUG5RtZsKZKzOmrMw"></script>
 <!-- Include js plugin -->
 <!-- Include js plugin -->
-<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="{{asset('web/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('web/js/owl.carousel.min.js')}}"></script>
 
@@ -42,7 +29,6 @@ if($default_currency->id == Session::get('currency_id')){
 <script type="text/javascript" src="{{asset('web/js/aos.js')}}"></script>
 <script type="text/javascript" src="{{asset('web/js/slick.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('web/js/custom.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/api/fancybox/source/jquery.fancybox.js')}}"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -98,27 +84,27 @@ jQuery( document ).ready( function () {
 	paymentMethods();
 @endif
 
-$.noConflict();
-	//stripe_ajax
-jQuery(document).on('click', '#stripe_ajax', function(e){
-	jQuery('#loader').css('display','flex');
-	jQuery.ajax({
-		headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
-		url: '{{ URL::to("/stripeForm")}}',
-		type: "POST",
-		success: function (res) {
-			if(res.trim() == "already added"){
-			}else{
-				jQuery('.head-cart-content').html(res);
-				jQuery(parent).removeClass('cart');
-				jQuery(parent).addClass('active');
-			}
-			message = "@lang('website.Product is added')";
-			notification(message);
-			jQuery('#loader').hide();
-		},
-	});
-});
+{{--$.noConflict();--}}
+{{--	//stripe_ajax--}}
+{{--jQuery(document).on('click', '#stripe_ajax', function(e){--}}
+{{--	jQuery('#loader').css('display','flex');--}}
+{{--	jQuery.ajax({--}}
+{{--		headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},--}}
+{{--		url: '{{ URL::to("/stripeForm")}}',--}}
+{{--		type: "POST",--}}
+{{--		success: function (res) {--}}
+{{--			if(res.trim() == "already added"){--}}
+{{--			}else{--}}
+{{--				jQuery('.head-cart-content').html(res);--}}
+{{--				jQuery(parent).removeClass('cart');--}}
+{{--				jQuery(parent).addClass('active');--}}
+{{--			}--}}
+{{--			message = "@lang('website.Product is added')";--}}
+{{--			notification(message);--}}
+{{--			jQuery('#loader').hide();--}}
+{{--		},--}}
+{{--	});--}}
+{{--});--}}
 	//default product cart
 jQuery(document).on('click', '.cart', function(e){
 	var parent = jQuery(this);
@@ -149,8 +135,63 @@ jQuery(document).on('click', '.cart', function(e){
 	});
  });
 });
+jQuery(document).on('click', '.buy-now', function(e){
+    if(jQuery('#number').val() > 0) {
+        var parent = jQuery(this);
+        var products_id = jQuery(this).attr('products_id');
+        var message;
+        jQuery.ajax({
+            url: '{{ URL::to("/addToCart")}}',
+            headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+            data: '&products_id='+products_id,
+
+            success: function (res) {
+                if(res['status'] == 'exceed'){
+                    swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
+                }
+                else {
+                    jQuery('.head-cart-content').html(res);
+                    jQuery(parent).addClass('active');
+                    location.href = "{{ URL::to('/viewcart') }}"
+                }
+            }
+        });
+    } else {
+        swal("Please select the quantity", "@lang('Quantity is not selcted')", "error");
+    }
+});
+jQuery(document).on('click', '.whishlist', function(e){
+	var parent = jQuery(this);
+	var products_id = jQuery(this).attr('products_id');
+	var message ;
+  jQuery(function ($) {
+	jQuery.ajax({
+		url: '{{ URL::to("/likeMyProduct")}}',
+    headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+
+		type: "POST",
+		data: '&products_id='+products_id,
+		success: function (res) {
+		    res = JSON.parse(res);
+            if(res.success == 0){
+                swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
+            }
+            else{
+                {{--jQuery('.head-cart-content').html(res);--}}
+                {{--jQuery(parent).removeClass('cart');--}}
+                {{--jQuery(parent).addClass('active');--}}
+                {{--jQuery(parent).html("@lang('website.Added')");--}}
+                swal("Congrates!", "Product Added Successfully Thanks.Continue Shopping", "success");
+
+            }
+		},
+	});
+ });
+});
 
 jQuery(document).on('click', '.modal_show', function(e){
+    // e.preventDefault();
 	var parent = jQuery(this);
 	var products_id = jQuery(this).attr('products_id');
 	var message ;
@@ -169,6 +210,58 @@ jQuery(document).on('click', '.modal_show', function(e){
 	});
  });
 });
+
+// Product Listing Shop Page jquery
+    jQuery(document).on('click', '#apply_options_btn', function(e){
+        // alert('jdjhd');
+        if (jQuery('input:checkbox.filters_box:checked').length > 0) {
+            jQuery('#filters_applied').val(1);
+            jQuery('#apply_options_btn').removeAttr('disabled');
+        } else {
+            jQuery('#filters_applied').val(0);
+            jQuery('#apply_options_btn').attr('disabled',true);
+        }
+        jQuery('#load_products_form').submit();
+        jQuery('#test').submit();
+
+    });
+
+
+
+//load more products
+    jQuery(document).on('click', '#load_products', function(e){
+        jQuery('#loader').css('display','flex');
+        var page_number = jQuery('#page_number').val();
+        var total_record = jQuery('#total_record').val();
+        var formData = jQuery("#load_products_form").serialize();
+        jQuery.ajax({
+            headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+            url: '{{ URL::to("/filterProducts")}}',
+            type: "POST",
+            data: formData,
+            success: function (res) {
+                if(jQuery.trim().res==0){
+                    jQuery('#load_products').hide();
+                    jQuery('#loaded_content').show();
+                }else{
+                    page_number++;
+                    jQuery('#page_number').val(page_number);
+                    jQuery('#swap .row').append(res);
+                    var record_limit = jQuery('#record_limit').val();
+                    var showing_record = page_number*record_limit;
+                    if(total_record<=showing_record){
+                        jQuery('.showing_record').html(total_record);
+                        jQuery('#load_products').hide();
+                        jQuery('#loaded_content').show();
+                    }else{
+                        jQuery('.showing_record').html(showing_record);
+                    }
+                }
+                jQuery('#loader').hide();
+            },
+        });
+    });
+
 	//commeents
 jQuery(document).on('focusout','#order_comments', function(e){
 	jQuery('#loader').css('display','flex');
@@ -239,30 +332,33 @@ jQuery( function() {
 
 
 //add-to-Cart with custom options
-jQuery(document).on('click', '.add-to-Cart', function(e){ alert('hi');
-	var formData = jQuery("#add-Product-form").serialize();
- var url = jQuery('#checkout_url').val();
- var message;
- jQuery.ajax({
-	 url: '{{ URL::to("/addToCart")}}',
-	 headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+jQuery(document).on('click', '.add-to-Cart', function(e){
+    if(jQuery('#number').val() > 0) {
+        var formData = jQuery("#add-Product-form").serialize();
+        var url = jQuery('#checkout_url').val();
+        var message;
+        jQuery.ajax({
+            url: '{{ URL::to("/addToCart")}}',
+            headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+            data: formData,
 
-	 type: "POST",
-	 data: formData,
+            success: function (res) {
+                if(res['status'] == 'exceed'){
+                    swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
+                }
+                else {
+                    jQuery('.head-cart-content').html(res);
+                    jQuery(parent).addClass('active');
+                    swal("Congrates!", "Product Added Successfully Thanks.Continue Shopping", "success",{button: false});
 
-	 success: function (res) {
-		 if(res['status'] == 'exceed'){
-			 swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
-		 }
-		 else {
-			 jQuery('.head-cart-content').html(res);
-			 jQuery(parent).addClass('active');
-			 swal("Congrates!", "Product Added Successfully Thanks.Continue Shopping", "success",{button: false});
+                }
+            }
+        });
+    } else {
+        swal("Please select the quantity", "@lang('Quantity is not selcted')", "error");
+    }
 
-		 }
-
-		 }
- });
 });
 
 //update-single-Cart with
@@ -288,29 +384,29 @@ jQuery(function () {
 
 function initialize(location){
 
-{{--		@if(!empty($result['commonContent']['setting'][9]->value) or $result['commonContent']['setting'][10]->value)--}}
-{{--			var address = '{{$result['commonContent']['setting'][9]->value}}, {{$result['commonContent']['setting'][10]->value}}';--}}
-{{--		@else--}}
-{{--			var address = '';--}}
-{{--		@endif--}}
+		@if(!empty($result['commonContent']['setting'][9]->value) or $result['commonContent']['setting'][10]->value)
+			var address = '{{$result['commonContent']['setting'][9]->value}}, {{$result['commonContent']['setting'][10]->value}}';
+		@else
+			var address = '';
+		@endif
 
-{{--		var map = new google.maps.Map(document.getElementById('googleMap'), {--}}
-{{--			mapTypeId: google.maps.MapTypeId.TERRAIN,--}}
-{{--			zoom: 13--}}
-{{--		});--}}
-{{--		var geocoder = new google.maps.Geocoder();--}}
-{{--		geocoder.geocode({--}}
-{{--			'address': address--}}
-{{--		},--}}
-{{--		function(results, status) {--}}
-{{--			if(status == google.maps.GeocoderStatus.OK) {--}}
-{{--			 new google.maps.Marker({--}}
-{{--				position: results[0].geometry.location,--}}
-{{--				map: map--}}
-{{--			 });--}}
-{{--			 map.setCenter(results[0].geometry.location);--}}
-{{--			}--}}
-{{--		});--}}
+		var map = new google.maps.Map(document.getElementById('googleMap'), {
+			mapTypeId: google.maps.MapTypeId.TERRAIN,
+			zoom: 13
+		});
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({
+			'address': address
+		},
+		function(results, status) {
+			if(status == google.maps.GeocoderStatus.OK) {
+			 new google.maps.Marker({
+				position: results[0].geometry.location,
+				map: map
+			 });
+			 map.setCenter(results[0].geometry.location);
+			}
+		});
 	   }
 	//default product cart
 
@@ -699,33 +795,38 @@ function getQuantity(){
 // Fancy Box For Product Detail Page
 jQuery(document).ready(function() {
     jQuery(".fancybox-button").fancybox({
-        openEffect  : 'none',
-        closeEffect : 'none',
-        prevEffect		: 'none',
-        nextEffect		: 'none',
-        closeBtn		: true,
-        margin      : [20, 60, 20, 60],
-        helpers		: {
-            title	: { type : 'inside' },
-            buttons	: {}
-        }
+        // openEffect  : 'none',
+        // closeEffect : 'none',
+        // prevEffect		: 'none',
+        // nextEffect		: 'none',
+        // closeBtn		: true,
+        // margin      : [20, 60, 20, 60],
+        // helpers		: {
+        //     title	: { type : 'inside' },
+        //     buttons	: {}
+        // }
+        'transitionIn'	:	'elastic',
+        'transitionOut'	:	'elastic',
+        'speedIn'		:	600,
+        'speedOut'		:	200,
+        'overlayShow'	:	false
     });
 });
 
 // Product SLICK
-jQuery('.slider-for').slick({
+jQuery('.pro-full-slider').not('.slick-initialized').slick({
     slidesToShow: 1,
     slidesToScroll:1,
     arrows: false,
     infinite: false,
     draggable: false,
     fade: true,
-    asNavFor: '.slider-nav'
+    asNavFor: '.pro-thubnail-slider'
 });
-jQuery('.slider-nav').slick({
+jQuery('.pro-thubnail-slider').not('.slick-initialized').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
-    asNavFor: '.slider-for',
+    asNavFor: '.pro-full-slider',
     centerMode: true,
     centerPadding: '60px',
     dots: false,
@@ -758,13 +859,12 @@ jQuery('.slider-nav-vertical').slick({
 // Zoom Core Scripts
 
 (function(o){var t={url:!1,callback:!1,target:!1,duration:120,on:"mouseover",touch:!0,onZoomIn:!1,onZoomOut:!1,magnify:1};o.zoom=function(t,n,e,i){var u,c,a,r,m,l,s,f=o(t),h=f.css("position"),d=o(n);return t.style.position=/(absolute|fixed)/.test(h)?h:"relative",t.style.overflow="hidden",e.style.width=e.style.height="",o(e).addClass("zoomImg").css({position:"absolute",top:0,left:0,opacity:0,width:e.width*i,height:e.height*i,border:"none",maxWidth:"none",maxHeight:"none"}).appendTo(t),{init:function(){c=f.outerWidth(),u=f.outerHeight(),n===t?(r=c,a=u):(r=d.outerWidth(),a=d.outerHeight()),m=(e.width-c)/r,l=(e.height-u)/a,s=d.offset()},move:function(o){var t=o.pageX-s.left,n=o.pageY-s.top;n=Math.max(Math.min(n,a),0),t=Math.max(Math.min(t,r),0),e.style.left=t*-m+"px",e.style.top=n*-l+"px"}}},o.fn.zoom=function(n){return this.each(function(){var e=o.extend({},t,n||{}),i=e.target&&o(e.target)[0]||this,u=this,c=o(u),a=document.createElement("img"),r=o(a),m="mousemove.zoom",l=!1,s=!1;if(!e.url){var f=u.querySelector("img");if(f&&(e.url=f.getAttribute("data-src")||f.currentSrc||f.src),!e.url)return}c.one("zoom.destroy",function(o,t){c.off(".zoom"),i.style.position=o,i.style.overflow=t,a.onload=null,r.remove()}.bind(this,i.style.position,i.style.overflow)),a.onload=function(){function t(t){f.init(),f.move(t),r.stop().fadeTo(o.support.opacity?e.duration:0,1,o.isFunction(e.onZoomIn)?e.onZoomIn.call(a):!1)}function n(){r.stop().fadeTo(e.duration,0,o.isFunction(e.onZoomOut)?e.onZoomOut.call(a):!1)}var f=o.zoom(i,u,a,e.magnify);"grab"===e.on?c.on("mousedown.zoom",function(e){1===e.which&&(o(document).one("mouseup.zoom",function(){n(),o(document).off(m,f.move)}),t(e),o(document).on(m,f.move),e.preventDefault())}):"click"===e.on?c.on("click.zoom",function(e){return l?void 0:(l=!0,t(e),o(document).on(m,f.move),o(document).one("click.zoom",function(){n(),l=!1,o(document).off(m,f.move)}),!1)}):"toggle"===e.on?c.on("click.zoom",function(o){l?n():t(o),l=!l}):"mouseover"===e.on&&(f.init(),c.on("mouseenter.zoom",t).on("mouseleave.zoom",n).on(m,f.move)),e.touch&&c.on("touchstart.zoom",function(o){o.preventDefault(),s?(s=!1,n()):(s=!0,t(o.originalEvent.touches[0]||o.originalEvent.changedTouches[0]))}).on("touchmove.zoom",function(o){o.preventDefault(),f.move(o.originalEvent.touches[0]||o.originalEvent.changedTouches[0])}).on("touchend.zoom",function(o){o.preventDefault(),s&&(s=!1,n())}),o.isFunction(e.callback)&&e.callback.call(a)},a.src=e.url})},o.fn.zoom.defaults=t})(window.jQuery);
-
-
 jQuery(function(){
     // ZOOM
-    jQuery('.ex1').zoom();
+    jQuery('.zoom-image').zoom();
 
 });
+</script>
 
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -790,4 +890,4 @@ jQuery(function(){
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 </script>
-</script>
+

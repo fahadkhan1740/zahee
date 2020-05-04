@@ -1,3 +1,4 @@
+
 <header>
     <div class="headerTop">
         <div class="container">
@@ -15,7 +16,6 @@
                                             @foreach($languages as $language)
                                                 <li  @if(session('locale')==$language->code) style="background:lightgrey;" @endif>
                                                     <button  onclick="myFunction1({{$language->languages_id}})" style="background:none;">
-                                                        <img style="margin-left:10px; margin-right:10px;"src="{{asset('').$language->image_path}}" width="17px" />
                                                         <span>{{$language->name}}</span>
                                                     </button>
                                                 </li>
@@ -25,26 +25,6 @@
                                     @include('web.common.scripts.changeLanguage')
                                 @endif
                             </div>
-{{--                <ul>--}}
-{{--                    <li><a href="#">Wishlist</a></li>--}}
-{{--                    <li class="divide">|</li>--}}
-{{--                    <li>--}}
-{{--                        <select class="form-control">--}}
-{{--                            <option><span class="flag-icon flag-icon-us"></span>English</option>--}}
-{{--                            <option><span class="flag-icon flag-icon-us"></span>English</option>--}}
-{{--                        </select>--}}
-{{--                    </li>--}}
-{{--		<li>--}}
-{{--		                 <select class="form-control">--}}
-{{--                            <option> Kuwait</option>--}}
-{{--                            <option> Qatar</option>--}}
-{{--			                <option> UAE</option>--}}
-{{--                            <option> Bahrain</option>--}}
-{{--                            <option> Saudi Arabia</option>--}}
-{{--                            <option> Oman</option>--}}
-{{--                        </select>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
             </div>
         </div>
     </div>
@@ -66,25 +46,23 @@
                     <ul>
                     @if(auth()->guard('customer')->check())
                         <li>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="dropdown-toggle " data-toggle="dropdown">
+                                <a href="{{ url('/profile') }}">
                                     @if(auth()->guard('customer')->user()->avatar == null)
                                         <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{asset('web/images/miscellaneous/avatar.jpg')}}">
                                     @else
                                         <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{url('/').'/'.auth()->guard('customer')->user()->avatar}}">
                                     @endif
-                                        <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp;! {{auth()->guard('customer')->user()->first_name}} <?php }?> </span></a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="{{ url('/profile') }}"> <i class="fa fa-user" aria-hidden="true"></i> @lang('website.Profile')</a></li>
-                                    <li><a href="{{ url('/viewcart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> @lang('website.Cart')</a></li>
-                                    <li><a href="{{ url('/wishlist') }}"> <i class="fa fa-heart" aria-hidden="true"></i> @lang('website.Wishlist')</a></li>
-                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> @lang('website.Logout')</a></li>
-                                </ul>
-                            </div>
+                                        <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp;! {{auth()->guard('customer')->user()->first_name}} <?php }?>
+                                        </span>
+                                </a>
                         </li>
                         @else
                         <li><a href="{{url('/login')}}"><i class="fa fa-user" aria-hidden="true"></i>@lang('website.Login/Register')</a></li>
                   @endif
+                  </li>
+                        <li class="cart-header dropdown head-cart-content">
+                            @include('web.headers.cartButtons.cartButton')
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -101,8 +79,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('/all-category') }}">@lang('website.All Categories')</a>
+                    <li class="{{ Request::is('/all-category') ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="{{ URL::to('/all-category')}}">@lang('website.All Categories')</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)">@lang('website.Pet Services')</a>
@@ -110,7 +88,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)">@lang('website.Grocery')</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)">@lang('website.Cosmetic & Perfumes')   </a>
                     </li>
                     <li class="nav-item">

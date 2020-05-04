@@ -11,7 +11,7 @@
       <!-- Header Content -->
         <?php echo $final_theme['header']; ?>
        <!-- End Header Content -->
-        <?php echo $final_theme['mobile_header']; ?>
+<!--        --><?php //echo $final_theme['mobile_header']; ?>
        <!-- NOTIFICATION CONTENT -->
          @include('web.common.notifications')
       <!-- END NOTIFICATION CONTENT -->
@@ -52,7 +52,7 @@
 
       <!-- Include js plugin -->
        @include('web.common.scripts')
-
+      @yield('scripts')
     </body>
 </html>
 

@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Web'], function () {
 		Route::post('/updateMyProfile', 'CustomersController@updateMyProfile')->middleware('Customer');
 		Route::post('/updateMyPassword', 'CustomersController@updateMyPassword')->middleware('Customer');
 		Route::get('UnlikeMyProduct/{id}', 'CustomersController@unlikeMyProduct')->middleware('Customer');
-		Route::post('likeMyProduct', 'CustomersController@likeMyProduct');
+		Route::post('/likeMyProduct', 'CustomersController@likeMyProduct');
 		Route::post('addToCompare', 'CustomersController@addToCompare');
 		Route::get('compare', 'CustomersController@Compare')->middleware('Customer');
 		Route::get('deletecompare/{id}', 'CustomersController@DeleteCompare')->middleware('Customer');

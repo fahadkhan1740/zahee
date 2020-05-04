@@ -1,7 +1,5 @@
-<script>
-
+<script type="text/javascript">
 jQuery(function () {
-
 var $range = jQuery(".js-range-slider"),
     $inputFrom = jQuery(".js-input-from"),
     $inputTo = jQuery(".js-input-to"),

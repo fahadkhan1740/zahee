@@ -39,25 +39,25 @@ $(document).ready(function() {
                 $( ".imgupload" ).hide("slow");
                 $( ".imgupload.ok" ).hide("slow");
                 $( ".imgupload.stop" ).show("slow");
-              
+
                 $('.namefile').css({"color":"red","font-weight":700});
                 $('.namefile').html("File "+filename+" is not  video!");
                 $('#btnup').html('Change Video');
                 $('.namefile').addClass('after-no');
                 $( "#submitbtn" ).hide();
-                $( "#fakebtn" ).show(); 
+                $( "#fakebtn" ).show();
             }else{
                 //if file is valid we show the green alert and show the valid submit
                 $( ".imgupload" ).hide("slow");
                 $( ".imgupload.stop" ).hide("slow");
                 $( ".imgupload.ok" ).show("slow");
-              
+
                 $('.namefile').css({"color":"green","font-weight":700});
                 $('.namefile').addClass('after-no');
                 $('.namefile').html(filename);
                 $('#btnup').html('Change Video');
-                
-              
+
+
                 $( "#submitbtn" ).show();
                 $( "#fakebtn" ).hide();
             }
@@ -119,7 +119,7 @@ $(document).ready(function() {
 // cart card payment
 
 $("input[type=radio]").change(function(){
-   
+
    if ( $('input#card-payment[type=radio]').is(":checked") ){
       $('#card-payment-data').show();
     }
@@ -133,7 +133,7 @@ $("input[type=radio]").change(function(){
 // cart card payment
 
 
-$(".custom_radio_tab input[type=radio]").change(function(){ 
+$(".custom_radio_tab input[type=radio]").change(function(){
 
     if ( $('.custom_radio_tab input#tab-1[type=radio]').is(":checked") ){
 
@@ -146,13 +146,13 @@ $(".custom_radio_tab input[type=radio]").change(function(){
      $('div#tab-2').show();
     }
   });
- 
 
 
 
 
 
-    // slider 
+
+    // slider
 
     $('.variable-slider.categories-slider').slick({
         dots: false,
@@ -180,7 +180,7 @@ $(".custom_radio_tab input[type=radio]").change(function(){
 
 
 
-  
+
 
 });
 
@@ -196,7 +196,7 @@ $(".custom_radio_tab input[type=radio]").change(function(){
   });
   $('.pro-thubnail-slider').slick({
     slidesToShow: 3,
-    slidesToScroll: 1, 
+    slidesToScroll: 1,
     asNavFor: '.pro-full-slider',
     dots: false,
     centerMode: true,
@@ -261,7 +261,7 @@ function increaseValue() {
     value++;
     document.getElementById('number').value = value;
   }
-  
+
   function decreaseValue() {
     var value = parseInt(document.getElementById('number').value, 10);
     value = isNaN(value) ? 0 : value;
@@ -334,25 +334,25 @@ $('.action-wrap  .view-btnn').each(function(){
 
 //     // Momentum reduction damping factor, a float value between (0, 1)
 //     damping: .05,
-  
+
 //     // Minimal size for scrollbar thumb.
 //     thumbMinSize: 20,
-  
+
 //     // Render scrolling by integer pixels
 //     renderByPixels: true,
-  
-//     // Whether allow upper scrollable content to continue scrolling when current scrollbar reaches edge. 
+
+//     // Whether allow upper scrollable content to continue scrolling when current scrollbar reaches edge.
 //     // When set to 'auto', it will be enabled on nested scrollbars, and disabled on first-class scrollbars.
 //     continuousScrolling: 'auto',
-  
+
 //     // Keep scrollbar tracks always visible.
 //     alwaysShowTracks: false,
-  
-//     // Element to be used as a listener for mouse wheel scroll events. 
+
+//     // Element to be used as a listener for mouse wheel scroll events.
 //     // By default, the container element is used.
 //     wheelEventTarget: null,
-  
+
 //     // plugins
 //     plugins: {}
-    
+
 //   });

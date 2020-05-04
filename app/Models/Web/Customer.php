@@ -334,7 +334,6 @@ class Customer extends Model
   }
 
   public function likeMyProduct($request){
-
       if(!empty(auth()->guard('customer')->user()->id)){
         $liked_products_id  = $request->products_id;
 

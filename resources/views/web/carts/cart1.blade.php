@@ -1,3 +1,4 @@
+
 <section class=" cart-content">
       <div class="container">
     <div class="row">
@@ -59,7 +60,7 @@
                 <tr class="d-flex">
                   <td class="col-12 col-md-2" >
                     <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="cart-thumb">
-                    <img class="img-fluid" src="{{asset('').$products->image_path}}" alt="{{$products->products_name}}"/>
+                    <img class="img-fluid" src="{{url('/').$products->image_path}}" alt="{{$products->products_name}}"/>
                     </a>
                    </td>
                   <td class="col-12 col-md-4 item-detail-left">
@@ -119,7 +120,7 @@
                     @endif
 
                    </td>
-                   
+
                   <td class="col-12 col-md-2 Qty">
                         <div class="input-group">
                           <span class="input-group-btn qtyminuscart">
@@ -204,7 +205,7 @@
                 <tr>
                   <th scope="row">@lang('website.SubTotal')</th>
                   <td align="right">
-                    {{Session::get('symbol_left')}}{{$currency_value * $price+0-number_format((float)session('coupon_discount'), 2, '.', '')}}{{Session::get('symbol_right')}}
+                    {{Session::get('symbol_left')}}{{(($currency_value * $price)+0)-number_format((float)session('coupon_discount'), 2, '.', '')}}{{Session::get('symbol_right')}}
                   </td>
                 </tr>
                 <tr>
@@ -213,7 +214,7 @@
                 </tr>
                 <tr class="item-price">
                   <th scope="row">@lang('website.Total')</th>
-                  <td align="right" >{{Session::get('symbol_left')}}{{$currency_value * $price+0-number_format((float)session('coupon_discount'), 2, '.', '')}}{{Session::get('symbol_right')}}</td>
+                  <td align="right" >{{Session::get('symbol_left')}}{{(($currency_value * $price)+0)-number_format((float)session('coupon_discount'), 2, '.', '')}}{{Session::get('symbol_right')}}</td>
                 </tr>
               </tbody>
             </table>

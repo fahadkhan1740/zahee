@@ -770,5 +770,6 @@ return [
     'Grocery'=> 'بقالة',
     'Cosmetic & Perfumes' => 'مستحضرات التجميل والعطور',
     'Health Supplements' => 'المكملات الغذائية',
-    'Protein & others' => 'البروتين وغيره'
+    'Protein & others' => 'البروتين وغيره',
+    'Go to Cart' => 'اذهب إلى سلة التسوق'
 ];
