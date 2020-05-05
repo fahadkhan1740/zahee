@@ -70,9 +70,9 @@
                                                 <td>
                                                     {{ $shipping_methods->name }}
                                                 </td>
-                                                @if($shipping_methods->methods_type_link=='upsShipping' and $shipping_methods->shipping_methods_id=='1')
+                                                @if($shipping_methods->methods_type_link=='DHL' and $shipping_methods->shipping_methods_id=='1')
 
-                                                    <td>---</td>
+                                                    <td>--</td>
                                                     <td>
                                                         @if($shipping_methods->status==0)
                                                             <span class="label label-warning">
@@ -97,114 +97,6 @@
                                                     <td><a href="{{ $shipping_methods->methods_type_link }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                     </td>
                                                 @endif
-
-                                                @if($shipping_methods->methods_type_link=='freeShipping' and $shipping_methods->shipping_methods_id=='2')
-                                                    <td>---</td>
-                                                    <td>
-                                                        @if($shipping_methods->status==0)
-                                                            <span class="label label-warning">
-                                                            	{{ trans('labels.InActive') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=no" class="method-status">
-                                                                {{ trans('labels.InActive') }}
-                                                            </a>
-                                                        @endif
-                                                        &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-                                                        @if($shipping_methods->status==1)
-                                                            <span class="label label-success">
-                                                            	{{ trans('labels.Active') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=yes" class="method-status">
-                                                                {{ trans('labels.Active') }}
-                                                            </a>
-                                                        @endif
-                                                    </td>
-                                                    <td><a href="{{ URL::to("admin/shippingmethods/detail/".$shipping_methods->table_name)}}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                @endif
-
-                                                @if($shipping_methods->methods_type_link=='localPickup' and $shipping_methods->shipping_methods_id=='3')
-                                                    <td>---</td>
-                                                    <td>
-                                                        @if($shipping_methods->status==0)
-                                                            <span class="label label-warning">
-                                                            	{{ trans('labels.InActive') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=no" class="method-status">
-                                                                {{ trans('labels.InActive') }}
-                                                            </a>
-                                                        @endif
-                                                        &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-                                                        @if($shipping_methods->status==1)
-                                                            <span class="label label-success">
-                                                            	{{ trans('labels.Active') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=yes" class="method-status">
-                                                                {{ trans('labels.Active') }}
-                                                            </a>
-                                                        @endif
-                                                    </td>
-                                                    <td><a href="{{ URL::to("admin/shippingmethods/detail/".$shipping_methods->table_name)}}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                @endif
-
-                                                @if($shipping_methods->methods_type_link=='flateRate' and $shipping_methods->shipping_methods_id=='4')
-                                                    <td>{{ $result['flate_rate']['flate_rate']->currency }}{{ $result['flate_rate']['flate_rate']->flate_rate }} </td>
-                                                    <td>
-                                                        @if($shipping_methods->status==0)
-                                                            <span class="label label-warning">
-                                                            	{{ trans('labels.InActive') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=no" class="method-status">
-                                                                {{ trans('labels.InActive') }}
-                                                            </a>
-                                                        @endif
-                                                        &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-                                                        @if($shipping_methods->status==1)
-                                                            <span class="label label-success">
-                                                            	{{ trans('labels.Active') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=yes" class="method-status">
-                                                                {{ trans('labels.Active') }}
-                                                            </a>
-                                                        @endif
-                                                    </td>
-                                                    <td><a href="{{ $shipping_methods->methods_type_link }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                    </td>
-                                                @endif
-
-                                                @if($shipping_methods->methods_type_link=='shippingByWeight' and $shipping_methods->shipping_methods_id=='5')
-
-                                                    <td>---</td>
-                                                    <td>
-                                                        @if($shipping_methods->status==0)
-                                                            <span class="label label-warning">
-                                                            	{{ trans('labels.InActive') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=no" class="method-status">
-                                                                {{ trans('labels.InActive') }}
-                                                            </a>
-                                                        @endif
-                                                        &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-                                                        @if($shipping_methods->status==1)
-                                                            <span class="label label-success">
-                                                            	{{ trans('labels.Active') }}
-                                                            </span>
-                                                        @else
-                                                            <a href="{{ URL::to("admin/shippingmethods/display")}}?id={{ $shipping_methods->shipping_methods_id}}&active=yes" class="method-status">
-                                                                {{ trans('labels.Active') }}
-                                                            </a>
-                                                        @endif
-                                                    </td>
-                                                    <td><a href="{{ URL::to("admin/shippingmethods/detail/".$shipping_methods->table_name)}}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                    <td> <a href="{{ URL::to('admin/shippingmethods/shppingbyweight/')}}" class="badge bg-light-blue">{{ trans('labels.Manage Weight') }}</a>    </td>                              </td>
-                                                @endif
-
                                             </tr>
                                         @endforeach
                                         </tbody>

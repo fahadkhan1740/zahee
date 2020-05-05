@@ -76,7 +76,7 @@ class OrdersController extends Controller
 		//cart data
 
 		$result['cart'] = $this->cart->myCart($result);
-
+//        dd($this->getPaymentMethods());
 		if(count($result['cart'])==0){
 			return redirect("/");
 		}else{
@@ -142,7 +142,7 @@ class OrdersController extends Controller
 
 			try{
 			//shipping methods
-			$result['shipping_methods'] = $this->shipping_methods();
+//			$result['shipping_methods'] = $this->shipping_methods();
 
 			//payment methods
 			$result['payment_methods'] = $this->getPaymentMethods();
@@ -165,8 +165,8 @@ class OrdersController extends Controller
 
 
 			//breaintree token
-			$token = $this->generateBraintreeTokenWeb();
-			session(['braintree_token' => $token]);
+//			$token = $this->generateBraintreeTokenWeb();
+//			session(['braintree_token' => $token]);
 
 
 			return view("web.checkout", ['title' =>$title,'final_theme' => $final_theme])->with('result', $result);
@@ -194,8 +194,8 @@ class OrdersController extends Controller
 			 $billing_data['billing_firstname'] = $value;
 		  }else if($key=='lastname'){
 			 $billing_data['billing_lastname'] = $value;
-		  }else if($key=='company'){
-			 $billing_data['billing_company'] = $value;
+		  }else if($key=='flat'){
+			 $billing_data['billing_flat'] = $value;
 		  }else if($key=='street'){
 			 $billing_data['billing_street'] = $value;
 		  }else if($key=='countries_id'){
@@ -204,8 +204,8 @@ class OrdersController extends Controller
 			 $billing_data['billing_zone_id'] = $value;
 		  }else if($key=='city'){
 			 $billing_data['billing_city'] = $value;
-		  }else if($key=='postcode'){
-			 $billing_data['billing_zip'] = $value;
+		  }else if($key=='address_type'){
+			 $billing_data['billing_address_type'] = $value;
 		  }else if($key=='delivery_phone'){
 			 $billing_data['billing_phone'] = $value;
 		  }
@@ -268,6 +268,7 @@ class OrdersController extends Controller
 		  }
 
 		}
+
 		session(['shipping_detail' => (object) $shipping_detail]);
 		return redirect()->back();
 
@@ -276,6 +277,7 @@ class OrdersController extends Controller
 	//order_detail
 	public function paymentComponent(Request $request){
 		session(['payment_method' => $request->payment_method]);
+		$this->place_order($request);
 		//return view('paymentComponent');
 	}
 
@@ -321,7 +323,9 @@ class OrdersController extends Controller
 	public function orders(Request $request){
 		$title = array('pageTitle' => Lang::get("website.My Orders"));
 		$final_theme = $this->theme->theme();
+
     $result = $this->order->orders($request);
+
 		return view("web.orders", ['title' => $title,'final_theme' => $final_theme])->with('result', $result);
 	}
 
@@ -330,14 +334,7 @@ class OrdersController extends Controller
 
 		$title = array('pageTitle' => Lang::get("website.View Order"));
 		$final_theme = $this->theme->theme();
-
-
-		DB::enableQueryLog();
 		$result = $this->order->viewOrder($request,$id);
-		$query = DB::getQueryLog();
-
-		//echo '<pre>';  print_r($query); die; 
-		//echo '<pre>'; print_r($result); die; 
 
 		if(@$result['res'] = "view-order"){
 			return view("web.view-order", $title)->with(['result' => $result,'final_theme' => $final_theme]);
@@ -363,7 +360,7 @@ class OrdersController extends Controller
 		$result		  = array();
 		if(!empty(session('shipping_address'))){
 			$countries_id = session('shipping_address')->countries_id;
-			$toPostalCode = session('shipping_address')->postcode;
+//			$toPostalCode = session('shipping_address')->postcode;
 			$toCity		  = session('shipping_address')->city;
 			$toAddress	  = 'gh';
 			$countries = $this->order->getCountries($countries_id);
@@ -419,12 +416,13 @@ class OrdersController extends Controller
 			$shippings_detail = $this->order->getShippingDetail($shipping_methods);
 
 			//ups shipping rate
-			if($shipping_methods->methods_type_link == 'upsShipping' and $shipping_methods->status == '1'){
+			if($shipping_methods->methods_type_link == 'DHL' and $shipping_methods->status == '1'){
 
 				$result2= array();
 				$is_transaction = '0';
 
 				$ups_shipping = $this->order->getUpsShipping();
+				return $ups_shipping;
 
 				//shipp from and all credentials
 				$accessKey  = $ups_shipping[0]->access_key;
@@ -510,9 +508,9 @@ class OrdersController extends Controller
 					'user_name' => $userId,								# UPS Username
 					'password' => $password, 							# UPS Password
 					'pickUpType' => '03',								# Drop Off Location
-					'shipToPostalCode' => $toPostalCode, 				# Destination  Postal Code
+//					'shipToPostalCode' => $toPostalCode, 				# Destination  Postal Code
 					'shipToCountryCode' => $toCountry,					# Destination  Country
-					'shipFromPostalCode' => $fromPostalCode, 			# Origin Postal Code
+//					'shipFromPostalCode' => $fromPostalCode, 			# Origin Postal Code
 					'shipFromCountryCode' => $fromCountry,				# Origin Country
 					'residentialIndicator' => 'IN', 					# Residence Shipping and for commercial shipping "COM"
 					'cServiceCodes' => $serviceTtype, 					# Sipping rate for UPS Ground
@@ -554,56 +552,6 @@ class OrdersController extends Controller
 				$mainIndex++;
 
 
-			}else if($shipping_methods->methods_type_link == 'flateRate' and $shipping_methods->status == '1'){
-				$ups_shipping = $this->order->getUpsShippingRate();
-				$data2 =  array('name'=>$shippings_detail[0]->name,'rate'=>$ups_shipping[0]->flate_rate,'currencyCode'=>$ups_shipping[0]->currency,'shipping_method'=>'flateRate');
-				if(count($ups_shipping)>0){
-					$success = array('success'=>'1', 'message'=>"Rate is returned.", 'name'=>$shippings_detail[0]->name, 'is_default'=>$shipping_methods->isDefault);
-					$success['services'][0] = $data2;
-					$result[$mainIndex] = $success;
-				 	$mainIndex++;
-				}
-
-
-			}else if($shipping_methods->methods_type_link == 'localPickup' and $shipping_methods->status == '1') {
-
-				$data2 =  array('name'=>$shippings_detail[0]->name, 'rate'=>'0', 'currencyCode'=>'USD', 'shipping_method'=>'localPickup');
-				$success = array('success'=>'1', 'message'=>"Rate is returned.", 'name'=>$shippings_detail[0]->name, 'is_default'=>$shipping_methods->isDefault);
-				$success['services'][0] = $data2;
-				$result[$mainIndex] = $success;
-				$mainIndex++;
-
-			}else if($shipping_methods->methods_type_link == 'freeShipping'  and $shipping_methods->status == '1'){
-
-				$data2 =  array('name'=>$shippings_detail[0]->name,'rate'=>'0','currencyCode'=>'USD','shipping_method'=>'freeShipping');
-				$success = array('success'=>'1', 'message'=>"Rate is returned.", 'name'=>$shippings_detail[0]->name, 'is_default'=>$shipping_methods->isDefault);
-				$success['services'][0] = $data2;
-				$result[$mainIndex] = $success;
-				$mainIndex++;
-			}else if($shipping_methods->methods_type_link == 'shippingByWeight'  and $shipping_methods->status == '1'){
-
-				//cart data
-				$carts = $this->cart->myCart('');
-
-				$weight = 0;
-				foreach($carts as $cart){
-					$weight += $cart->weight*$cart->customers_basket_quantity;
-				}
-
-				//check price by weight
-				$priceByWeight = $this->order->priceByWeight($weight);
-
-				if(!empty($priceByWeight) and count($priceByWeight)>0 ){
-					$price = $priceByWeight[0]->weight_price;
-				}else{
-					$price = 0;
-				}
-
-				$data2 =  array('name'=>$shippings_detail[0]->name,'rate'=>$price,'currencyCode'=>'USD','shipping_method'=>'Shipping By Weight');
-				$success = array('success'=>'1', 'message'=>"Rate is returned.", 'name'=>$shippings_detail[0]->name, 'is_default'=>$shipping_methods->isDefault);
-				$success['services'][0] = $data2;
-				$result[$mainIndex] = $success;
-				$mainIndex++;
 			}
 		}
 
@@ -616,42 +564,42 @@ class OrdersController extends Controller
 		/**   BRAIN TREE **/
 		//////////////////////
 		$result = array();
-		$payments_setting = $this->order->payments_setting_for_brain_tree();
-		if($payments_setting['merchant_id']->environment=='0'){
-			$braintree_enviroment = 'Test';
-		}else{
-			$braintree_enviroment = 'Live';
-		}
-
-		$braintree = array(
-			'environment' => $braintree_enviroment,
-			'name' => $payments_setting['merchant_id']->name,
-			'public_key' => $payments_setting['public_key']->value,
-			'active' => $payments_setting['merchant_id']->status,
-			'payment_method'=>$payments_setting['merchant_id']->payment_method,
-			'payment_currency' => Session::get('currency_code'),
-		);
+//		$payments_setting = $this->order->payments_setting_for_brain_tree();
+//		if($payments_setting['merchant_id']->environment=='0'){
+//			$braintree_enviroment = 'Test';
+//		}else{
+//			$braintree_enviroment = 'Live';
+//		}
+//
+//		$braintree = array(
+//			'environment' => $braintree_enviroment,
+//			'name' => $payments_setting['merchant_id']->name,
+//			'public_key' => $payments_setting['public_key']->value,
+//			'active' => $payments_setting['merchant_id']->status,
+//			'payment_method'=>$payments_setting['merchant_id']->payment_method,
+//			'payment_currency' => Session::get('currency_code'),
+//		);
        /**  END BRAIN TREE **/
 			 //////////////////////
 
 			 /**   STRIPE**/
 			 //////////////////////
 
-	  $payments_setting = $this->order->payments_setting_for_stripe();
-		if($payments_setting['publishable_key']->environment=='0'){
-			$stripe_enviroment = 'Test';
-		}else{
-			$stripe_enviroment = 'Live';
-		}
-
-		$stripe = array(
-			'environment' => $stripe_enviroment,
-			'name' => $payments_setting['publishable_key']->name,
-			'public_key' => $payments_setting['publishable_key']->value,
-			'active' => $payments_setting['publishable_key']->status,
-			'payment_currency' => Session::get('currency_code'),
-			'payment_method'=>$payments_setting['publishable_key']->payment_method
-		);
+//	  $payments_setting = $this->order->payments_setting_for_stripe();
+//		if($payments_setting['publishable_key']->environment=='0'){
+//			$stripe_enviroment = 'Test';
+//		}else{
+//			$stripe_enviroment = 'Live';
+//		}
+//
+//		$stripe = array(
+//			'environment' => $stripe_enviroment,
+//			'name' => $payments_setting['publishable_key']->name,
+//			'public_key' => $payments_setting['publishable_key']->value,
+//			'active' => $payments_setting['publishable_key']->status,
+//			'payment_currency' => Session::get('currency_code'),
+//			'payment_method'=>$payments_setting['publishable_key']->payment_method
+//		);
 
 		/**   END STRIPE**/
 		//////////////////////
@@ -676,75 +624,75 @@ class OrdersController extends Controller
 
 		/**   PAYPAL**/
 		/*************************/
-		$payments_setting = $this->order->payments_setting_for_paypal();
-
-		if($payments_setting['id']->environment=='0'){
-			$paypal_enviroment = 'Test';
-		}else{
-			$paypal_enviroment = 'Live';
-		}
-
-		$paypal = array(
-			'environment' => $paypal_enviroment,
-			'name' => $payments_setting['id']->name,
-			'public_key' => $payments_setting['id']->value,
-			'active' => $payments_setting['id']->status,
-			'payment_method'=>$payments_setting['id']->payment_method,
-			'payment_currency' => Session::get('currency_code'),
-
-		);
+//		$payments_setting = $this->order->payments_setting_for_paypal();
+//
+//		if($payments_setting['id']->environment=='0'){
+//			$paypal_enviroment = 'Test';
+//		}else{
+//			$paypal_enviroment = 'Live';
+//		}
+//
+//		$paypal = array(
+//			'environment' => $paypal_enviroment,
+//			'name' => $payments_setting['id']->name,
+//			'public_key' => $payments_setting['id']->value,
+//			'active' => $payments_setting['id']->status,
+//			'payment_method'=>$payments_setting['id']->payment_method,
+//			'payment_currency' => Session::get('currency_code'),
+//
+//		);
 
 		/**   END PAYPAL**/
 		/*************************/
 
 		/**   INSTAMOJO**/
 		/*************************/
-		$payments_setting = $this->order->payments_setting_for_instamojo();
-		if($payments_setting['auth_token']->environment=='0'){
-			$instamojo_enviroment = 'Test';
-		}else{
-			$instamojo_enviroment = 'Live';
-		}
-
-		$instamojo = array(
-			'environment' => $instamojo_enviroment,
-			'name' => $payments_setting['auth_token']->name,
-			'public_key' => $payments_setting['api_key']->value,
-			'active' => $payments_setting['api_key']->status,
-			'payment_currency' => Session::get('currency_code'),
-			'payment_method' => $payments_setting['api_key']->payment_method,
-		);
+//		$payments_setting = $this->order->payments_setting_for_instamojo();
+//		if($payments_setting['auth_token']->environment=='0'){
+//			$instamojo_enviroment = 'Test';
+//		}else{
+//			$instamojo_enviroment = 'Live';
+//		}
+//
+//		$instamojo = array(
+//			'environment' => $instamojo_enviroment,
+//			'name' => $payments_setting['auth_token']->name,
+//			'public_key' => $payments_setting['api_key']->value,
+//			'active' => $payments_setting['api_key']->status,
+//			'payment_currency' => Session::get('currency_code'),
+//			'payment_method' => $payments_setting['api_key']->payment_method,
+//		);
 
 		/**   END INSTAMOJO**/
 		/*************************/
 
 		/**   END HYPERPAY**/
 		/*************************/
-		$payments_setting = $this->order->payments_setting_for_hyperpay();
-		//dd($payments_setting);
-		if($payments_setting['userid']->environment=='0'){
-			$hyperpay_enviroment = 'Test';
-		}else{
-			$hyperpay_enviroment = 'Live';
-		}
-
-		$hyperpay = array(
-			'environment' => $hyperpay_enviroment,
-			'name' => $payments_setting['userid']->name,
-			'public_key' => $payments_setting['userid']->value,
-			'active' => $payments_setting['userid']->status,
-			'payment_currency' => Session::get('currency_code'),
-			'payment_method' => $payments_setting['userid']->payment_method,
-		);
+//		$payments_setting = $this->order->payments_setting_for_hyperpay();
+//		//dd($payments_setting);
+//		if($payments_setting['userid']->environment=='0'){
+//			$hyperpay_enviroment = 'Test';
+//		}else{
+//			$hyperpay_enviroment = 'Live';
+//		}
+//
+//		$hyperpay = array(
+//			'environment' => $hyperpay_enviroment,
+//			'name' => $payments_setting['userid']->name,
+//			'public_key' => $payments_setting['userid']->value,
+//			'active' => $payments_setting['userid']->status,
+//			'payment_currency' => Session::get('currency_code'),
+//			'payment_method' => $payments_setting['userid']->payment_method,
+//		);
 		/**   END HYPERPAY**/
 		/*************************/
 
-		$result[0] = $braintree;
-		$result[1] = $stripe;
+//		$result[0] = $braintree;
+//		$result[1] = $stripe;
 		$result[2] = $cod;
-		$result[3] = $paypal;
-		$result[4] = $instamojo;
-		$result[5] = $hyperpay;
+//		$result[3] = $paypal;
+//		$result[4] = $instamojo;
+//		$result[5] = $hyperpay;
 
 		return $result;
 	}

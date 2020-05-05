@@ -83,14 +83,10 @@
                      </div>
 
                      <div class="form-group">
-                       <label for="firstName">@lang('website.Company')</label>
-                       <input type="text" required class="form-control field-validate" id="company" aria-describedby="companyHelp" placeholder="Enter Your Company Name" name="company" value="@if(!empty(session('shipping_address'))>0) {{session('shipping_address')->company}}@endif">
-                       <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your company name')</span>
-                     </div>
-
-                     <div class="form-group">
                        <label for="exampleInputAddress1">@lang('website.Address')</label>
-                       <input type="text" required class="form-control field-validate" name="street" id="street" aria-describedby="addressHelp" placeholder="@lang('website.Please enter your address')">
+                       <input type="text" required class="form-control field-validate" name="flat" id="flat" aria-describedby="addressHelp" placeholder="@lang('website.address_flat')">
+                         <br>
+                       <input type="text" required class="form-control field-validate" name="street" id="street" aria-describedby="addressHelp" placeholder="@lang('website.address_street')">
                        <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your address')</span>
                      </div>
                      <div class="form-group">
@@ -129,14 +125,17 @@
                            <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your city')</span>
                        </div>
                        <div class="form-group">
-                         <label for="exampleInputZpCode1">@lang('website.Zip/Postal Code')</label>
-                         <input required type="number" class="form-control" id="postcode" aria-describedby="zpcodeHelp" placeholder="Enter Your Zip / Postal Code" name="postcode" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->postcode}}@endif">
-                         <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your Zip/Postal Code')</span>
-                       </div>
-                       <div class="form-group">
                          <label for="exampleInputNumber1">@lang('website.Phone Number')</label>
                          <input required type="text" class="form-control" id="delivery_phone" aria-describedby="numberHelp" placeholder="Enter Your Phone Number" name="delivery_phone" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->delivery_phone}}@endif">
                          <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your valid phone number')</span>
+                       </div>
+                       <div class="form-group">
+                           <label for="exampleInputZpCode1">@lang('website.address_type')</label>
+                           <select class="form-control" id="address_type" name="address_type" required>
+                               <option value="home"> @lang('website.home')</option>
+                               <option value="office">@lang('website.office')</option>
+                           </select>
+                           <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please select your address type')</span>
                        </div>
                        <div class="col-12 col-sm-12">
                          <div class="row">
@@ -146,6 +145,7 @@
                    </form>
                  </div>
                  <div class="tab-pane fade @if(session('step') == 1) show active @endif"  id="pills-billing" role="tabpanel" aria-labelledby="pills-billing-tab">
+
                      <form name="signup" enctype="multipart/form-data" action="{{ URL::to('/checkout_billing_address')}}" method="post">
                        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                          <div class="form-group">
@@ -155,19 +155,15 @@
                            </div>
                            <div class="form-group">
                              <label for="exampleInputName2">@lang('website.Last Name')</label>
-                             <input type="text" class="form-control same_address" id="exampleInputName2" aria-describedby="NameHelp2" placeholder="Enter Your Name" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_lastname" name="billing_lastname" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_lastname}}@endif">
+                             <input type="text" class="form-control same_address" aria-describedby="NameHelp2" placeholder="Enter Your Name" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_lastname" name="billing_lastname" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_lastname}}@endif">
                              <span class="help-block error-content" hidden>@lang('website.Please enter your last name')</span>
                            </div>
 
                            <div class="form-group">
-                             <label for="exampleInputCompany1">@lang('website.Company')</label>
-                             <input type="text" class="form-control same_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_company" name="billing_company" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_company}}@endif" id="exampleInputCompany1" aria-describedby="companyHelp" placeholder="Enter Your Company Name">
-                             <span class="help-block error-content" hidden>@lang('website.Please enter your company name')</span>
-                           </div>
-
-                           <div class="form-group">
                              <label for="exampleInputAddress1">@lang('website.Address')</label>
-                             <input type="text" class="form-control same_address" id="exampleInputAddress1" aria-describedby="addressHelp" placeholder="Enter Your Address" @if(!empty(session('22'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_street" name="billing_street" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_street}}@endif">
+                               <input type="text" class="form-control same_address" aria-describedby="addressHelp" placeholder="@lang('website.address_flat')" @if(!empty(session('22'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_flat" name="billing_flat" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_flat}}@endif">
+                               <br>
+                               <input type="text" class="form-control same_address" aria-describedby="addressHelp" placeholder="@lang('website.address_street')" @if(!empty(session('22'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_street" name="billing_street" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_street}}@endif">
                              <span class="help-block error-content" hidden>@lang('website.Please enter your address')</span>
                            </div>
                            <div class="form-group">
@@ -204,16 +200,20 @@
                                <input type="text" class="form-control same_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_city" name="billing_city" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_city}}@endif" placeholder="Enter Your City">
                                <span class="help-block error-content" hidden>@lang('website.Please enter your city')</span>
                            </div>
-                             <div class="form-group">
-                               <label for="exampleInputZpCode1">@lang('website.Zip/Postal Code')</label>
-                               <input type="text" class="form-control same_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_zip" name="billing_zip" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_zip}}@endif" aria-describedby="zpcodeHelp" placeholder="Enter Your Zip / Postal Code">
-                               <small id="zpcodeHelp" class="form-text text-muted"></small>
-                             </div>
+
                              <div class="form-group">
                                <label for="exampleInputNumber1">@lang('website.Phone Number')</label>
                                <input type="text" class="form-control same_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_phone" name="billing_phone" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_phone}}@endif" aria-describedby="numberHelp" placeholder="Enter Your Phone Number">
                                <span class="help-block error-content" hidden>@lang('website.Please enter your valid phone number')</span>
                              </div>
+                         <div class="form-group">
+                             <label for="exampleInputZpCode1">@lang('website.address_type')</label>
+                             <select class="form-control" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_address_type" name="billing_address_type">
+                                 <option value="home" @if(!empty(session('billing_address'))>0 && (session('billing_address')->billing_address_type === 'home')){{'selected'}} @endif> @lang('website.home')</option>
+                                 <option value="office" @if(!empty(session('billing_address'))>0 && (session('billing_address')->billing_address_type === 'office')){{'selected'}} @endif>@lang('website.office')</option>
+                             </select>
+                             <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please select your address type')</span>
+                         </div>
                              <div class="form-group">
                                  <div class="form-check">
                                      <input class="form-check-input" type="checkbox" id="same_billing_address" value="1" name="same_billing_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) checked @endif @else checked  @endif > @lang('website.Same shipping and billing address')>
@@ -236,57 +236,10 @@
                              </div>
                              <form name="shipping_mehtods" method="post" id="shipping_mehtods_form" enctype="multipart/form-data" action="{{ URL::to('/checkout_payment_method')}}">
                                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                 @if(!empty($result['shipping_methods'])>0)
-                                     <input type="hidden" name="mehtod_name" id="mehtod_name">
-                                     <input type="hidden" name="shipping_price" id="shipping_price">
-
-                                @foreach($result['shipping_methods'] as $shipping_methods)
-                                         <div class="heading">
-                                             <h2>{{$shipping_methods['name']}}</h2>
-                                             <hr>
-                                         </div>
-                                         <div class="form-check">
-
-                                             <div class="form-row">
-                                                 @if($shipping_methods['success']==1)
-                                                 <ul class="list"style="list-style:none; padding: 0px;">
-                                                     @foreach($shipping_methods['services'] as $services)
-                                                      <?php
-                                                          if($services['shipping_method']=='upsShipping')
-                                                             $method_name=$shipping_methods['name'].'('.$services['name'].')';
-                                                          else{
-                                                             $method_name=$services['name'];
-                                                             }
-                                                         ?>
-                                                         <li>
-                                                           @php
-                                                           $default_currency = DB::table('currencies')->where('is_default',1)->first();
-                                                           if($default_currency->id == Session::get('currency_id')){
-
-                                                             $currency_value = 1;
-                                                           }else{
-                                                             $session_currency = DB::table('currencies')->where('id',Session::get('currency_id'))->first();
-
-                                                             $currency_value = $session_currency->value;
-                                                           }
-                                                           @endphp
-                                                         <input class="shipping_data" id="{{$method_name}}" type="radio" name="shipping_method" value="{{$services['shipping_method']}}" shipping_price="{{$services['rate']}}"  method_name="{{$method_name}}" @if(!empty(session('shipping_detail')) and !empty(session('shipping_detail')) > 0)
-                                                         @if(session('shipping_detail')->mehtod_name == $method_name) checked @endif
-                                                         @elseif($shipping_methods['is_default']==1) checked @endif
-                                                         >
-                                                          <label for="{{$method_name}}">{{$services['name']}} --- {{Session::get('symbol_left')}}{{$services['rate']* $currency_value}}{{Session::get('symbol_right')}}</label>
-                                                         </li>
-                                                     @endforeach
-                                                 </ul>
-                                                 @else
-                                                     <ul class="list"style="list-style:none; padding: 0px;">
-                                                         <li>@lang('website.Your location does not support this') {{$shipping_methods['name']}}.</li>
-                                                     </ul>
-                                                 @endif
-                                             </div>
-                                         </div>
-                                     @endforeach
-                                 @endif
+                                  <input type="hidden" name="mehtod_name" id="mehtod_name">
+                                  <input type="hidden" name="shipping_price" id="shipping_price">
+                                 <input class="shipping_data" id="DHL" type="radio" name="shipping_method" value="DHL" shipping_price="10"  method_name="DHL" checked />
+                                 <label for="DHL">DHL</label>
                                  <div class="alert alert-danger alert-dismissible error_shipping" role="alert" style="display:none;">
                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                      @lang('website.Please select your shipping method')
@@ -383,10 +336,10 @@
                                        </table>
                                                    <?php
                                                        if(!empty(session('shipping_detail')) and !empty(session('shipping_detail'))>0){
-                                                           $shipping_price = session('shipping_detail')->shipping_price;
+                                                           @$shipping_price = session('shipping_detail')->shipping_price;
                                          $shipping_name = session('shipping_detail')->mehtod_name;
                                                        }else{
-                                                           $shipping_price = 0;
+                                                           @$shipping_price = 0;
                                          $shipping_name = '';
                                                        }
                                                        $tax_rate = number_format((float)session('tax_rate'), 2, '.', '');
@@ -455,20 +408,8 @@
                                                </form>
                                            </div>
                                            <div class="button">
-
-                                                           <!--- paypal -->
-                                                           <div id="paypal_button" class="payment_btns" style="display: none"></div>
-
-                                                           <button id="braintree_button" style="display: none" class="btn btn-dark payment_btns" data-toggle="modal" data-target="#braintreeModel" >@lang('website.Order Now')</button>
-
-                                                           <button id="stripe_button" class="btn btn-dark payment_btns" style="display: none" data-toggle="modal" data-target="#stripeModel" >@lang('website.Order Now')</button>
-
-                                                           <button id="cash_on_delivery_button" class="btn btn-dark payment_btns" style="display: none">@lang('website.Order Now')</button>
-                                                           <button id="instamojo_button" class="btn btn-dark payment_btns" style="display: none" data-toggle="modal" data-target="#instamojoModel">@lang('website.Order Now')</button>
-
-                                                           <a href="{{ URL::to('/checkout/hyperpay')}}" id="hyperpay_button" class="btn btn-dark payment_btns" style="display: none">@lang('website.Order Now')</a>
-
-                                          </div>
+                                               <button id="cash_on_delivery_button" class="btn btn-dark payment_btns" style="display: none">@lang('website.Order Now')</button>
+                                           </div>
                                        </div>
                                        <!-- The braintree Modal -->
                                        <div class="modal fade" id="braintreeModel">
@@ -653,11 +594,12 @@
  </div>
  </div>
 </section>
-
+@section('scripts')
 <script>
 jQuery(document).on('click', '#cash_on_delivery_button', function(e){
 	jQuery("#update_cart_form").submit();
 });
 </script>
+@endsection
 
 @endsection

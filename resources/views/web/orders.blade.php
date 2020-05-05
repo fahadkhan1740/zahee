@@ -81,8 +81,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @if(count($result['orders']) > 0)
+                               @if(count($result['orders']) > 0)
                   @foreach( $result['orders'] as $orders)
+
                   <tr class="d-flex">
                     <td class="col-12 col-md-2">{{$orders->orders_id}}</td>
                     <td class="col-12 col-md-2">
@@ -121,7 +122,7 @@
                             <span class="badge badge-primary">{{$orders->orders_status}}</span>
                             &nbsp;&nbsp;/&nbsp;&nbsp;
 
-                            <form action="{{ URL::to('/updatestatus')}}" method="post" onSubmit="return cancelOrder();" style="display: inline-block">
+                            <form action="{{ URL::to('/updatestatus')}}" method="post" style="display: inline-block">
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <input type="hidden" name="orders_id" value="{{$orders->orders_id}}">
                             <input type="hidden" name="orders_status_id" value="3">

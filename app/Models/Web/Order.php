@@ -26,18 +26,17 @@ class Order extends Model
 					//$customers_telephone            		=   $request->customers_telephone;
 
 					$email            						=  auth()->guard('customer')->user()->email;
-					$delivery_company 						=	session('shipping_address')->company;
 					$delivery_firstname  	          		=   session('shipping_address')->firstname;
 
 					$delivery_lastname            			=   session('shipping_address')->lastname;
 					$delivery_street_address            	=   session('shipping_address')->street;
+					$delivery_flat_address            	=   session('shipping_address')->flat;
 					$delivery_suburb            			=   '';
 					$delivery_city            				=   session('shipping_address')->city;
-					$delivery_postcode            			=   session('shipping_address')->postcode;
 					$delivery_phone            				=   session('shipping_address')->delivery_phone;
+					$delivery_address_type          				=   session('shipping_address')->address_type;
 
 					$delivery = DB::table('zones')->where('zone_id', '=', session('shipping_address')->zone_id)->get();
-
 					if(count($delivery)>0){
 						$delivery_state            				=   $delivery[0]->zone_code;
 					}else{
@@ -51,14 +50,11 @@ class Order extends Model
 					$billing_firstname            			=   session('billing_address')->billing_firstname;
 					$billing_lastname            			=   session('billing_address')->billing_lastname;
 					$billing_street_address            		=   session('billing_address')->billing_street;
+					$billing_flat_address            		=   session('billing_address')->billing_flat;
 					$billing_suburb	            			=   '';
 					$billing_city            				=   session('billing_address')->billing_city;
-					$billing_postcode            			=   session('billing_address')->billing_zip;
 					$billing_phone            				=   session('billing_address')->billing_phone;
-
-					if(!empty(session('billing_company')->company)){
-						$billing_company 						=	session('billing_address')->company;
-					}
+					$billing_address_type            				=   session('billing_address')->billing_address_type;
 
 					$billing = DB::table('zones')->where('zone_id', '=', session('billing_address')->billing_zone_id)->get();
 
@@ -100,8 +96,8 @@ class Order extends Model
 					$coupon_discount = number_format((float)session('coupon_discount'), 2, '.', '');
 					$order_price = (session('products_price')+$tax_rate+$shipping_price)-$coupon_discount;
 
-					$shipping_cost            			=   session('shipping_detail')->shipping_price;
-					$shipping_method            		=   session('shipping_detail')->mehtod_name;
+					$shipping_cost            			=   !empty(session('shipping_detail')->shipping_price)?session('shipping_detail')->shipping_price:0;
+					$shipping_method            		=   !empty(session('shipping_detail')->mehtod_name)?session('shipping_detail')->mehtod_name:'DHL';
 					$orders_status            			=   '1';
 					//$orders_date_finished            	=   $request->orders_date_finished;
 
@@ -142,131 +138,12 @@ class Order extends Model
 
 
 					//payment methods
-
-					if($payment_method == 'braintree'){
-					      	$payments_setting = $this->payments_setting_for_brain_tree();
-
-									//braintree transaction with nonce
-									$is_transaction  = '1'; 			# For payment through braintree
-									$nonce    		 =   $request->payment_method_nonce;
-
-									if($payments_setting['merchant_id']->environment == '0'){
-										$braintree_environment = 'sandbox';
-									}else{
-										$braintree_environment = 'production';
-									}
-
-									$braintree_merchant_id = $payments_setting['merchant_id']->value;
-									$braintree_public_key  = $payments_setting['public_key']->value;
-									$braintree_private_key = $payments_setting['private_key']->value;
-
-									//brain tree credential
-									require_once app_path('braintree/Braintree.php');
-
-									if ($result->success)
-									{
-
-									if($result->transaction->id)
-										{
-											$order_information = array(
-												'braintree_id'=>$result->transaction->id,
-												'status'=>$result->transaction->status,
-												'type'=>$result->transaction->type,
-												'currencyIsoCode'=>$result->transaction->currencyIsoCode,
-												'amount'=>$result->transaction->amount,
-												'merchantAccountId'=>$result->transaction->merchantAccountId,
-												'subMerchantAccountId'=>$result->transaction->subMerchantAccountId,
-												'masterMerchantAccountId'=>$result->transaction->masterMerchantAccountId,
-												//'orderId'=>$result->transaction->orderId,
-												'createdAt'=>time(),
-						//						'updatedAt'=>$result->transaction->updatedAt->date,
-												'token'=>$result->transaction->creditCard['token'],
-												'bin'=>$result->transaction->creditCard['bin'],
-												'last4'=>$result->transaction->creditCard['last4'],
-												'cardType'=>$result->transaction->creditCard['cardType'],
-												'expirationMonth'=>$result->transaction->creditCard['expirationMonth'],
-												'expirationYear'=>$result->transaction->creditCard['expirationYear'],
-												'customerLocation'=>$result->transaction->creditCard['customerLocation'],
-												'cardholderName'=>$result->transaction->creditCard['cardholderName']
-											);
-
-											$payment_status = "success";
-										}
-									}
-									else
-										{
-											$payment_status = "failed";
-										}
-
-					}
-					else if($payment_method == 'stripe'){				#### stipe payment
-
-									//require file
-									require_once app_path('stripe/config.php');
-
-									//get token from app
-									$token  = $request->token;
-
-									$customer = \Stripe\Customer::create(array(
-									  'email' => $email,
-									  'source'  => $token
-									));
-
-									$charge = \Stripe\Charge::create(array(
-									  'customer' => $customer->id,
-									  'amount'   => 100*$order_price,
-									  'currency' => 'usd'
-									));
-
-									 if($charge->paid == true){
-										 $order_information = array(
-												'paid'=>'true',
-												'transaction_id'=>$charge->id,
-												'type'=>$charge->outcome->type,
-												'balance_transaction'=>$charge->balance_transaction,
-												'status'=>$charge->status,
-												'currency'=>$charge->currency,
-												'amount'=>$charge->amount,
-												'created'=>date('d M,Y', $charge->created),
-												'dispute'=>$charge->dispute,
-												'customer'=>$charge->customer,
-												'address_zip'=>$charge->source->address_zip,
-												'seller_message'=>$charge->outcome->seller_message,
-												'network_status'=>$charge->outcome->network_status,
-												'expirationMonth'=>$charge->outcome->type
-											);
-
-											$payment_status = "success";
-
-									 }else{
-											$payment_status = "failed";
-									 }
-
-					}
-					else if($payment_method == 'cash_on_delivery'){
+				if($payment_method == 'cash_on_delivery'){
 						$payments_setting = $this->payments_setting_for_cod();
 
 						$payment_method = $payments_setting->name;
 						$payment_status='success';
 
-					}
-					else if($payment_method == 'paypal'){
-							$paypal_description = $this->payments_setting_for_paypal();
-							$payment_method = $payments_setting['id']->name;
-							$payment_status='success';
-							$order_information = json_decode($request->nonce, JSON_UNESCAPED_SLASHES);
-					}
-					else if($payment_method == 'instamojo'){
-						$instamojo =  $this->payments_setting_for_instamojo();
-						$payment_method = $instamojo['auth_token']->name;
-						$payment_status='success';
-						$order_information = $request->nonce;
-					}
-					else if($payment_method == 'hyperpay'){
-						$hyperpay =$this->payments_setting_for_hyperpay();
-						$payment_method = $hyperpay['userid']->name;
-						$payment_status='success';
-						$order_information = session('paymentResponseData');
 					}
 
 					//check if order is verified
@@ -275,10 +152,9 @@ class Order extends Model
 										$orders_id = DB::table('orders')->insertGetId(
 											[	 'customers_id' => $customers_id,
 												 'customers_name'  => $delivery_firstname.' '.$delivery_lastname,
-												 'customers_street_address' => $delivery_street_address,
+												 'customers_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
 												 'customers_suburb'  =>  $delivery_suburb,
 												 'customers_city' => $delivery_city,
-												 'customers_postcode'  => $delivery_postcode,
 												 'customers_state' => $delivery_state,
 												 'customers_country'  =>  $delivery_country,
 												 //'customers_telephone' => $customers_telephone,
@@ -286,19 +162,17 @@ class Order extends Model
 												// 'customers_address_format_id' => $delivery_address_format_id,
 
 												 'delivery_name'  =>  $delivery_firstname.' '.$delivery_lastname,
-												 'delivery_street_address' => $delivery_street_address,
+												 'delivery_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
 												 'delivery_suburb'  => $delivery_suburb,
 												 'delivery_city' => $delivery_city,
-												 'delivery_postcode'  =>  $delivery_postcode,
 												 'delivery_state' => $delivery_state,
 												 'delivery_country'  => $delivery_country,
 												// 'delivery_address_format_id' => $delivery_address_format_id,
 
 												 'billing_name'  => $billing_firstname.' '.$billing_lastname,
-												 'billing_street_address' => $billing_street_address,
+												 'billing_street_address' => $billing_street_address.' ,'.$billing_flat_address,
 												 'billing_suburb'  =>  $billing_suburb,
 												 'billing_city' => $billing_city,
-												 'billing_postcode'  => $billing_postcode,
 												 'billing_state' => $billing_state,
 												 'billing_country'  =>  $billing_country,
 												 //'billing_address_format_id' => $billing_address_format_id,
@@ -313,7 +187,7 @@ class Order extends Model
 												 'order_price'  => $order_price,
 												 'shipping_cost' =>$shipping_cost,
 												 'shipping_method'  =>  $shipping_method,
-												// 'orders_status' => $orders_status,
+												 'orders_status' => $orders_status,
 												 //'orders_date_finished'  => $orders_date_finished,
 												 'currency'  =>  $currency,
 												 'order_information' => 	json_encode($order_information),
@@ -343,7 +217,6 @@ class Order extends Model
 											$orders_products_id = DB::table('orders_products')->insertGetId(
 												[
 													 'orders_id' 		 => 	$orders_id,
-												  	'vendor_id' 		 => $this->getvendorID($products->products_id),
 													 'products_id' 	 	 =>		$products->products_id,
 													 'products_name'	 => 	$products->products_name,
 													 'products_price'	 =>  	$products->price,
@@ -466,9 +339,9 @@ class Order extends Model
 //get product vendor id
 
 	public function getvendorID($id) {
-		$product = 	DB::SELECT('SELECT vendor_id from products where  products_id=' . $id);
+		$product = 	DB::SELECT('SELECT manufacturers_id from products where  products_id=' . $id);
 
-		return $product[0]->vendor_id;
+		return $product[0]->manufacturers_id;
 	}
   public function orders($request){
           $index = new Index();
@@ -478,7 +351,6 @@ class Order extends Model
 
 					//orders
 					$orders = DB::table('orders')->orderBy('date_purchased','DESC')->where('customers_id','=', auth()->guard('customer')->user()->id)->get();
-
 					$index = 0;
 					$total_price = array();
 
@@ -490,14 +362,21 @@ class Order extends Model
 
 						$orders[$index]->total_price = $orders_products[0]->total_price;
 
+//                        DB::enableQueryLog();
 						$orders_status_history = DB::table('orders_status_history')
 							->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
 							->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
 							->select('orders_status_description.orders_status_name', 'orders_status.orders_status_id')
-							->where('orders_id', '=', $orders_data->orders_id)->where('orders_status_description.language_id',session('language_id'))->orderby('orders_status_history.orders_status_history_id', 'DESC')->limit(1)->get();
+							->where('orders_status_history.orders_id', '=', $orders_data->orders_id)->where('orders_status_description.language_id',session('language_id'))->orderby('orders_status_history.orders_status_history_id', 'DESC')->limit(1)->get();
+//                        dd(DB::getQueryLog());
 
-						$orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
-						$orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
+                        if(count($orders_status_history) > 0) {
+                            $orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
+                            $orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
+                        } else {
+                            $orders[$index]->orders_status_id = '';
+                            $orders[$index]->orders_status = '';
+                        }
 						$index++;
 
 					}
@@ -522,13 +401,6 @@ class Order extends Model
 			$index = 0;
 			foreach($orders as $orders_data){
 
-				$orders_status_history = DB::table('orders_status_history')
-					->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-					->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-					->select('orders_status_description.orders_status_name', 'orders_status.orders_status_id')
-					->where('orders_id', '=', $orders_data->orders_id)->where('orders_status_description.language_id',session('language_id'))->orderby('orders_status_history.orders_status_history_id', 'DESC')->limit(1)->get();
-
-
 				$products_array = array();
 				$index2 = 0;
 				$order_products = DB::table('orders_products')
@@ -549,17 +421,22 @@ class Order extends Model
 
 				}
 
-				$orders_status_history = DB::table('orders_status_history')
-					->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-					->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-					->select('orders_status_description.orders_status_name', 'orders_status.orders_status_id')
-					->where('orders_id', '=', $orders_data->orders_id)->where('orders_status_description.language_id',session('language_id'))->orderby('orders_status_history.orders_status_history_id', 'DESC')->limit(1)->get();
+                $orders_status_history = DB::table('orders_status_history')
+                    ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
+                    ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+                    ->select('orders_status_description.orders_status_name', 'orders_status.orders_status_id')
+                    ->where('orders_status_history.orders_id', '=', $orders_data->orders_id)->where('orders_status_description.language_id',session('language_id'))->orderby('orders_status_history.orders_status_history_id', 'DESC')->limit(1)->get();
 
 
 				$orders[$index]->statusess = $orders_status_history;
 				$orders[$index]->products = $products_array;
-				$orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
-				$orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
+                if(count($orders_status_history) > 0) {
+                    $orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
+                    $orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
+                } else {
+                    $orders[$index]->orders_status = '';
+                    $orders[$index]->orders_status = '';
+                }
 				$index++;
 
 			}
@@ -802,10 +679,10 @@ class Order extends Model
 	}
 
 	public function InsertOrdersCheck($request,$date_added,$comments){
-		$orders_history_id = DB::table('orders_status_history')->insertGetId(
-			[	 'orders_id'  => $request->orders_id,
+		$orders_history_id = DB::table('orders_status_history')
+            ->where('orders_id'  ,'=', $request->orders_id)
+            ->update([
 				 'orders_status_id' => $request->orders_status_id,
-				 'date_added'  => $date_added,
 				 'customer_notified' =>'1',
 				 'comments'  =>  $comments
 			]);

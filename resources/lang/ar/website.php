@@ -125,8 +125,6 @@ return [
 
 	'View All'=>'عرض الكل',
 
-	'Special'=>'خاص',
-
 	'items'=>'العناصر',
 	'item'=>'بند',
 
@@ -174,17 +172,11 @@ return [
 
 	'Detail'=>'التفاصيل',
 
-	'Quantity'=>'الكمية',
-
 	'Unit Price'=>'سعر الوحدة',
 
 	'Item Total'=>'إجمالي العنصر',
 
-	'Special'=>'الخاصة',
-
 	'Coupon Code'=>'رمز القسيمة',
-
-	'Checkout'=>'الخروج',
 
 	'Update Cart'=>'تحديث السلة',
 
@@ -242,8 +234,6 @@ return [
 
 	'Terms and Services'=>'الشروط والخدمات',
 
-	'Privacy Policy'=>'سياسة الخصوصية',
-
 	'Refund Policy'=>'سياسة الاسترداد',
 
 	'Please accept our terms and conditions'=>'"يرجى قبول الشروط والأحكام',
@@ -272,13 +262,7 @@ return [
 
 	'Ut quis dolor accumsan, viverra neque nec, blandit leo'=>'بالنسبة لشخص ل، viverra neque غير المصنفة في موضع الألم المنحى، blandit تيمبوس ليو.',
 
-	'Checkout'=>'الخروج',
-
-	'Shopping cart'=>'عربة التسوق',
-
 	'Billing Address'=>'عنوان الفواتي',
-
-
 
 	'Payment Methods'=>'طرق الدفع',
 
@@ -340,7 +324,7 @@ return [
 
 	'Order Now'=>'اطلب الآن',
 
-	'Please select a prefered shipping method to use on this order'=>'يُرجى تحديد طريقة شحن مفضلة لاستخدامها في هذا الطلب.',
+	'Please select a preferred shipping method to use on this order'=>'يُرجى تحديد طريقة شحن مفضلة لاستخدامها في هذا الطلب.',
 
 	'My Orders'=>'طلبي',
 
@@ -348,7 +332,6 @@ return [
 
 	'Order ID'=>'معرف الطلب',
 
-	'Quantity'=>'الكمية',
 
 	'Order Date'=>'تاريخ الطلب',
 
@@ -359,8 +342,6 @@ return [
 	'Status'=>'الحالة',
 
 	'Order information'=>'معلومات الطلب',
-
-	'Please select a prefered shipping method to use on this order'=>'يُرجى تحديد طريقة شحن مفضلة لاستخدامها في هذا الطلب.',
 
 	'Customer Detail'=>'تفاصيل العميل',
 
@@ -409,8 +390,6 @@ return [
 	'Edit Cart'=>'تحرير سلة التسوق',
 
 	'Full Name'=>'الاسم الكامل',
-
-	'Email'=>'البريد الإلكتروني',
 
 	'Message'=>'رسالة',
 
@@ -467,8 +446,6 @@ return [
 
 	'Edit Address'=>'تحرير العنوان',
 
-	'Add Address'=>'إضافة عنوان',
-
 	'All products are loaded'=>' يتم تحميل جميع المنتجات.',
 
 	'Related Products'=>'منتجات ذات صلة ',
@@ -498,8 +475,6 @@ return [
 
 	'This field is required'=>'هذا الحقل مطلوب.',
 
-	'Forgot Password'=>'هل نسيت كلمة المرور؟',
-
 	'Please enter your password and should be at least 6 characters long'=>'الرجاء إدخال كلمة المرور الخاصة بك ويجب أن يكون طولها 6 أحرف على الأقل',
 
 	'New Password'=>'كلمة المرور الجديدة',
@@ -520,19 +495,13 @@ return [
 
 	'Male'=>'مالي',
 
-	'Gender'=>'الجنس',
-
 	'Ecommerce'=>'التجارة الإلكترونية',
 
 	'Featured'=>'المميز',
 
 	'Filters'=>'شروط',
 
-	'Apply'=>'تطبيق',
-
 	'Reset'=>'إعادة تعيين',
-
-	'Subscribe'=>'الاشتراك!',
 
 	'Shipping Address'=>'عنوان الشحن',
 
@@ -710,52 +679,14 @@ return [
 	'Please login first to like this product'=>'الرجاء تسجيل الدخول أولاً لمثل هذا المنتج.',
 	'Product is liked'=>'المنتج هو يحب.',
 	'Product is disliked'=>'المنتج غير محبوب.',
-	'Password has been updated successfully'=>'تم تحديث كلمة المرور بنجاح.',
 
-
-	'Record not found'=>'سجل ملاحظة الخطوط!',
-	'contact us title'=>'التجارة الإلكترونية اتصل بنا',
-	'Follow Us'=>'تابعنا',
-
-	'Shipping addresses are not added yet'=>'لا تتم إضافة عناوين الشحن حتى الآن',
-
-	'product is not added to your wish list'=>'لا يضاف المنتج إلى قائمة أمنياتك.',
-
-	'Search result for'=>'نتيجة البحث عن',
-
-	'item found'=>'تم العثور على العنصر',
-	'cancel'=>'إلغاء',
-
-	'Please write notes of your order'=>'يرجى كتابة ملاحظات من طلبك',
-	'Coupon Applied'=>'الكوبون التطبيقية',
 
 	//new
-	'Welcome'=>'أهلا بك',
 	'Welcome Guest!'=>'مرحبا بالضيف!',
-	'Worldwide Express Plus'=>'في جميع أنحاء العالم اكسبرس بلاس',
-	'Standard'=>'اساسي',
-	'Worldwide Expedited'=>'في جميع أنحاء العالم المعجل',
-	'Worldwide Express'=>'في جميع أنحاء العالم اكسبرس',
-	'2nd Day Air A.M.'=>'اليوم الثاني للطيران',
-	'Next Day Air Early A.M.'=>'اليوم التاليالهواء في وقت مبكرصباحا',
-	'Next Day Air Saver'=>'اليوم التالي توفير الهواء',
-	'3 Day Select'=>'اختيار 3 أيام',
-	'Ground'=>'أرض',
-	'2nd Day Air'=>'اليوم الثاني للطيران',
-	'Next Day Air'=>'الهواء اليوم التالي',
-	'My Account'=>'حسابي',
-	'Info Pages'=>'صفحات المعلومات',
-	'Dummy Text'=>'أبجد هوز دولور الجلوس امات، مينيابوليس الجامعية إيليت. لكنه يرغب في الماكياج هو أن أقول، كتلة دائما، وشحم التحرير تمويل. مجانا في بعض مكتب السهام الدعاية. لوضع توقعات واقعية. كرة القدم لايف عززت ولا عقوبة الرعاية الكلي. الحرارية ااا  كرة القدم انم، والجلوس امات خميرة التمويل في الهواء الطلقالاتحاد الأوروبي. تباينت المطورينسد، ولكن على الزناد لكرة القدم أي شركة طيران.',
 
-	'Product is unliked'=>'المنتج غير مرغوب فيه',
-	'Please login first to like this product'=>'الرجاء تسجيل الدخول أولاً لمثل هذا المنتج',
-	'Product is liked'=>'المنتج هو يحب',
-	'Product is disliked'=>'المنتج غير محبوب',
-	'Password has been updated successfully'=>'تم تحديث كلمة المرور بنجاح',
 	'Empty Site Name'=>'إفراغ اسم الموقع',
 	'Instamojo Payment'=>'انسٹاموجو دفع',
 	'External Link'=>'رابط خارجي',
-	'Flash Sale'=>'بيع مفاجئ',
 	'cancel order'=>'الغاء الطلب',
 	'cancelled'=>'ألغيت',
 	'Are you sure you want to cancel this order?'=>'هل أنت متأكد من أنك تريد إلغاء هذا الطلب؟',
@@ -771,5 +702,11 @@ return [
     'Cosmetic & Perfumes' => 'مستحضرات التجميل والعطور',
     'Health Supplements' => 'المكملات الغذائية',
     'Protein & others' => 'البروتين وغيره',
-    'Go to Cart' => 'اذهب إلى سلة التسوق'
+    'Go to Cart' => 'اذهب إلى سلة التسوق',
+    'address_street' => 'مستعمرة / شارع / محلة',
+    'address_flat' => 'شقة / بيت رقم / الدور / مبنى',
+    'address_type' => 'نوع العنوان',
+    'office' => 'مكتب / تجاري (10:00 صباحاً - 6:00 مساءً توصيل)',
+    'home' => 'المنزل (7:00 صباحًا - 9:00 مساءً ، طوال اليوم)',
+    'Please select your address type' => 'يرجى تحديد نوع العنوان الخاص بك',
 ];

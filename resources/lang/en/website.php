@@ -756,5 +756,12 @@ return [
     'Cosmetic & Perfumes' => 'Cosmetic & Perfumes',
     'Health Supplements' => 'Health Supplements',
     'Protein & others' => 'Protein & others',
-    'Go to Cart' => 'Go to Cart'
+    'Go to Cart' => 'Go to Cart',
+    'address_street' => 'Colony/Street/Locality',
+    'address_flat' => 'Flat/House No./Floor/Building',
+    'address_type' => 'Type of Address',
+    'office' => 'Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)',
+    'home' => 'Home (7:00 A.M. - 9:00 P.M., All Day)',
+    'Please select your address type' => 'Please select your address type',
+
 ];

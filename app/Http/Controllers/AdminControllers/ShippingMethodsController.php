@@ -36,16 +36,16 @@ class ShippingMethodsController extends Controller
       $shipping_methods = $this->Shipping_method->shipingMethod();
       $result['shipping_methods'] = $shipping_methods;
 
-      //ups data
-      $ups_shipping['ups_shipping'] = $this->Shipping_method->ups_shipping();
-      $ups_shipping['ups_description'] = $this->Shipping_method->upsDescription();
-      $result['ups_shipping'] = $ups_shipping;
-
-      //flatrate
+//      //ups data
+//      $ups_shipping['ups_shipping'] = $this->Shipping_method->ups_shipping();
+//      $ups_shipping['ups_description'] = $this->Shipping_method->upsDescription();
+//      $result['ups_shipping'] = $ups_shipping;
+//
+//      //flatrate
       $flate_rate['flate_rate'] = $this->Shipping_method->flateRate();
-      $flate_rate['flatrate_description'] = $this->Shipping_method->flateRateDescription();
-
-      $result['flate_rate'] = $flate_rate;
+//      $flate_rate['flatrate_description'] = $this->Shipping_method->flateRateDescription();
+//
+//      $result['flate_rate'] = $flate_rate;
       return view("admin.shippingmethods.index", $title)->with('result', $result);
 
     }

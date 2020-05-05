@@ -296,7 +296,6 @@ if(typeof resposne  !== "undefined"){
 	}
 }
 //cash_on_delivery_button
-
 	//shipping_mehtods_form
 jQuery(document).on('submit', '#shipping_mehtods_form', function(e){
 	jQuery('.error_shipping').hide();
@@ -318,9 +317,30 @@ jQuery(document).on('click', '#update_cart', function(e){
 
 	//billling method
 	//apply_coupon_cart
+    jQuery(document).on('click','#coupon-code', function(e){
+        jQuery('#loader').css('display','flex');
+        var parent = jQuery(this);
+        var coupon_code = jQuery('#coupon_code').val();
+        jQuery.ajax({
+            headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+            url: '{{ URL::to("/apply_coupon")}}',
+            type: "POST",
+            data: '&coupon_code='+coupon_code,
+            async: false,
+            success: function (res) {
+                res = JSON.parse(res);
+                if(res.success == 0) {
+                    swal("Coupon Error!", res.message, "error");
+                } else {
+                    swal("Congrates!", res.message, "success");
+                    location.re
+                }
+                console.log(res);
+                jQuery('#loader').hide();
+            },
+        });
+    });
 	//coupon_code
-
-//sortby
 
 
 jQuery( function() {

@@ -5,13 +5,13 @@
   <main id="scrollbar-body" data-scrollbar="">
 
 
-        <section class="section cart cart-step-1">
+        <section class="section view-cart cart-step-1">
             <div class="container">
                  <div class="row">
                      <div class="col-md-9">
                           <div class="cart-col cart-left box-shadow">
                             <div class="cart-title">
-                                <h6>My Cart(2)</h6>
+                                <h6>My Cart({{count($result['cart'])}})</h6>
                             </div>
                               <?php
                               $price = 0;
@@ -110,17 +110,11 @@
                                         <p>Delivered by Mon, 20th ‘18</p>
                                     </div>
                                 </div>
-
                                 <!-- cart -items -->
-
                                 <div class="cart-action-wrap text-right ">
                                     <a href="{{ URL::to('/shop')}}" class="link-btn">@lang('website.Back To Shopping')</a>
                                     <a href="{{ URL::to('/checkout')}}" class="btn btn-default">@lang('website.proceedToCheckout')</a>
                                 </div>
-
-
-
-
                             </div>
                               @endforeach
                           </div>
@@ -158,9 +152,9 @@
                     <div class="col-12 col-lg-5">
                         <form id="apply_coupon" class="form-validate">
                             <div class="input-group ">
-                                <input type="text"  id="coupon_code" name="coupon_code" class="form-control" placeholder="Coupon Code" aria-label="Coupon Code" aria-describedby="coupon-code">
+                                <input type="text"  id="coupon_code" name="coupon_code" class="form-control" placeholder="Coupon Code">
                                 <div class="input-group-append">
-                                    <button class="btn  btn-secondary" type="submit" id="coupon-code">APPLY</button>
+                                    <button class="btn  btn-secondary" type="button" id="coupon-code">APPLY</button>
                                 </div>
                             </div>
                         </form>

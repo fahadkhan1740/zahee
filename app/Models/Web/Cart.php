@@ -787,8 +787,7 @@ class Cart extends Model
 
 	public function common_apply_coupon($coupon_code){
 		$result = array();
-		//dd('ds');
-
+//        dd($coupon_code);
 		//current date
 		$currentDate		=	date('Y-m-d 00:00:00',time());
 
@@ -814,6 +813,8 @@ class Cart extends Model
 		}
 
 		$coupons = $data->get();
+
+
 
 		if(count($coupons)>0){
 
