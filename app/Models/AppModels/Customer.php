@@ -511,7 +511,7 @@ class Customer extends Model
                         'customer_id' => $customers_id,
                     ]);
             }
-
+            $userData[0]->password = $password;
             $responseData = array('success' => $success, 'data' => $userData, 'message' => $message);
         } else {
             $responseData = array('success' => '0', 'data' => array(), 'message' => "Unauthenticated call.");
@@ -618,6 +618,8 @@ class Customer extends Model
                         'customer_id' => $customers_id,
                     ]);
             }
+
+            $userData[0]->password = $password;
 
             //$userData = $request->all();
             $responseData = array('success' => $success, 'data' => $userData, 'message' => "Login successfully");

@@ -74,7 +74,7 @@ class Customers extends Model
 
     public function insert($request){
       $uploadImage = '';
-      
+
       //
       // $var = "20/04/2012";
       // $date = str_replace('/', '-', $var);
@@ -132,9 +132,9 @@ class Customers extends Model
         $state_name = '';
       }
       $country_name = $countries->countries_name;
-      
+
       $cordinates_address = urlencode($request->entry_street_address.' '.$request->entry_city.' '.$state_name. ' '. $request->entry_postcode. ' '.$country_name);
-      
+
       $setting = new Setting();
       $getSettings = $setting->getSettings();
 
@@ -143,9 +143,9 @@ class Customers extends Model
       if(!empty($getSettings[103]->value)){
           $google_map_api	  =  $getSettings[103]->value;
           $cordinates = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key='.$google_map_api.'&address='.$cordinates_address);
-          
+
           $cordinates = json_decode($cordinates);
-          
+
           if($cordinates->status=="OK"){
               $latitude = $cordinates->results[0]->geometry->location->lat;
               $longitude = $cordinates->results[0]->geometry->location->lng;
@@ -227,9 +227,9 @@ class Customers extends Model
           $state_name = '';
         }
         $country_name = $countries->countries_name;
-        
+
         $cordinates_address = urlencode($request->entry_street_address.' '.$request->entry_city.' '.$state_name. ' '. $request->entry_postcode. ' '.$country_name);
-        
+
         $setting = new Setting();
         $getSettings = $setting->getSettings();
 
@@ -238,9 +238,9 @@ class Customers extends Model
         if(!empty($getSettings[103]->value)){
             $google_map_api	  =  $getSettings[103]->value;
             $cordinates = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key='.$google_map_api.'&address='.$cordinates_address);
-            
+
             $cordinates = json_decode($cordinates);
-            //dd($cordinates);   
+            //dd($cordinates);
             if($cordinates->status=="OK"){
                 $latitude = $cordinates->results[0]->geometry->location->lat;
                 $longitude = $cordinates->results[0]->geometry->location->lng;
@@ -305,12 +305,15 @@ class Customers extends Model
     }
 
     public function destroyrecord($user_id){
-      DB::table('users')->where('id','=', $user_id)->delete();
+
+     DB::table('users')->where('id','=', $user_id)->delete();
+
       $addresses = DB::table('user_to_address')->where('user_to_address.user_id','=', $user_id)->get();
       foreach($addresses as $address){
         DB::table('address_book')->where('address_book_id','=', $address->address_book_id)->delete();
       }
       DB::table('user_to_address')->where('user_to_address.user_id','=', $user_id)->delete();
+
     }
 
     public function filter($request){

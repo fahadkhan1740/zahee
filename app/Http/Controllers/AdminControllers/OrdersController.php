@@ -46,8 +46,8 @@ class OrdersController extends Controller
                 ->select('orders_status_description.orders_status_name', 'orders_status_description.orders_status_id')
                 ->where('orders_status_description.language_id', '=', $language_id)
                 ->where('orders_id', '=', $orders_data->orders_id)
-                ->where('role_id', '<=', 2)
                 ->orderby('orders_status_history.date_added', 'DESC')->limit(1)->get();
+//            dd($orders_status_history);
 
             $orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
             $orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
@@ -73,6 +73,7 @@ class OrdersController extends Controller
         $message = array();
         $errorMessage = array();
 
+
         DB::table('orders')->where('orders_id', '=', $orders_id)
             ->where('customers_id', '!=', '')->update(['is_seen' => 1]);
 
@@ -81,7 +82,6 @@ class OrdersController extends Controller
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
             ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
             ->where('orders_status_description.language_id', '=', $language_id)
-            ->where('role_id', '<=', 2)
             ->where('orders.orders_id', '=', $orders_id)->orderby('orders_status_history.date_added', 'DESC')->get();
 
         foreach ($order as $data) {
@@ -128,13 +128,13 @@ class OrdersController extends Controller
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
             ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
             ->where('orders_status_description.language_id', '=', $language_id)
-            ->where('role_id', '<=', 2)
+//            ->where('role_id', '<=', 2)
             ->orderBy('orders_status_history.date_added', 'desc')
             ->where('orders_id', '=', $orders_id)->get();
 
         $orders_status = DB::table('orders_status')
             ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-            ->where('orders_status_description.language_id', '=', $language_id)->where('role_id', '<=', 2)->get();
+            ->where('orders_status_description.language_id', '=', $language_id)->get();
 
         $ordersData['message'] = $message;
         $ordersData['errorMessage'] = $errorMessage;
@@ -165,7 +165,7 @@ class OrdersController extends Controller
             $setting = $this->myVarsetting->getSetting();
 
             $status = DB::table('orders_status')->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-                ->where('orders_status_description.language_id', '=', 1)->where('role_id', '<=', 2)->where('orders_status_description.orders_status_id', '=', $orders_status)->get();
+                ->where('orders_status_description.language_id', '=', 1)->where('orders_status_description.orders_status_id', '=', $orders_status)->get();
 
             if ($old_orders_status == $orders_status) {
                 return redirect()->back()->with('error', Lang::get("labels.StatusChangeError"));
@@ -283,7 +283,7 @@ class OrdersController extends Controller
             ->LeftJoin('orders_status_history', 'orders_status_history.orders_id', '=', 'orders.orders_id')
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
             ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-            ->where('orders_status_description.language_id', '=', $language_id)->where('role_id', '<=', 2)
+            ->where('orders_status_description.language_id', '=', $language_id)
             ->where('orders.orders_id', '=', $orders_id)->orderby('orders_status_history.date_added', 'DESC')->get();
 
         foreach ($order as $data) {
@@ -332,12 +332,12 @@ class OrdersController extends Controller
         $orders_status_history = DB::table('orders_status_history')
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
             ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-            ->where('orders_status_description.language_id', '=', $language_id)->where('role_id', '<=', 2)
+            ->where('orders_status_description.language_id', '=', $language_id)
             ->orderBy('orders_status_history.date_added', 'desc')
             ->where('orders_id', '=', $orders_id)->get();
 
         $orders_status = DB::table('orders_status')->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-            ->where('orders_status_description.language_id', '=', $language_id)->where('role_id', '<=', 2)->get();
+            ->where('orders_status_description.language_id', '=', $language_id)->get();
 
         $ordersData['message'] = $message;
         $ordersData['errorMessage'] = $errorMessage;

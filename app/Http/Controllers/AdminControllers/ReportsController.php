@@ -68,7 +68,7 @@ class ReportsController extends Controller
 			->orderBy('products_ordered', 'DESC')
 			->where('products_description.language_id','=','1')
 			->paginate(20);
-		
+
 		$result['data'] = $products;
 		//get function from other controller
 		$myVar = new SiteSettingController();
@@ -150,9 +150,7 @@ class ReportsController extends Controller
 		$result['products'] = $data;
 		$myVar = new SiteSettingController();
 		$result['currency'] = $myVar->getSetting();
-
-		return view("admin.reports.outofstock",$title)->with('result', $result);
-
+			return view("admin.reports.outofstock",$title)->with('result', $result);
 	}
 
 	//lowinstock

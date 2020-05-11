@@ -187,7 +187,7 @@ class Order extends Model
 												 'order_price'  => $order_price,
 												 'shipping_cost' =>$shipping_cost,
 												 'shipping_method'  =>  $shipping_method,
-												 'orders_status' => $orders_status,
+												 //'orders_status' => $orders_status,
 												 //'orders_date_finished'  => $orders_date_finished,
 												 'currency'  =>  $currency,
 												 'order_information' => 	json_encode($order_information),

@@ -247,6 +247,7 @@ class CustomersController extends Controller
     }
 
     public function delete(Request $request){
+//        dd($request->users_id);
       $this->Customers->destroyrecord($request->users_id);
       return redirect()->back()->withErrors([Lang::get("labels.DeleteCustomerMessage")]);
     }

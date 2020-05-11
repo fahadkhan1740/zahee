@@ -72,7 +72,7 @@ $("img").click(function() {
   $("#btn").click(function() {
 
 	if (confirm('Are You Sure To Delete This?')) {
-    
+
 		var imgs = $("img.hover").length;
 		var parentFrom = $('#images_form');
 		var formData = parentFrom.serialize();
@@ -89,15 +89,15 @@ $("img").click(function() {
 				},
 			});
 		}else{
-			alert('Please choose image first.');	
+			alert('Please choose image first.');
 		}
-		
+
 	} else {
 		// Do nothing!
-		
+
 	}
 
-    
+
 
   });
 
@@ -1484,7 +1484,7 @@ $(document).on('click', '#updateAddress', function(e){
 	$(document).on('click', '#deleteCustomerFrom', function(){
 		var users_id = $(this).attr('customers_id');
 		$('#users_id').val(users_id);
-		console.log(users_id);
+
 		$('#customers_id1').val(users_id);
 		$('#customers_id').val(users_id);
 		$("#deleteCustomerModal").modal('show');
@@ -1976,7 +1976,7 @@ $(document).ready(function(e) {
 
 $(document).on('change', '#bannerType', function(e){
 	var type = $(this).val();
-	
+
 
 });
 

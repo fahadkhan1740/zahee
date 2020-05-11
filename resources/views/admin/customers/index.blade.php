@@ -88,7 +88,7 @@
                                             <td>{{ $listingCustomers->id }}</td>
                                             <td>{{ $listingCustomers->first_name }} {{ $listingCustomers->last_name }}</td>
                                             <td>{{ $listingCustomers->email }}</td>
-                                            <td>                                               
+                                            <td>
                                                 <strong>{{ trans('labels.Phone') }}: </strong> {{ $listingCustomers->phone }} <br>
                                                 <strong>{{ trans('labels.Devices') }}: </strong>
                                                 @if(count($listingCustomers->devices)>0)
@@ -138,7 +138,7 @@
                                                             <li role="presentation"><a role="menuitem" tabindex="-1" href="{{url('admin/customers/address/display/'.$listingCustomers->id) }}">{{ trans('labels.EditAddress') }}</a></li>
                                                             <li role="presentation" class="divider"></li>
                                                             <li role="presentation"><a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Delete') }}" id="deleteCustomerFrom"
-                                                                  users_id="{{ $listingCustomers->id }}">{{ trans('labels.Delete') }}</a></li>
+                                                                                       customers_id="{{ $listingCustomers->id }}">{{ trans('labels.Delete') }}</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
