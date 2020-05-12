@@ -84,47 +84,43 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="product-desc product-desc-detail">
-                                        <p>   <?=stripslashes($result['detail']['product_data'][0]->products_description)?></p>
-                                    </div>
-                                    <div class="product-desc product-desc-size">
                                         @if(count($result['detail']['product_data'][0]->attributes)>0)
+                                        <div class="product-desc product-desc-size">
                                             @foreach( $result['detail']['product_data'][0]->attributes as $key=>$attributes_data )
-                                                <div class="">
-                                                    <label>{{ $attributes_data['option']['name'] }}</label>
-                                                    <div class="select-control ">
-                                                        <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
-                                                            @if(!empty($result['cart']))
-                                                                @php
-                                                                    $value_ids = array();
-                                                                     foreach($result['cart'][0]->attributes as $values){
-                                                                         $value_ids[] = $values->options_values_id;
-                                                                     }
-                                                                @endphp
-                                                                @foreach($attributes_data['values'] as $values_data)
-                                                                    @if(!empty($result['cart']))
-                                                                        <option @if(in_array($values_data['id'],$value_ids)) selected @endif attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            @else
-                                                                @foreach($attributes_data['values'] as $values_data)
-                                                                    <option attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
+                                                    <div class="">
+                                                        <label>{{ $attributes_data['option']['name'] }}</label>
+                                                        <div class="select-control ">
+                                                            <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
+                                                                @if(!empty($result['cart']))
+                                                                    @php
+                                                                        $value_ids = array();
+                                                                         foreach($result['cart'][0]->attributes as $values){
+                                                                             $value_ids[] = $values->options_values_id;
+                                                                         }
+                                                                    @endphp
+                                                                    @foreach($attributes_data['values'] as $values_data)
+                                                                        @if(!empty($result['cart']))
+                                                                            <option @if(in_array($values_data['id'],$value_ids)) selected @endif attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach($attributes_data['values'] as $values_data)
+                                                                        <option attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                        </div>
                                         @endif
-                                    </div>
                                         @if($result['detail']['product_data'][0]->defaultStock > 0)
                                     <div class="product-desc product-desc-qty">
                                         <div class="product-label-wrap">
                                             <div class="label"><p>Quantity:</p></div>
                                             <div class="qty-wrap qty-sm">
                                                     <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                                    <input type="number" id="number" readonly name="quantity" value="0">
+                                                    <input type="number" id="number" readonly name="quantity" value="{{$result['detail']['product_data'][0]->products_min_order}}">
                                                     <div class="value-button" id="increase" onclick="increaseValue()" >+</div>
                                             </div>
                                         </div>

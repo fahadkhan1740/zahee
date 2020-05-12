@@ -175,14 +175,14 @@ jQuery(document).on('click', '.whishlist', function(e){
 		success: function (res) {
 		    res = JSON.parse(res);
             if(res.success == 0){
-                swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
+                swal("Something Happened To Stock",res.message, "error");
             }
             else{
                 {{--jQuery('.head-cart-content').html(res);--}}
                 {{--jQuery(parent).removeClass('cart');--}}
                 {{--jQuery(parent).addClass('active');--}}
                 {{--jQuery(parent).html("@lang('website.Added')");--}}
-                swal("Congrates!", "Product Added Successfully Thanks.Continue Shopping", "success");
+                swal("Congrates!", "@lang('Product Added Successfully Thanks.Continue Shopping')", "success");
 
             }
 		},

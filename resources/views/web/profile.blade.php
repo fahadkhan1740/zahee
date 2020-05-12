@@ -11,12 +11,11 @@
                  <li class="breadcrumb-item active" aria-current="page">@lang('website.myProfile')</li>
                </ol>
              </nav>
-             
+
          </div>
          <div class="col-12 media-main">
              <div class="media">
                <div class="media__pro">
-                   <img src="{{auth()->guard('customer')->user()->avatar}}" alt="avatar">
                  </div>
                  <div class="media-body">
                    <div class="row">
@@ -29,7 +28,7 @@
 
                      </div>
                      </div>
-                 </div> 
+                 </div>
 
              </div>
          </div>
@@ -135,28 +134,28 @@
                         </button>
                     </div>
                 @endif
-                <div class="form-group row justify-content-center">
-                  <div class="col-12 media-main">
-                      <div class="media">
-                        @if(!empty(auth()->guard('customer')->user()->avatar))
-                            <input type="hidden" name="customers_old_picture" value="{{ auth()->guard('customer')->user()->avatar }}">
-                        @else
-                          <input type="hidden" name="customers_old_picture" value="">
-                        @endif
-                        <div class="media__pro">
-                          <img style="margin-bottom:-50px;" src="{{auth()->guard('customer')->user()->avatar}}" alt="avatar">
-                          </div>
-                          <div class="media-body">
-                            <div class="row">
-                              <div class="col-12 col-sm-4 col-md-6">
-                                 <input name="picture" id="userImage" type="file" class="inputFile" onChange="showPreview(this);" /><br>
-                              </div>
-                            </div>
-                          </div>
+{{--                <div class="form-group row justify-content-center">--}}
+{{--                  <div class="col-12 media-main">--}}
+{{--                      <div class="media">--}}
+{{--                        @if(!empty(auth()->guard('customer')->user()->avatar))--}}
+{{--                            <input type="hidden" name="customers_old_picture" value="{{ auth()->guard('customer')->user()->avatar }}">--}}
+{{--                        @else--}}
+{{--                          <input type="hidden" name="customers_old_picture" value="">--}}
+{{--                        @endif--}}
+{{--                        <div class="media__pro">--}}
+{{--                          <img style="margin-bottom:-50px;" src="{{auth()->guard('customer')->user()->avatar}}" alt="avatar">--}}
+{{--                          </div>--}}
+{{--                          <div class="media-body">--}}
+{{--                            <div class="row">--}}
+{{--                              <div class="col-12 col-sm-4 col-md-6">--}}
+{{--                                 <input name="picture" id="userImage" type="file" class="inputFile" onChange="showPreview(this);" /><br>--}}
+{{--                              </div>--}}
+{{--                            </div>--}}
+{{--                          </div>--}}
 
-                      </div>
-                  </div>
-                </div>
+{{--                      </div>--}}
+{{--                  </div>--}}
+{{--                </div>--}}
 
                  <div class="form-group row">
                    <label for="firstName" class="col-sm-2 col-form-label">@lang('website.First Name')</label>

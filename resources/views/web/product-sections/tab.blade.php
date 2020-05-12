@@ -2,7 +2,7 @@
 <div class="product-wrap" >
     <div class="title-wrap d-flex justify-content-between align-items-center">
     <div class="title-box">
-      <h6>Deals of the day</h6>
+      <h6>@lang('website.Deals of the day')</h6>
     </div>
     <!-- <div class="titlee-right">
         <a href="#" class="see-all-btn">See All</a>
@@ -36,7 +36,7 @@
 <div class="product-wrap">
   <div class="title-wrap d-flex justify-content-between align-items-center">
     <div class="title-box">
-      <h6>Offers</h6>
+      <h6>@lang('website.Offers')</h6>
     </div>
   </div>
   <div class="product-slider">
@@ -95,7 +95,7 @@
 <div class="product-wrap">
   <div class="title-wrap d-flex justify-content-between align-items-center">
     <div class="title-box">
-      <h6>Most Selling</h6>
+      <h6>@lang('website.Most Selling')</h6>
     </div>
     <!-- <div class="titlee-right">
         <a href="#" class="see-all-btn">See All</a>
@@ -119,10 +119,10 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-1.png" alt="service-24-icon-1.png" />
+                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-1.png" alt="service-24-icon-1.png" />
                 </figure>
                 <div class="service-24-content">
-                    <h6>24/7 Online Support</h6>
+                    <h6>@lang('24/7 Online Support')</h6>
                     <p>Lorem ipsum is simply dummy</p>
                 </div>
             </div>
@@ -130,10 +130,10 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-2.png" alt="service-24-icon-2.png" />
+                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-2.png" alt="service-24-icon-2.png" />
                 </figure>
                 <div class="service-24-content">
-                    <h6>Money Guarantee</h6>
+                    <h6>@lang('Money Guarantee')</h6>
                     <p>Lorem ipsum is simply dummy</p>
                 </div>
             </div>
@@ -141,10 +141,10 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-3.png" alt="service-24-icon-3.png" />
+                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-3.png" alt="service-24-icon-3.png" />
                 </figure>
                 <div class="service-24-content">
-                    <h6>Secure Payment</h6>
+                    <h6>@lang('website.Secure Payment')</h6>
                     <p>Lorem ipsum is simply dummy</p>
                 </div>
             </div>
@@ -152,10 +152,10 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-4.png" alt="service-24-icon-4.png" />
+                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-4.png" alt="service-24-icon-4.png" />
                 </figure>
                 <div class="service-24-content">
-                    <h6>Big Saving</h6>
+                    <h6>@lang('website.Big Saving')</h6>
                     <p>Lorem ipsum is simply dummy</p>
                 </div>
             </div>
@@ -167,7 +167,7 @@
 <div class="product-wrap">
         <div class="title-wrap d-flex justify-content-between align-items-center">
             <div class="title-box">
-                <h6>What’s HOT</h6>
+                <h6>@lang('website.What’s HOT')</h6>
             </div>
             <!-- <div class="titlee-right">
                 <a href="#" class="see-all-btn">See All</a>
@@ -214,7 +214,7 @@
                             </figure>
                             <div class="items-content">
                                 <h6>{{$products->products_name}}</h6>
-                                <p class="primary-color"><?php echo @$discount_percentage; ?> % Off</p>
+                                <p class="primary-color"><?php echo @round($discount_percentage); ?> % Off</p>
                                 <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn">Shop Now!</a>
                             </div>
                         </div>

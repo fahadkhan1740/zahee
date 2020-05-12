@@ -139,8 +139,13 @@ class Index extends Model
         $featuredNews = $myVar->getAllNews($data);
         $result['featuredNews'] = $featuredNews;
         $data = array('type'=>'header');
+        // cart data
         $cart = $this->cart($data);
     		$result['cart'] = $cart;
+    		// whishlist Data
+           $wishlist = $this->wishlistCount($data);
+      $result['wishlist_count'] = $wishlist;
+
     		if(count($result['cart'])==0){
     			session(['step' => '0']);
     			session(['coupon' => array()]);
@@ -273,5 +278,14 @@ class Index extends Model
     $baskit = $cart->get();
     return($baskit);
 
+  }
+
+  public function wishlistCount($request) {
+      if(auth()->guard('customer')->check()) {
+          $count = DB::table('liked_products')->where('liked_customers_id', auth()->guard('customer')->user()->id)->count();
+      } else {
+          $count = 0;
+      }
+      return $count;
   }
 }

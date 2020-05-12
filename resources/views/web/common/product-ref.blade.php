@@ -33,20 +33,21 @@
 
 <div class="items-list text-center">
     <div class="items-box-wrap">
-        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
+        <a href="#" class="heart-icon whishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
         <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
             <figure>
                 <img src="{{asset('').$products->image_path}}" alt="{{$products->products_name}}" />
             </figure>
             <div class="items-content">
-                <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                 <h6>{{$products->products_name}}</h6>
-                <p><span class="price old-price">
+                <p>
+                    <span class="price ">
                          @if(empty($products->discount_price))
-                            <span > {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span> </span>
+                            <span> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
+                    </span>
                         @else
-                            {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
-                            <span class="price new-price"> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
+                        <span class="price new-price">{{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}</span>
+                            <span class="price old-price"> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
 
                         @endif
 

@@ -709,4 +709,12 @@ return [
     'office' => 'مكتب / تجاري (10:00 صباحاً - 6:00 مساءً توصيل)',
     'home' => 'المنزل (7:00 صباحًا - 9:00 مساءً ، طوال اليوم)',
     'Please select your address type' => 'يرجى تحديد نوع العنوان الخاص بك',
+    'Deals of the day' => 'صفقات اليوم',
+    'Offers' => 'عروض',
+    'Most Selling' => 'الأكثر مبيعا',
+    '24/7 Online Support' => '24/7 دعم عبر الإنترنت',
+    'Money Guarantee' => 'ضمان المال',
+    'Secure Payment' => 'دفع امن',
+    'Big Saving' => 'توفير كبير',
+    'What’s HOT' => 'ما الحار',
 ];

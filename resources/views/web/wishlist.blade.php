@@ -113,7 +113,6 @@
 					                  {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
 					                  @endif
 													</h6>
-													<p class="d-none d-lg-block d-xl-block"><?=stripslashes($products->products_description)?></p>
 													<div class="buttons">
 															@if($products->products_type==0)
 																	@if(!in_array($products->products_id,$result['cartArray']))

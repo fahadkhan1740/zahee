@@ -47,11 +47,6 @@
                     @if(auth()->guard('customer')->check())
                         <li>
                                 <a href="{{ url('/profile') }}">
-                                    @if(auth()->guard('customer')->user()->avatar == null)
-                                        <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{asset('web/images/miscellaneous/avatar.jpg')}}">
-                                    @else
-                                        <img class="img-fluid" style="width: 50px; border-radius: 50%;" src="{{url('/').'/'.auth()->guard('customer')->user()->avatar}}">
-                                    @endif
                                         <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp;! {{auth()->guard('customer')->user()->first_name}} <?php }?>
                                         </span>
                                 </a>
@@ -82,21 +77,11 @@
                     <li class="{{ Request::is('/all-category') ? 'nav-item active' : 'nav-item' }}">
                         <a class="nav-link" href="{{ URL::to('/all-category')}}">@lang('website.All Categories')</a>
                     </li>
+                    @foreach($result['commonContent']['categories'] as $category)
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">@lang('website.Pet Services')</a>
+                        <a class="nav-link" href="{{url('/shop?category='.$category->slug)}}">{{$category->name}}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">@lang('website.Grocery')</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">@lang('website.Cosmetic & Perfumes')   </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">@lang('website.Health Supplements')</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">@lang('website.Protein & others')</a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
