@@ -150,7 +150,7 @@
                     <?php $__currentLoopData = ($result['commonContent']['homeBanners']); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $homeBanners): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                        <?php if($homeBanners->type==7): ?>
                        <div class="img-main">
-                           <a href="<?php echo e($homeBanners->banners_url); ?>" ><img class="img-fluid" src="<?php echo e(asset('').$homeBanners->path); ?>"></a>
+                           <a href="<?php echo e($homeBanners->banners_url); ?>" ><img class="img-fluid" src="<?php echo e(asset('public').$homeBanners->path); ?>"></a>
                        </div>
                      <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -252,7 +252,7 @@
                                        <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="<?php echo e($products->products_id); ?>"><i class="fas fa-eye"></i></div>
                                          <a onclick="myFunction3(<?php echo e($products->products_id); ?>)"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
                                        </div>
-                                   <img class="img-fluid" src="<?php echo e(asset('').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>">
+                                   <img class="img-fluid" src="<?php echo e(asset('public').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>">
                                  </div>
                                  <?php echo $__env->make('web.common.scripts.addToCompare', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                  <?php

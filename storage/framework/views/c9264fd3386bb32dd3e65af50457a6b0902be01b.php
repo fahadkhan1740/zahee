@@ -11,7 +11,7 @@
               <div class="icon"><i class="fas fa-eye"></i></div>
               <a href="<?php echo e(url('compare')); ?>" class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
             </div>
-          <img class="img-fluid" src="<?php echo e(asset('').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>">
+          <img class="img-fluid" src="<?php echo e(asset('public').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>">
        </div>
        <?php
           $default_currency = DB::table('currencies')->where('is_default',1)->first();

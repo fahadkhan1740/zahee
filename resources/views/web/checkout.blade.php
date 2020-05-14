@@ -287,7 +287,7 @@
                                                    <td class="col-12 col-md-2 item">
                                                        <input type="hidden" name="cart[]" value="{{$products->customers_basket_id}}">
                                                          <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="cart-thumb">
-                                                             <img class="img-fluid" src="{{asset('').$products->image_path}}" alt="{{$products->products_name}}" alt="">
+                                                             <img class="img-fluid" src="{{asset('public').$products->image_path}}" alt="{{$products->products_name}}" alt="">
                                                          </a>
                                                    </td>
                                                    <td class="col-12 col-md-4 item-detail-left">

@@ -9,7 +9,7 @@
                        @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                           @if($homeBanners->type==26)
                     <figure class="banner-image ">
-                        <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->path}}" alt="Banner Image"></a>
+                        <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public').$homeBanners->path}}" alt="Banner Image"></a>
                       </figure>
                       @endif
                      @endforeach
@@ -18,7 +18,7 @@
                      @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                         @if($homeBanners->type==28)
                       <figure class="banner-image ">
-                          <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->path}}" alt="Banner Image"></a>
+                          <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public').$homeBanners->path}}" alt="Banner Image"></a>
                         </figure>
                         @endif
                        @endforeach
@@ -29,7 +29,7 @@
                        @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                           @if($homeBanners->type==25)
                         <figure class="banner-image banner-column-5">
-                          <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->path}}" alt="Banner Image"></a>
+                          <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public').$homeBanners->path}}" alt="Banner Image"></a>
                         </figure>
                         @endif
                        @endforeach
@@ -40,7 +40,7 @@
                        @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                           @if($homeBanners->type==27)
                       <figure class="banner-image ">
-                        <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->path}}" alt="Banner Image"></a>
+                        <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public').$homeBanners->path}}" alt="Banner Image"></a>
                       </figure>
                       @endif
                      @endforeach
@@ -49,7 +49,7 @@
                      @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                         @if($homeBanners->type==29)
                       <figure class="banner-image ">
-                        <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->path}}" alt="Banner Image"></a>
+                        <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public').$homeBanners->path}}" alt="Banner Image"></a>
                       </figure>
                       @endif
                      @endforeach

@@ -6,7 +6,7 @@
                 <a href="#" id="dropdownMenuButton" class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="badge badge-secondary"><?php echo e($qunatity); ?></span>
                     <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                    <!--<img class="img-fluid" src="<?php echo e(asset('').'public/images/shopping_cart.png'); ?>" alt="icon">-->
+                    <!--<img class="img-fluid" src="<?php echo e(asset('public').'public/images/shopping_cart.png'); ?>" alt="icon">-->
 
                     <span class="block">
                     	<span class="title"><?php echo app('translator')->get('website.My Cart'); ?></span>
@@ -43,9 +43,9 @@
 					            	$qunatity 	  += $cart_data->customers_basket_quantity; ?>
                         <li>
                             <div class="item-thumb">
-                            	<a href="<?php echo e(URL::to('/deleteCart?id='.$cart_data->customers_basket_id)); ?>" class="icon" ><img class="img-fluid" src="<?php echo e(asset('').'web/images/close.png'); ?>" alt="icon"></a>
+                            	<a href="<?php echo e(URL::to('/deleteCart?id='.$cart_data->customers_basket_id)); ?>" class="icon" ><img class="img-fluid" src="<?php echo e(asset('public').'web/images/close.png'); ?>" alt="icon"></a>
                             	<div class="image">
-                                	<img class="img-fluid" src="<?php echo e(asset('').$cart_data->image); ?>" alt="<?php echo e($cart_data->products_name); ?>"/>
+                                	<img class="img-fluid" src="<?php echo e(asset('public').$cart_data->image); ?>" alt="<?php echo e($cart_data->products_name); ?>"/>
                                 </div>
                             </div>
                             <div class="item-detail">

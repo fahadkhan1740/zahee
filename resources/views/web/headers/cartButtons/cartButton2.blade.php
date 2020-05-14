@@ -6,7 +6,7 @@
                 <a href="" id="dropdownCartButton_1" class="dropdown-toggle cart-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="badge badge-secondary">{{ $qunatity }}</span>
                     <i class="fas fa-cart-arrow-down" aria-hidden="true"></i>
-                    <!--<img class="img-fluid" src="{{asset('').'public/images/shopping_cart.png'}}" alt="icon">-->
+                    <!--<img class="img-fluid" src="{{asset('public').'public/images/shopping_cart.png'}}" alt="icon">-->
 
                     <span class="block">
                     	<span class="title">@lang('website.My Cart')</span>
@@ -43,9 +43,9 @@
 					            	$qunatity 	  += $cart_data->customers_basket_quantity; ?>
                         <li>
                             <div class="item-thumb">
-                            	<a href="{{ URL::to('/deleteCart?id='.$cart_data->customers_basket_id)}}" class="icon" ><img class="img-fluid" src="{{asset('').'web/images/close.png'}}" alt="icon"></a>
+                            	<a href="{{ URL::to('/deleteCart?id='.$cart_data->customers_basket_id)}}" class="icon" ><img class="img-fluid" src="{{asset('public').'web/images/close.png'}}" alt="icon"></a>
                             	<div class="image">
-                                	<img class="img-fluid" src="{{asset('').$cart_data->image}}" alt="{{$cart_data->products_name}}"/>
+                                	<img class="img-fluid" src="{{asset('public').$cart_data->image}}" alt="{{$cart_data->products_name}}"/>
                                 </div>
                             </div>
                             <div class="item-detail">

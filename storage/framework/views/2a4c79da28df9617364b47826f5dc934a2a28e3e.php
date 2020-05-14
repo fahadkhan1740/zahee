@@ -112,7 +112,7 @@
                                 <p class="notify-colors"><span class="sold-content" data-toggle="tooltip" data-placement="bottom" title="Sold Products"></span> <?php echo e(trans('labels.soldProducts')); ?>  <span class="purchased-content" data-toggle="tooltip" data-placement="bottom" title="Added Products"></span><?php echo e(trans('labels.addedProducts')); ?> </p>
                             </div>
                         </div>
-                        
+
                         <ul class="nav nav-tabs">
                             <li class="<?php echo e(Request::is('admin/dashboard/last_year') ? 'active' : ''); ?>"><a href="<?php echo e(url('admin/dashboard/last_year')); ?>"><?php echo e(trans('labels.lastYear')); ?></a></li>
                             <li class="<?php echo e(Request::is('admin/dashboard/last_month') ? 'active' : ''); ?>"><a href="<?php echo e(url('admin/dashboard/last_month')); ?>"><?php echo e(trans('labels.LastMonth')); ?></a></li>
@@ -162,7 +162,7 @@
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                 </button>
-                                
+
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                                     <h3 class="box-title"><?php echo e(trans('labels.latest_customers')); ?></h3>
 
                                     <div class="box-tools pull-right">
-                                        
+
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                         </button>
                                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
@@ -274,7 +274,7 @@
                                                         </li>
                                                     <?php endif; ?>
                                                     <?php $i++; ?>
-                                                
+
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                     <?php else: ?>
@@ -445,7 +445,7 @@
                                 <?php $__currentLoopData = $result['recentProducts']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $recentProducts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="<?php echo e(asset('').$recentProducts->products_image); ?>" alt="" width=" 100px" height="100px">
+                                            <img src="<?php echo e(asset('public').$recentProducts->products_image); ?>" alt="" width=" 100px" height="100px">
                                         </div>
                                         <div class="product-info">
                                             <a href="<?php echo e(URL::to('admin/products/edit')); ?>/<?php echo e($recentProducts->products_id); ?>" class="product-title"><?php echo e($recentProducts->products_name); ?>
@@ -471,9 +471,9 @@
         </section>
         <!-- /.content -->
     </div>
-    
 
-    
+
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/zaheeecomm/resources/views/admin/dashboard.blade.php ENDPATH**/ ?>
