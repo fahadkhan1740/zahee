@@ -53,10 +53,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-1.png" alt="b-product-1.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-1.png" alt="b-product-1.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Lakme Sun Expert Ultra Matte SPF 40 PA+++ Compact</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -72,10 +72,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-2.png" alt="b-product-2.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-2.png" alt="b-product-2.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Nutrition Whey Protein Concentrate</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -90,10 +90,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-3.png" alt="b-product-3.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-3.png" alt="b-product-3.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Sollar's Vest</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -108,10 +108,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-4.png" alt="b-product-4.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-4.png" alt="b-product-4.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Sugar Free Gold Sweetener </h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -125,10 +125,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-5.png" alt="b-product-5.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-5.png" alt="b-product-5.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Wild Stone Edge Perfume</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -142,10 +142,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-6.png" alt="b-product-6.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-6.png" alt="b-product-6.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Organic Tattva Brown Sugar</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -163,7 +163,7 @@
                                <img src="images/b-product-1.png" alt="b-product-1.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Lakme Sun Expert Ultra Matte SPF 40 PA+++ Compact</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -178,10 +178,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-2.png" alt="b-product-2.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-2.png" alt="b-product-2.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Nutrition Whey Protein Concentrate</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -195,10 +195,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-3.png" alt="b-product-3.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-3.png" alt="b-product-3.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Sollar's Vest</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -212,10 +212,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-4.png" alt="b-product-4.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-4.png" alt="b-product-4.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Sugar Free Gold Sweetener </h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -229,10 +229,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-5.png" alt="b-product-5.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-5.png" alt="b-product-5.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Wild Stone Edge Perfume</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
@@ -246,10 +246,10 @@
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/b-product-6.png" alt="b-product-6.png" />
+                               <img src="https://zaahee.shop/public/web/images/cus/b-product-6.png" alt="b-product-6.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                                <h6>Organic Tattva Brown Sugar</h6>
                                <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
                            </div>
