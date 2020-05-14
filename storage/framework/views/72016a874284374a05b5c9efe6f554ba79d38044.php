@@ -36,7 +36,7 @@
         <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
         <a href="<?php echo e(URL::to('/product-detail/'.$products->products_slug)); ?>">
             <figure>
-                <img src="<?php echo e(asset('public/').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>" />
+                <img src="<?php echo e(asset('public').'/'.$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>" />
             </figure>
             <div class="items-content">
                 <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>

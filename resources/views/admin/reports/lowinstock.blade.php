@@ -42,7 +42,7 @@
                     @foreach ($result['lowQunatity'] as  $key=>$lowQunatityProducts)
                         <tr>
                             <td>{{ $lowQunatityProducts->products_id }}</td>
-                            <td><img src="{{asset('public/').'/'.$lowQunatityProducts->products_image}}" alt="" width=" 100px" height="100px"></td>
+                            <td><img src="{{asset('public').'/'.'/'.$lowQunatityProducts->products_image}}" alt="" width=" 100px" height="100px"></td>
                             <td width="45%">
                                 <strong>{{ $lowQunatityProducts->products_name }} ( {{ $lowQunatityProducts->products_model }} )</strong><br>
                             </td>

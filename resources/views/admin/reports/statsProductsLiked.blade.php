@@ -40,7 +40,7 @@
                     @foreach ($result['data'] as  $key=>$products)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td><img src="{{asset('public/').'/'.$products->products_image}}" alt="" width=" 100px" height="100px"></td>
+                            <td><img src="{{asset('public').'/'.'/'.$products->products_image}}" alt="" width=" 100px" height="100px"></td>
                             <td width="45%">
                             	<strong>{{ $products->products_name }} @if(!empty($products->products_model)) ( {{ $products->products_model }} ) @endif</strong><br>
                             </td>

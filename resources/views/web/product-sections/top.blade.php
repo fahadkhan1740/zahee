@@ -29,7 +29,7 @@
                       </div>
                     <article>
                       <div class="thumb">
-                        <img class="img-fluid" src="{{asset('public/').$products->image_path}}" alt="{{$products->products_name}}">
+                        <img class="img-fluid" src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}">
                       </div>
                       <div class="module">
                         <span class="tag">

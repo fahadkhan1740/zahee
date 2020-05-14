@@ -58,7 +58,7 @@
                       <div class="dropdown"style="margin-top:-12px;margin-bottom:-12px;">
                         <span>Country&nbsp;:</span>
                           <button class="btn" style="background:none;" href="#">
-                            <img style="margin-right:-30px;"src="{{asset('public/').session('language_image')}}" width="17px" />
+                            <img style="margin-right:-30px;"src="{{asset('public').'/'.session('language_image')}}" width="17px" />
                           </button>
                           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                            {{	session('language_name')}}
@@ -67,7 +67,7 @@
                             @foreach($languages as $language)
                             <li  @if(session('locale')==$language->code) style="background:lightgrey;" @endif>
                               <button  onclick="myFunction1({{$language->languages_id}})" class="btn" style="background:none;" href="#">
-                                <img style="margin-left:10px; margin-right:10px;"src="{{asset('public/').$language->image_path}}" width="17px" />
+                                <img style="margin-left:10px; margin-right:10px;"src="{{asset('public').'/'.$language->image_path}}" width="17px" />
                                 <span>{{$language->name}}</span>
                               </button>
                             </li>
@@ -116,7 +116,7 @@
           @endif
 
           @if($result['commonContent']['setting'][77]->value=='logo')
-          <img src="{{asset('public/').$result['commonContent']['setting'][15]->value}}" alt="<?=stripslashes($result['commonContent']['setting'][79]->value)?>">
+          <img src="{{asset('public').'/'.$result['commonContent']['setting'][15]->value}}" alt="<?=stripslashes($result['commonContent']['setting'][79]->value)?>">
           @endif
           </a>
             </div>

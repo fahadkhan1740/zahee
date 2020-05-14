@@ -40,7 +40,7 @@
                     <?php $__currentLoopData = $result['data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$products): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo e(++$key); ?></td>
-                            <td><img src="<?php echo e(asset('public/').'/'.$products->products_image); ?>" alt="" width=" 100px" height="100px"></td>
+                            <td><img src="<?php echo e(asset('public').'/'.'/'.$products->products_image); ?>" alt="" width=" 100px" height="100px"></td>
                             <td width="45%">
                             	<strong><?php echo e($products->products_name); ?> <?php if(!empty($products->products_model)): ?> ( <?php echo e($products->products_model); ?> ) <?php endif; ?></strong><br>
                             </td>

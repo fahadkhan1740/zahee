@@ -445,7 +445,7 @@
                                 @foreach($result['recentProducts'] as $recentProducts)
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="{{asset('public/').$recentProducts->products_image}}" alt="" width=" 100px" height="100px">
+                                            <img src="{{asset('public').'/'.$recentProducts->products_image}}" alt="" width=" 100px" height="100px">
                                         </div>
                                         <div class="product-info">
                                             <a href="{{ URL::to('admin/products/edit') }}/{{ $recentProducts->products_id }}" class="product-title">{{ $recentProducts->products_name }}

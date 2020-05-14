@@ -34,9 +34,9 @@
 					            	$qunatity 	  += $cart_data->customers_basket_quantity; ?>
                         <li>
                             <div class="item-thumb">
-                            	<a href="<?php echo e(URL::to('/deleteCart?id='.$cart_data->customers_basket_id)); ?>" class="icon" ><img class="img-fluid" src="<?php echo e(asset('public/').'web/images/close.png'); ?>" alt="icon"></a>
+                            	<a href="<?php echo e(URL::to('/deleteCart?id='.$cart_data->customers_basket_id)); ?>" class="icon" ><img class="img-fluid" src="<?php echo e(asset('public').'/'.'web/images/close.png'); ?>" alt="icon"></a>
                             	<div class="image">
-                                	<img class="img-fluid" src="<?php echo e(asset('public/').$cart_data->image); ?>" alt="<?php echo e($cart_data->products_name); ?>"/>
+                                	<img class="img-fluid" src="<?php echo e(asset('public').'/'.$cart_data->image); ?>" alt="<?php echo e($cart_data->products_name); ?>"/>
                                 </div>
                             </div>
                             <div class="item-detail">

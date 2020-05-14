@@ -42,7 +42,7 @@
                     <?php $__currentLoopData = $result['lowQunatity']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$lowQunatityProducts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo e($lowQunatityProducts->products_id); ?></td>
-                            <td><img src="<?php echo e(asset('public/').'/'.$lowQunatityProducts->products_image); ?>" alt="" width=" 100px" height="100px"></td>
+                            <td><img src="<?php echo e(asset('public').'/'.'/'.$lowQunatityProducts->products_image); ?>" alt="" width=" 100px" height="100px"></td>
                             <td width="45%">
                                 <strong><?php echo e($lowQunatityProducts->products_name); ?> ( <?php echo e($lowQunatityProducts->products_model); ?> )</strong><br>
                             </td>

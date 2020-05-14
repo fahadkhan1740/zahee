@@ -33,7 +33,7 @@
                     <div class="overlay">
                         <a href="{{ URL::to('/news-detail/'.$news_data->news_slug)}}" class="fas fa-search-plus"></a>
                     </div>
-                    <img class="img-fluid" src="{{asset('public/').$news_data->image_path}}">
+                    <img class="img-fluid" src="{{asset('public').'/'.$news_data->image_path}}">
 
                   </div>
             </div>
