@@ -13,7 +13,7 @@
            @foreach($result['commonContent']['featuredNews']['news_data'] as $key=>$news_data)
              <div class="col-12 col-sm-12">
                        <div class="blog">
-                           <img class="img-thumbnail" src="{{asset('').$result['news'][0]->image}}" width="100%">
+                           <img class="img-thumbnail" src="{{asset('public').$result['news'][0]->image}}" width="100%">
 
 
 
@@ -75,7 +75,7 @@
                              </div>
                              @foreach($result['commonContent']['featuredNews']['news_data'] as $key=>$news_data)
                              <div class="media">
-                                 <img src="{{asset('').$news_data->image_path}}" alt="John Doe" class=" mt-1" style="width:68px;height:68px;">
+                                 <img src="{{asset('public').$news_data->image_path}}" alt="John Doe" class=" mt-1" style="width:68px;height:68px;">
                                  <div class="media-body">
                                    <a href="{{ URL::to('/news-detail/'.$news_data->news_slug)}}">
                                     <h4>{{$news_data->news_name}}</h4>

@@ -23,7 +23,7 @@
                     <div class="box-body box-profile">
                         @if(!empty($result['devices'][0]->customers_picture))
                         <img class="profile-user-img img-responsive img-circle"
-                            src="{{asset('').$result['devices'][0]->customers_picture}}"
+                            src="{{asset('public').$result['devices'][0]->customers_picture}}"
                             alt="{{ $result['devices'][0]->customers_firstname }} profile picture">
                         <h3 class="profile-username text-center">{{ $result['devices'][0]->customers_firstname }}
                             {{ $result['devices'][0]->customers_lastname }}</h3>

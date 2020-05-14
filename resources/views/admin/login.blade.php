@@ -15,7 +15,7 @@
 {{--   			<img src="{{asset('images/admin_logo/logo-laravel-blue-v1.png')}}" class="website-hide">--}}
 {{--    	@endif--}}
 {{--    @else--}}
-{{--    	<img style="width: 60%" src="{{asset('').$web_setting[15]->value}}">--}}
+{{--    	<img style="width: 60%" src="{{asset('public').$web_setting[15]->value}}">--}}
 {{--    @endif--}}
 
     <div style="

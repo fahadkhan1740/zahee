@@ -58,7 +58,7 @@
 						@foreach($result['products']['product_data'] as $key=>$products)
 								<div class="media">
 									<div class="media__pro">
-										<img class="img-fluid" src="{{asset('').$products->image_path}}" alt="{{$products->products_name}}">
+										<img class="img-fluid" src="{{asset('public').$products->image_path}}" alt="{{$products->products_name}}">
 										</div>
 										<div class="media-body">
 											<div class="row">

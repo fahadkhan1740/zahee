@@ -123,7 +123,7 @@
                                                 <label for="name" class="col-sm-2 col-md-3 control-label"></label>
                                                 <div class="col-sm-10 col-md-4">
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
-                                                    <img src="{{asset('').$result['editCategory'][0]->path}}" alt="" width=" 100px">
+                                                    <img src="{{asset('public').$result['editCategory'][0]->path}}" alt="" width=" 100px">
                                                 </div>
                                             </div>
 

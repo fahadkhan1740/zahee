@@ -161,9 +161,9 @@
                                                 <br>
                                                 {!! Form::hidden('oldImage', $result['languages'][0]->image, array('id'=>'oldImage')) !!}
                                                 @if(($result['languages'][0]->path!== null))
-                                                    <img width="80px" src="{{asset('').$result['banners'][0]->path}}" class="img-circle">
+                                                    <img width="80px" src="{{asset('public').$result['banners'][0]->path}}" class="img-circle">
                                                 @else
-                                                    <img width="80px" src="{{asset('').$result['banners'][0]->path}}" class="img-circle">
+                                                    <img width="80px" src="{{asset('public').$result['banners'][0]->path}}" class="img-circle">
                                                 @endif
 
                                             </div>

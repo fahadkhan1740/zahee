@@ -9,7 +9,7 @@
                                 @if(count($languages) > 1)
                                     <div class="dropdown">
                                         <a href= "#" class="dropdown-toggle"  data-toggle="dropdown" >
-{{--                                            <img src="{{asset('').session('language_image')}}" width="17px" />--}}
+{{--                                            <img src="{{asset('public').session('language_image')}}" width="17px" />--}}
                                             {{	session('language_name')}}
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-right">

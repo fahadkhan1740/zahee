@@ -106,7 +106,7 @@
             <tr>
                 <td>{{  $products->products_quantity }}</td>
                 <td >
-                   <img src="{{ asset('').$products->image }}" width="60px"> <br>
+                   <img src="{{ asset('public').$products->image }}" width="60px"> <br>
                 </td>
                 <td  width="30%">
                     {{  $products->products_name }}<br>
