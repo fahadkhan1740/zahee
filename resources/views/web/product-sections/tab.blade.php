@@ -21,7 +21,7 @@
         @foreach($result['commonContent']['homeBanners'] as $homeBanner)
             @if($homeBanner->status && $homeBanner->languages_id === Session::get('language_id'))
                 <div class="col-md-4">
-                    <figure style="background-image:url('<?php echo $homeBanner->path ?>')">
+                    <figure style="background-image:url('<?php echo 'public/'.$homeBanner->path ?>')">
                         <a href="javascript:void(0)"></a>
                     </figure>
                 </div>
