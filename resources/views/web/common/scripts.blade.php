@@ -13,8 +13,8 @@ if($default_currency->id == Session::get('currency_id')){
 <!-- Include js plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="{{asset('web/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('web/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('public/web/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('public/web/js/owl.carousel.min.js')}}"></script>
 
 
 
@@ -23,12 +23,12 @@ if($default_currency->id == Session::get('currency_id')){
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 
-<script src="{{asset('web/js/slick.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/api/fancybox/source/jquery.fancybox.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/aos.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/slick.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('web/js/custom.js')}}"></script>
+<script src="{{asset('public/web/js/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('public/web/api/fancybox/source/jquery.fancybox.js')}}"></script>
+<script type="text/javascript" src="{{asset('public/web/js/popper.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('public/web/js/aos.js')}}"></script>
+<script type="text/javascript" src="{{asset('public/web/js/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('public/web/js/custom.js')}}"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -803,11 +803,11 @@ function getQuantity(){
 
 
 @if(session('direction') == 'rtl')
-<script src="{{asset('web/js/rtl_scripts.js')}}"></script>
+<script src="{{asset('public/web/js/rtl_scripts.js')}}"></script>
 @else
-<script src="{{asset('web/js/scripts.js')}}"></script>
+<script src="{{asset('public/web/js/scripts.js')}}"></script>
 @endif
-<!-- <script src="{{asset('web/js/setup.js')}}"></script> -->
+<!-- <script src="{{asset('public/web/js/setup.js')}}"></script> -->
 
 <script>
 
@@ -891,11 +891,11 @@ jQuery(function(){
 <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+     https://firebase.google.com/docs/public/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
 
 <script>
-    // Your web app's Firebase configuration
+    // Your public/web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyBttfQixBsmyVJJzdVd3YzSLwx75e-7_Mc",
         authDomain: "zaahee-ce982.firebaseapp.com",
@@ -903,7 +903,7 @@ jQuery(function(){
         projectId: "zaahee-ce982",
         storageBucket: "zaahee-ce982.appspot.com",
         messagingSenderId: "241507832628",
-        appId: "1:241507832628:web:994a96a6d954de820b4b61",
+        appId: "1:241507832628:public/web:994a96a6d954de820b4b61",
         measurementId: "G-ZCRSSWC09R"
     };
     // Initialize Firebase
