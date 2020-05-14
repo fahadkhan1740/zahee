@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/html/resources/views/web/footers/mobile.blade.php ENDPATH**/ ?>

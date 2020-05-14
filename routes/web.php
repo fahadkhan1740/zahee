@@ -1,16 +1,8 @@
 <?php
-if(file_exists(storage_path('installed'))){
-	$check = DB::table('settings')->where('id', 94)->first();
-	if($check->value == 'Maintenance'){
-		$middleware = ['installer','env'];
-	}
-	else{
-		$middleware = ['installer'];
-	}
-}
-else{
-	$middleware = ['installer'];
-}
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 Route::get('/maintance','Web\IndexController@maintance');
 
 Route::group(['namespace' => 'Web','middleware' => ['installer']], function () {
