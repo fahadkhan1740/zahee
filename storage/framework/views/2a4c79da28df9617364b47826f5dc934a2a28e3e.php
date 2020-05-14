@@ -445,7 +445,7 @@
                                 <?php $__currentLoopData = $result['recentProducts']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $recentProducts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="<?php echo e(asset('public').$recentProducts->products_image); ?>" alt="" width=" 100px" height="100px">
+                                            <img src="<?php echo e(asset('public/').$recentProducts->products_image); ?>" alt="" width=" 100px" height="100px">
                                         </div>
                                         <div class="product-info">
                                             <a href="<?php echo e(URL::to('admin/products/edit')); ?>/<?php echo e($recentProducts->products_id); ?>" class="product-title"><?php echo e($recentProducts->products_name); ?>

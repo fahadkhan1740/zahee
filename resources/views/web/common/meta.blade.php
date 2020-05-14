@@ -9,7 +9,7 @@
     @endif
 
     @if(!empty($result['setting'][86]->value))
-    <link rel="icon" href="{{asset('public').$result['setting'][86]->value}}" type="image/gif">
+    <link rel="icon" href="{{asset('public/').$result['setting'][86]->value}}" type="image/gif">
     @endif
     <meta name="DC.title"  content="<?=stripslashes($result['setting'][73]->value)?>"/>
     <meta name="description" content="<?=stripslashes($result['setting'][75]->value)?>"/>

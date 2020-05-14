@@ -13,7 +13,7 @@
                                 <?php $__currentLoopData = $result['detail']['product_data'][0]->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$images): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($images->image_type == 'ACTUAL'): ?>
                                 <div class="items">
-                                    <img src="<?php echo e(asset('public').$images->image_path); ?>" alt="Zoom Image" />
+                                    <img src="<?php echo e(asset('public/').$images->image_path); ?>" alt="Zoom Image" />
                                 </div>
 
                                     <?php endif; ?>
@@ -26,7 +26,7 @@
                                 <?php $__currentLoopData = $result['detail']['product_data'][0]->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$images): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($images->image_type == 'ACTUAL'): ?>
                                     <div class="items">
-                                        <img src="<?php echo e(asset('public').$images->image_path); ?>" alt="Zoom Image"/>
+                                        <img src="<?php echo e(asset('public/').$images->image_path); ?>" alt="Zoom Image"/>
                                     </div>
                                 <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

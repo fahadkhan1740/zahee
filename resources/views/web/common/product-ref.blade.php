@@ -36,7 +36,7 @@
         <a href="#" class="heart-icon whishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
         <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
             <figure>
-                <img src="{{asset('public').$products->image_path}}" alt="{{$products->products_name}}" />
+                <img src="{{asset('public/').$products->image_path}}" alt="{{$products->products_name}}" />
             </figure>
             <div class="items-content">
                 <h6>{{$products->products_name}}</h6>

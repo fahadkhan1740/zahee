@@ -11,7 +11,7 @@
                                 @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                     @if($images->image_type == 'ACTUAL')
                                     <div class="items">
-                                        <img src="{{asset('public').$images->image_path }}" alt="Zoom Image" />
+                                        <img src="{{asset('public/').$images->image_path }}" alt="Zoom Image" />
                                     </div>
                                     @endif
                                 @endforeach
@@ -20,7 +20,7 @@
                                 @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                     @if($images->image_type == 'ACTUAL')
                                         <div class="items">
-                                            <img src="{{asset('public').$images->image_path }}" alt="Zoom Image"/>
+                                            <img src="{{asset('public/').$images->image_path }}" alt="Zoom Image"/>
                                         </div>
                                 @endif
                                 @endforeach

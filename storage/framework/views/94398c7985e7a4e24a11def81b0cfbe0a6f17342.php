@@ -60,7 +60,7 @@
                 <tr class="d-flex">
                   <td class="col-12 col-md-2" >
                     <a href="<?php echo e(URL::to('/product-detail/'.$products->products_slug)); ?>" class="cart-thumb">
-                    <img class="img-fluid" src="<?php echo e(asset('public').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>"/>
+                    <img class="img-fluid" src="<?php echo e(asset('public/').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>"/>
                     </a>
                    </td>
                   <td class="col-12 col-md-4 item-detail-left">

@@ -15,7 +15,7 @@
    			<img src="<?php echo e(asset('images/admin_logo/logo-laravel-blue-v1.png')); ?>" class="website-hide">
     	<?php endif; ?>
     <?php else: ?>
-    	<img style="width: 60%" src="<?php echo e(asset('public').$web_setting[15]->value); ?>">
+    	<img style="width: 60%" src="<?php echo e(asset('public/').$web_setting[15]->value); ?>">
     <?php endif; ?>
 
     <div style="

@@ -107,7 +107,7 @@
                   <li><!-- start message -->
                     <a href="<?php echo e(URL::to("admin/editProduct")); ?>/<?php echo e($lowInQunatity->products_id); ?>">
                       <div class="pull-left">
-                         <img src="<?php echo e(asset('public').'/'.$lowInQunatity->products_image); ?>" class="img-circle" >
+                         <img src="<?php echo e(asset('public/').'/'.$lowInQunatity->products_image); ?>" class="img-circle" >
                       </div>
                       <h4 style="white-space: normal;">
                         <?php echo e($lowInQunatity->products_name); ?>

@@ -46,7 +46,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="{{asset('public').$products->image_path}}" alt="{{$products->products_name}}" />
+            <img src="{{asset('public/').$products->image_path}}" alt="{{$products->products_name}}" />
           </a>
         </figure>
         <div class="items-content">
@@ -209,7 +209,7 @@
                         <div class="items-box-wrap">
                             <figure>
                                 <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
-                                    <img src="{{asset('public').$products->image_path}}" alt="{{$products->products_name}}" />
+                                    <img src="{{asset('public/').$products->image_path}}" alt="{{$products->products_name}}" />
                                 </a>
                             </figure>
                             <div class="items-content">

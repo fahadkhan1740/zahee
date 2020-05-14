@@ -8,7 +8,7 @@
                   <?php if($homeBanners->type==3 or $homeBanners->type==4 or $homeBanners->type==5): ?>
                   <div class="col-12 col-md-4">
                     <figure class="banner-image ">
-                      <a href="<?php echo e($homeBanners->banners_url); ?>"><img class="img-fluid" src="<?php echo e(asset('public').$homeBanners->path); ?>" alt="Banner Image"></a>
+                      <a href="<?php echo e($homeBanners->banners_url); ?>"><img class="img-fluid" src="<?php echo e(asset('public/').$homeBanners->path); ?>" alt="Banner Image"></a>
                     </figure>
                   </div>
                 <?php endif; ?>

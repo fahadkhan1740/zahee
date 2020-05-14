@@ -350,7 +350,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="<?php echo e(URL::to('/product-detail/'.$products->products_slug)); ?>">
-            <img src="<?php echo e(asset('public').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>" />
+            <img src="<?php echo e(asset('public/').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>" />
           </a>
         </figure>
         <div class="items-content">

@@ -61,7 +61,7 @@
                             <td><?php echo e($banners->banners_id); ?></td>
                             <td><?php echo e($banners->language_name); ?></td>
                       	  	<td><?php echo e($banners->banners_title); ?></td>
-                            <td><img src="<?php echo e(asset('public').$banners->path); ?>" alt="" width=" 100px"></td>
+                            <td><img src="<?php echo e(asset('public/').$banners->path); ?>" alt="" width=" 100px"></td>
                             <td><strong><?php echo e(trans('labels.AddedDate')); ?>: </strong> <?php echo e(date('d M, Y', strtotime($banners->date_added))); ?><br>
                             </td>
 
