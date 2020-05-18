@@ -119,7 +119,7 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-1.png" alt="service-24-icon-1.png" />
+                    <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-1.png" alt="service-24-icon-1.png" />
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('24/7 Online Support')</h6>
@@ -130,7 +130,7 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-2.png" alt="service-24-icon-2.png" />
+                    <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-2.png" alt="service-24-icon-2.png" />
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('Money Guarantee')</h6>
@@ -141,7 +141,7 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-3.png" alt="service-24-icon-3.png" />
+                    <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-3.png" alt="service-24-icon-3.png" />
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('website.Secure Payment')</h6>
@@ -152,7 +152,7 @@
         <div class="col-md-3">
             <div class="service-24-box">
                 <figure>
-                    <img src="http://zaahee.customer-devreview.com/public/web/images/cus/service-24-icon-4.png" alt="service-24-icon-4.png" />
+                    <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-4.png" alt="service-24-icon-4.png" />
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('website.Big Saving')</h6>

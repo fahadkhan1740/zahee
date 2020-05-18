@@ -8,7 +8,7 @@
                         <div class="col-sm-4">
                             <div class="box">
                                 <div class="imgbox">
-                                    <img src="{{ url('http://zaahee.customer-devreview.com/public/'.$cat->image)}}" class="img-responsive">
+                                    <img src="{{ url('https://zaahee.shop/public/'.$cat->image)}}" class="img-responsive">
                                 </div>
                                 <div class="content">
                                     <h3>{{$cat->name}}</h3>
