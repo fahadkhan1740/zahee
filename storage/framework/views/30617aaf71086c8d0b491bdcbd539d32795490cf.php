@@ -1,1 +1,0 @@
-<?php /**PATH /var/www/html/resources/views/web/product-sections/banner_section.blade.php ENDPATH**/ ?>
