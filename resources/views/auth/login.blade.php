@@ -75,7 +75,7 @@
 {{--									</a>--}}
 {{--									@endif--}}
 								</div>
-						</form> 
+						</form>
 					</div>
 					<div class="col-12 col-sm-12 my-5">
 						<div class="registration-socials">
@@ -218,7 +218,7 @@
 							</form>
 						</div>
 				</div>
-				
+
 			</div>
 
 	</div>
@@ -226,3 +226,23 @@
 
 
 @endsection
+@section('scripts')
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '150819416358499',
+                xfbml      : true,
+                version    : 'v7.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    @endsection

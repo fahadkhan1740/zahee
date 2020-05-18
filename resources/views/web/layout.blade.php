@@ -8,6 +8,9 @@
     <!-- dir="rtl" -->
     <body class="animation-s1"  dir="{{ session('direction')}}">
 
+    // Facebook Script
+
+
       <!-- Header Content -->
         <?php echo $final_theme['header']; ?>
        <!-- End Header Content -->

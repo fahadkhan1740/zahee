@@ -126,7 +126,7 @@
                                                                             <option  value=""></option>
 
                                                                             @foreach($allimage as $key=>$image)
-                                                                                <option data-img-src="{{asset($image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->path}}"> {{$image->path}} </option>
+                                                                                <option data-img-src="{{asset('public/'.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->path}}"> {{$image->path}} </option>
 
                                                                             @endforeach
                                                                         </select>

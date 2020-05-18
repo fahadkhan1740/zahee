@@ -80,7 +80,7 @@
                                                 <tr>
                                                     <td>{{ $manufacturer->id }}</td>
                                                     <td>{{ $manufacturer->name }}</td>
-                                                    <td><img src="{{asset($manufacturer->path)}}" alt="" width=" 100px"></td>
+                                                    <td><img src="{{asset('public/'.$manufacturer->path)}}" alt="" width=" 100px"></td>
                                                     <td>
                                                     <!--<strong>{{ trans('labels.ClickDate') }}: </strong> {{ $manufacturer->clik_date }}<br>-->
                                                         <strong>{{ trans('labels.URL') }}: </strong>{{ $manufacturer->url }} <br>

@@ -102,7 +102,7 @@
                                                                             <select class="image-picker show-html " name="image_id" id="select_img">
                                                                                 <option  value=""></option>
                                                                                 @foreach($allimage as $key=>$image)
-                                                                                    <option data-img-src="{{asset($image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                                    <option data-img-src="{{asset('public/'.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                                 @endforeach
                                                                             </select>
                                                                         @endif
@@ -129,9 +129,9 @@
                                                             <br>
                                                             {!! Form::hidden('oldImage', $editManufacturer[0]->image, array('id'=>'oldImage')) !!}
                                                             @if(($editManufacturer[0]->path!== null))
-                                                                <img width="80px" src="{{asset($editManufacturer[0]->path)}}" class="img-circle">
+                                                                <img width="80px" src="{{asset('public/'.$editManufacturer[0]->path)}}" class="img-circle">
                                                             @else
-                                                                <img width="80px" src="{{asset($editManufacturer[0]->path) }}" class="img-circle">
+                                                                <img width="80px" src="{{asset('public/'.$editManufacturer[0]->path) }}" class="img-circle">
                                                             @endif
 
                                                         </div>
