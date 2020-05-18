@@ -158,7 +158,7 @@ jQuery(document).on('click', '.buy-now', function(e){
             }
         });
     } else {
-        swal("Please select the quantity", "@lang('Quantity is not selcted')", "error");
+        swal("Please select the quantity", "@lang('Quantity is not selected')", "error");
     }
 });
 jQuery(document).on('click', '.whishlist', function(e){
@@ -173,16 +173,12 @@ jQuery(document).on('click', '.whishlist', function(e){
 		type: "POST",
 		data: '&products_id='+products_id,
 		success: function (res) {
-		    res = JSON.parse(res);
             if(res.success == 0){
                 swal("Something Happened To Stock",res.message, "error");
-            }
-            else{
-                {{--jQuery('.head-cart-content').html(res);--}}
-                {{--jQuery(parent).removeClass('cart');--}}
-                {{--jQuery(parent).addClass('active');--}}
-                {{--jQuery(parent).html("@lang('website.Added')");--}}
-                swal("Congrates!", "@lang('Product Added Successfully Thanks.Continue Shopping')", "success");
+            } else{
+                jQuery('.head-cart-content').html(res);
+                // jQuery(parent).html("<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>Remove From Wishlist");
+                swal('Wishlist Update', "The Wishlist has been updated successfully", "success");
 
             }
 		},
@@ -353,8 +349,8 @@ jQuery( function() {
 
 //add-to-Cart with custom options
 jQuery(document).on('click', '.add-to-Cart', function(e){
+    var formData = jQuery("#add-Product-form").serialize();
     if(jQuery('#number').val() > 0) {
-        var formData = jQuery("#add-Product-form").serialize();
         var url = jQuery('#checkout_url').val();
         var message;
         jQuery.ajax({
@@ -884,30 +880,5 @@ jQuery(function(){
     jQuery('.zoom-image').zoom();
 
 });
-</script>
-
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/public/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
-
-<script>
-    // Your public/web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyBttfQixBsmyVJJzdVd3YzSLwx75e-7_Mc",
-        authDomain: "zaahee-ce982.firebaseapp.com",
-        databaseURL: "https://zaahee-ce982.firebaseio.com",
-        projectId: "zaahee-ce982",
-        storageBucket: "zaahee-ce982.appspot.com",
-        messagingSenderId: "241507832628",
-        appId: "1:241507832628:public/web:994a96a6d954de820b4b61",
-        measurementId: "G-ZCRSSWC09R"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
 </script>
 

@@ -2,6 +2,7 @@
 
 namespace App\Models\Web;
 
+use App\Models\Web\Index;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Lang;
@@ -15,7 +16,6 @@ use Auth;
 use Hash;
 use App\Http\Controllers\Web\AlertController;
 use App\Models\Web\Products;
-use App\Models\Web\Index;
 
 class Customer extends Model
 {
@@ -336,6 +336,8 @@ class Customer extends Model
   public function likeMyProduct($request){
       if(!empty(auth()->guard('customer')->user()->id)){
         $liked_products_id  = $request->products_id;
+          $index = new Index();
+
 
         $liked_customers_id = auth()->guard('customer')->user()->id;
         $date_liked			= date('Y-m-d H:i:s');
@@ -346,7 +348,6 @@ class Customer extends Model
             'liked_customers_id' => $liked_customers_id
           ])->get();
 
-
         if(count($record)>0){
 
           DB::table('liked_products')->where([
@@ -354,12 +355,18 @@ class Customer extends Model
             'liked_customers_id' => $liked_customers_id
           ])->delete();
 
-
-
           DB::table('products')->where('products_id','=',$liked_products_id)->decrement('products_liked');
           $products = DB::table('products')->where('products_id','=',$liked_products_id)->get();
+            //get wishlist count
+            $total_count = DB::table('liked_products')->where([
+                'liked_customers_id' => $liked_customers_id
+            ])->count();
 
-          $responseData = array('success'=>'1', 'message'=>Lang::get("website.Product is disliked"), 'total_likes' => $products[0]->products_liked,'id' => 'like_count_'.$liked_products_id);
+            $result['commonContent'] = $index->commonContent();
+            $result['success'] = 1;
+            $result['message'] = Lang::get("website.Product is disliked");
+
+//          $responseData = array('success'=>'1', 'message'=>, 'total_likes' => $total_count,'id' => 'like_count_'.$liked_products_id,'result' => $result);
         }else{
 
           DB::table('liked_products')->insert([
@@ -370,16 +377,28 @@ class Customer extends Model
           DB::table('products')->where('products_id','=',$liked_products_id)->increment('products_liked');
           $products = DB::table('products')->where('products_id','=',$liked_products_id)->get();
 
-          $responseData = array('success'=>'2', 'message'=>Lang::get("website.Product is liked"), 'total_likes' => $products[0]->products_liked,'id' => 'like_count_'.$liked_products_id);
+            //get wishlist count
+            $total_count = DB::table('liked_products')->where([
+                'liked_customers_id' => $liked_customers_id
+            ])->count();
+
+
+            $result['commonContent'] = $index->commonContent();
+            $result['success'] = 2;
+            $result['message'] = Lang::get("website.Product is liked");
+
+
+//            $responseData = array('success'=>'2', 'message'=>Lang::get("website.Product is liked"), 'total_likes' =>$total_count,'id' => 'like_count_'.$liked_products_id,'result' => $result);
 
         }
-
-
       }else{
-        $responseData = array('success'=>'0', 'message'=>Lang::get("website.Please login first to like this product"));
+          $result['commonContent'] = array();
+          $result['success'] = 0;
+          $result['message'] = Lang::get("website.website.Please login first to like this product");
+//        $responseData = array('success'=>'0', 'message'=>Lang::get("website.Please login first to like this product"));
       }
-      $cartResponse = json_encode($responseData);
-      return $cartResponse;
+//      $cartResponse = json_encode($result);
+      return $result;
     }
 
   public function unlikeMyProduct($id){

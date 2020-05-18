@@ -1,4 +1,4 @@
-<?php $qunatity=0; ?>
+<?php $qunatity=0;?>
                 @foreach($result['commonContent']['cart'] as $cart_data)
                 	<?php $qunatity += $cart_data->customers_basket_quantity; ?>
                 @endforeach

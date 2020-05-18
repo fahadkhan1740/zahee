@@ -114,7 +114,7 @@
                                             @endforeach
                                     </div>
                                         @endif
-                                        @if($result['detail']['product_data'][0]->defaultStock > 0)
+{{--                                        @if($result['detail']['product_data'][0]->defaultStock > 0)--}}
                                     <div class="product-desc product-desc-qty">
                                         <div class="product-label-wrap">
                                             <div class="label"><p>Quantity:</p></div>
@@ -125,7 +125,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                        @endif
+{{--                                        @endif--}}
 
 
                                     <div class="product-desc product-desc-action">
