@@ -661,8 +661,8 @@ function getQuantity(){
 <!-- Include js plugin -->
 
 <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script src="<?php echo e(asset('web/js/bootstrap.bundle.min.js')); ?>"></script>
-<script src="<?php echo e(asset('web/js/owl.carousel.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/web/js/bootstrap.bundle.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/web/js/owl.carousel.min.js')); ?>"></script>
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
 
@@ -671,21 +671,21 @@ function getQuantity(){
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 
-<script src="<?php echo e(asset('web/js/slick.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('web/api/fancybox/source/jquery.fancybox.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('web/js/popper.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('web/js/aos.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('web/js/slick.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('web/js/custom.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('web/api/fancybox/source/jquery.fancybox.js')); ?>"></script>
+<script src="<?php echo e(asset('public/web/js/slick.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('public/web/api/fancybox/source/jquery.fancybox.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('public/web/js/popper.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('public/web/js/aos.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('public/web/js/slick.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('public/web/js/custom.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('public/web/api/fancybox/source/jquery.fancybox.js')); ?>"></script>
 
 
 <?php if(session('direction') == 'rtl'): ?>
-<script src="<?php echo e(asset('web/js/rtl_scripts.js')); ?>"></script>
+<script src="<?php echo e(asset('public/web/js/rtl_scripts.js')); ?>"></script>
 <?php else: ?>
-<script src="<?php echo e(asset('web/js/scripts.js')); ?>"></script>
+<script src="<?php echo e(asset('public/web/js/scripts.js')); ?>"></script>
 <?php endif; ?>
-<!-- <script src="<?php echo e(asset('web/js/setup.js')); ?>"></script> -->
+<!-- <script src="<?php echo e(asset('public/web/js/setup.js')); ?>"></script> -->
 
 <script>
 

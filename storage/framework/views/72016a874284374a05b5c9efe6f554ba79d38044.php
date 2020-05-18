@@ -39,7 +39,7 @@
                 <img src="<?php echo e(asset('public').'/'.$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>" />
             </figure>
             <div class="items-content">
-                <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
+                <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
                 <h6><?php echo e($products->products_name); ?></h6>
                 <p><span class="price old-price">
                          <?php if(empty($products->discount_price)): ?>

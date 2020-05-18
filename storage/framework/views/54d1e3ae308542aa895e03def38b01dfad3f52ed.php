@@ -54,7 +54,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-1.png" alt="product-img-1.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-1.png" alt="product-img-1.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -71,7 +71,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-2.png" alt="product-img-2.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-2.png" alt="product-img-2.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -87,7 +87,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-3.png" alt="product-img-3.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-3.png" alt="product-img-3.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -103,7 +103,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-4.png" alt="product-img-4.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-4.png" alt="product-img-4.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -119,7 +119,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-5.png" alt="product-img-5.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-5.png" alt="product-img-5.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -135,7 +135,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-6.png" alt="product-img-6.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-6.png" alt="product-img-6.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -151,7 +151,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-2.png" alt="product-img-2.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-2.png" alt="product-img-2.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -167,7 +167,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-3.png" alt="product-img-3.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-3.png" alt="product-img-3.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -184,7 +184,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-4.png" alt="product-img-4.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-4.png" alt="product-img-4.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -200,7 +200,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-5.png" alt="product-img-5.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-5.png" alt="product-img-5.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -216,7 +216,7 @@
       <div class="items-box-wrap">
         <figure>
           <a href="#">
-            <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/product-img-6.png" alt="product-img-6.png" />
+            <img src="https://zaahee.shop/public/web/images/cus/product-img-6.png" alt="product-img-6.png" />
           </a>
         </figure>
         <div class="items-content">
@@ -260,7 +260,7 @@
     <div class="col-md-3">
       <div class="service-24-box">
         <figure>
-          <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-1.png" alt="service-24-icon-1.png" />
+          <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-1.png" alt="service-24-icon-1.png" />
         </figure>
         <div class="service-24-content">
           <h6>24/7 Online Support</h6>
@@ -271,7 +271,7 @@
     <div class="col-md-3">
       <div class="service-24-box">
         <figure>
-          <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-2.png" alt="service-24-icon-2.png" />
+          <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-2.png" alt="service-24-icon-2.png" />
         </figure>
         <div class="service-24-content">
           <h6>Money Guarantee</h6>
@@ -282,7 +282,7 @@
     <div class="col-md-3">
       <div class="service-24-box">
         <figure>
-          <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-3.png" alt="service-24-icon-3.png" />
+          <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-3.png" alt="service-24-icon-3.png" />
         </figure>
         <div class="service-24-content">
           <h6>Secure Payment</h6>
@@ -293,7 +293,7 @@
     <div class="col-md-3">
       <div class="service-24-box">
         <figure>
-          <img src="https://clientstagingdev.com/zaheeecomm/public/web/images/cus/service-24-icon-4.png" alt="service-24-icon-4.png" />
+          <img src="https://zaahee.shop/public/web/images/cus/service-24-icon-4.png" alt="service-24-icon-4.png" />
         </figure>
         <div class="service-24-content">
           <h6>Big Saving</h6>

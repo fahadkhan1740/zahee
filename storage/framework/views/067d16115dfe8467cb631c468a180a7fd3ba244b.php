@@ -55,7 +55,7 @@
     <nav class="navbar navbar-expand-md">
         <div class="container">
             <div class="logo-wrap">
-                <a href="<?php echo e(URL::to('/')); ?>" class="site-logo"><img src="<?php echo e(asset('web/images/cus/logo.png')); ?>" alt="logo1.png" /></a>
+                <a href="<?php echo e(URL::to('/')); ?>" class="site-logo"><img src="<?php echo e(asset('public/web/images/cus/logo.png')); ?>" alt="logo1.png" /></a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
