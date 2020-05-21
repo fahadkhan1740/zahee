@@ -85,10 +85,10 @@
 									</div>
 									<div class="col-12 col-sm-12">
 										  @if($result['commonContent']['setting'][61]->value==1)
-											<a href="login/google" type="button" class=" btn-google"><i class="fab fa-google-plus-g"></i>&nbsp;Google</a>
+											<a href="login/google" type="button" class="btn-google"><i class="fab fa-google-plus-g"></i>&nbsp;Google</a>
 											@endif
 											@if($result['commonContent']['setting'][2]->value==1)
-											<a  href="login/facebook" type="button" class=" btn-facebook"><i class="fab fa-facebook-f"></i>&nbsp;Facebook</a>
+											<a  href="login/facebook" type="button" class="btn-facebook"><i class="fab fa-facebook-f"></i>&nbsp;Facebook</a>
 											@endif
 									</div>
 							</div>

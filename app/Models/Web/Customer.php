@@ -191,45 +191,51 @@ class Customer extends Model
 												]);
 											}
 					}
-
 					if($social == 'google'){
+						$existUser = DB::table('users')->where('email', '=', $email)->get();
+						if(count($existUser)>0){
+						    $customers_id = $existUser[0]->user_id;
+						    //update data of customer
+                            DB::table('users')->where('id','=',$customers_id)->update([
+                                'first_name' => $customers_firstname,
+                                'last_name' => $customers_lastname,
+                                'email' => $email,
+                                'password' => bcrypt($password),
+                                'status' => '1',
+                                'avatar' => $profile_photo,
+                                'created_at' =>	 time()
+                            ]);
+                            $checkSoacialData =  DB::table('customers')->where('google_id', '=', $social_id)->get();
+                            if(count($existUser)>0){
+                                DB::table('customers')->where('user_id','=',$customers_id)->update([
+                                    'google_id' => $social_id,
+                                ]);
+                            } else {
+                                $customers_id = DB::table('customers')->insertGetId([
+                                    'user_id' => $customers_id,
+                                    'google_id' => $social_id,
+                                ]);
+                            }
 
-						$existUser = DB::table('customers')->where('google_id', '=', $social_id)->get();
+						}else{
+						    //insert data of customer
+                            $customers_id = DB::table('users')->insertGetId([
+                                'role_id' => 2,
+                                'first_name' => $customers_firstname,
+                                'last_name' => $customers_lastname,
+                                'email' => $email,
+                                'password' => bcrypt($password),
+                                'status' => '1',
+                                'avatar' => $profile_photo,
+                                'created_at' =>	 time()
+                            ]);
 
-											if(count($existUser)>0){
+                            $customers_id = DB::table('customers')->insertGetId([
+                                'user_id' => $customers_id,
+                                'google_id' => $social_id,
+                            ]);
 
-												$customers_id = $existUser[0]->user_id;
-
-												//update data of customer
-												DB::table('users')->where('id','=',$customers_id)->update([
-													'first_name' => $customers_firstname,
-													'last_name' => $customers_lastname,
-													'email' => $email,
-                                                    'password' => bcrypt($password),
-													'status' => '1',
-													'avatar' => $profile_photo,
-													'created_at' =>	 time()
-												]);
-												DB::table('customers')->where('user_id','=',$customers_id)->update([
-													'google_id' => $social_id,
-												]);
-											}else{
-												//insert data of customer
-												$customers_id = DB::table('users')->insertGetId([
-													'role_id' => 2,
-													'first_name' => $customers_firstname,
-													'last_name' => $customers_lastname,
-													'email' => $email,
-                                                    'password' => bcrypt($password),
-													'status' => '1',
-													'avatar' => $profile_photo,
-													'created_at' =>	 time()
-												]);
-												$customers_id = DB::table('customers')->insertGetId([
-													'user_id' => $customers_id,
-													'google_id' => $social_id,
-												]);
-											}
+						}
 					}
 
 
@@ -283,6 +289,7 @@ class Customer extends Model
 
 					$customerInfo = array("email" => $email, "password" => $password);
 					$old_session = Session::getId();
+					dd($customerInfo);
 
 					if(auth()->guard('customer')->attempt($customerInfo)) {
 							$customer = auth()->guard('customer')->user();
@@ -324,7 +331,9 @@ class Customer extends Model
 //							dd($result);
 							return  $result;
 					}
-					$result = '';
+					else {
+                        $result = '';
+                    }
 					return $result;
   }
 

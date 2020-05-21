@@ -46,14 +46,14 @@ return [
     'facebook' => [
       'client_id' => '150819416358499',
       'client_secret' => '3491ca578a7c25198d72cd2c57bb9171',
-      'redirect' => 'https://zaahee.shop/public/login/facebook/callback',
+      'redirect' => 'https://zaahee.shop/login/facebook/callback',
     ],
 
 
     'google' => [
       'client_id' => '241507832628-rs55u237ciras7qlcq8davu1p2g2tbrl.apps.googleusercontent.com',
       'client_secret' => 'GDS5KsgJLFJLTo3GtgUXcHxZ',
-      'redirect' => 'https://zaahee.shop/public/login/google/callback',
+      'redirect' => 'https://zaahee.shop/login/google/callback',
     ],
 
 ];
