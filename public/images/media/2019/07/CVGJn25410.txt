@@ -1,0 +1,12 @@
+commands
+
+Pres escape then:
+
+edit
+vi /file
+
+save
+:w
+
+go back after file
+:q!
