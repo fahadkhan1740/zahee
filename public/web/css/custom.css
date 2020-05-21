@@ -423,6 +423,11 @@ header .account-wrap .dropdown .dropdown-toggle img
     background-color: #fff200;
     padding: 5px;
     color: #000;
+} 
+
+.listing .product article .tag {
+    padding: 3px 8px;
+    font-size: 11px;
 }
 
 
@@ -811,5 +816,111 @@ body[dir="rtl"] .checkout-module .heading
 .verify__text
 {
     font-weight: 500; 
-    color: #ff521b;
+    color: #ff521b;   
+}
+.listing .product
+{
+    box-shadow: 0 0 10px rgba(0, 17, 0, 0.08);
+    padding: 20px;
+}
+
+.griding .product article .thumb
+{
+    width: 100%;
+    height: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.listing .product article .thumb
+{
+    width: 190px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.listing .product article
+{
+    display: flex;
+}
+
+.listing .product article .product-detaill
+{
+    text-align: left;
+    width: calc(100% - 200px);
+    padding-left: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.listing .product article .product-detaill .title
+{
+    text-align: left !important;
+    padding: 0 0 !important;
+    margin-bottom: 10px;
+    overflow: visible;
+}
+
+.listing .product article .product-detaill .price
+{
+   color: #ff521b; 
+}
+
+.listing .product article .product-detaill  .product-hover
+{
+  display: block !important;
+  text-align: left;
+}
+.listing .product article .product-detaill  .product-hover .icons
+{
+    margin-bottom: 20px;
+    justify-content: flex-end; 
+}
+
+.listing .product article .product-detaill  .product-hover .icons .badge
+{
+    padding: 2px 5px;
+}
+
+.icon-liked > a
+{
+    display: flex;
+    align-items: center;
+}
+.shop-content .toolbar .form-inline
+{    
+    margin: 0 -15px;    
+}
+
+
+.product article .thumb .img-fluid {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-desc-qty .product-label-wrap
+{
+    margin-bottom: 0;
+}
+
+
+.account-wrap ul a .fa {
+    margin-right: 5px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+#back-to-top
+{
+    z-index: 9999;
+}   
+
+
+.product-detaill
+{
+    text-align: center;
 }

@@ -87,17 +87,22 @@ class Products extends Model
         ->where('categories_description.language_id','=', Session::get('language_id'))
         ->groupBy('categories.categories_id')
         ->get();
+
      if($items->isNotEmpty()){
         $childs = array();
         foreach($items as $item)
             $childs[$item->parent_id][] = $item;
 
-        foreach($items as $item) if (isset($childs[$item->categories_id]))
-            $item->childs = $childs[$item->categories_id];
+        foreach($items as $item) {
+            if (isset($childs[$item->categories_id])) {
 
-        $tree = $childs[0];
-        return  $tree;
+                $item->childs = $childs[$item->categories_id];
+            }
+        }
+
       }
+     $tree = $childs[0];
+      return  $tree;
   }
 
   private function recursivecategories(){
@@ -219,7 +224,6 @@ private function recursivecategories1(){
     		}else{
     			$skip								=   $data['limit']*$data['page_number'];
     		}
-
     		$min_price	 							=   $data['min_price'];
     		$max_price	 							=   $data['max_price'];
     		$take									=   $data['limit'];
@@ -263,7 +267,7 @@ private function recursivecategories1(){
     				->leftJoin('manufacturers','manufacturers.manufacturers_id','=','products.manufacturers_id')
     				->leftJoin('manufacturers_info','manufacturers.manufacturers_id','=','manufacturers_info.manufacturers_id')
     				->leftJoin('products_description','products_description.products_id','=','products.products_id')
-            ->LeftJoin('image_categories','products.products_image','=','image_categories.image_id');
+                    ->LeftJoin('image_categories','products.products_image','=','image_categories.image_id');
 
 
     			if(!empty($data['categories_id'])){
@@ -271,7 +275,6 @@ private function recursivecategories1(){
     						->leftJoin('categories','categories.categories_id','=','products_to_categories.categories_id')
     						->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id');
     			}
-
 
     			if(!empty($data['filters']) and empty($data['search'])){
     				$categories->leftJoin('products_attributes','products_attributes.products_id','=','products.products_id');
@@ -571,7 +574,6 @@ private function recursivecategories1(){
     								->select('categories.categories_id','categories_description.categories_name','categories.categories_image','categories.categories_icon', 'categories.parent_id')
     								->where('products_id','=', $products_id)
     								->where('categories_description.language_id','=', Session::get('language_id'))->get();
-
     				$products_data->categories =  $categories;
     				array_push($result,$products_data);
 

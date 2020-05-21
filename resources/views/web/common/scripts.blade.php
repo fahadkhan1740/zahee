@@ -13,7 +13,7 @@ if($default_currency->id == Session::get('currency_id')){
 <!-- Include js plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="{{asset('public/web/js/bootstrap.bundle.min.js')}}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="{{asset('public/web/js/owl.carousel.min.js')}}"></script>
 
 
@@ -174,7 +174,7 @@ jQuery(document).on('click', '.whishlist', function(e){
 		data: '&products_id='+products_id,
 		success: function (res) {
             if(res.success == 0){
-                swal("Something Happened To Stock",res.message, "error");
+                swal("login required",res.message, "error");
             } else{
                 jQuery('.head-cart-content').html(res);
                 // jQuery(parent).html("<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>Remove From Wishlist");
@@ -185,6 +185,11 @@ jQuery(document).on('click', '.whishlist', function(e){
 	});
  });
 });
+
+function isHTML(str) {
+        var doc = new DOMParser().parseFromString(str, "text/html");
+        return Array.from(doc.body.childNodes).some(node => node.nodeType === 1);
+    }
 
 jQuery(document).on('click', '.modal_show', function(e){
     // e.preventDefault();

@@ -101,6 +101,7 @@ class ProductsController extends Controller
 			$category_slug = '';
 		}
 
+
 		$result['category_name'] = $category_name;
 		$result['category_slug'] = $category_slug;
 		$result['sub_category_name'] = $sub_category_name;
@@ -152,7 +153,6 @@ class ProductsController extends Controller
 		$data = array('page_number'=>$page_number, 'type'=>$type, 'limit'=>$limit,
 		 'categories_id'=>$categories_id, 'search'=>$search,
 		 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );
-
 		$products = $this->products->products($data);
 		$result['products'] = $products;
 
@@ -172,7 +172,6 @@ class ProductsController extends Controller
 		//liked products
 		$result['liked_products'] = $this->products->likedProducts();
 		$result['categories'] = $this->products->categories();
-
 		$result['min_price'] = $min_price;
 		$result['max_price'] = $max_price;
 

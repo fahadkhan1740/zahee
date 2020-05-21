@@ -1,4 +1,5 @@
 <?php
+//dd($products);
           $default_currency = DB::table('currencies')->where('is_default',1)->first();
           if($default_currency->id == Session::get('currency_id')){
             if(!empty($products->discount_price)){

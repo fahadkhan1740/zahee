@@ -50,6 +50,7 @@ class CartController extends Controller
 		$final_theme = $this->theme->theme();
 
 		$result['cart'] = $this->cart->myCart($data);
+//		dd($result['cart']);
 		//apply coupon
 		if(session('coupon')){
 			$session_coupon_data = session('coupon');

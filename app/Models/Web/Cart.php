@@ -16,6 +16,7 @@ class Cart extends Model
 {
 	//mycart
 	public function myCart($baskit_id){
+//        DB::enableQueryLog();
 		$cart = DB::table('customers_basket')
 			->join('products', 'products.products_id','=', 'customers_basket.products_id')
 			->join('products_description', 'products_description.products_id','=', 'products.products_id')
@@ -48,7 +49,9 @@ class Cart extends Model
 				$cart->where('customers_basket.customers_basket_id', '=', $baskit_id);
 			}
 
+
 		$baskit = $cart->get();
+//        dd(DB::getQueryLog());
 
 		$total_carts = count($baskit);
 		$result = array();

@@ -184,10 +184,11 @@ class CustomersController extends Controller
 
 	public function likeMyProduct(Request $request){
 		$cartResponse = $this->customer->likeMyProduct($request);
-        if(!empty($cartResponse['success']) &&  $cartResponse['success']== 0){
+//        dd($cartResponse['success'] == 0);
+        if($cartResponse['success']== 0){
             return json_encode($cartResponse);
         }
-//        dd($cartResponse);
+
         return view("web.headers.cartButtons.cartButton")->with('result', $cartResponse);
 
 	}

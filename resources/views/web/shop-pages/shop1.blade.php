@@ -5,27 +5,27 @@
            <div class="right-menu-categories">
             @if(!empty($result['categories']))
              @foreach($result['categories'] as $category)
-             <a class=" main-manu"  @if(array_key_exists("childs",$category)) href="#{{$category->slug}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="men-cloth" @else href="{{url('shop?category=').$category->slug}}" @endif>
-               <img class="img-fuild" src="{{asset($category->image_path)}}">
+             <a class=" main-manu"  @if(array_key_exists("childs",$category)) href="#{{$category->slug}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="men-cloth"  @else  href="{{url('shop?category=').$category->slug}}"  @endif>
+               <img class="img-fuild" src="{{asset('public/'.$category->image_path)}}">
                   {{$category->categories_name}} <span><i class="fas fa-minus"></i></span>
-
              </a>
-             <div class="sub-manu collapse multi-collapse" id="{{$category->slug}}">
-               <ul class="unorder-list">
                  @if(array_key_exists("childs",$category))
-                 @foreach($category->childs as $cat)
-                   <li class="list-item">
-                     <a class="list-link"  href="{{url('shop?category=').$cat->slug}}" >
-                         <i class="fas fa-angle-right"></i>{{$cat->categories_name}}
-                     </a>
-                   </li>
-                   @endforeach
-                   @endif
-               </ul>
-             </div>
+                    <div class="sub-manu collapse" id="{{$category->slug}}">
+                           <ul class="unorder-list">
+                             @if(array_key_exists("childs",$category))
+                             @foreach($category->childs as $cat)
+                               <li class="list-item">
+                                 <a class="list-link"  href="{{url('shop?category=').$cat->slug}}" >
+                                     <i class="fas fa-angle-right"></i>{{$cat->categories_name}}
+                                 </a>
+                               </li>
+                               @endforeach
+                               @endif
+                           </ul>
+                         </div>
+                 @endif
              @endforeach
             @endif
-
            </div>
            @if(!empty($result['categories']))
            <form enctype="multipart/form-data" name="filters" id="test" method="get">
@@ -221,7 +221,7 @@
                          @if($result['products']['success']==1)
                          @foreach($result['products']['product_data'] as $key=>$products)
 
-                         <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                         <div class="col-12 col-sm-12 col-md-6 col-lg-4 griding">
                              <!-- Product -->
                              <div class="product">
                                <article>
@@ -286,6 +286,8 @@
                                        {{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif
                                    @endforeach
                                  </span>
+                                 <div class="product-detaill">
+                                   <div class="product__left">
                                  <h4 class="title text-center"><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h4>
                                  <div class="price">
                                    @if(empty($products->discount_price))
@@ -315,6 +317,8 @@
 {{--                                    @endif--}}
 {{--                                   </div>--}}
                                  </div>
+                                 </div>
+                                 <div class="product__right">
                                  <div class="product-hover d-none d-lg-block d-xl-block">
                                      <div class="icons">
                                        <div class="icon-liked">
@@ -366,6 +370,8 @@
 {{--                                      <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>--}}
 {{--                                  @endif--}}
                                    </div>
+                                    </div>
+                                   </div>
                                </article>
 
                              </div>
@@ -395,7 +401,7 @@
                                                $record = '15';
                                            }
                                        ?>
-                                       <button class="btn btn-dark" type="button" id="load_products"
+                                       <button class="btn btn-default" type="button" id="load_products"
                                        @if(count($result['products']['product_data']) < $record )
                                            style="display:none"
                                        @endif

@@ -35,10 +35,16 @@
             </div>
             <div class="headerBottomRight">
                 <div class="search-wrap">
-                    <form>
-                        <div class="input-field">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" class="form-control" placeholder="Search" />
+                    <form method="POST" action="{{URL::to('/shop')}}">
+                        @csrf
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search" name="search" style="height:47px;"/>
+                            <div class="input-group-append">
+                                <button style="min-width: 0;    background: #FF5722;" class="btn btn-outline-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+
+{{--                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>--}}
                         </div>
                     </form>
                 </div>
@@ -74,8 +80,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="{{ Request::is('/all-category') ? 'nav-item active' : 'nav-item' }}">
-                        <a class="nav-link" href="{{ URL::to('/all-category')}}">@lang('website.All Categories')</a>
+                    <li class="{{ Request::is('/shop') ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="{{ URL::to('/shop')}}">@lang('website.All Categories')</a>
                     </li>
                     @foreach($result['commonContent']['categories'] as $category)
                     <li class="nav-item">

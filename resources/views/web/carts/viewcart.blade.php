@@ -39,7 +39,7 @@
                                     <div class="cart-item-col cart-item-left">
                                            <div class="cart-item-sb-wrap cart-item-top">
                                                 <div class="cart-item-sb-col-left cart-item-sb-col cart-item-product">
-                                                    <figure class="cart-figure-pro"><img src="{{url('/').'/'.$products->image_path}}" alt="{{$products->products_name}}"></figure>
+                                                    <figure class="cart-figure-pro"><img src="{{url('public').'/'.$products->image_path}}" alt="{{$products->products_name}}"></figure>
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-detail">
                                                     <h6><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h6>

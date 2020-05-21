@@ -37,6 +37,7 @@
 	    <link rel="stylesheet" href="{{asset('public/web/css/rtl.css')}}">
 	    <link rel="stylesheet" href="{{asset('public/web/css/main.css')}}">
         <link rel="stylesheet" href="{{asset('public/web/css/custom.css')}}">
+    <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 
 
