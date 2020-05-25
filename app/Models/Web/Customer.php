@@ -154,47 +154,9 @@ class Customer extends Model
 
 					if($social == 'facebook'){
 
-						$existUser = DB::table('customers')->where('fb_id', '=', $social_id)->get();
-
-											if(count($existUser)>0){
-
-												$customers_id = $existUser[0]->user_id;
-
-												//update data of customer
-												DB::table('users')->where('id','=',$customers_id)->update([
-													'first_name' => $customers_firstname,
-													'last_name' => $customers_lastname,
-													'email' => $email,
-													'password' => bcrypt($password),
-													'status' => '1',
-													'avatar' => $profile_photo,
-													'created_at' =>	 time()
-												]);
-												DB::table('customers')->where('user_id','=',$customers_id)->update([
-													'fb_id' => $social_id,
-												]);
-											}else{
-												//insert data of customer
-												$customers_id = DB::table('users')->insertGetId([
-													'role_id' => 2,
-													'first_name' => $customers_firstname,
-													'last_name' => $customers_lastname,
-													'email' => $email,
-													'password' => bcrypt($password),
-													'status' => '1',
-													'avatar' => $profile_photo,
-													'created_at' =>	 time()
-												]);
-												$customers_id = DB::table('customers')->insertGetId([
-													'user_id' => $customers_id,
-													'fb_id' => $social_id,
-												]);
-											}
-					}
-					if($social == 'google'){
 						$existUser = DB::table('users')->where('email', '=', $email)->get();
 						if(count($existUser)>0){
-						    $customers_id = $existUser[0]->user_id;
+						    $customers_id = $existUser[0]->id;
 						    //update data of customer
                             DB::table('users')->where('id','=',$customers_id)->update([
                                 'first_name' => $customers_firstname,
@@ -205,13 +167,56 @@ class Customer extends Model
                                 'avatar' => $profile_photo,
                                 'created_at' =>	 time()
                             ]);
-                            $checkSoacialData =  DB::table('customers')->where('google_id', '=', $social_id)->get();
-                            if(count($existUser)>0){
+                            $checkSoacialData =  DB::table('customers')->where('user_id', '=', $customers_id)->get();
+                            if(count($checkSoacialData)>0){
+                                DB::table('customers')->where('user_id','=',$customers_id)->update([
+                                    'fb_id' => $social_id,
+                                ]);
+                            } else {
+                                DB::table('customers')->insertGetId([
+                                    'user_id' => $customers_id,
+                                    'fb_id' => $social_id,
+                                ]);
+                            }
+						}else{
+												//insert data of customer
+                            $customers_id = DB::table('users')->insertGetId([
+                                'role_id' => 2,
+                                'first_name' => $customers_firstname,
+                                'last_name' => $customers_lastname,
+                                'email' => $email,
+                                'password' => bcrypt($password),
+                                'status' => '1',
+                                'avatar' => $profile_photo,
+                                'created_at' =>	 time()
+                            ]);
+                            DB::table('customers')->insertGetId([
+                                'user_id' => $customers_id,
+                                'fb_id' => $social_id,
+                            ]);
+						}
+					}
+					if($social == 'google'){
+						$existUser = DB::table('users')->where('email', '=', $email)->get();
+						if(count($existUser)>0){
+						    $customers_id = $existUser[0]->id;
+						    //update data of customer
+                            DB::table('users')->where('id','=',$customers_id)->update([
+                                'first_name' => $customers_firstname,
+                                'last_name' => $customers_lastname,
+                                'email' => $email,
+                                'password' => bcrypt($password),
+                                'status' => '1',
+                                'avatar' => $profile_photo,
+                                'created_at' =>	 time()
+                            ]);
+                            $checkSoacialData =  DB::table('customers')->where('user_id', '=', $customers_id)->get();
+                            if(count($checkSoacialData)>0){
                                 DB::table('customers')->where('user_id','=',$customers_id)->update([
                                     'google_id' => $social_id,
                                 ]);
                             } else {
-                                $customers_id = DB::table('customers')->insertGetId([
+                                DB::table('customers')->insertGetId([
                                     'user_id' => $customers_id,
                                     'google_id' => $social_id,
                                 ]);
@@ -230,7 +235,7 @@ class Customer extends Model
                                 'created_at' =>	 time()
                             ]);
 
-                            $customers_id = DB::table('customers')->insertGetId([
+                           DB::table('customers')->insertGetId([
                                 'user_id' => $customers_id,
                                 'google_id' => $social_id,
                             ]);
@@ -289,7 +294,6 @@ class Customer extends Model
 
 					$customerInfo = array("email" => $email, "password" => $password);
 					$old_session = Session::getId();
-					dd($customerInfo);
 
 					if(auth()->guard('customer')->attempt($customerInfo)) {
 							$customer = auth()->guard('customer')->user();
@@ -328,7 +332,6 @@ class Customer extends Model
 							}
 
 							$result['customers'] = DB::table('users')->where('id', $customer->id)->get();
-//							dd($result);
 							return  $result;
 					}
 					else {

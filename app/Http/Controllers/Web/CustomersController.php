@@ -172,7 +172,7 @@ class CustomersController extends Controller
 
     public function handleSocialLoginCallback($social){
 		  $result =  $this->customer->handleSocialLoginCallback($social);
-		  dd($result);
+//		  dd($result);
 			if(!empty($result)){
 				return redirect()->intended('/')->with('result', $result);
 			}

@@ -28,13 +28,14 @@
                                    $currency_value = $session_currency->value;
                                   }
                               @endphp
-                              @foreach( $result['cart'] as $products)
-                                  <?php
-                                  $price+= $products->final_price * $products->customers_basket_quantity;
-                                  ?>
+
                             <div class="cart-items-wrap">
 
                                  <!-- cart -items -->
+                                @foreach( $result['cart'] as $products)
+                                    <?php
+                                    $price+= $products->final_price * $products->customers_basket_quantity;
+                                    ?>
                                 <div class="cart-item">
                                     <div class="cart-item-col cart-item-left">
                                            <div class="cart-item-sb-wrap cart-item-top">
@@ -110,13 +111,14 @@
                                         <p>Delivered by Mon, 20th ‘18</p>
                                     </div>
                                 </div>
+                                @endforeach
                                 <!-- cart -items -->
                                 <div class="cart-action-wrap text-right ">
                                     <a href="{{ URL::to('/shop')}}" class="link-btn">@lang('website.Back To Shopping')</a>
                                     <a href="{{ URL::to('/checkout')}}" class="btn btn-default">@lang('website.proceedToCheckout')</a>
                                 </div>
                             </div>
-                              @endforeach
+
                           </div>
                      </div>
                      <div class="col-md-3">

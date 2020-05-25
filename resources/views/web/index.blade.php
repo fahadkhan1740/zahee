@@ -37,7 +37,8 @@
 
    <?php   }  }
       ?>
-       <div class="product-wrap">
+       @if(!empty($result['recently_viewed']))
+        <div class="product-wrap">
            <div class="title-wrap d-flex justify-content-between align-items-center">
                <div class="title-box">
                    <h6>Recent Search</h6>
@@ -46,28 +47,74 @@
                    <a href="#" class="see-all-btn">See All</a>
                </div> -->
            </div>
-
            <div class="product-slider b-product-slider">
+
+               @foreach($result['recently_viewed'] as $viewedProd)
                <div class="items-list text-center">
                    <div class="items-box-wrap">
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                        <a href="#">
                            <figure>
-                               <img src="https://zaahee.shop/public/web/images/cus/b-product-1.png" alt="b-product-1.png" />
+                               <img src="{{asset('public/'.$viewedProd[0]->image_path)}}" alt="b-product-1.png" />
                            </figure>
                            <div class="items-content">
-                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>
-                               <h6>Lakme Sun Expert Ultra Matte SPF 40 PA+++ Compact</h6>
-                               <p><span class="price old-price">$16</span> <span class="price new-price">$14</span></p>
+{{--                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>--}}
+                               <h6>{{$viewedProd[0]->products_name}}</h6>
+
+                               <p>
+                                   @php
+                                   $default_currency = DB::table('currencies')->where('is_default',1)->first();
+                                   if($default_currency->id == Session::get('currency_id')){
+                                       if(!empty($viewedProd[0]->discount_price)){
+                                           $discount_price = $viewedProd[0]->discount_price;
+                                       }
+                                       if(!empty($viewedProd[0]->flash_price)){
+                                           $flash_price = $viewedProd[0]->flash_price;
+                                       }
+                                       $orignal_price = $viewedProd[0]->products_price;
+                                   }else{
+                                       $session_currency = DB::table('currencies')->where('id',Session::get('currency_id'))->first();
+                                       if(!empty($viewedProd[0]->discount_price)){
+                                           $discount_price = $viewedProd[0]->discount_price * $session_currency->value;
+                                       }
+                                       if(!empty($viewedProd[0]->flash_price)){
+                                           $flash_price = $viewedProd[0]->flash_price * $session_currency->value;
+                                       }
+                                       $orignal_price = $viewedProd[0]->products_price * $session_currency->value;
+                                   }
+                                   if(!empty($viewedProd[0]->discount_price)){
+
+                                       if(($orignal_price+0)>0){
+                                           $discounted_price = $orignal_price-$discount_price;
+                                           $discount_percentage = $discounted_price/$orignal_price*100;
+                                           $discounted_price = $viewedProd[0]->discount_price;
+
+                                       }else{
+                                           $discount_percentage = 0;
+                                           $discounted_price = 0;
+                                       }
+                                   }
+                                   else{
+                                       $discounted_price = $orignal_price;
+                                   }
+                                  @endphp
+                                   @if(!empty($viewedProd[0]->flash_price))
+                                       {{Session::get('symbol_left')}}{{$flash_price+0}}{{Session::get('symbol_right')}}
+                                   @elseif(!empty($viewedProd[0]->discount_price))
+                                       {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
+                                   @else
+                                       {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
+                                   @endif
+                               </p>
                            </div>
                        </a>
                    </div>
-
                </div>
+               @endforeach
            </div>
 
        </div>
-
+       @endif
        </div>
        </section>
        </main>

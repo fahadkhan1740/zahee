@@ -7,8 +7,11 @@
   </head>
     <!-- dir="rtl" -->
     <body class="animation-s1"  dir="{{ session('direction')}}">
-
-      <!-- Header Content -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=150819416358499&autoLogAppEvents=1"></script>
+{{--    <script async src="https://telegram.org/js/telegram-widget.js?8"></script>--}}
+{{--    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>--}}
+    <!-- Header Content -->
         <?php echo $final_theme['header']; ?>
        <!-- End Header Content -->
 <!--        --><?php //echo $final_theme['mobile_header']; ?>

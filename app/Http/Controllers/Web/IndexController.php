@@ -119,6 +119,16 @@ $data = array('page_number'=>'0', 'type'=>'mostliked', 'limit'=>$limit, 'min_pri
 $most_liked = $this->products->products($data);
 $result['most_liked'] = $most_liked;
 
+// recently viewed
+//        dd(session()->get('recently_viewed'));
+        if(!empty(session()->get('recently_viewed'))){
+            $recently_viewed = session()->get('recently_viewed');
+        } else {
+            session()->put('recently_viewed', []);
+            $recently_viewed = '';
+        }
+
+$result['recently_viewed'] = $recently_viewed;
 
 //is feature
 $data = array('page_number'=>'0', 'type'=>'is_feature', 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );

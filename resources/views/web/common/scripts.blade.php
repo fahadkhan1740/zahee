@@ -1,4 +1,4 @@
-@php
+;@php
 $default_currency = DB::table('currencies')->where('is_default',1)->first();
 if($default_currency->id == Session::get('currency_id')){
 
@@ -12,6 +12,7 @@ if($default_currency->id == Session::get('currency_id')){
 <!-- Include js plugin -->
 <!-- Include js plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="{{asset('public/web/js/popper.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="{{asset('public/web/js/owl.carousel.min.js')}}"></script>
@@ -25,7 +26,6 @@ if($default_currency->id == Session::get('currency_id')){
 
 <script src="{{asset('public/web/js/slick.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/web/api/fancybox/source/jquery.fancybox.js')}}"></script>
-<script type="text/javascript" src="{{asset('public/web/js/popper.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/web/js/aos.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/web/js/slick.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/web/js/custom.js')}}"></script>
@@ -127,7 +127,7 @@ jQuery(document).on('click', '.cart', function(e){
 				jQuery(parent).removeClass('cart');
 				jQuery(parent).addClass('active');
 				jQuery(parent).html("@lang('website.Added')");
-				swal("Congrates!", "Product Added Successfully Thanks.Continue Shopping", "success");
+				swal('', "Product Added Successfully Thanks.Continue Shopping", "success");
 
 			}
 
@@ -173,13 +173,13 @@ jQuery(document).on('click', '.whishlist', function(e){
 		type: "POST",
 		data: '&products_id='+products_id,
 		success: function (res) {
-            if(res.success == 0){
-                swal("login required",res.message, "error");
-            } else{
+		    if(isHTML(res)) {
                 jQuery('.head-cart-content').html(res);
                 // jQuery(parent).html("<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>Remove From Wishlist");
                 swal('Wishlist Update', "The Wishlist has been updated successfully", "success");
 
+            } else {
+		        location.href="{{URL::to('/login')}}"
             }
 		},
 	});
@@ -371,7 +371,7 @@ jQuery(document).on('click', '.add-to-Cart', function(e){
                 else {
                     jQuery('.head-cart-content').html(res);
                     jQuery(parent).addClass('active');
-                    swal("Congrates!", "Product Added Successfully Thanks.Continue Shopping", "success",{button: false});
+                    swal('', "Product Added Successfully Thanks.Continue Shopping", "success",{button: false});
 
                 }
             }
@@ -796,9 +796,9 @@ function getQuantity(){
 	});
 }
 
-
-
-
+function share_fb(url) {
+    window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'facebook-share-dialog',"width=626, height=436")
+}
 </script>
 
 

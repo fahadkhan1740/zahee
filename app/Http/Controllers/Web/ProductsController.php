@@ -323,6 +323,8 @@ class ProductsController extends Controller
 				$data = array('page_number'=>'0', 'type'=>$type, 'products_id'=>$products[0]->products_id, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
 				$detail = $this->products->products($data);
 				$result['detail'] = $detail;
+				// Set Recently Viewed Session
+                $request->session()->put('recently_viewed', $result['detail']);
 
 				$i = 0;
 				foreach($result['detail']['product_data'][0]->categories as $postCategory){
@@ -362,6 +364,8 @@ class ProductsController extends Controller
 		}else{
 			$min_price = '';
 		}
+
+
 
 		//max_price
 		if(!empty($request->max_price)){
@@ -417,6 +421,8 @@ class ProductsController extends Controller
 		$detail = $this->products->products($data);
 		$result['detail'] = $detail;
 
+
+
 		$i = 0;
 		foreach($result['detail']['product_data'][0]->categories as $postCategory){
 			if($i==0){
@@ -431,6 +437,10 @@ class ProductsController extends Controller
 
 		$cart = '';
 		$result['cartArray'] = $this->products->cartIdArray($cart);
+
+		//Add to recently Viewed
+        session()->push('recently_viewed', $detail['product_data']);
+//        session(['recently_viewed[]' => $detail['product_data']]);
 
 		//liked products
 		$result['liked_products'] = $this->products->likedProducts();

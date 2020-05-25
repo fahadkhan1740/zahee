@@ -184,8 +184,45 @@
                                         <div class="product-action-ele">
                                             <ul>
                                                 <li><a href="javascript:void(0)" class="red-color whishlist" products_id="{{$result['detail']['product_data'][0]->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i> Add to Wish List</a></li>
-                                                <li><a href="javascript:void(0)"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a></li>
+                                                <li class="dropdown">
+                                                    <a href="javascript:void(0)" class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                           <li class="dropdown-item">
+                                                               <a href="mailto:?subject=I ♥ this product on ZaaHee!&amp;body=Check out this amazing product {{$result['detail']['product_data'][0]->products_name}} in Zaahee Here is the link:  {{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}"
+                                                               title="Share by Email">
+                                                                <img class="share-img" src="{{asset('public/web/images/cus/email.svg')}}"/>
+                                                               </a>
+                                                           </li>
+                                                        <li class="dropdown-item">
+                                                            <a href="#" onclick="share_fb(`{{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}`);return false;" rel="nofollow" share_url="{{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}" target="_blank">
+                                                            <img class="share-img" src="{{asset('public/web/images/cus/fb.svg')}}"/>
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <a href="https://t.me/share/url?url={{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}&text={{$result['detail']['product_data'][0]->products_name}}" target="_blank">
+                                                            <img class="share-img" src="{{asset('public/web/images/cus/telegram.svg')}}"/>
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <a href="javascript:void(0)">
+                                                                <img class="share-img" src="{{asset('public/web/images/cus/twitter.svg')}}" />
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <a href="javascript:void(0)">
+                                                                <img class="share-img" src="{{asset('public/web/images/cus/whatsapp.svg')}}" />
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <a href="javascript:void(0)">
+                                                                <img class="share-img" src="{{asset('public/web/images/cus/instagram.svg')}}" />
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
                                             </ul>
+
                                         </div>
                                     </div>
                                 </div>
