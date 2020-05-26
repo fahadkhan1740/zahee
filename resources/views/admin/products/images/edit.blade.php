@@ -97,7 +97,7 @@
 
                                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
 
-                                                        <img src="{{asset($products_images[0]->path)}}" alt="" width=" 100px">
+                                                        <img src="{{asset('public/'.$products_images[0]->path)}}" alt="" width=" 100px">
                                                     </div>
                                                 </div>
 

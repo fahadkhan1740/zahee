@@ -50,7 +50,7 @@
                                                       <a class="badge bg-light-blue editProductImagesModal"  href="{{url('admin/products/images/editproductimage/')}}/{{$products_image->id}}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                       <a products_id = '{{ $products_image->products_id }}' id = "{{ $products_image->id }}" class="badge bg-red deleteProductImagesModal"><i class="fa fa-trash " aria-hidden="true"></i></a></td>
                                                </div>
-                                                    <img width="200px" height="300px"src="{{asset($products_image->path)}}" alt="...">
+                                                    <img width="200px" height="300px"src="{{asset('public/'.$products_image->path)}}" alt="...">
                                                      Sort Order : {{ $products_image->sort_order}}
                                                 </div>
                                             </div>
