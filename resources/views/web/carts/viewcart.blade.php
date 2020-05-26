@@ -119,7 +119,22 @@
                                 </div>
                             </div>
 
-                          </div>
+                          </div> 
+
+                   <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <form id="apply_coupon" class="form-validate coupen__wrap">
+                            <div class="input-group ">
+                                <input type="text"  id="coupon_code" name="coupon_code" class="form-control" placeholder="Coupon Code">
+                                <div class="input-group-append">
+                                    <button class="btn  btn-secondary" type="button" id="coupon-code">APPLY</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="coupon_error" class="help-block" style="display: none;color:red; margin-left:12px;"></div>
+                        <div  id="coupon_require_error" class="help-block" style="display: none;color:red; margin-left:12px;">@lang('website.Please enter a valid coupon code')</div>
+                    </div>
+                </div>
                      </div>
                      <div class="col-md-3">
                         <div class="cart-col cart-right  box-shadow">
@@ -150,20 +165,7 @@
                         </div>
                      </div>
                  </div>
-                <div class="row">
-                    <div class="col-12 col-lg-5">
-                        <form id="apply_coupon" class="form-validate">
-                            <div class="input-group ">
-                                <input type="text"  id="coupon_code" name="coupon_code" class="form-control" placeholder="Coupon Code">
-                                <div class="input-group-append">
-                                    <button class="btn  btn-secondary" type="button" id="coupon-code">APPLY</button>
-                                </div>
-                            </div>
-                        </form>
-                        <div id="coupon_error" class="help-block" style="display: none;color:red; margin-left:12px;"></div>
-                        <div  id="coupon_require_error" class="help-block" style="display: none;color:red; margin-left:12px;">@lang('website.Please enter a valid coupon code')</div>
-                    </div>
-                </div>
+             
             </div>
         </section>
 

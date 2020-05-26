@@ -927,3 +927,41 @@ body[dir="rtl"] .checkout-module .heading
 .share-img {
     width: 50%;
 }
+
+
+.view-cart .cart-left .cart-items-wrap
+{
+    margin-top: 50px; 
+}
+.registration-process .input-group
+{
+    position: relative;
+}
+
+.registration-process .input-group .input-group-prepend
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 40px;
+}
+
+.registration-process .input-group .input-group-prepend .input-group-text
+{
+    background-color: transparent;
+    border: 0;
+    z-index: 99;
+    position: relative;
+
+    color: #ff521b;
+}
+.registration-process .input-group>.custom-select, 
+.registration-process .input-group>.form-control {
+    border-radius: 50px;
+    padding-left: 50px;
+}
+
+.headerBottomRight .search-wrap form > .search-wrap
+{
+    margin-bottom: 0;
+}

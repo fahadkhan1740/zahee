@@ -185,7 +185,7 @@
                                             <ul>
                                                 <li><a href="javascript:void(0)" class="red-color whishlist" products_id="{{$result['detail']['product_data'][0]->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i> Add to Wish List</a></li>
                                                 <li class="dropdown">
-                                                    <a href="javascript:void(0)" class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
+                                                    <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                            <li class="dropdown-item">
                                                                <a href="mailto:?subject=I ♥ this product on ZaaHee!&amp;body=Check out this amazing product {{$result['detail']['product_data'][0]->products_name}} in Zaahee Here is the link:  {{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}"

@@ -15,6 +15,7 @@
 								</nav>
 
 					</div>
+
 				<div class="col-12 col-sm-12 col-md-6">
 					@if(Session::has('loginError'))
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -38,33 +39,34 @@
 									</button>
 							</div>
 					@endif
-						<div class="col-12"><h4 class="heading login-heading">@lang('website.Login')</h4></div>
+						<div class="title-head"><h4 class="heading login-heading">@lang('website.Login')</h4></div>
 					<div class="registration-process">
 
 						<form  enctype="multipart/form-data"   action="{{ URL::to('/process-login')}}" method="post">
 							{{csrf_field()}}
-								<div class="from-group mb-3">
-									<div class="col-12"> <label for="inlineFormInputGroup">@lang('website.Email')</label></div>
-									<div class="input-group col-12">
+								<div class="from-group mb-3 ">
+									 <label for="inlineFormInputGroup">@lang('website.Email')</label>
+									<div class="input-group">
 										<div class="input-group-prepend">
 											<div class="input-group-text"><i class="fas fa-at"></i></div>
 										</div>
-										<input type="email" name="email" id="email" placeholder="@lang('website.Please enter your valid email address')"class="form-control email-validate">
-										<span class="help-block" hidden>@lang('website.Please enter your valid email address')</span>
-								 </div>
+									<input type="email" name="email" id="email" placeholder="@lang('website.Please enter your valid email address')"class="form-control email-validate">
+									<span class="help-block" hidden>@lang('website.Please enter your valid email address')</span>
+								</div>
 								</div>
 								<div class="from-group mb-3">
-										<div class="col-12"> <label for="inlineFormInputGroup">@lang('website.Password')</label></div>
-										<div class="input-group col-12">
+									 <label for="inlineFormInputGroup">@lang('website.Password')</label>
+									 
+										<div class="input-group">
 											<div class="input-group-prepend">
 												<div class="input-group-text"><i class="fas fa-lock"></i></div>
 											</div>
-											<input type="password" name="password" id="password" placeholder="Please Enter Password" class="form-control field-validate">
-											<span class="help-block" hidden>@lang('website.This field is required')</span>										</div>
+										<input type="password" name="password" id="password" placeholder="Please Enter Password" class="form-control field-validate">
+										<span class="help-block" hidden>@lang('website.This field is required')</span>										</div>
 									</div>
 
-									<div class="col-12 col-sm-12">
-										<button type="submit" class="btn btn-default">@lang('website.Login')</button>
+									<div class="buttons__wrap">
+									 <button type="submit" class="btn btn-default">@lang('website.Login')</button>
 									<a href="{{ URL::to('/forgotPassword')}}" class="btn btn-link">@lang('website.Forgot Password')</a>
 {{--									@if($result['checkout_button'] == 1)--}}
 {{--									<p style="text-align:center; margin-top:30px;">--}}
@@ -74,7 +76,7 @@
 {{--										@lang('website.Guest Checkout')--}}
 {{--									</a>--}}
 {{--									@endif--}}
-								</div>
+                               </div>
 						</form>
 					</div>
 					<div class="col-12 col-sm-12 my-5">
@@ -97,7 +99,7 @@
 				</div>
 
 				<div class="col-12 col-sm-12 col-md-6">
-						<div class="col-12"><h4 class="heading login-heading">NEW CUSTOMER</h4></div>
+						<div class="title-head"><h4 class="heading login-heading">NEW CUSTOMER</h4></div>
 						<div class="registration-process">
 							@if( count($errors) > 0)
 								@foreach($errors->all() as $error)
@@ -138,9 +140,9 @@
 
 							<form name="signup" enctype="multipart/form-data"  action="{{ URL::to('/signupProcess')}}" method="post">
 								{{csrf_field()}}
-								<div class="from-group mb-3">
-									<div class="col-12"> <label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.First Name')</label></div>
-									<div class="input-group col-12">
+								<div class="from-group mb-3"><label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.First Name')</label>
+								
+									<div class="input-group">
 										<div class="input-group-prepend">
 												<div class="input-group-text"><i class="fas fa-signature"></i></div>
 										</div>
@@ -149,8 +151,9 @@
 									</div>
 								</div>
 								<div class="from-group mb-3">
-									<div class="col-12"> <label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Last Name')</label></div>
-									<div class="input-group col-12">
+									<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Last Name')</label>
+									
+									<div class="input-group">
 										<div class="input-group-prepend">
 												<div class="input-group-text"><i class="fas fa-signature"></i></div>
 										</div>
@@ -159,8 +162,9 @@
 									</div>
 								</div>
 									<div class="from-group mb-3">
-										<div class="col-12"> <label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Email Adrress')</label></div>
-										<div class="input-group col-12">
+										<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Email Adrress')</label>
+										
+										<div class="input-group">
 											<div class="input-group-prepend">
 													<div class="input-group-text"><i class="fas fa-at"></i></div>
 											</div>
@@ -169,8 +173,9 @@
 										</div>
 									</div>
 									<div class="from-group mb-3">
-											<div class="col-12"> <label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Password')</label></div>
-											<div class="input-group col-12">
+										<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Password')</label>
+										
+											<div class="input-group">
 												<div class="input-group-prepend">
 														<div class="input-group-text"><i class="fas fa-lock"></i></div>
 												</div>
@@ -180,8 +185,9 @@
 											</div>
 										</div>
 										<div class="from-group mb-3">
-												<div class="col-12"> <label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Confirm Password')</label></div>
-												<div class="input-group col-12">
+											<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Confirm Password')</label>
+											
+												<div class="input-group">
 													<div class="input-group-prepend">
 															<div class="input-group-text"><i class="fas fa-lock"></i></div>
 													</div>
@@ -191,8 +197,9 @@
 												</div>
 											</div>
 											<div class="from-group mb-3">
-												<div class="col-12" > <label for="inlineFormInputGroup"><strong  style="color: red;">*</strong>@lang('website.Gender')</label></div>
-												<div class="input-group col-12">
+												 <label for="inlineFormInputGroup"><strong  style="color: red;">*</strong>@lang('website.Gender')</label>
+
+												<div class="input-group">
 													<div class="input-group-prepend">
 															<div class="input-group-text"><i class="fas fa-signature"></i></div>
 													</div>
@@ -205,15 +212,14 @@
 												</div>
 											</div>
 											<div class="from-group mb-3">
-													<div class="input-group col-12">
+													<div class="input-group">
 														<input required style="margin:4px;"class="form-controlt checkbox-validate" type="checkbox">
 														@lang('website.Creating an account means you are okay with our')  @if(!empty($result['commonContent']['pages'][3]->slug))&nbsp;<a href="{{ URL::to('/page?name='.$result['commonContent']['pages'][3]->slug)}}">@endif @lang('website.Terms and Services')@if(!empty($result['commonContent']['pages'][3]->slug))</a>@endif, @if(!empty($result['commonContent']['pages'][1]->slug))<a href="{{ URL::to('/page?name='.$result['commonContent']['pages'][1]->slug)}}">@endif @lang('website.Privacy Policy')@if(!empty($result['commonContent']['pages'][1]->slug))</a> @endif &nbsp; and &nbsp; @if(!empty($result['commonContent']['pages'][2]->slug))<a href="{{ URL::to('/page?name='.$result['commonContent']['pages'][2]->slug)}}">@endif @lang('website.Refund Policy') @if(!empty($result['commonContent']['pages'][3]->slug))</a>@endif.
 														<span class="help-block" hidden>@lang('website.Please accept our terms and conditions')</span>
 													</div>
 												</div>
-										<div class="col-12 col-sm-12">
+										<div class="buttons__wrap">
 												<button type="submit" class="btn btn-default">Create an Account</button>
-
 										</div>
 							</form>
 						</div>
