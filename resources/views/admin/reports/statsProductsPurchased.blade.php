@@ -43,7 +43,7 @@
                     @foreach ($result['data'] as  $key=>$products)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td><img src="{{asset($products->path)}}" alt="" width=" 100px" height="100px"></td>
+                            <td><img src="{{asset('public/'.$products->path)}}" alt="" width=" 100px" height="100px"></td>
                             <td>
                             	<strong>{{ $products->products_name }}
                                 @if(!empty($products->products_model))
@@ -52,13 +52,13 @@
                                 </strong><br>
                             </td>
                             <td align="">
-                              
+
                                 @php
                                   $date = new DateTime($products->created_at);
                                   $myDate = $date->format('d-m-Y');
                                   print $myDate;
                                 @endphp
-                                  
+
                             </td>
 
                             <td align="">
