@@ -207,7 +207,7 @@ class CartController extends Controller
 
 	//updatesinglecart
 	public function updatesinglecart(Request $request){
-    $this->cart->updatesinglecart($request);
+        $result = $this->cart->updatesinglecart($request);
 		return view("web.headers.cartButtons.cartButton")->with('result', $result);
 	}
 

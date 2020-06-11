@@ -360,6 +360,7 @@ class Customer extends Model
             'liked_customers_id' => $liked_customers_id
           ])->get();
 
+
         if(count($record)>0){
 
           DB::table('liked_products')->where([
@@ -374,7 +375,26 @@ class Customer extends Model
                 'liked_customers_id' => $liked_customers_id
             ])->count();
 
-            $result['commonContent'] = $index->commonContent();
+            $result['commonContent']['wishlist_count'] = $total_count;
+            $cart = DB::table('customers_basket')
+                ->join('products', 'products.products_id','=', 'customers_basket.products_id')
+                ->join('products_description', 'products_description.products_id','=', 'products.products_id')
+                ->LeftJoin('image_categories', function ($join) {
+                    $join->on('image_categories.image_id', '=', 'products.products_image')
+                        ->where(function ($query) {
+                            $query->where('image_categories.image_type', '=', 'THUMBNAIL')
+                                ->where('image_categories.image_type', '!=', 'THUMBNAIL')
+                                ->orWhere('image_categories.image_type', '=', 'ACTUAL');
+                        });
+                })
+                ->select('customers_basket.*', 'products.products_model as model', 'image_categories.path as image', 'products_description.products_name as products_name', 'products.products_quantity as quantity', 'products.products_price as price', 'products.products_weight as weight', 'products.products_weight_unit as unit' )->where('customers_basket.is_order', '=', '0')->where('products_description.language_id','=', Session::get('language_id') );
+
+            if(empty(session('customers_id'))){
+                $cart->where('customers_basket.session_id', '=', Session::getId());
+            }else{
+                $cart->where('customers_basket.customers_id', '=', session('customers_id'));
+            };
+            $result['commonContent']['cart'] = $cart->get();
             $result['success'] = 1;
             $result['message'] = Lang::get("website.Product is disliked");
 
@@ -394,8 +414,26 @@ class Customer extends Model
                 'liked_customers_id' => $liked_customers_id
             ])->count();
 
+            $cart = DB::table('customers_basket')
+                ->join('products', 'products.products_id','=', 'customers_basket.products_id')
+                ->join('products_description', 'products_description.products_id','=', 'products.products_id')
+                ->LeftJoin('image_categories', function ($join) {
+                    $join->on('image_categories.image_id', '=', 'products.products_image')
+                        ->where(function ($query) {
+                            $query->where('image_categories.image_type', '=', 'THUMBNAIL')
+                                ->where('image_categories.image_type', '!=', 'THUMBNAIL')
+                                ->orWhere('image_categories.image_type', '=', 'ACTUAL');
+                        });
+                })
+                ->select('customers_basket.*', 'products.products_model as model', 'image_categories.path as image', 'products_description.products_name as products_name', 'products.products_quantity as quantity', 'products.products_price as price', 'products.products_weight as weight', 'products.products_weight_unit as unit' )->where('customers_basket.is_order', '=', '0')->where('products_description.language_id','=', Session::get('language_id') );
 
-            $result['commonContent'] = $index->commonContent();
+            if(empty(session('customers_id'))){
+                $cart->where('customers_basket.session_id', '=', Session::getId());
+            }else{
+                $cart->where('customers_basket.customers_id', '=', session('customers_id'));
+            }
+            $result['commonContent']['cart'] = $cart->get();
+            $result['commonContent']['wishlist_count'] = $total_count;
             $result['success'] = 2;
             $result['message'] = Lang::get("website.Product is liked");
 

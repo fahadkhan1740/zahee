@@ -3,8 +3,6 @@
 <!-- cart Content -->
 
   <main id="scrollbar-body" data-scrollbar="">
-
-
         <section class="section view-cart cart-step-1">
             <div class="container">
                  <div class="row">
@@ -30,9 +28,9 @@
                               @endphp
 
                             <div class="cart-items-wrap">
-
+                                @if(count($result['cart']) > 0)
                                  <!-- cart -items -->
-                                @foreach( $result['cart'] as $products)
+                                @foreach( $result['cart'] as $k => $products)
                                     <?php
                                     $price+= $products->final_price * $products->customers_basket_quantity;
                                     ?>
@@ -77,12 +75,12 @@
                                                     ?>
                                                     <div class="price">
                                                         @if(!empty($products->final_price))
-                                                            {{Session::get('symbol_left')}}{{$flash_price+0}}{{Session::get('symbol_right')}}
+                                                            {{Session::get('symbol_left')}}{{($flash_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @elseif(!empty($products->discount_price))
-                                                            {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
-                                                            <span> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
+                                                            {{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
+                                                            <span> {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
                                                         @else
-                                                            {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
+                                                            {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @endif
                                                     </div>
                                                 </div>
@@ -97,13 +95,14 @@
                                            <div class="cart-item-sb-wrap cart-item-bottom">
                                                 <div class="cart-item-sb-col-left cart-item-sb-col  cart-item-product-qty">
                                                     <form class="qty-wrap qty-sm">
-                                                        <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                                        <input type="text" class="number" id="number" name="quantity[]" readonly value="{{$products->customers_basket_quantity}}" min="{{$products->min_order}}" max="{{$products->max_order}}">
-                                                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                                                        <div class="value-button" id="decrease-{{$k+1}}" onclick="decreaseValue(`{{$k+1}}`)" value="Decrease Value">-</div>
+                                                        <input type="number" class="number-{{$k+1}}" id="number-{{$k+1}}" name="quantity[]" readonly value="{{$products->customers_basket_quantity}}" min="{{$products->min_order}}" max="{{$products->max_order}}" />
+                                                        <div class="value-button" id="increase-{{$k+1}}" onclick="increaseValue(`{{$k+1}}`)" value="Increase Value">+</div>
                                                       </form>
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-remove">
-                                                     <p><a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}" class="remove">Remove</a></p>
+                                                     <p><a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}" class="remove"><i class="fa fa-trash" aria-hidden="true"></i>Remove</a></p>
+                                                     <p><a href="javascript:void(0)" products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k}}" class="update-cart-value"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Cart</a></p>
                                                 </div>
                                            </div>
                                     </div>
@@ -117,9 +116,19 @@
                                     <a href="{{ URL::to('/shop')}}" class="link-btn">@lang('website.Back To Shopping')</a>
                                     <a href="{{ URL::to('/checkout')}}" class="btn btn-default">@lang('website.proceedToCheckout')</a>
                                 </div>
+                                    @else
+                                        <div class="cart-item">
+                                            <div class="cart-item-col cart-item-center">
+                                                <figure>
+                                                    <img src="{{asset('public/web/images/cus/empty-cart.png')}}" alt="empty-cart" style="width:15%">
+                                                    <figcaption>No Products in your Cart</figcaption>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                @endif
                             </div>
 
-                          </div> 
+                          </div>
 
                    <div class="row">
                     <div class="col-12 col-lg-6">
@@ -165,7 +174,7 @@
                         </div>
                      </div>
                  </div>
-             
+
             </div>
         </section>
 

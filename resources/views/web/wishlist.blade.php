@@ -114,19 +114,16 @@
 					                  @endif
 													</h6>
 													<div class="buttons">
-															@if($products->products_type==0)
+                                                        <input type="hidden" id="number"  value="1" />
 																	@if(!in_array($products->products_id,$result['cartArray']))
-																			<a  class="btn btn-default cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
-																	@elseif($products->products_min_order>1)
-																			<a class="btn btn-block btn-default" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+																			<a  class="btn btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                                                                            <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+                                                                            <a class="btn btn-block btn-secondary buy-now" products_id="{{$products->products_id}}" href="javascript:void(0)">@lang('website.Buy Now')</a>
+
 																	@else
-																			<a  class="btn btn-default active">@lang('website.Added')</a>
+                                                                           <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+																			<a  class="btn btn-secondary active">@lang('website.Added')</a>
 																	@endif
-															@elseif($products->products_type==1)
-																	<a class="btn  btn-default" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-															@elseif($products->products_type==2)
-																	<a href="{{$products->products_url}}" target="_blank" class="btn btn-default">@lang('website.External Link')</a>
-															@endif
 													</div>
 												</div>
 												<div class="col-12 col-md-4 detail">

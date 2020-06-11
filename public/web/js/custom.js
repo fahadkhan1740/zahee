@@ -119,7 +119,7 @@ jQuery(document).ready(function() {
 // cart card payment
 
     jQuery("input[type=radio]").change(function(){
-   
+
    if ( jQuery('input#card-payment[type=radio]').is(":checked") ){
        jQuery('#card-payment-data').show();
     }
@@ -146,13 +146,13 @@ jQuery(document).ready(function() {
         jQuery('div#tab-2').show();
     }
   });
- 
 
 
 
 
 
-    // slider 
+
+    // slider
 
     jQuery('.variable-slider.categories-slider').slick({
         dots: false,
@@ -180,7 +180,7 @@ jQuery(document).ready(function() {
 
 
 
-  
+
 
 });
 
@@ -196,7 +196,7 @@ jQuery('.pro-full-slider').slick({
   });
 jQuery('.pro-thubnail-slider').slick({
     slidesToShow: 3,
-    slidesToScroll: 1, 
+    slidesToScroll: 1,
     asNavFor: '.pro-full-slider',
     dots: false,
     centerMode: true,
@@ -255,22 +255,36 @@ function hasScrolled() {
 
 // input qty
 
-function increaseValue() {
-    var value = parseInt(document.getElementById('number').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('number').value = value;
-  }
-  
-  function decreaseValue() {
-    var value = parseInt(document.getElementById('number').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value < 1 ? value = 1 : '';
-    value--;
-    document.getElementById('number').value = value;
-  }
+function increaseValue(index=0) {
+    if(index > 0) {
+        var value = parseInt(document.getElementById(`number-${index}`).value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById(`number-${index}`).value = value;
+    } else {
+        var value = parseInt(document.getElementById(`number`).value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById(`number`).value = value;
+    }
 
+}
 
+function decreaseValue(index = 0) {
+    if(index > 0) {
+        var value = parseInt(document.getElementById(`number-${index}`).value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById(`number-${index}`).value = value;
+    } else {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+    }
+}
 
 
 //   avtar
@@ -334,25 +348,25 @@ jQuery( document ).ready(function() {
 
 //     // Momentum reduction damping factor, a float value between (0, 1)
 //     damping: .05,
-  
+
 //     // Minimal size for scrollbar thumb.
 //     thumbMinSize: 20,
-  
+
 //     // Render scrolling by integer pixels
 //     renderByPixels: true,
-  
-//     // Whether allow upper scrollable content to continue scrolling when current scrollbar reaches edge. 
+
+//     // Whether allow upper scrollable content to continue scrolling when current scrollbar reaches edge.
 //     // When set to 'auto', it will be enabled on nested scrollbars, and disabled on first-class scrollbars.
 //     continuousScrolling: 'auto',
-  
+
 //     // Keep scrollbar tracks always visible.
 //     alwaysShowTracks: false,
-  
-//     // Element to be used as a listener for mouse wheel scroll events. 
+
+//     // Element to be used as a listener for mouse wheel scroll events.
 //     // By default, the container element is used.
 //     wheelEventTarget: null,
-  
+
 //     // plugins
 //     plugins: {}
-    
+
 //   });

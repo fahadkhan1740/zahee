@@ -929,9 +929,9 @@ body[dir="rtl"] .checkout-module .heading
 }
 
 
-.view-cart .cart-left .cart-items-wrap
+.view-cart .cart-left .cart-action-wrap
 {
-    margin-top: 50px; 
+    margin-top: 50px;
 }
 .registration-process .input-group
 {
@@ -955,13 +955,111 @@ body[dir="rtl"] .checkout-module .heading
 
     color: #ff521b;
 }
-.registration-process .input-group>.custom-select, 
+.registration-process .input-group>.custom-select,
 .registration-process .input-group>.form-control {
     border-radius: 50px;
     padding-left: 50px;
 }
 
-.headerBottomRight .search-wrap form > .search-wrap
+.headerBottomRight .search-wrap form > .input-group.mb-3
+{
+    margin-bottom: 0 !important;
+}
+.cart-item-center {
+    text-align: center;
+    width: 100%;
+}
+
+.qty-wrap input[type='number'],
+.qty-wrap .number-3
+{
+    text-align: center;
+    border: none;
+    border-top: 1px solid #ff521b;
+    border-bottom: 1px solid #ff521b;
+    color: #fff;
+    margin: 0px;
+    width: 40px;
+    background-color: #ff521b;
+}
+
+.cart-item-product-remove
+{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+.cart-item-product-remove p
 {
     margin-bottom: 0;
+    margin-right: 20px;
+}
+
+.cart-item-product-remove p a
+{ 
+    color:#ff521b;
+}
+.cart-item-product-remove p a .fa
+{
+    margin-right: 7px;
+}
+
+.cart-item-product-remove p:last-child
+{
+    margin-right: 0;
+}
+
+.checkout-module .table tbody+tbody {
+    border-top: 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.checkout-module .table .item-detail h4
+{
+   font-size: 20px;
+}
+
+.checkout-module .table  .item-controls
+{
+    margin-top: 50px; 
+}
+.checkout-module .table  .item-controls .btn
+{
+    padding: 5px 35px;
+    min-width: 109px;
+    font-size: 14px;
+}
+
+.checkout-module  .table thead th:last-child
+{
+    text-align: center;
+}
+
+.buttons .btn-default
+{
+    color:#000;
+}
+
+
+.list-main .icon-liked a.icon i {
+    margin-right: 10px;
+}
+
+#quickView .carousel-item
+{
+    width:100%;
+    height:100%;
+}
+
+#quickView .carousel-item>img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.buttons .btn-secondary
+{
+    color: #fff !important;
 }

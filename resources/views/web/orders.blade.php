@@ -79,7 +79,7 @@
                     <th class="col-12 col-md-2" ></th>
 
                   </tr>
-                </thead>
+                </thead>  
                 <tbody>
                                @if(count($result['orders']) > 0)
                   @foreach( $result['orders'] as $orders)
@@ -132,14 +132,14 @@
                             @endif
                         @endif
                     </td>
-                    <td align="right"><a class="btn btn-sm btn-dark" href="{{ URL::to('/view-order/'.$orders->orders_id)}}">@lang('website.View Order')</a></td>
+                    <td align="right"><a class="btn btn-sm btn-secondary  " href="{{ URL::to('/view-order/'.$orders->orders_id)}}">@lang('website.View Order')</a></td>
                   </tr>
-                  @endforeach
+                  @endforeach  
                   @else
                       <tr>
                           <td colspan="4">@lang('website.No order is placed yet')
-                          </td>
-                      </tr>
+                          </td>  
+                      </tr>  
                   @endif
                 </tbody>
               </table>

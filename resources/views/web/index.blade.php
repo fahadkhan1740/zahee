@@ -37,8 +37,9 @@
 
    <?php   }  }
       ?>
-       @if(!empty($result['recently_viewed']))
+
         <div class="product-wrap">
+            @if(!empty($result['recently_viewed']))
            <div class="title-wrap d-flex justify-content-between align-items-center">
                <div class="title-box">
                    <h6>Recent Search</h6>
@@ -53,14 +54,12 @@
                <div class="items-list text-center">
                    <div class="items-box-wrap">
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                       <a href="#">
+                       <a href="{{ URL::to('product-detail/'.$viewedProd[0]->products_slug) }}">
                            <figure>
                                <img src="{{asset('public/'.$viewedProd[0]->image_path)}}" alt="b-product-1.png" />
                            </figure>
                            <div class="items-content">
-{{--                               <img src="https://zaahee.shop/public/web/images/cus/rating-star.png" alt="rating-star.png"/>--}}
                                <h6>{{$viewedProd[0]->products_name}}</h6>
-
                                <p>
                                    @php
                                    $default_currency = DB::table('currencies')->where('is_default',1)->first();
@@ -112,9 +111,9 @@
                </div>
                @endforeach
            </div>
-
+            @endif
        </div>
-       @endif
+
        </div>
        </section>
        </main>

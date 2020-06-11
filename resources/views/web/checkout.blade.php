@@ -8,28 +8,27 @@
 
  <div class="container">
    <div class="row">
-     <div class="col-12 col-sm-12">
-         <div class="row justify-content-end">
-             <nav aria-label="breadcrumb">
-                 <ol class="breadcrumb">
-                   <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-                   <li class="breadcrumb-item"><a href="javascript:void(0)">@lang('website.Checkout')</a></li>
-                   <li class="breadcrumb-item">
-                     <a href="javascript:void(0)">
-                       @if(session('step')==0)
-                             @lang('website.Shipping Address')
-                           @elseif(session('step')==1)
-                             @lang('website.Billing Address')
-                           @elseif(session('step')==2)
-                             @lang('website.Shipping Methods')
-                           @elseif(session('step')==3)
-                             @lang('website.Order Detail')
-                           @endif
-                     </a>
-                   </li>
-                 </ol>
-               </nav>
-         </div>
+     <div class="col-12 col-sm-12"> 
+       <nav aria-label="breadcrumb">
+           <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+             <li class="breadcrumb-item"><a href="javascript:void(0)">@lang('website.Checkout')</a></li>
+             <li class="breadcrumb-item">
+               <a href="javascript:void(0)">
+                 @if(session('step')==0)
+                       @lang('website.Shipping Address')
+                     @elseif(session('step')==1)
+                       @lang('website.Billing Address')
+                     @elseif(session('step')==2)
+                       @lang('website.Shipping Methods')
+                     @elseif(session('step')==3)
+                       @lang('website.Order Detail')
+                     @endif
+               </a>
+             </li>
+           </ol>
+         </nav>
+
      </div>
      <div class="col-12 col-xl-9 checkout-left">
        <input type="hidden" id="hyperpayresponse" value="@if(!empty(session('paymentResponse'))) @if(session('paymentResponse')=='success') {{session('paymentResponse')}} @else {{session('paymentResponse')}}  @endif @endif">
@@ -37,7 +36,7 @@
            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
            @if(!empty(session('paymentResponse')) and session('paymentResponse')=='error') {{session('paymentResponseData') }} @endif
        </div>
-         <div class="row">
+
            <div class="checkout-module">
              <ul class="nav nav-pills mb-3 checkoutd-nav d-none d-lg-flex" id="pills-tab" role="tablist">
                  <li class="nav-item">
@@ -294,6 +293,12 @@
                                                      <div class="item-detail">
                                                          <h4>{{$products->products_name}}</h4>
                                                          <div class="item-attributes"></div>
+
+                                                         <div class="item-controls">
+                                                           <a class="btn btn-default"   href="{{ URL::to('/product-detail/'.$products->products_slug)}}">Edit</span></a>
+                                                           <a class="btn btn-default" href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}">Delete</a>
+                                                    
+                                                     </div>
                                                        </div>
                                                    </td>
 
@@ -317,19 +322,12 @@
                                                    <td class="align-middle item-total col-12 col-md-2 subtotal" align="center"><span class="cart_price_{{$products->customers_basket_id}}">{{Session::get('symbol_left')}}{{$orignal_price * $products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
                                                    </td>
                                                </tr>
-                                               <tr class="d-flex">
-                                                   <td class="col-12 col-md-2 p-0">
-                                                     <div class="item-controls">
-                                                         <button  type="button" class="btn" >
-                                                             <a  href="{{ URL::to('/product-detail/'.$products->products_slug)}}"><span class="fas fa-pencil-alt"></span></a>
-                                                         </button>
-                                                         <button  type="button" class="btn" >
-                                                             <a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}"><span class="fas fa-times"></span></a>
-                                                         </button>
-                                                     </div>
+                                               <!-- <tr class="d-flex">
+                                                   <td class="col-12 col-md-6 p-0">
+                                                   
                                                    </td>
                                                    <td class="col-12 col-md-10 d-none d-md-block"></td>
-                                               </tr>
+                                               </tr> -->
 
                                            </tbody>
                                            @endforeach
@@ -349,9 +347,9 @@
 
                                         ?>
                                </form>
-                                   <div class="col-12 col-sm-12">
+                                   <div class="col-12 col-sm-12 mb-3">
                                        <div class="row">
-                                         <div class="heading">
+                                         <div class="heading"  style="width:100%; padding:0;">
                                            <h2>@lang('website.orderNotesandSummary')</h2>
                                            <hr>
                                          </div>
@@ -364,7 +362,7 @@
                                    </div>
                                    <div class="col-12 col-sm-12 mb-3">
                                        <div class="row">
-                                         <div class="heading">
+                                         <div class="heading"  style="width:100%; padding:0;">
                                            <h2>@lang('website.Payment Methods')</h2>
                                            <hr>
                                          </div>
@@ -408,7 +406,7 @@
                                                </form>
                                            </div>
                                            <div class="button">
-                                               <button id="cash_on_delivery_button" class="btn btn-dark payment_btns" style="display: none">@lang('website.Order Now')</button>
+                                               <button id="cash_on_delivery_button" class="btn btn-default payment_btns" style="display: none">@lang('website.Order Now')</button>
                                            </div>
                                        </div>
                                        <!-- The braintree Modal -->
@@ -539,7 +537,6 @@
 
                  </div>
                </div>
-         </div>
          </div>
      </div>
      @php

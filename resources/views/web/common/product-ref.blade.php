@@ -34,7 +34,7 @@
 
 <div class="items-list text-center">
     <div class="items-box-wrap">
-        <a href="#" class="heart-icon whishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
+        <a href="#" class="heart-icon whishlist" products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
         <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
             <figure>
                 <img src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
