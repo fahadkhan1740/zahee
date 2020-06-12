@@ -439,8 +439,17 @@ class ProductsController extends Controller
 		$result['cartArray'] = $this->products->cartIdArray($cart);
 
 		//Add to recently Viewed
-        session()->push('recently_viewed', $detail['product_data']);
-//        session(['recently_viewed[]' => $detail['product_data']]);
+        if(count(session()->get('recently_viewed'))){
+            // check if product already exists
+            $recently_viewed_data = session()->get('recently_viewed');
+            $valueCheck = $this->find_key_value($recently_viewed_data,$detail['product_data'][0]->products_id);
+            if(!$valueCheck) {
+                session()->push('recently_viewed', $detail['product_data'][0]);
+            }
+//            dd($valueCheck);
+        } else {
+            session()->push('recently_viewed', $detail['product_data'][0]);
+        }
 
 		//liked products
 		$result['liked_products'] = $this->products->likedProducts();
@@ -462,6 +471,18 @@ class ProductsController extends Controller
 		$result = $this->products->productQuantity($data);
 		print_r(json_encode($result));
 	}
+
+
+    function find_key_value($array, $val)
+    {
+        foreach ($array as $item)
+        {
+//            dd($item->products_id,$val);
+            if (isset($item->products_id) && $item->products_id === $val) return true;
+        }
+
+        return false;
+    }
 
 
 }

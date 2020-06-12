@@ -106,6 +106,7 @@
 													?>
 													<h5><a href="{{url('/shop')}}">{{$products->products_name}}</a></h5>
 													<h6>Total Price:
+                                                        @php //dd($products); @endphp
 														@if(!empty($products->discount_price))
 					                  {{Session::get('symbol_left')}}{{$discounted_price+0}}{{Session::get('symbol_right')}}
 					                  <span> {{Session::get('symbol_left')}}{{$products->price+0}}{{Session::get('symbol_right')}}</span>
@@ -122,7 +123,7 @@
 
 																	@else
                                                                            <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-																			<a  class="btn btn-secondary active">@lang('website.Added')</a>
+                                                                           <a  class="btn btn-secondary" products_id="{{$products->products_id}}" disabled>@lang('website.Add to Cart')</a>
 																	@endif
 													</div>
 												</div>

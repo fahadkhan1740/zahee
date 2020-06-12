@@ -104,9 +104,9 @@ jQuery(document).on('click', '.cart', function(e){
 				jQuery('.head-cart-content').html(res);
 				jQuery(parent).removeClass('cart');
 				jQuery(parent).addClass('active');
-				jQuery(parent).html("@lang('website.Added')");
+				jQuery(parent).html("@lang('website.Go to Cart')");
 				swal('', "Product Added Successfully Thanks.Continue Shopping", "success");
-
+                location.reload();
 			}
 
 		},
@@ -117,12 +117,13 @@ jQuery(document).on('click', '.buy-now', function(e){
     if(jQuery('#number').val() > 0) {
         var parent = jQuery(this);
         var products_id = jQuery(this).attr('products_id');
+        var qty = document.getElementById('number').value;
         var message;
         jQuery.ajax({
             url: '{{ URL::to("/addToCart")}}',
             headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
             type: "POST",
-            data: '&products_id='+products_id,
+            data: '&products_id='+products_id+'&quantity='+qty,
 
             success: function (res) {
                 if(res['status'] == 'exceed'){
@@ -178,7 +179,9 @@ jQuery(document).on('click', '.update-cart-value', function(e){
 		type: "POST",
 		data: '&products_id='+products_id+'&cart_id='+baskt_id+'&quantity='+qty,
 		success: function (res) {
-		 console.log(res);
+            jQuery('.head-cart-content').html(res);
+            jQuery(parent).addClass('active');
+            location.href = "{{ URL::to('/viewcart') }}"
 		},
 	});
  });

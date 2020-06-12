@@ -771,4 +771,5 @@ return [
     'Secure Payment' => 'Secure Payment',
     'Big Saving' => 'Big Saving',
     'What’s HOT' => 'What’s HOT',
+    'Buy Now' => 'Buy Now',
 ];

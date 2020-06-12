@@ -717,4 +717,5 @@ return [
     'Secure Payment' => 'دفع امن',
     'Big Saving' => 'توفير كبير',
     'What’s HOT' => 'ما الحار',
+    'Buy Now' => 'اشتري الآن',
 ];

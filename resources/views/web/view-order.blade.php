@@ -7,10 +7,11 @@
       <div class="col-12 col-sm-12">
           <div class="row justify-content-end">
               <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('website.Order information')</li>
-                  </ol>
+                  <ul class="arrows">
+                    <li class=""><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+                      <li class="" aria-current="page">@lang('website.My Orders')</li>
+                    <li class="active" aria-current="page">@lang('website.Order information')</li>
+                  </ul>
                 </nav>
           </div>
       </div>
