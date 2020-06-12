@@ -1,8 +1,6 @@
 <section class="product-page product-page-one ">
     <div class="container">
-
       <div class="product-main">
-
           <div class="row">
             <div class="col-12 col-sm-12">
               <div class="row">
