@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-lg-12">
       <div id="quickView" class="carousel slide" data-ride="carousel">
           <!-- The slideshow -->
           <div class="carousel-inner">
@@ -25,9 +25,9 @@
 
       </div>
   </div>
-  <div class="col-12 col-lg-7  product-page-one" >
-      <h1>{{$result['detail']['product_data'][0]->products_name}}</h1>
-      <div class="list-main">
+  <div class="col-12 col-lg-12  product-page-one" >
+      <h4>{{$result['detail']['product_data'][0]->products_name}}</h4>
+      <div class="list-main form-group">
           <div class="icon-liked">
             <a class="icon active is_liked" products_id="<?=$result['detail']['product_data'][0]->products_id?>">
               <i class="fas fa-heart"></i>
@@ -76,9 +76,9 @@
                 <input id="attributeid_<?=$index?>" type="hidden" value="">
                 <input id="attribute_sign_<?=$index?>" type="hidden" value="">
                 <input id="attributeids_<?=$index?>" type="hidden" name="attributeid[]" value="" >
-                <div class="col-12 col-md-4 box">
+                <div class="col-12 col-md-6  form-group">
                   <label>{{ $attributes_data['option']['name'] }}</label>
-                  <div class="select-control ">
+                   <div class="select-control ">
                       <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
                       @if(!empty($result['cart']))
                         @php
@@ -99,85 +99,95 @@
                         @endif
                       </select>
                   </div>
-                </div>
+                 </div>
                   @endforeach
                 @endif
+                
 
-                  <div class="col-12 col-md-4 box Qty" @if(!empty($result['detail']['product_data'][0]->flash_start_date) and $result['detail']['product_data'][0]->server_time < $result['detail']['product_data'][0]->flash_start_date ) style="display: none" @endif>
+                  <div class="col-12 col-md-12 form-group" @if(!empty($result['detail']['product_data'][0]->flash_start_date) and $result['detail']['product_data'][0]->server_time < $result['detail']['product_data'][0]->flash_start_date ) style="display: none" @endif>
                     <label>Quantity</label>
-                    <div class="Qty">
+                    <div class="Qty  qty-wrap qty-sm">
                       <div class="input-group">
-                          <span class="input-group-btn first qtyminus">
+                          <!-- <span class="input-group-btn first qtyminus">
                             <button class="btn btn-defualt" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                          </span>
-                          <input style="width:-20px;" type="text" readonly name="quantity" value=" @if(!empty($result['cart'])) {{$result['cart'][0]->customers_basket_quantity}} @else @if($result['detail']['product_data'][0]->products_min_order>0) {{$result['detail']['product_data'][0]->products_min_order}} @else 1 @endif @endif" min="@if($result['detail']['product_data'][0]->products_min_order>0) {{$result['detail']['product_data'][0]->products_min_order}} @else 1 @endif" max="@if(!empty($result['detail']['product_data'][0]->products_max_stock) and $result['detail']['product_data'][0]->products_max_stock>0){{ $result['detail']['product_data'][0]->products_max_stock}}@else{{ $result['detail']['product_data'][0]->defaultStock}}@endif" class="form-control qty">
-                          <span class="input-group-btn last qtyplus">
+                          </span> -->
+                          <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                          <input style="width:-20px;" id="number" type="number" readonly name="quantity" value=" @if(!empty($result['cart'])) {{$result['cart'][0]->customers_basket_quantity}} @else @if($result['detail']['product_data'][0]->products_min_order>0) {{$result['detail']['product_data'][0]->products_min_order}} @else 1 @endif @endif" min="@if($result['detail']['product_data'][0]->products_min_order>0) {{$result['detail']['product_data'][0]->products_min_order}} @else 1 @endif" max="@if(!empty($result['detail']['product_data'][0]->products_max_stock) and $result['detail']['product_data'][0]->products_max_stock>0){{ $result['detail']['product_data'][0]->products_max_stock}}@else{{ $result['detail']['product_data'][0]->defaultStock}}@endif" >
+                          <div class="value-button" id="increase" onclick="increaseValue()">+</div>
+                          <!-- <span class="input-group-btn last qtyplus">
                             <button class="btn btn-defualt" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                          </span>
+                          </span> -->
                       </div>
+                    </div>
+                   </div>
+
+
+            <div class="col-12 col-md-6 form-group">
+              <div class="proce__wrap">
+                    <h6>Total Price:
+                      <span class="total_price">
+                        <?php
+                        $default_currency = DB::table('currencies')->where('is_default',1)->first();
+                        if($default_currency->id == Session::get('currency_id')){
+                          if(!empty($result['detail']['product_data'][0]->discount_price)){
+                          $discount_price = $result['detail']['product_data'][0]->discount_price;
+                          }
+                          if(!empty($result['detail']['product_data'][0]->flash_price)){
+                            $flash_price = $result['detail']['product_data'][0]->flash_price;
+                          }
+                          $orignal_price = $result['detail']['product_data'][0]->products_price;
+                        }else{
+                          $session_currency = DB::table('currencies')->where('id',Session::get('currency_id'))->first();
+                          if(!empty($result['detail']['product_data'][0]->discount_price)){
+                          $discount_price = $result['detail']['product_data'][0]->discount_price * $session_currency->value;
+                          }
+                          if(!empty($result['detail']['product_data'][0]->flash_price)){
+                            $flash_price = $result['detail']['product_data'][0]->flash_price * $session_currency->value;
+                          }
+                          $orignal_price = $result['detail']['product_data'][0]->products_price * $session_currency->value;
+                        }
+                        if(!empty($result['detail']['product_data'][0]->discount_price)){
+
+                          if(($orignal_price+0)>0){
+                        $discounted_price = $orignal_price-$discount_price;
+                        $discount_percentage = $discounted_price/$orignal_price*100;
+                        $discounted_price = $result['detail']['product_data'][0]->discount_price;
+
+                        }else{
+                          $discount_percentage = 0;
+                          $discounted_price = 0;
+                        }
+                        }
+                        else{
+                          $discounted_price = $orignal_price;
+                        }
+                        ?>
+                        @if(!empty($result['detail']['product_data'][0]->flash_price))
+                        {{Session::get('symbol_left')}}{{$flash_price+0}}{{Session::get('symbol_right')}}
+                        @elseif(!empty($result['detail']['product_data'][0]->discount_price))
+                        {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
+                        @else
+                        {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
+                        @endif
+                        
+                        @if($result['detail']['product_data'][0]->products_min_order>0)
+                      
+                      @endif
+                        </h6>
+
+              </div>
+                 </div>
+
+                   <div class="col-12 col-md-6 form-group">
+                    <div class="limit__wrap">
+                      <p>
+                        &nbsp; @lang('website.Min Order Limit:') {{ $result['detail']['product_data'][0]->products_min_order }}
+                      </p>
                     </div>
                   </div>
 
-              </div>
 
-
-
-
-      <div class="product-buttons">
-          <h2>Total Price:
-            <span class="total_price">
-
-              <?php
-              $default_currency = DB::table('currencies')->where('is_default',1)->first();
-              if($default_currency->id == Session::get('currency_id')){
-                if(!empty($result['detail']['product_data'][0]->discount_price)){
-                $discount_price = $result['detail']['product_data'][0]->discount_price;
-                }
-                if(!empty($result['detail']['product_data'][0]->flash_price)){
-                  $flash_price = $result['detail']['product_data'][0]->flash_price;
-                }
-                $orignal_price = $result['detail']['product_data'][0]->products_price;
-              }else{
-                $session_currency = DB::table('currencies')->where('id',Session::get('currency_id'))->first();
-                if(!empty($result['detail']['product_data'][0]->discount_price)){
-                $discount_price = $result['detail']['product_data'][0]->discount_price * $session_currency->value;
-                }
-                if(!empty($result['detail']['product_data'][0]->flash_price)){
-                  $flash_price = $result['detail']['product_data'][0]->flash_price * $session_currency->value;
-                }
-                $orignal_price = $result['detail']['product_data'][0]->products_price * $session_currency->value;
-              }
-               if(!empty($result['detail']['product_data'][0]->discount_price)){
-
-                if(($orignal_price+0)>0){
-               $discounted_price = $orignal_price-$discount_price;
-               $discount_percentage = $discounted_price/$orignal_price*100;
-               $discounted_price = $result['detail']['product_data'][0]->discount_price;
-
-               }else{
-                 $discount_percentage = 0;
-                 $discounted_price = 0;
-               }
-              }
-              else{
-                $discounted_price = $orignal_price;
-              }
-              ?>
-              @if(!empty($result['detail']['product_data'][0]->flash_price))
-              {{Session::get('symbol_left')}}{{$flash_price+0}}{{Session::get('symbol_right')}}
-              @elseif(!empty($result['detail']['product_data'][0]->discount_price))
-              {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
-              @else
-              {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
-              @endif
-              </h2>
-            @if($result['detail']['product_data'][0]->products_min_order>0)
-              <p>
-              &nbsp; @lang('website.Min Order Limit:') {{ $result['detail']['product_data'][0]->products_min_order }}
-                </p>
-            @endif
-
-            <div class="buttons">
+            <div class=" buttons col-12 form-group">
              @if(!empty($result['detail']['product_data'][0]->flash_start_date) and $result['detail']['product_data'][0]->server_time < $result['detail']['product_data'][0]->flash_start_date )
               @else
                @if($result['detail']['product_data'][0]->products_type == 0)
@@ -193,6 +203,8 @@
               @endif
             </div>
 
+
+      </div>
       </div>
     </form>
 

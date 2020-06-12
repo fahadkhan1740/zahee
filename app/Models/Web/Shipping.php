@@ -18,15 +18,15 @@ class Shipping extends Model
 		$customers_id            				=   auth()->guard('customer')->user()->id;
 		$entry_firstname            		    =   $request->entry_firstname;
 		$entry_lastname             		    =   $request->entry_lastname;
-		$entry_street_address       		    =   $request->entry_street_address;
-		$entry_suburb             				=   $request->entry_suburb;
+		$entry_flat       		                =   $request->flat;
+		$entry_street_address       		    =   $request->street;
 		$entry_postcode             			=   $request->entry_postcode;
 		$entry_city             				=   $request->entry_city;
 		$entry_state             				=   $request->entry_state;
 		$entry_country_id             			=   $request->entry_country_id;
 		$entry_zone_id             				=   $request->entry_zone_id;
 		$entry_gender							=   $request->entry_gender;
-		$entry_company							=   $request->entry_company;
+		$delivery_phone							=   $request->delivery_phone;
 		$customers_default_address_id			=   $request->customers_default_address_id;
 
 		if(!empty($customers_id)){
@@ -34,7 +34,7 @@ class Shipping extends Model
 				'entry_firstname'               =>   $entry_firstname,
 				'entry_lastname'                =>   $entry_lastname,
 				'entry_street_address'          =>   $entry_street_address,
-				'entry_suburb'             		=>   $entry_suburb,
+				'entry_flat'          =>   $entry_flat,
 				'entry_postcode'            	=>   $entry_postcode,
 				'entry_city'             		=>   $entry_city,
 				'entry_state'            		=>   $entry_state,
@@ -43,7 +43,7 @@ class Shipping extends Model
 				'customers_id'             		=>   $customers_id,
 				'user_id'             		=>   $customers_id,
 				'entry_gender'					=>   $entry_gender,
-				'entry_company'					=>   $entry_company
+				'delivery_phone'					=>   $delivery_phone,
 			);
 
 			//add address into address book
@@ -66,18 +66,16 @@ class Shipping extends Model
 							'user_to_address.is_default as default_address',
 							'address_book.address_book_id as address_id',
 							'address_book.entry_gender as gender',
-							'address_book.entry_company as company',
 							'address_book.entry_firstname as firstname',
 							'address_book.entry_lastname as lastname',
 							'address_book.entry_street_address as street',
-							'address_book.entry_suburb as suburb',
+							'address_book.entry_flat as flat',
+							'address_book.delivery_phone',
 							'address_book.entry_postcode as postcode',
 							'address_book.entry_city as city',
 							'address_book.entry_state as state',
-
 							'countries.countries_id as countries_id',
 							'countries.countries_name as country_name',
-
 							'zones.zone_id as zone_id',
 							'zones.zone_code as zone_code',
 							'zones.zone_name as zone_name'

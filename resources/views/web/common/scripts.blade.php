@@ -83,28 +83,6 @@ jQuery( document ).ready( function () {
 	getZonesBilling();
 	paymentMethods();
 @endif
-
-{{--$.noConflict();--}}
-{{--	//stripe_ajax--}}
-{{--jQuery(document).on('click', '#stripe_ajax', function(e){--}}
-{{--	jQuery('#loader').css('display','flex');--}}
-{{--	jQuery.ajax({--}}
-{{--		headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},--}}
-{{--		url: '{{ URL::to("/stripeForm")}}',--}}
-{{--		type: "POST",--}}
-{{--		success: function (res) {--}}
-{{--			if(res.trim() == "already added"){--}}
-{{--			}else{--}}
-{{--				jQuery('.head-cart-content').html(res);--}}
-{{--				jQuery(parent).removeClass('cart');--}}
-{{--				jQuery(parent).addClass('active');--}}
-{{--			}--}}
-{{--			message = "@lang('website.Product is added')";--}}
-{{--			notification(message);--}}
-{{--			jQuery('#loader').hide();--}}
-{{--		},--}}
-{{--	});--}}
-{{--});--}}
 	//default product cart
 jQuery(document).on('click', '.cart', function(e){
 	var parent = jQuery(this);
@@ -173,6 +151,7 @@ jQuery(document).on('click', '.whishlist', function(e){
 		type: "POST",
 		data: '&products_id='+products_id,
 		success: function (res) {
+		    // alert(res);
 		    if(isHTML(res)) {
                 jQuery('.head-cart-content').html(res);
                 // jQuery(parent).html("<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>Remove From Wishlist");
@@ -181,6 +160,25 @@ jQuery(document).on('click', '.whishlist', function(e){
             } else {
 		        location.href="{{URL::to('/login')}}"
             }
+		},
+	});
+ });
+});
+jQuery(document).on('click', '.update-cart-value', function(e){
+	var parent = jQuery(this);
+	var products_id = jQuery(this).attr('products_id');
+	var baskt_id = jQuery(this).attr('baskt_id');
+	var index = jQuery(this).attr('index');
+	var qty = document.getElementById('number-'+index).value;
+	var message ;
+  jQuery(function ($) {
+	jQuery.ajax({
+		url: '{{ URL::to("/updatesinglecart")}}',
+        headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+		type: "POST",
+		data: '&products_id='+products_id+'&cart_id='+baskt_id+'&quantity='+qty,
+		success: function (res) {
+		 console.log(res);
 		},
 	});
  });
@@ -348,9 +346,6 @@ jQuery( function() {
     	jQuery( "#category_id" ).selectmenu();
 		jQuery( ".attributes_data" ).selectmenu();
 });
-
-
-
 
 //add-to-Cart with custom options
 jQuery(document).on('click', '.add-to-Cart', function(e){

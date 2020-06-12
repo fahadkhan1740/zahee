@@ -7,9 +7,10 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 @foreach($result['slides'] as $k => $slide)
-                <div class="<?php if($k == 0){ echo 'carousel-item active';} else { echo 'carousel-item'; } ?>">
+<?php //dd($slide); ?>
+                <a href="@if($slide->type == 'product') {{URL::to('product-detail/'.$slide->url) }} @else {{URL::to('shop?category='.$slide->url) }} @endif" class="<?php if($k == 0){ echo 'carousel-item active';} else { echo 'carousel-item'; } ?>">
                     <figure class="figure-banner" style="background-image: url('<?php echo 'public/'.$slide->path; ?>');"></figure>
-                </div>
+                </a>
                 @endforeach
             </div>
 

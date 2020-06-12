@@ -325,7 +325,7 @@ return [
 	'ManufacturerNameExample' => 'Manufacturer such as "Samsung or iphone" etc.',
 	'ManufacturerURL' => 'Manufacturer URL',
 	'ManufacturerURL' => 'Manufacturer URL',
-	'ManufacturerURLText' => 'Manufacturer url refer to its website link (optional).',
+	'ManufacturerURLText' => 'Manufacturer url refer to its website link.',
 	'ManufacturerLogo' => 'Upload manufacturer logo.',
 	'ManufacturerUpdatedMessage' => 'Manufacturer has been updated successfully!',
 	'EditManufacturer' => 'Edit Manufacturer',

@@ -102,7 +102,7 @@ class OrdersController extends Controller
 				session(['step' => '0']);
 			}
 
-
+//			dd(auth()->guard('customer')->user()->customers_default_address_id);
 			if(!empty(auth()->guard('customer')->user()->customers_default_address_id)){
 
 				$address_id = auth()->guard('customer')->user()->customers_default_address_id;
