@@ -69,19 +69,22 @@
                                                 <tr>
                                                     <td>{{ $customer_addresses->address_book_id }}</td>
                                                     <td>
-                                                        <strong>{{ trans('labels.Company') }}:</strong> {{ $customer_addresses->entry_company }}<br>
+{{--                                                        <strong>{{ trans('labels.Company') }}:</strong> {{ $customer_addresses->entry_company }}<br>--}}
                                                     <!--<strong>Gender:</strong> {{ $customer_addresses->entry_gender }}<br>-->
                                                         <strong>{{ trans('labels.FirstName') }}:</strong> {{ $customer_addresses->entry_firstname }}<br>
                                                         <strong>{{ trans('labels.LastName') }}:</strong> {{ $customer_addresses->entry_lastname }}
                                                     </td>
                                                     <td>
+                                                        <strong>{{ trans('labels.FlatAddress') }}:</strong> {{ $customer_addresses->entry_flat_address }}<br>
                                                         <strong>{{ trans('labels.Street') }}:</strong> {{ $customer_addresses->entry_street_address }}<br>
-                                                        <strong>{{ trans('labels.Suburb') }}:</strong> {{ $customer_addresses->entry_suburb }}<br>
-                                                        <strong>{{ trans('labels.Postcode') }}:</strong> {{ $customer_addresses->entry_postcode }}<br>
+{{--                                                        <strong>{{ trans('labels.Suburb') }}:</strong> {{ $customer_addresses->entry_suburb }}<br>--}}
+{{--                                                        <strong>{{ trans('labels.Postcode') }}:</strong> {{ $customer_addresses->entry_postcode }}<br>--}}
                                                         <strong>{{ trans('labels.City') }}:</strong> {{ $customer_addresses->entry_city }}<br>
-                                                        <strong>{{ trans('labels.State') }}:</strong>@if(!is_numeric($customer_addresses->entry_state)) {{ $customer_addresses->entry_state }} @else {{ $customer_addresses->zone_name }} @endif<br>
-                                                        <!-- <strong>{{ trans('labels.Zone') }}:</strong> {{ $customer_addresses->zone_name }}<br> -->
-                                                        <strong>{{ trans('labels.Country') }}:</strong> {{ $customer_addresses->countries_name }}
+{{--                                                        <strong>{{ trans('labels.State') }}:</strong>@if(!is_numeric($customer_addresses->entry_state)) {{ $customer_addresses->entry_state }} @else {{ $customer_addresses->zone_name }} @endif<br>--}}
+{{--                                                        <!-- <strong>{{ trans('labels.Zone') }}:</strong> {{ $customer_addresses->zone_name }}<br> -->--}}
+                                                        <strong>{{ trans('labels.Country') }}:</strong> {{ $customer_addresses->countries_name }}<br>
+                                                        <strong>{{ trans('labels.contactNumber') }}:</strong> {{ $customer_addresses->contact_number }}<br>
+                                                        <strong>{{ trans('labels.addressType') }}:</strong> {{ $customer_addresses->address_type }}
                                                     </td>
                                                     <td>
                                                         <a class="badge bg-light-blue editAddressModal" user_id = '{{ $data['user_id'] }}' address_book_id = "{{ $customer_addresses->address_book_id }}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -113,15 +116,16 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="addAdressModalLabel">{{ trans('labels.AddAddress') }}</h4>
                                     </div>
+{{--                                    @php dd($data['user_id']); @endphp--}}
                                     {!! Form::open(array('url' =>'', 'name'=>'addAddressFrom', 'id'=>'addAddressFrom', 'method'=>'post', 'class' => 'form-horizontal form-validate', 'enctype'=>'multipart/form-data')) !!}
                                     {!! Form::hidden('user_id',  $data['user_id'] , array('class'=>'form-control', 'id'=>'entry_company')) !!}
                                     <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Company') }}</label>
-                                            <div class="col-sm-10 col-md-8">
-                                                {!! Form::text('entry_company',  '', array('class'=>'form-control', 'id'=>'entry_company')) !!}
-                                            </div>
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Company') }}</label>--}}
+{{--                                            <div class="col-sm-10 col-md-8">--}}
+{{--                                                {!! Form::text('entry_company',  '', array('class'=>'form-control', 'id'=>'entry_company')) !!}--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                         <div class="form-group">
                                             <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.FirstName') }}<span style="color:red;">*</span></label>
                                             <div class="col-sm-10 col-md-8">
@@ -135,24 +139,25 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Address') }}<span style="color:red;">*</span></label>
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.FlatAddress') }}</label>
+                                            <div class="col-sm-10 col-md-8">
+                                                {!! Form::text('entry_flat_address',  '', array('class'=>'form-control', 'id'=>'entry_flat_address')) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.StreetAddress') }}<span style="color:red;">*</span></label>
                                             <div class="col-sm-10 col-md-8">
                                                 {!! Form::text('entry_street_address',  '', array('class'=>'form-control field-validate', 'id'=>'entry_street_address')) !!}
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Suburb') }}</label>
-                                            <div class="col-sm-10 col-md-8">
-                                                {!! Form::text('entry_suburb',  '', array('class'=>'form-control', 'id'=>'entry_suburb')) !!}
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Postcode') }}<span style="color:red;">*</span></label>
-                                            <div class="col-sm-10 col-md-8">
-                                                {!! Form::text('entry_postcode',  '', array('class'=>'form-control field-validate', 'id'=>'entry_postcode')) !!}
-                                            </div>
-                                        </div>
+
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Postcode') }}<span style="color:red;">*</span></label>--}}
+{{--                                            <div class="col-sm-10 col-md-8">--}}
+{{--                                                {!! Form::text('entry_postcode',  '', array('class'=>'form-control field-validate', 'id'=>'entry_postcode')) !!}--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                         <div class="form-group">
                                             <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.City') }}<span style="color:red;">*</span></label>
                                             <div class="col-sm-10 col-md-8">
@@ -173,19 +178,22 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group selectstate" style="display: none" >
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.State') }}<span style="color:red;">*</span></label>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.contactNumber') }}</label>
                                             <div class="col-sm-10 col-md-8">
-                                                <select class="form-control zoneContent" name="entry_state_box">
-                                                    <option value="">{{ trans('labels.State') }}</option>
-                                                </select>
+                                                <div class="col-sm-10 col-md-8">
+                                                    {!! Form::text('contact_number',  '', array('class'=>'form-control field-validate', 'id'=>'contact_number')) !!}
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="form-group otherstate" style="display: none">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.State') }}<span style="color:red;">*</span></label>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.addressType') }}</label>
                                             <div class="col-sm-10 col-md-8">
-                                                {!! Form::text("entry_state",  "", array("class"=>"form-control entry_state", "id"=>"entry_state")) !!}
+                                                <select id="address_type" class="form-control" name="address_type">
+                                                    <option value="{{trans('labels.office')}}">{{ trans('labels.office') }}</option>
+                                                    <option value="{{ trans('labels.home') }}">{{ trans('labels.home') }}</option>
+                                                </select>
                                             </div>
                                         </div>
 

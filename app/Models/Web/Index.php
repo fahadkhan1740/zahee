@@ -27,8 +27,8 @@ class Index extends Model
     						 )
     	 ->where('status', '=', '1')
     	 ->where('languages_id', '=', session('language_id'))
-       ->orwhere('status', '=', '1')
-       ->where('languages_id', '=', 1)
+//       ->orwhere('status', '=', '1')
+//       ->where('languages_id', '=', session('language_id'))
     	 ->get();
        return $slides;
   }
@@ -49,10 +49,6 @@ class Index extends Model
 				->where('status', '=', '1')
 			 ->where('carousel_id', '=', $carousel_id)
 			 ->where('languages_id', '=', session('language_id'))
-
-       ->orwhere('status', '=', '1')
-       ->where('carousel_id', '=', $carousel_id)
-       ->where('languages_id', '=', 1)
 			 ->groupBy('sliders_images.sliders_id')
 			 ->get();
        return $slides;

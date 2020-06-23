@@ -30,6 +30,7 @@
 
 <!-- all js scripts including custom js -->
 @include('admin.common.scripts')
+@yield('scripts')
 <!-- ./end of js scripts -->
 
 </body>

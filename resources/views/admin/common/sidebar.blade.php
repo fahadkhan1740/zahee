@@ -218,58 +218,58 @@
   <span> {{ trans('labels.link_site_settings') }}</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li class="treeview {{ Request::is('admin/media/add') ? 'active' : '' }}">
-              <a href="#">
-                <i class="fa fa-picture-o"></i> <span>{{ trans('labels.Theme Setting') }}</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">
-                    <a href="{{url('admin/webPagesSettings')}}/1">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> {{ trans('labels.Home Page') }} </span>
-                    </a>
-                </li>
-                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">
-                    <a href="{{url('admin/webPagesSettings')}}/5">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Shop Page Settings </span>
-                    </a>
-                </li>
-                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">
-                    <a href="{{url('admin/webPagesSettings')}}/2">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Cart Page Settings </span>
-                    </a>
-                </li>
-                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">
-                    <a href="{{url('admin/webPagesSettings')}}/6">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Contact Page Settings</span>
-                    </a>
-                </li>
-                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">
-                    <a href="{{url('admin/webPagesSettings')}}/7">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Colors Settings</span>
-                    </a>
-                </li>
-                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">
-                    <a href="{{url('admin/webPagesSettings')}}/4">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Product Page Settings </span>
-                    </a>
-                </li>
-              </ul>
-            </li>
+{{--            <li class="treeview {{ Request::is('admin/media/add') ? 'active' : '' }}">--}}
+{{--              <a href="#">--}}
+{{--                <i class="fa fa-picture-o"></i> <span>{{ trans('labels.Theme Setting') }}</span> <i class="fa fa-angle-left pull-right"></i>--}}
+{{--              </a>--}}
+{{--              <ul class="treeview-menu">--}}
+{{--                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">--}}
+{{--                    <a href="{{url('admin/webPagesSettings')}}/1">--}}
+{{--                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> {{ trans('labels.Home Page') }} </span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">--}}
+{{--                    <a href="{{url('admin/webPagesSettings')}}/5">--}}
+{{--                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Shop Page Settings </span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">--}}
+{{--                    <a href="{{url('admin/webPagesSettings')}}/2">--}}
+{{--                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Cart Page Settings </span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">--}}
+{{--                    <a href="{{url('admin/webPagesSettings')}}/6">--}}
+{{--                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Contact Page Settings</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">--}}
+{{--                    <a href="{{url('admin/webPagesSettings')}}/7">--}}
+{{--                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Colors Settings</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="treeview {{ Request::is('admin/theme/setting') ? 'active' : '' }} ">--}}
+{{--                    <a href="{{url('admin/webPagesSettings')}}/4">--}}
+{{--                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> Product Page Settings </span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--              </ul>--}}
+{{--            </li>--}}
             <li class="{{ Request::is('admin/constantbanners') ? 'active' : '' }} {{ Request::is('admin/constantbanners') ? 'active' : '' }} {{ Request::is('admin/constantbanners/*') ? 'active' : '' }} "><a href="{{ URL::to('admin/constantbanners')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_Banners') }}</a></li>
 
             <li class="{{ Request::is('admin/sliders') ? 'active' : '' }} {{ Request::is('admin/addsliderimage') ? 'active' : '' }} {{ Request::is('admin/editslide/*') ? 'active' : '' }} "><a href="{{ URL::to('admin/sliders')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_Sliders') }}</a></li>
 
-            <li class="{{ Request::is('admin/menus') ? 'active' : '' }}  {{ Request::is('admin/addmenus') ? 'active' : '' }}  {{ Request::is('admin/editmenus/*') ? 'active' : '' }}"><a href="{{ URL::to('admin/menus')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.menus') }}</a></li>
+{{--            <li class="{{ Request::is('admin/menus') ? 'active' : '' }}  {{ Request::is('admin/addmenus') ? 'active' : '' }}  {{ Request::is('admin/editmenus/*') ? 'active' : '' }}"><a href="{{ URL::to('admin/menus')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.menus') }}</a></li>--}}
 
             <li class="{{ Request::is('admin/webpages') ? 'active' : '' }}  {{ Request::is('admin/addwebpage') ? 'active' : '' }}  {{ Request::is('admin/editwebpage/*') ? 'active' : '' }}"><a href="{{ URL::to('admin/webpages')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.content_pages') }}</a></li>
 
             <!-- <li class="{{ Request::is('admin/webthemes') ? 'active' : '' }} "><a href="{{ URL::to('admin/webthemes')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.website_themes') }}</a></li> -->
 
-            <li class="{{ Request::is('admin/seo') ? 'active' : '' }} "><a href="{{ URL::to('admin/seo')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.seo content') }}</a></li>
+{{--            <li class="{{ Request::is('admin/seo') ? 'active' : '' }} "><a href="{{ URL::to('admin/seo')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.seo content') }}</a></li>--}}
 
-            <li class="{{ Request::is('admin/customstyle') ? 'active' : '' }} "><a href="{{ URL::to('admin/customstyle')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.custom_style_js') }}</a></li>
+{{--            <li class="{{ Request::is('admin/customstyle') ? 'active' : '' }} "><a href="{{ URL::to('admin/customstyle')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.custom_style_js') }}</a></li>--}}
 
-            <li class="{{ Request::is('admin/websettings') ? 'active' : '' }}"><a href="{{ URL::to('admin/websettings')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_setting') }}</a></li>
+{{--            <li class="{{ Request::is('admin/websettings') ? 'active' : '' }}"><a href="{{ URL::to('admin/websettings')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_setting') }}</a></li>--}}
           </ul>
         </li>
       <?php } ?>
@@ -292,13 +292,13 @@
 
             <li class="{{ Request::is('admin/pages') ? 'active' : '' }}  {{ Request::is('admin/addpage') ? 'active' : '' }}  {{ Request::is('admin/editpage/*') ? 'active' : '' }}"><a href="{{ URL::to('admin/pages')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.content_pages') }}</a></li>
 
-            <li class="{{ Request::is('admin/admobSettings') ? 'active' : '' }}"><a href="{{ URL::to('admin/admobSettings')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_admob') }}</a></li>
+{{--            <li class="{{ Request::is('admin/admobSettings') ? 'active' : '' }}"><a href="{{ URL::to('admin/admobSettings')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_admob') }}</a></li>--}}
 
             <li class="android-hide {{ Request::is('admin/applabel') ? 'active' : '' }} {{ Request::is('admin/addappkey') ? 'active' : '' }}"><a href="{{ URL::to('admin/applabel')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.labels') }}</a></li>
 
-            <li class="{{ Request::is('admin/applicationapi') ? 'active' : '' }}"><a href="{{ URL::to('admin/applicationapi')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.applicationApi') }}</a></li>
+{{--            <li class="{{ Request::is('admin/applicationapi') ? 'active' : '' }}"><a href="{{ URL::to('admin/applicationapi')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.applicationApi') }}</a></li>--}}
 
-            <li class="{{ Request::is('admin/appsettings') ? 'active' : '' }}"><a href="{{ URL::to('admin/appsettings')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_setting') }}</a></li>
+{{--            <li class="{{ Request::is('admin/appsettings') ? 'active' : '' }}"><a href="{{ URL::to('admin/appsettings')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_setting') }}</a></li>--}}
 
           </ul>
         </li>

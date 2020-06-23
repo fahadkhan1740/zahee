@@ -7,10 +7,10 @@
     <div class="row">
         <div class="col-12 col-sm-12">
           <nav aria-label="breadcrumb">
-              <ul class="arrows">
-                <li class=""><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
-                <li class="active" aria-current="page">@lang('website.Shipping Address')</li>
-              </ul>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ URL::to('/')}}">@lang('website.Home')</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@lang('website.Shipping Address')</li>
+              </ol>
             </nav>
         </div>
       <div class="col-12 col-lg-3">
@@ -196,18 +196,18 @@
                     </div>
                   </div>
                   <div class="form-row">
-{{--                    <div class="form-group select-control col-md-6">--}}
-{{--                      <label for="inputState">@lang('website.State')</label>--}}
-{{--                      <select required name="entry_zone_id" id="entry_zone_id" class="form-control field-validate">--}}
-{{--                          <option value="-1">Others</option>--}}
-{{--                          @if(!empty($result['zones']))--}}
-{{--                          @foreach($result['zones'] as $zones)--}}
-{{--                          <option value="{{$zones->zone_id}}" @if(!empty($result['editAddress'])) @if($zones->zone_id==$result['editAddress'][0]->zone_id) selected @endif @endif>{{$zones->zone_name}}</option>--}}
-{{--                          @endforeach--}}
-{{--                          @endif--}}
-{{--                      </select>--}}
-{{--                      <span class="help-block error-content6" hidden>@lang('website.Please select your state')</span>--}}
-{{--                    </div>--}}
+                    <div class="form-group select-control col-md-6">
+                      <label for="inputState">@lang('website.State')</label>
+                      <select required name="entry_zone_id" id="entry_zone_id" class="form-control field-validate">
+                          <option value="-1">Others</option>
+                          @if(!empty($result['zones']))
+                          @foreach($result['zones'] as $zones)
+                          <option value="{{$zones->zone_id}}" @if(!empty($result['editAddress'])) @if($zones->zone_id==$result['editAddress'][0]->zone_id) selected @endif @endif>{{$zones->zone_name}}</option>
+                          @endforeach
+                          @endif
+                      </select>
+                      <span class="help-block error-content6" hidden>@lang('website.Please select your state')</span>
+                    </div>
                     <div class="form-group select-control col-md-6">
                       <label for="inputState"><span class="star">*</span> @lang('website.City')</label>
                       <input type="text" name="entry_city" class="form-control field-validate" id="entry_city1" @if(!empty($result['editAddress'])) value="{{$result['editAddress'][0]->city}}" @endif>

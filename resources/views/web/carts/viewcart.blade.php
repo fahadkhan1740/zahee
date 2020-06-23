@@ -13,18 +13,18 @@
                             </div>
                               <?php
                               $price = 0;
+                              $total_discount = 0;
                               ?>
                               @php
                                   $default_currency = DB::table('currencies')->where('is_default',1)->first();
 
                                   if($default_currency->id == Session::get('currency_id')){
-
                                    $currency_value = 1;
                                   }else{
                                    $session_currency = DB::table('currencies')->where('id',Session::get('currency_id'))->first();
-
                                    $currency_value = $session_currency->value;
                                   }
+
                               @endphp
 
                             <div class="cart-items-wrap">
@@ -32,7 +32,10 @@
                                  <!-- cart -items -->
                                 @foreach( $result['cart'] as $k => $products)
                                     <?php
-                                    $price+= $products->final_price * $products->customers_basket_quantity;
+//                                         dd(is_null($products->final_price));
+                                    $price+= is_null($products->final_price)? $products->price * $products->customers_basket_quantity:$products->final_price * $products->customers_basket_quantity;
+                                    $total_discount+= is_null($products->final_price)? $products->price - $products->discount_price:$products->final_price - $products->discount_price;
+
                                     ?>
                                 <div class="cart-item">
                                     <div class="cart-item-col cart-item-left">
@@ -48,7 +51,7 @@
                                                         if(!empty($products->discount_price)){
                                                             $discount_price = $products->discount_price;
                                                         }
-                                                        if(!empty($products->final_price)){
+                                                        if(!empty($products->final_price) || !is_null($products->final_price)){
                                                             $flash_price = $products->final_price;
                                                         }
                                                         $orignal_price = $products->price;
@@ -62,6 +65,7 @@
                                                         }
                                                         $orignal_price = $products->price * $session_currency->value;
                                                     }
+//                                                    dd($products->discount_price);
                                                     if(!empty($products->discount_price)){
 
                                                         if(($orignal_price+0)>0){
@@ -77,8 +81,8 @@
                                                         @if(!empty($products->final_price))
                                                             {{Session::get('symbol_left')}}{{($flash_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @elseif(!empty($products->discount_price))
-                                                            {{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
-                                                            <span> {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
+                                                            <span class="old-price">{{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
+                                                            <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
                                                         @else
                                                             {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @endif
@@ -96,13 +100,14 @@
                                                 <div class="cart-item-sb-col-left cart-item-sb-col  cart-item-product-qty">
                                                     <form class="qty-wrap qty-sm">
                                                         <div class="value-button" id="decrease-{{$k+1}}" onclick="decreaseValue(`{{$k+1}}`)" value="Decrease Value">-</div>
-                                                        <input type="number" class="number-{{$k+1}}" id="number-{{$k+1}}" name="quantity[]" readonly value="{{$products->customers_basket_quantity}}" min="{{$products->min_order}}" max="{{$products->max_order}}" />
+                                                        <input type="number" class="number" id="number-{{$k+1}}" name="quantity[]" readonly value="{{$products->customers_basket_quantity}}" min="{{$products->min_order}}" max="{{$products->max_order}}" />
                                                         <div class="value-button" id="increase-{{$k+1}}" onclick="increaseValue(`{{$k+1}}`)" value="Increase Value">+</div>
                                                       </form>
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-remove">
                                                      <p><a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}" class="remove"><i class="fa fa-trash" aria-hidden="true"></i>Remove</a></p>
-                                                     <p><a href="javascript:void(0)" products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k}}" class="update-cart-value"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Cart</a></p>
+                                                     <p><a href="javascript:void(0)" products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k+1}}" class="update-cart-value"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Cart</a></p>
+                                                     <p><a href="{{ URL::to('/product-detail/'.$products->products_slug) }}" class="view-product"><i class="fa fa-eye" aria-hidden="true"></i>View</a></p>
                                                 </div>
                                            </div>
                                     </div>
@@ -159,11 +164,11 @@
 
                                     <li>
                                         <span class="cart-price-col">@lang('website.Discount(Coupon)')</span>
-                                        <span class="cart-price-col">{{Session::get('symbol_left')}}{{$currency_value * number_format((float)session('coupon_discount'), 2, '.', '')+0}}{{Session::get('symbol_right')}}</span>
+                                        <span class="cart-price-col">{{Session::get('symbol_left')}}{{abs($currency_value * number_format((float)session('coupon_discount'), 2, '.', '')+0)}}{{Session::get('symbol_right')}}</span>
                                     </li>
                                     <li>
                                         <span class="cart-price-col">Delivery Charges</span>
-                                        <span class="cart-price-col">0</span>
+                                        <span class="cart-price-col">{{Session::get('symbol_left')}}0{{Session::get('symbol_right')}}</span>
                                     </li>
                                     <li class="total-amount">
                                         <span class="cart-price-col">@lang('website.Total')</span>

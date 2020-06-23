@@ -28,7 +28,12 @@ class Cart extends Model
 											->orWhere('image_categories.image_type', '=', 'ACTUAL');
 							});
 			})
-			->LeftJoin('specials', 'specials.products_id', '=', 'products.products_id')
+			->LeftJoin('specials', function($join) {
+			    $join->on('specials.products_id', '=', 'products.products_id')
+                    ->where( function($query) {
+                        $query->where('specials.status','=', 1);
+                    });
+			})
 			->select('specials.specials_new_products_price as discount_price','customers_basket.*',
 			'image_categories.path as image_path', 'products.products_model as model',
 			'products.products_type as products_type', 'products.products_min_order as min_order', 'products.products_max_stock as max_order',
@@ -343,8 +348,8 @@ class Cart extends Model
 					 'final_price' => $final_price,
 					 'customers_basket_date_added' => $customers_basket_date_added,
 				]);
-
-				if(count($request->option_id)>0){
+//        dd($request->option_id);
+				if(!is_null($request->option_id)){
 					foreach($request->option_id as $option_id){
 
 						DB::table('customers_basket_attributes')->where([
@@ -360,6 +365,7 @@ class Cart extends Model
 					 }
 
 				}
+//				dd(session('coupon'));
 				//apply coupon
 				if(count(session('coupon'))>0){
 					$session_coupon_data = session('coupon');

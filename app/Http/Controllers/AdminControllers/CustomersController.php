@@ -140,13 +140,11 @@ class CustomersController extends Controller
 
       $customer_addresses = $this->Customers->addressBook($address_book_id);
       $countries = $this->Customers->countries();;
-      $zones = $this->Customers->zones($customer_addresses);
       $customers = $this->Customers->checkdefualtaddress($address_book_id);
 
       $customerData['user_id'] = $user_id;
       $customerData['customer_addresses'] = $customer_addresses;
       $customerData['countries'] = $countries;
-      $customerData['zones'] = $zones;
       $customerData['customers'] = $customers;
 
       return view("admin/customers/address/editaddress")->with('data', $customerData);

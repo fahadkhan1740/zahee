@@ -47,12 +47,14 @@ class Customers extends Model
             ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
             ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
             ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-            ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
-            ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
+            ->select('users.*', 'address_book.entry_gender as entry_gender',
             'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-            'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-            'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-            'address_book.entry_state as entry_state', 'countries.*', 'zones.*')
+            'address_book.entry_street_address as entry_street_address',
+            'address_book.entry_flat_address as entry_flat_address',
+            'address_book.entry_city as entry_city',
+            'address_book.address_type as address_type',
+            'address_book.contact_number as contact_number',
+             'countries.*')
             ->where('role_id',2)
             ->groupby('users.id')
             ->get();
@@ -95,8 +97,7 @@ class Customers extends Model
             'password' => Hash::make($request->password),
             'status' => $request->isActive,
             'avatar' => $uploadImage,
-            'created_at' => date('Y-m-d H:i:s'),
-            'role_id'    => '2'
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         return $customers_id;
     }
@@ -104,7 +105,6 @@ class Customers extends Model
     public function addresses($id){
         $addresses = DB::table('user_to_address')
             ->leftjoin('address_book', 'address_book.address_book_id','=','user_to_address.address_book_id')
-            ->leftJoin('zones', 'zones.zone_id', '=', 'address_book.entry_zone_id')
             ->leftJoin('countries', 'countries.countries_id', '=', 'address_book.entry_country_id')
             ->where('user_to_address.user_id', '=', $id)->get();
           return $addresses;
@@ -117,55 +117,53 @@ class Customers extends Model
 
     public function addcustomeraddress($request){
 
-      if(!empty($request->entry_state_box)){
-        $state = $request->entry_state_box;
-      }else{
-        $state = $request->entry_state;
-      }
+//      if(!empty($request->entry_state_box)){
+//        $state = $request->entry_state_box;
+//      }else{
+//        $state = $request->entry_state;
+//      }
 
       ///////// To get longitude and latitude //////////////
-      $zones =  DB::table('zones')->where('zone_id', $state)->first();
+//      $zones =  DB::table('zones')->where('zone_id', $state)->first();
       $countries =  DB::table('countries')->where('countries_id', $request->entry_country_id)->first();
-      if($zones){
-          $state_name = $zones->zone_name;
-      }else{
-        $state_name = '';
-      }
-      $country_name = $countries->countries_name;
+//      if($zones){
+//          $state_name = $zones->zone_name;
+//      }else{
+//        $state_name = '';
+//      }
+//      $country_name = $countries->countries_name;
 
-      $cordinates_address = urlencode($request->entry_street_address.' '.$request->entry_city.' '.$state_name. ' '. $request->entry_postcode. ' '.$country_name);
-
-      $setting = new Setting();
-      $getSettings = $setting->getSettings();
-
-      $latitude = '';
-      $longitude = '';
-      if(!empty($getSettings[103]->value)){
-          $google_map_api	  =  $getSettings[103]->value;
-          $cordinates = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key='.$google_map_api.'&address='.$cordinates_address);
-
-          $cordinates = json_decode($cordinates);
-
-          if($cordinates->status=="OK"){
-              $latitude = $cordinates->results[0]->geometry->location->lat;
-              $longitude = $cordinates->results[0]->geometry->location->lng;
-          }
-      }
+//      $cordinates_address = urlencode($request->entry_street_address.' '.$request->entry_street_address.' '.$request->entry_city.' '.$country_name);
+//
+//      $setting = new Setting();
+//      $getSettings = $setting->getSettings();
+//
+//      $latitude = '';
+//      $longitude = '';
+//      if(!empty($getSettings[103]->value)){
+//          $google_map_api	  =  $getSettings[103]->value;
+//          $cordinates = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key='.$google_map_api.'&address='.$cordinates_address);
+//
+//          $cordinates = json_decode($cordinates);
+//
+//          if($cordinates->status=="OK"){
+//              $latitude = $cordinates->results[0]->geometry->location->lat;
+//              $longitude = $cordinates->results[0]->geometry->location->lng;
+//          }
+//      }
 
       $address_book_id = DB::table('address_book')->insertGetId([
           'entry_gender'		 	=>   $request->entry_gender,
-          'entry_company'		 	=>   $request->entry_company,
           'entry_firstname'	 	=>	 $request->entry_firstname,
           'entry_lastname'   		=>   $request->entry_lastname,
           'entry_street_address'	=>   $request->entry_street_address,
-          'entry_suburb' 			=>   $request->entry_suburb,
-          'entry_postcode'	 	=>	 $request->entry_postcode,
+          'entry_flat_address'	    =>       $request->entry_flat_address,
           'entry_city'   			=>   $request->entry_city,
-          'entry_state'		 	=>   $state,
           'entry_country_id'		=>   $request->entry_country_id,
-          'entry_zone_id'	 		=>	 $state,
-          'entry_latitude'            =>   $latitude,
-          'entry_longitude'           =>   $longitude,
+          'address_type'		=>   $request->address_type,
+          'contact_number'		=>   $request->contact_number,
+//          'entry_latitude'            =>   $latitude,
+//          'entry_longitude'           =>   $longitude,
       ]);
 
       //set default address
@@ -184,7 +182,7 @@ class Customers extends Model
 
     public function addressBook($address_book_id){
         $customer_addresses = DB::table('address_book')
-            ->leftJoin('zones', 'zones.zone_id', '=', 'address_book.entry_zone_id')
+//            ->leftJoin('zones', 'zones.zone_id', '=', 'address_book.entry_zone_id')
             ->leftJoin('countries', 'countries.countries_id', '=', 'address_book.entry_country_id')
             ->where('address_book_id', '=', $address_book_id)->get();
        return $customer_addresses;
@@ -249,16 +247,14 @@ class Customers extends Model
 
         DB::table('address_book')->where('address_book_id','=', $address_book_id)->update([
             'entry_gender'		  	=>   $request->entry_gender,
-            'entry_company'		 	  =>   $request->entry_company,
             'entry_firstname'	 	  =>	 $request->entry_firstname,
             'entry_lastname'   		=>   $request->entry_lastname,
             'entry_street_address'=>   $request->entry_street_address,
-            'entry_suburb' 			  =>   $request->entry_suburb,
-            'entry_postcode'	 	  =>	 $request->entry_postcode,
+            'entry_flat_address'=>   $request->entry_flat_address,
             'entry_city'   		   	=>   $request->entry_city,
-            'entry_state'		 	    =>   $state,
             'entry_country_id'		=>   $request->entry_country_id,
-            'entry_zone_id'	 		  =>	 $state,
+            'address_type'		=>   $request->address_type,
+            'contact_number'		=>   $request->contact_number,
             'entry_latitude'            =>   $latitude,
             'entry_longitude'           =>   $longitude,
         ]);
@@ -327,14 +323,14 @@ class Customers extends Model
                     ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                     ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                     ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                    ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                     ->leftJoin('images','images.id', '=', 'users.avatar')
                     ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                    ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
-                    'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                    'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                    'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                    'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                    ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
+                        'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
+                        'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                        'address_book.entry_city as entry_city',
+                        'address_book.address_type as address_type',
+                        'countries.*', 'image_categories.path as path')
                     ->where(function($query) {
                         $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                             ->where('image_categories.image_type','!=',   'THUMBNAIL')
@@ -354,14 +350,14 @@ class Customers extends Model
                 ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                 ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                 ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                 ->leftJoin('images','images.id', '=', 'users.avatar')
                 ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
-                'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
+                    'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
+                    'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                    'address_book.entry_city as entry_city',
+                    'address_book.address_type as address_type',
+                    'countries.*', 'image_categories.path as path')
                 ->where(function($query) {
                     $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                         ->where('image_categories.image_type','!=',   'THUMBNAIL')
@@ -379,14 +375,14 @@ class Customers extends Model
                 ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                 ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                 ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                 ->leftJoin('images','images.id', '=', 'users.avatar')
                 ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
-                'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
+                    'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
+                    'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                    'address_book.entry_city as entry_city',
+                    'address_book.address_type as address_type',
+                    'countries.*', 'image_categories.path as path')
                 ->where(function($query) {
                     $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                         ->where('image_categories.image_type','!=',   'THUMBNAIL')
@@ -404,14 +400,14 @@ class Customers extends Model
                 ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                 ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                 ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                 ->leftJoin('images','images.id', '=', 'users.avatar')
                 ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
-                'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
+                    'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
+                    'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                    'address_book.entry_city as entry_city',
+                    'address_book.address_type as address_type',
+                    'countries.*', 'image_categories.path as path')
                 ->where(function($query) {
                     $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                         ->where('image_categories.image_type','!=',   'THUMBNAIL')
@@ -432,14 +428,14 @@ class Customers extends Model
                 ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                 ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                 ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                 ->leftJoin('images','images.id', '=', 'users.avatar')
                 ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
-                'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
+                    'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
+                    'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                    'address_book.entry_city as entry_city',
+                    'address_book.address_type as address_type',
+                    'countries.*', 'image_categories.path as path')
                 ->where(function($query) {
                     $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                         ->where('image_categories.image_type','!=',   'THUMBNAIL')
@@ -457,14 +453,14 @@ class Customers extends Model
                 ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                 ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                 ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                 ->leftJoin('images','images.id', '=', 'users.avatar')
                 ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
-                'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
+                    'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
+                    'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                    'address_book.entry_city as entry_city',
+                    'address_book.address_type as address_type',
+                    'countries.*', 'image_categories.path as path')
                 ->where(function($query) {
                     $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                         ->where('image_categories.image_type','!=',   'THUMBNAIL')
@@ -482,14 +478,14 @@ class Customers extends Model
                 ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                 ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                 ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                 ->leftJoin('images','images.id', '=', 'users.avatar')
                 ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
-                'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
+                    'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
+                    'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                    'address_book.entry_city as entry_city',
+                    'address_book.address_type as address_type',
+                    'countries.*', 'image_categories.path as path')
                 ->where(function($query) {
                     $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                         ->where('image_categories.image_type','!=',   'THUMBNAIL')
@@ -507,14 +503,14 @@ class Customers extends Model
                 ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
                 ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
                 ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-                ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
                 ->leftJoin('images','images.id', '=', 'users.avatar')
                 ->leftJoin('image_categories','image_categories.image_id', '=', 'users.avatar')
-                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
+                ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.contact_number as contact_number',
                 'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-                'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-                'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-                'address_book.entry_state as entry_state', 'countries.*', 'zones.*','image_categories.path as path')
+                'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+                 'address_book.entry_city as entry_city',
+                 'address_book.address_type as address_type',
+                'countries.*', 'image_categories.path as path')
                 ->where(function($query) {
                     $query->where('image_categories.image_type', '=',  'THUMBNAIL')
                         ->where('image_categories.image_type','!=',   'THUMBNAIL')

@@ -52,6 +52,7 @@
 
                                                 </label>
                                                 <div class="col-sm-10 col-md-4">
+
                                                     <select name="{{$result['settings'][61]->name}}" class="form-control">
                                                         <option @if($result['settings'][61]->value == '1')
                                                                 selected
@@ -67,33 +68,32 @@
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.googleLoginText') }}</span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.GoogleAppID') }}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.GoogleAppID') }}</label>--}}
+{{--                                                @php dd($result['settings']); @endphp--}}
+{{--                                                <div class="col-sm-10 col-md-4">--}}
+{{--                                                    {!! Form::text($result['settings'][115]->name, $result['settings'][115]->value, array('class'=>'form-control', 'id'=>$result['settings'][115]->name)) !!}--}}
+{{--                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.GoogleAppIDText') }}</span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.GoogleAppSecret') }}--}}
 
-                                                </label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    {!! Form::text($result['settings'][115]->name, $result['settings'][115]->value, array('class'=>'form-control', 'id'=>$result['settings'][115]->name)) !!}
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.GoogleAppIDText') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.GoogleAppSecret') }}
+{{--                                                </label>--}}
+{{--                                                <div class="col-sm-10 col-md-4">--}}
+{{--                                                    {!! Form::text($result['settings'][116]->name, $result['settings'][116]->value, array('class'=>'form-control', 'id'=>$result['settings'][116]->name)) !!}--}}
+{{--                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.GoogleAppSecretText') }}</span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.GoogleAppUrl') }}--}}
 
-                                                </label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    {!! Form::text($result['settings'][116]->name, $result['settings'][116]->value, array('class'=>'form-control', 'id'=>$result['settings'][116]->name)) !!}
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.GoogleAppSecretText') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.GoogleAppUrl') }}
-
-                                                </label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    {!! Form::text($result['settings'][117]->name, $result['settings'][117]->value, array('class'=>'form-control', 'id'=>$result['settings'][117]->name)) !!}
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.GoogleAppURLText') }}</span>
-                                                </div>
-                                            </div>
+{{--                                                </label>--}}
+{{--                                                <div class="col-sm-10 col-md-4">--}}
+{{--                                                    {!! Form::text($result['settings'][117]->name, $result['settings'][117]->value, array('class'=>'form-control', 'id'=>$result['settings'][117]->name)) !!}--}}
+{{--                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.GoogleAppURLText') }}</span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
                                             <!-- /.box-body -->
                                             <div class="box-footer text-center">

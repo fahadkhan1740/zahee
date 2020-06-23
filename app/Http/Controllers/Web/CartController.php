@@ -179,23 +179,27 @@ class CartController extends Controller
 
 		if(!empty($request->type) and $request->type=='header cart'){
 			$result['commonContent'] = $this->index->commonContent();
-			if(empty($check)){
-				$message = Lang::get("website.Cart item has been deleted successfully");
-				return redirect('/')->with('message', $message);
-
-			}else{
-				$message = Lang::get("website.Cart item has been deleted successfully");
-				return view("web.headers.cartButtons.cartButton")->with('result', $result);
-			}
+            $message = Lang::get("website.Cart item has been deleted successfully");
+            return view("web.headers.cartButtons.cartButton")->with('result', $result);
+//			if(empty($check)){
+//				$message = Lang::get("website.Cart item has been deleted successfully");
+//				return redirect('/')->with('message', $message);
+//
+//			}else{
+//				$message = Lang::get("website.Cart item has been deleted successfully");
+//				return view("web.headers.cartButtons.cartButton")->with('result', $result);
+//			}
 		}else{
-			if(empty($check)){
-				$message = Lang::get("website.Cart item has been deleted successfully");
-				return redirect('/')->with('message', $message);
-
-			}else{
-				$message = Lang::get("website.Cart item has been deleted successfully");
+            $message = Lang::get("website.Cart item has been deleted successfully");
 				return redirect()->back()->with('message', $message);
-			}
+//			if(empty($check)){
+//				$message = Lang::get("website.Cart item has been deleted successfully");
+//				return redirect('/')->with('message', $message);
+//
+//			}else{
+//				$message = Lang::get("website.Cart item has been deleted successfully");
+//				return redirect()->back()->with('message', $message);
+//			}
 		}
 	}
 

@@ -39,7 +39,7 @@
       ?>
 
         <div class="product-wrap">
-            @if(count($result['recently_viewed']) >0 )
+            @if(!empty($result['recently_viewed']))
            <div class="title-wrap d-flex justify-content-between align-items-center">
                <div class="title-box">
                    <h6>Recent Search</h6>
@@ -54,39 +54,39 @@
                <div class="items-list text-center">
                    <div class="items-box-wrap">
                        <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                       <a href="{{ URL::to('product-detail/'.$viewedProd->products_slug) }}">
+                       <a href="{{ URL::to('product-detail/'.$viewedProd[0]->products_slug) }}">
                            <figure>
-                               <img src="{{asset('public/'.$viewedProd->image_path)}}" alt="b-product-1.png" />
+                               <img src="{{asset('public/'.$viewedProd[0]->image_path)}}" alt="b-product-1.png" />
                            </figure>
                            <div class="items-content">
-                               <h6>{{$viewedProd->products_name}}</h6>
+                               <h6>{{$viewedProd[0]->products_name}}</h6>
                                <p>
                                    @php
                                    $default_currency = DB::table('currencies')->where('is_default',1)->first();
                                    if($default_currency->id == Session::get('currency_id')){
-                                       if(!empty($viewedProd->discount_price)){
-                                           $discount_price = $viewedProd->discount_price;
+                                       if(!empty($viewedProd[0]->discount_price)){
+                                           $discount_price = $viewedProd[0]->discount_price;
                                        }
-                                       if(!empty($viewedProd->flash_price)){
-                                           $flash_price = $viewedProd->flash_price;
+                                       if(!empty($viewedProd[0]->flash_price)){
+                                           $flash_price = $viewedProd[0]->flash_price;
                                        }
-                                       $orignal_price = $viewedProd->products_price;
+                                       $orignal_price = $viewedProd[0]->products_price;
                                    }else{
                                        $session_currency = DB::table('currencies')->where('id',Session::get('currency_id'))->first();
-                                       if(!empty($viewedProd->discount_price)){
-                                           $discount_price = $viewedProd->discount_price * $session_currency->value;
+                                       if(!empty($viewedProd[0]->discount_price)){
+                                           $discount_price = $viewedProd[0]->discount_price * $session_currency->value;
                                        }
-                                       if(!empty($viewedProd->flash_price)){
-                                           $flash_price = $viewedProd->flash_price * $session_currency->value;
+                                       if(!empty($viewedProd[0]->flash_price)){
+                                           $flash_price = $viewedProd[0]->flash_price * $session_currency->value;
                                        }
-                                       $orignal_price = $viewedProd->products_price * $session_currency->value;
+                                       $orignal_price = $viewedProd[0]->products_price * $session_currency->value;
                                    }
-                                   if(!empty($viewedProd->discount_price)){
+                                   if(!empty($viewedProd[0]->discount_price)){
 
                                        if(($orignal_price+0)>0){
                                            $discounted_price = $orignal_price-$discount_price;
                                            $discount_percentage = $discounted_price/$orignal_price*100;
-                                           $discounted_price = $viewedProd->discount_price;
+                                           $discounted_price = $viewedProd[0]->discount_price;
 
                                        }else{
                                            $discount_percentage = 0;
@@ -97,9 +97,9 @@
                                        $discounted_price = $orignal_price;
                                    }
                                   @endphp
-                                   @if(!empty($viewedProd->flash_price))
+                                   @if(!empty($viewedProd[0]->flash_price))
                                        {{Session::get('symbol_left')}}{{$flash_price+0}}{{Session::get('symbol_right')}}
-                                   @elseif(!empty($viewedProd->discount_price))
+                                   @elseif(!empty($viewedProd[0]->discount_price))
                                        {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
                                    @else
                                        {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}

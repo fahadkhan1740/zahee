@@ -120,14 +120,12 @@ $most_liked = $this->products->products($data);
 $result['most_liked'] = $most_liked;
 
 // recently viewed
-//        dd(session()->get('recently_viewed'));
-        if(!empty(session()->get('recently_viewed'))){
-            $recently_viewed = session()->get('recently_viewed');
-        } else {
-            session()->put('recently_viewed', []);
-            $recently_viewed = '';
-        }
-
+if(!is_null(session()->get('recently_viewed'))){
+    $recently_viewed = session()->get('recently_viewed');
+} else {
+    session()->put('recently_viewed', []);
+    $recently_viewed = array();
+}
 $result['recently_viewed'] = $recently_viewed;
 
 //is feature

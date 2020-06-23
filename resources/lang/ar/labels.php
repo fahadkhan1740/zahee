@@ -13,13 +13,6 @@ return [
     |
     */
 
-	//links labels
-	'login_text' => 'Sign in to start your session',
-	'welcome_message'	 =>	'Welcome',
-	'welcome_message_to'=>'To Admin Panel',
-	'login'=>'Login',
-	'login_page_name'=>'Login',
-
 
 	//login page
 	'login_text' => 'Sign in to start your session',
@@ -596,7 +589,7 @@ return [
 	'TitleText' => 'Enter title',
 	'ListingOrders' => 'Listing Orders',
 	'ViewOrder' => 'View Order',
-	'OrderStatusEmailTitle' => 'Ionic Ecommerce Order Status',
+	'OrderStatusEmailTitle' => 'Ionic Zaahee Order Status',
 	'StatusChangeError' => 'Nothing to change. The order was not updated!',
 	'OrderStatusChangedMessage' => 'Orders has been updated successfully!',
 	'OrderDeletedMessage' => 'Order has been deleted successfully!',
@@ -974,16 +967,16 @@ return [
 	'PaymentCurrency'=>'Payment in Currency',
 	'PaymentCurrencyText'=>'Please enter your payment currency name e.g: USD.',
 
-	'contactUsTitle'=>'Ecommerce App Contact Us',
-	'regardsForThanks'=>'Ecommerce App',
-	'ecommerceAppTeam'=>'Ecommerce App Team',
+	'contactUsTitle'=>'Zaahee App Contact Us',
+	'regardsForThanks'=>'Zaahee App',
+	'ecommerceAppTeam'=>'Zaahee App Team',
 	'HiAdmin'=>'Hi Admin',
 	'Hi'=>'Hi',
 	'Email'=>'Email',
-	'WelcomeEamailTitle'=>'Welcome To Ecommerce App',
+	'WelcomeEamailTitle'=>'Welcome To Zaahee App',
 	'accountCreatedText'=>'Your account has been created successfully!',
-	'EcommerceAppOrderStatus'=> 'Ecommerce App Order Status',
-	'EcommercePasswordRecovery'=>'Ecommerce Password Recovery',
+	'EcommerceAppOrderStatus'=> 'Zaahee App Order Status',
+	'EcommercePasswordRecovery'=>'Zaahee Password Recovery',
 	'recoverPasswordEmailText'=>'You have recently requested to recover your password.',
 	'Yourpasswordis'=>'Your password is:',
 	'Sincerely'=>'Sincerely',
@@ -1079,8 +1072,8 @@ return [
 	'NewProductEmailPart2'=>'is addedd with affordable price',
 	'newsNotificationTitle'=>'New News',
 	'newsNotficationMessagePart1'=>'',
-	'fogotPasswordEmailTitle'=>'Ionic Ecommerce Password Recovery',
-	'WelcometoEcommerce'=>'Welcome to Ecommerce',
+	'fogotPasswordEmailTitle'=>'Ionic Zaahee Password Recovery',
+	'WelcometoEcommerce'=>'Welcome to Zaahee',
 	'forgotNotificationTitle'=>'Forgot Password',
 	'forgotNotificationMessage'=>'Your password has been sent to your email address.',
 	'Value'=>'Value',
@@ -1334,7 +1327,6 @@ return [
 	'Zip/Postal Code'=>'Zip/Postal Code',
 	'StreetAddress'=>'Street Address',
 	'StreetAddressText'=>'Please enter street address.',
-	'Zip/Postal Code'=>'Zip/Postal Code',
 	'Zip/Postal Code Text'=>'Please enter Zip/Postal Code.',
 	'Email address already exist'=>'Email address already exist.',
 	'New admin has been added successfully'=>'New admin has been added successfully!',
@@ -1349,7 +1341,6 @@ return [
 	'editadmintype'=>'Edit Type',
 	'types'=>'Types',
 	'addadmintype'=>'Add Admin Type',
-	'AdminType'=>'Admin Type',
 	'AdminTypeStatusText'=>'Please choose status active or inactive',
 	'AddAdminType'=>'Add Type',
 	'Admin type has been added successfully'=>'Admin type has been added successfully!',
@@ -1374,7 +1365,6 @@ return [
 	'manage reports'=>'Manage Reports',
 	'manage application_setting'=>'Manage Application Setting',
 	'manage general_setting'=>'Manage General Setting',
-	'manage application_setting'=>'Manage Application Setting',
 	'manage manage_admins'=>'Manage Admins',
 	'manage notifications'=>'Manage Notifications',
 	'manage website_setting'=>'Manage Website Setting',
@@ -1527,7 +1517,6 @@ return [
 	'CategoriesRoles'=>'Categories Roles',
 	'CategoryRolesUpdatedSucceccfully'=>'Admin categories roles has been assigned succeccfully!',
 	'AdminRemoveCategoryMessage'=>'Admin has been unassigned from this category!',
-	'CategoriesRoles'=>'Categories Roles',
 	'StartDate'=>'Start Date',
 	'banner start date'=>'Banner start date for',
 	'banner start date text'=>'Please enter banner start date',
@@ -1567,5 +1556,11 @@ return [
     'ListingContent'=>'Listing All The Contents',
     'Contents' => 'Contents',
 	'ListingAllContents' => 'Listing All The Contents',
+	'FlatAddress' => 'House No./Flat/Building',
+	'addressType' => 'Address Type',
+    'office' => 'Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)',
+    'home' => 'Home (7:00 A.M. - 9:00 P.M., All Day)',
+    'contactNumber' => 'Contact Number',
+
 
 ];
