@@ -175,8 +175,8 @@ class Index extends Model
         //produt categories
         $result['categories'] = $this->categories();
     		return ($result);
-  }
 
+  }
   private function categories(){
 
     $result 	= 	array();
