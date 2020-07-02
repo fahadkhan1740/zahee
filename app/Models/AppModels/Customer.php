@@ -381,6 +381,7 @@ class Customer extends Model
     public static function facebookregistration($request)
     {
         require_once app_path('vendor/autoload.php');
+        //dd(app_path('vendor/autoload.php'));
         $consumer_data = array();
         $consumer_data['consumer_key'] = request()->header('consumer-key');
         $consumer_data['consumer_secret'] = request()->header('consumer-secret');
@@ -395,6 +396,7 @@ class Customer extends Model
             //get function from other controller
             $myVar = new AppSettingController();
             $setting = $myVar->getSetting();
+//            dd($setting['facebook_app_id']);
 
             $password = substr(md5(uniqid(mt_rand(), true)), 0, 8);
             $access_token = $request->access_token;
@@ -407,6 +409,7 @@ class Customer extends Model
 
             try {
                 $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender,public_key', $access_token);
+//                dd($response);
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error: ' . $e->getMessage();
             } catch (Facebook\Exceptions\FacebookSDKException $e) {
