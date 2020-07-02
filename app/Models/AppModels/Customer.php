@@ -674,7 +674,10 @@ class Customer extends Model
                     'device_model' => $request->device_model,
                     'user_id' => $request->customers_id,
                     'manufacturer' => $request->manufacturer,
+<<<<<<< HEAD
                     // $setting['default_notification'] => '1',
+=======
+>>>>>>> 33f0165015300428add23c7715ede5c2e708af2f
                     'is_notify' => '1',
                 );
 
@@ -692,8 +695,12 @@ class Customer extends Model
                     'location' => $request->location,
                     'device_model' => $request->device_model,
                     'manufacturer' => $request->manufacturer,
+<<<<<<< HEAD
                     'is_notify' => '1',
                     // $setting['default_notification'] => '1',
+=======
+                    'is_notify' => '1'
+>>>>>>> 33f0165015300428add23c7715ede5c2e708af2f
                 );
 
             }
