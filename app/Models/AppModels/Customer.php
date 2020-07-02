@@ -8,6 +8,7 @@ use Auth;
 use DB;
 use File;
 use Hash;
+use Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
@@ -305,9 +306,9 @@ class Customer extends Model
 
                 $content = DB::table('users')->where('id', $customers_id)->first();
 
-                $customerInfo = array("email" => $cehckexist->email, "password" => $oldpassword);
+                // dd( Hash::make($oldpassword));
 
-                if (Auth::attempt($customerInfo)) {
+                if ($oldpassword === $newPassword) {
 
                     DB::table('users')->where('id', $customers_id)->update([
                     'password'			 =>  Hash::make($newPassword)
@@ -319,7 +320,7 @@ class Customer extends Model
                         ->where('users.id', '=', $customers_id)->where('status', '1')->get();
                     $responseData = array('success'=>'1', 'data'=>$userData, 'message'=>"Information has been Updated successfully");
                 }else{
-                    $responseData = array('success'=>'2', 'data'=>array(),  'message'=>"current password does not match.");
+                    $responseData = array('success'=>'2', 'data'=>array(),  'message'=>"Confirm password does not match.");
                 }
         }else{
             $responseData = array('success'=>'3', 'data'=>array(),  'message'=>"Record not found.");
@@ -663,17 +664,17 @@ class Customer extends Model
                 $device_data = array(
                     'device_id' => $request->device_id,
                     'device_type' => $type,
-                    'register_date' => time(),
-                    'update_date' => time(),
+                    'created_at' => Carbon\Carbon::now(),
+                    'updated_at' => Carbon\Carbon::now(),
                     'ram' => $request->ram,
                     'status' => '1',
                     'processor' => $request->processor,
                     'device_os' => $request->device_os,
                     'location' => $request->location,
                     'device_model' => $request->device_model,
-                    'customers_id' => $request->customers_id,
+                    'user_id' => $request->customers_id,
                     'manufacturer' => $request->manufacturer,
-                    $setting['default_notification'] => '1',
+                    'is_notify' => '1',
                 );
 
             } else {
@@ -681,8 +682,8 @@ class Customer extends Model
                 $device_data = array(
                     'device_id' => $request->device_id,
                     'device_type' => $type,
-                    'register_date' => time(),
-                    'update_date' => time(),
+                    'created_at' => Carbon\Carbon::now(),
+                    'updated_at' => Carbon\Carbon::now(),
                     'status' => '1',
                     'ram' => $request->ram,
                     'processor' => $request->processor,
@@ -690,7 +691,7 @@ class Customer extends Model
                     'location' => $request->location,
                     'device_model' => $request->device_model,
                     'manufacturer' => $request->manufacturer,
-                    $setting['default_notification'] => '1',
+                    'is_notify' => '1'
                 );
 
             }

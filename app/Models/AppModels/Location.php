@@ -27,20 +27,17 @@ class Location extends Model
 			$user_id            					=   $request->customers_id;
             $entry_firstname            		    =   $request->entry_firstname;
             $entry_lastname             		    =   $request->entry_lastname;
-            $entry_flat       		                =   $request->flat;
-            $entry_street_address       		    =   $request->street;
-            $entry_postcode             			=   $request->entry_postcode;
+            $entry_flat_address       		        =   $request->entry_flat_address;
+            $entry_street_address       		    =   $request->entry_street_address;
             $entry_city             				=   $request->entry_city;
-            $entry_state             				=   $request->entry_state;
             $entry_country_id             			=   $request->entry_country_id;
-            $entry_zone_id             				=   $request->entry_zone_id;
             $entry_gender							=   $request->entry_gender;
-            $delivery_phone							=   $request->delivery_phone;
+            $contact_number							=   $request->contact_number;
 			$entry_gender					  		=   1;
-			$entry_company							=   $request->entry_company;
 			$is_default           					=   $request->is_default;
 			$entry_latitude             			=   $request->entry_latitude;
 			$entry_longitude            			=   $request->entry_longitude;
+			$address_type            			=   $request->address_type;
 			$consumer_data 		 				  =  array();
 			$consumer_data['consumer_key'] 	 	  =  request()->header('consumer-key');
 			$consumer_data['consumer_secret']	  =  request()->header('consumer-secret');
@@ -56,20 +53,17 @@ class Location extends Model
 				if(!empty($user_id)){
 
 					$address_book_data = array(
-                        'entry_firstname'               =>   $entry_firstname,
-				'entry_lastname'                =>   $entry_lastname,
-				'entry_street_address'          =>   $entry_street_address,
-				'entry_flat'          =>   $entry_flat,
-                        'user_id'             		=>   $user_id,
-				'entry_postcode'            	=>   $entry_postcode,
-				'entry_city'             		=>   $entry_city,
-				'entry_state'            		=>   $entry_state,
-				'entry_country_id'            	=>   $entry_country_id,
-				'entry_zone_id'             	=>   $entry_zone_id,
-				'entry_gender'					=>   $entry_gender,
-				'delivery_phone'					=>   $delivery_phone,
-				'entry_latitude'        =>   $entry_latitude,
-				'entry_longitude'       =>   $entry_longitude
+					'entry_firstname'               =>   $entry_firstname,
+					'entry_lastname'                =>   $entry_lastname,
+					'entry_street_address'          =>   $entry_street_address,
+					'entry_flat_address'          =>   $entry_flat_address,
+					'entry_city'             		=>   $entry_city,
+					'entry_country_id'            	=>   $entry_country_id,
+					'entry_gender'					=>   $entry_gender,
+					'contact_number'					=>   $contact_number,
+					'address_type'					=>   $address_type,
+					'entry_latitude'        =>   $entry_latitude,
+					'entry_longitude'       =>   $entry_longitude
 					);
 
 					$address_book_id = DB::table('address_book')->insertGetId($address_book_data);
@@ -98,20 +92,17 @@ class Location extends Model
 			$address_book_id            			=   $request->address_id;
             $entry_firstname            		    =   $request->entry_firstname;
             $entry_lastname             		    =   $request->entry_lastname;
-            $entry_flat       		                =   $request->flat;
-            $entry_street_address       		    =   $request->street;
-            $entry_postcode             			=   $request->entry_postcode;
+            $entry_flat_address       		        =   $request->entry_flat_address;
+            $entry_street_address       		    =   $request->entry_street_address;
             $entry_city             				=   $request->entry_city;
-            $entry_state             				=   $request->entry_state;
             $entry_country_id             			=   $request->entry_country_id;
-            $entry_zone_id             				=   $request->entry_zone_id;
             $entry_gender							=   $request->entry_gender;
-            $delivery_phone							=   $request->delivery_phone;
-            $entry_gender					  		=   1;
-            $entry_company							=   $request->entry_company;
-            $is_default           					=   $request->is_default;
-			$entry_latitude                         =   $request->entry_latitude;
-			$entry_longitude                        =   $request->entry_longitude;
+            $contact_number							=   $request->contact_number;
+			$entry_gender					  		=   1;
+			$is_default           					=   $request->is_default;
+			$entry_latitude             			=   $request->entry_latitude;
+			$entry_longitude            			=   $request->entry_longitude;
+			$address_type            			=   $request->address_type;
 			$consumer_data 		 				  =  array();
 			$consumer_data['consumer_key'] 	 	  =  request()->header('consumer-key');
 			$consumer_data['consumer_secret']	  =  request()->header('consumer-secret');
@@ -127,19 +118,16 @@ class Location extends Model
 
 					$address_book_data = array(
                         'entry_firstname'               =>   $entry_firstname,
-                        'entry_lastname'                =>   $entry_lastname,
-                        'entry_street_address'          =>   $entry_street_address,
-                        'entry_flat'          =>   $entry_flat,
-                        'user_id'             		=>   $user_id,
-                        'entry_postcode'            	=>   $entry_postcode,
-                        'entry_city'             		=>   $entry_city,
-                        'entry_state'            		=>   $entry_state,
-                        'entry_country_id'            	=>   $entry_country_id,
-                        'entry_zone_id'             	=>   $entry_zone_id,
-                        'entry_gender'					=>   $entry_gender,
-                        'delivery_phone'					=>   $delivery_phone,
-                        'entry_latitude'        =>   $entry_latitude,
-                        'entry_longitude'       =>   $entry_longitude
+						'entry_lastname'                =>   $entry_lastname,
+						'entry_street_address'          =>   $entry_street_address,
+						'entry_flat_address'          =>   $entry_flat_address,
+						'entry_city'             		=>   $entry_city,
+						'entry_country_id'            	=>   $entry_country_id,
+						'entry_gender'					=>   $entry_gender,
+						'contact_number'					=>   $contact_number,
+						'address_type'					=>   $address_type,
+						'entry_latitude'        =>   $entry_latitude,
+						'entry_longitude'       =>   $entry_longitude
 					);
 
 					//add address into address book
@@ -209,7 +197,6 @@ class Location extends Model
 		$addresses = DB::table('user_to_address')
 			->leftjoin('address_book', 'address_book.address_book_id', '=', 'user_to_address.address_book_id')
 			->leftJoin('countries', 'countries.countries_id', '=' ,'address_book.entry_country_id')
-			->leftJoin('zones', 'zones.zone_id', '=' ,'address_book.entry_zone_id')
 			->select(
                 'user_to_address.is_default as default_address',
                 'address_book.address_book_id as address_id',
@@ -217,16 +204,12 @@ class Location extends Model
                 'address_book.entry_firstname as firstname',
                 'address_book.entry_lastname as lastname',
                 'address_book.entry_street_address as street',
-                'address_book.entry_flat as flat',
-                'address_book.delivery_phone',
-                'address_book.entry_postcode as postcode',
+                'address_book.entry_flat_address as flat',
+				'address_book.contact_number',
+				'address_book.address_type',
                 'address_book.entry_city as city',
-                'address_book.entry_state as state',
                 'countries.countries_id as countries_id',
-                'countries.countries_name as country_name',
-                'zones.zone_id as zone_id',
-                'zones.zone_code as zone_code',
-                'zones.zone_name as zone_name'
+                'countries.countries_name as country_name'
 				)
 			->where('user_to_address.user_id', $user_id)->get();
 

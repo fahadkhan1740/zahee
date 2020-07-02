@@ -13,7 +13,7 @@ class Coupon extends Model
     use Sortable;
 
     public $sortable =['coupans_id','code','description','discount_type','amount',
-        'expiry_date','usage_count','individual_use','individual_use','exclude_product_ids',
+        'expiry_date','start_date','usage_count','individual_use','individual_use','exclude_product_ids',
         'usage_limit','usage_limit_per_user','limit_usage_to_x_items','free_shipping',
         'product_categories','excluded_product_categories','excluded_product_categories','minimum_amount',
         'maximum_amount','email_restrictions','used_by','created_at','updated_at'];
@@ -63,7 +63,7 @@ class Coupon extends Model
                               $discount_type,$amount,$individual_use,$product_ids,
                               $exclude_product_ids,$usage_limit,$usage_limit_per_user,$usage_count
                               ,$used_by,$limit_usage_to_x_items ,$product_categories,$excluded_product_categories,
-                              $exclude_sale_items,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$free_shipping){
+                              $exclude_sale_items,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$start_date,$free_shipping){
 
 
         $coupon_id = DB::table('coupons')->insertGetId([
@@ -87,6 +87,7 @@ class Coupon extends Model
             'minimum_amount'	 		 =>   $minimum_amount,
             'maximum_amount'	 		 =>   $maximum_amount,
             'expiry_date'				 =>	  $expiry_date,
+            'start_date'				 =>	  $start_date,
             'free_shipping'				 =>   $free_shipping
         ]);
         return $coupon_id;
@@ -143,7 +144,7 @@ class Coupon extends Model
      public function couponupdate($coupans_id,$code,$description,$discount_type, $amount,$individual_use,
                                   $product_ids, $exclude_product_ids, $usage_limit,$usage_limit_per_user, $usage_count,
                                   $limit_usage_to_x_items, $product_categories,$used_by, $excluded_product_categories,
-                                  $request,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$free_shipping){
+                                  $request,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$start_date,$free_shipping){
 
          //insert record
          $coupon_id = DB::table('coupons')->where('coupans_id', '=', $coupans_id)->update([
@@ -167,6 +168,7 @@ class Coupon extends Model
              'minimum_amount'	 		 =>   $minimum_amount,
              'maximum_amount'	 		 =>   $maximum_amount,
              'expiry_date'				 =>	  $expiry_date,
+             'start_date'				 =>	  $start_date,
              'free_shipping'				 =>   $free_shipping
          ]);
 

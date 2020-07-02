@@ -459,7 +459,8 @@
     </section>
     <!-- /.content -->
 </div>
-<script src="{!! asset('admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
+@endsection
+@section('scripts')
 <script type="text/javascript">
     $(function() {
 

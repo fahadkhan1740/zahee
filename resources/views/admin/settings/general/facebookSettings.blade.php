@@ -66,15 +66,15 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.FacebookAppURL') }}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.FacebookAppURL') }}--}}
 
-                                                </label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    {!! Form::text($result['settings'][114]->name, $result['settings'][114]->value, array('class'=>'form-control', 'id'=>$result['settings'][114]->name)) !!}
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.FacebookAppURLText') }}</span>
-                                                </div>
-                                            </div>
+{{--                                                </label>--}}
+{{--                                                <div class="col-sm-10 col-md-4">--}}
+{{--                                                    {!! Form::text($result['settings'][114]->name, $result['settings'][114]->value, array('class'=>'form-control', 'id'=>$result['settings'][114]->name)) !!}--}}
+{{--                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.FacebookAppURLText') }}</span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
 
                                             <div class="form-group">

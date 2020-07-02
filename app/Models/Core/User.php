@@ -70,13 +70,12 @@ class User extends Authenticatable
           ->LeftJoin('user_to_address', 'user_to_address.user_id' ,'=', 'users.id')
           ->LeftJoin('address_book','address_book.address_book_id','=', 'user_to_address.address_book_id')
           ->LeftJoin('countries','countries.countries_id','=', 'address_book.entry_country_id')
-          ->LeftJoin('zones','zones.zone_id','=', 'address_book.entry_zone_id')
           ->where('role_id',2)
-          ->select('users.*', 'address_book.entry_gender as entry_gender', 'address_book.entry_company as entry_company',
+          ->select('users.*', 'address_book.entry_gender as entry_gender',
           'address_book.entry_firstname as entry_firstname', 'address_book.entry_lastname as entry_lastname',
-          'address_book.entry_street_address as entry_street_address', 'address_book.entry_suburb as entry_suburb',
-          'address_book.entry_postcode as entry_postcode', 'address_book.entry_city as entry_city',
-          'address_book.entry_state as entry_state', 'countries.*', 'zones.*')
+          'address_book.entry_street_address as entry_street_address', 'address_book.entry_flat_address as entry_flat_address',
+          'address_book.entry_city as entry_city','address_book.address_type as address_type','address_book.contact_number as contact_number',
+         'countries.*')
           ->groupby('users.id')
           ->paginate(10);
           return $user;

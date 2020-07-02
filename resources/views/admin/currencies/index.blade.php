@@ -63,7 +63,7 @@
                                         @if(count($currencies)>0)
                                             @foreach ($currencies as $key=>$currency)
                                                     <tr>
-                                                        <td>{{ $key+1 }} @if($currency->id==1) <span class="label label-success">{{ trans('labels.is_default') }}</span>@endif</td>
+                                                        <td>{{ $key+1 }} @if($currency->is_default==1) <span class="label label-success">{{ trans('labels.is_default') }}</span>@endif</td>
                                                         <td>{{ $currency->title }}</td>
                                                         <td>{{ $currency->code }}</td>
                                                         <td>{{ $currency->symbol_left }}</td>

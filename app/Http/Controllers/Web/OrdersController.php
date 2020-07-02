@@ -76,7 +76,6 @@ class OrdersController extends Controller
 		//cart data
 
 		$result['cart'] = $this->cart->myCart($result);
-//        dd($this->getPaymentMethods());
 		if(count($result['cart'])==0){
 			return redirect("/");
 		}else{
@@ -128,7 +127,7 @@ class OrdersController extends Controller
 			}
 
 			$result['countries'] = $this->shipping->countries();
-			$result['zones'] = $this->shipping->zones($countries_id);
+			// $result['zones'] = $this->shipping->zones($countries_id);
 
 
 			//get tax
@@ -140,12 +139,16 @@ class OrdersController extends Controller
 				session(['tax_rate' => '0']);
 			}
 
+			
+
 			try{
 			//shipping methods
-//			$result['shipping_methods'] = $this->shipping_methods();
+			$result['shipping_methods'] = $this->shipping_methods();
+		
 
 			//payment methods
 			$result['payment_methods'] = $this->getPaymentMethods();
+			// dd($result['payment_methods']);
 			}
 			catch(\Exception $e){
 				$msg = $e->getMessage();
@@ -365,18 +368,15 @@ class OrdersController extends Controller
 			$toAddress	  = 'gh';
 			$countries = $this->order->getCountries($countries_id);
 			$toCountry = $countries[0]->countries_iso_code_2;
-			$zone_id = session('shipping_address')->zone_id;
-			if($zone_id != -1 and !empty($zone_id)){
-				$zones =  $this->order->getZones($zone_id);
-				$toState = $zones[0]->zone_code;
-			}
+	
+		
 		}else{
 			$countries_id = '';
 			$toPostalCode = '';
 			$toCity		  = '';
 			$toAddress	  = '';
 			$toCountry = '';
-			$zone_id = '';
+		
 		}
 
 		//product weight
@@ -415,143 +415,16 @@ class OrdersController extends Controller
 
 			$shippings_detail = $this->order->getShippingDetail($shipping_methods);
 
-			//ups shipping rate
-			if($shipping_methods->methods_type_link == 'DHL' and $shipping_methods->status == '1'){
 
-				$result2= array();
-				$is_transaction = '0';
-
-				$ups_shipping = $this->order->getUpsShipping();
-				return $ups_shipping;
-
-				//shipp from and all credentials
-				$accessKey  = $ups_shipping[0]->access_key;
-				$userId 	= $ups_shipping[0]->user_name;
-				$password 	= $ups_shipping[0]->password;
-
-				//ship from address
-				$fromAddress  = $ups_shipping[0]->address_line_1;
-				$fromPostalCode  = $ups_shipping[0]->post_code;
-				$fromCity  = $ups_shipping[0]->city;
-				$fromState  = $ups_shipping[0]->state;
-				$fromCountry  = $ups_shipping[0]->country;
-
-				//production or test mode
-				if($ups_shipping[0]->shippingEnvironment == 1){ 			#production mode
-					$useIntegration = true;
-				}else{
-					$useIntegration = false;								#test mode
-				}
-
-				$serviceData = explode(',',$ups_shipping[0]->serviceType);
-
-				$index = 0;
-				foreach($serviceData as $value){
-					if($value == "US_01")
-					{
-						$name = Lang::get('website.Next Day Air');
-						$serviceTtype = "1DA";
-					}
-					else if ($value == "US_02")
-					{
-						$name = Lang::get('website.2nd Day Air');
-						$serviceTtype = "2DA";
-					}
-						else if ($value == "US_03")
-					{
-						$name = Lang::get('website.Ground');
-						$serviceTtype = "GND";
-					}
-					else if ($value == "US_12")
-					{
-						$name = Lang::get('website.3 Day Select');
-						$serviceTtype = "3DS";
-					}
-					else if ($value == "US_13")
-					{
-						$name = Lang::get('website.Next Day Air Saver');
-						$serviceTtype = "1DP";
-					}
-					else if ($value == "US_14")
-					{
-						$name = Lang::get('website.Next Day Air Early A.M.');
-						$serviceTtype = "1DM";
-					}
-					else if ($value == "US_59")
-					{
-						$name = Lang::get('website.2nd Day Air A.M.');
-						$serviceTtype = "2DM";
-					}
-					else if($value == "IN_07")
-					{
-						$name = Lang::get('website.Worldwide Express');
-						$serviceTtype = "UPSWWE";
-					}
-					else if ($value == "IN_08")
-					{
-						$name = Lang::get('website.Worldwide Expedited');
-						$serviceTtype = "UPSWWX";
-					}
-					else if ($value == "IN_11")
-					{
-						$name = Lang::get('website.Standard');
-						$serviceTtype = "UPSSTD";
-					}
-					else if ($value == "IN_54")
-					{
-						$name = Lang::get('website.Worldwide Express Plus');
-						$serviceTtype = "UPSWWEXPP";
-					}
-
-				$some_data = array(
-					'access_key' => $accessKey,  						# UPS License Number
-					'user_name' => $userId,								# UPS Username
-					'password' => $password, 							# UPS Password
-					'pickUpType' => '03',								# Drop Off Location
-//					'shipToPostalCode' => $toPostalCode, 				# Destination  Postal Code
-					'shipToCountryCode' => $toCountry,					# Destination  Country
-//					'shipFromPostalCode' => $fromPostalCode, 			# Origin Postal Code
-					'shipFromCountryCode' => $fromCountry,				# Origin Country
-					'residentialIndicator' => 'IN', 					# Residence Shipping and for commercial shipping "COM"
-					'cServiceCodes' => $serviceTtype, 					# Sipping rate for UPS Ground
-					'packagingType' => '02',
-					'packageWeight' => $productsWeight
-				  );
-
-				  $curl = curl_init();
-				  // You can also set the URL you want to communicate with by doing this:
-				  // $curl = curl_init('http://localhost/echoservice');
-
-				  // We POST the data
-				  curl_setopt($curl, CURLOPT_POST, 1);
-				  // Set the url path we want to call
-				  curl_setopt($curl, CURLOPT_URL, $requiredURL);
-				  // Make it so the data coming back is put into a string
-				  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-				  // Insert the data
-				  curl_setopt($curl, CURLOPT_POSTFIELDS, $some_data);
-
-				  // You can also bunch the above commands into an array if you choose using: curl_setopt_array
-
-				  // Send the request
-				  $rate = curl_exec($curl);
-				  // Free up the resources $curl is using
-				  curl_close($curl);
-
-				 if (is_numeric($rate)){
+			if($shipping_methods->methods_type_link == 'flateRate' and $shipping_methods->status == '1'){
+				$ups_shipping = $this->order->getUpsShippingRate();
+				$data2 =  array('name'=>$shippings_detail[0]->name,'rate'=>$ups_shipping[0]->flate_rate,'currencyCode'=>$ups_shipping[0]->currency,'shipping_method'=>'flateRate');
+				if(count($ups_shipping)>0){
 					$success = array('success'=>'1', 'message'=>"Rate is returned.", 'name'=>$shippings_detail[0]->name, 'is_default'=>$shipping_methods->isDefault);
-					$result2[$index] = array('name'=>$name,'rate'=>$rate,'currencyCode'=>'USD','shipping_method'=>'upsShipping');
-					$index++;
-				 }
-				 else{
-					$success = array('success'=>'0','message'=>"Selected regions are not supported for UPS shipping", 'name'=>$shippings_detail[0]->name);
-				 }
-				  $success['services'] = $result2;
+					$success['services'][0] = $data2;
+					$result[$mainIndex] = $success;
+				 	$mainIndex++;
 				}
-				$result[$mainIndex] = $success;
-				$mainIndex++;
-
-
 			}
 		}
 

@@ -50,7 +50,7 @@ class CartController extends Controller
 		$final_theme = $this->theme->theme();
 
 		$result['cart'] = $this->cart->myCart($data);
-//		dd($result['cart']);
+
 		//apply coupon
 		if(session('coupon')){
 			$session_coupon_data = session('coupon');
@@ -66,7 +66,6 @@ class CartController extends Controller
 		return view("web.carts.viewcart", ['title' => $title,'final_theme' => $final_theme])->with('result', $result);
 	}
 
-	//eidtCart
 	public function editcart(Request $request,$id,$slug){
 
 
@@ -181,25 +180,11 @@ class CartController extends Controller
 			$result['commonContent'] = $this->index->commonContent();
             $message = Lang::get("website.Cart item has been deleted successfully");
             return view("web.headers.cartButtons.cartButton")->with('result', $result);
-//			if(empty($check)){
-//				$message = Lang::get("website.Cart item has been deleted successfully");
-//				return redirect('/')->with('message', $message);
-//
-//			}else{
-//				$message = Lang::get("website.Cart item has been deleted successfully");
-//				return view("web.headers.cartButtons.cartButton")->with('result', $result);
-//			}
+
 		}else{
             $message = Lang::get("website.Cart item has been deleted successfully");
 				return redirect()->back()->with('message', $message);
-//			if(empty($check)){
-//				$message = Lang::get("website.Cart item has been deleted successfully");
-//				return redirect('/')->with('message', $message);
-//
-//			}else{
-//				$message = Lang::get("website.Cart item has been deleted successfully");
-//				return redirect()->back()->with('message', $message);
-//			}
+
 		}
 	}
 

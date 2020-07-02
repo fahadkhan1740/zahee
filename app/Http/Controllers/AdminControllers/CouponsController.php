@@ -112,6 +112,9 @@ public function __construct(Coupon $coupon,Setting $setting)
             $date = str_replace('/', '-', $request->expiry_date);
             $expiry_date = date('Y-m-d', strtotime($date));
 
+            $date_1 = str_replace('/', '-', $request->start_date);
+            $start_date = date('Y-m-d', strtotime($date_1));
+
             if($request->individual_use !== null){
                 $individual_use = $request->individual_use;
             }else{
@@ -213,7 +216,7 @@ public function __construct(Coupon $coupon,Setting $setting)
                         $discount_type,$amount,$individual_use,$product_ids,
                         $exclude_product_ids,$usage_limit,$usage_limit_per_user,$usage_count
                         ,$used_by,$limit_usage_to_x_items ,$product_categories,$excluded_product_categories,
-                        $exclude_sale_items,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$free_shipping);
+                        $exclude_sale_items,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$start_date,$free_shipping);
 
                     return redirect('admin/coupons/add')->with('success', Lang::get("labels.CouponAddedMessage"));
                 }
@@ -253,6 +256,8 @@ public function __construct(Coupon $coupon,Setting $setting)
             $amount = $request->amount;
             $date = str_replace('/', '-', $request->expiry_date);
             $expiry_date = date('Y-m-d', strtotime($date));
+            $date_1 = str_replace('/', '-', $request->start_date);
+            $start_date = date('Y-m-d', strtotime($date_1));
             if(!empty($request->individual_use)){
                 $individual_use = $request->individual_use;
             }else{
@@ -327,7 +332,7 @@ public function __construct(Coupon $coupon,Setting $setting)
                     $coupon_id = $this->Coupon->couponupdate($coupans_id,$code,$description,$discount_type, $amount,$individual_use,
                         $product_ids, $exclude_product_ids, $usage_limit,$usage_limit_per_user, $usage_count,
                         $limit_usage_to_x_items, $product_categories,$used_by, $excluded_product_categories,
-                        $request,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$free_shipping);
+                        $request,$email_restrictions,$minimum_amount,$maximum_amount,$expiry_date,$start_date,$free_shipping);
 
                     $message = Lang::get("labels.CouponUpdatedMessage");
                     return redirect()->back()->withErrors([$message]);

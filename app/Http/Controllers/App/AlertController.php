@@ -166,32 +166,32 @@ class AlertController extends Controller
 			});
 		}
 
-		if($alertSetting[0]->forgot_notification==1){
-
-			$title = Lang::get("labels.forgotNotificationTitle");
-			$message = Lang::get("labels.forgotNotificationMessage");
-
-			$sendData = array
-				  (
-					'body' 	=> $message,
-					'title'	=> $title ,
-							'icon'	=> 'myicon',/*Default Icon*/
-							'sound' => 'mySound',/*Default sound*/
-							'image' => '',
-				  );
-
-			if($setting[54]->value=='fcm'){
-				$functionName = 'fcmNotification';
-			}elseif($setting[54]->value=='onesignal'){
-				$functionName = 'onesignalNotification';
-			}
-
-			//get device id
-			$device_id = $this->userDevice($existUser[0]->customers_id);
-			if(!empty($device_id)){
-				$response = $this->$functionName($device_id, $sendData);
-			}
-		}
+//		if($alertSetting[0]->forgot_notification==1){
+//
+//			$title = Lang::get("labels.forgotNotificationTitle");
+//			$message = Lang::get("labels.forgotNotificationMessage");
+//
+//			$sendData = array
+//				  (
+//					'body' 	=> $message,
+//					'title'	=> $title ,
+//							'icon'	=> 'myicon',/*Default Icon*/
+//							'sound' => 'mySound',/*Default sound*/
+//							'image' => '',
+//				  );
+//
+//			if($setting[54]->value=='fcm'){
+//				$functionName = 'fcmNotification';
+//			}elseif($setting[54]->value=='onesignal'){
+//				$functionName = 'onesignalNotification';
+//			}
+//
+//			//get device id
+//			$device_id = $this->userDevice($existUser[0]->customers_id);
+//			if(!empty($device_id)){
+//				$response = $this->$functionName($device_id, $sendData);
+//			}
+//		}
 
 
 	}

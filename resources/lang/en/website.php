@@ -772,4 +772,5 @@ return [
     'Big Saving' => 'Big Saving',
     'What’s HOT' => 'What’s HOT',
     'Buy Now' => 'Buy Now',
+    'Add from wishlist' => 'Add from wishlist',
 ];

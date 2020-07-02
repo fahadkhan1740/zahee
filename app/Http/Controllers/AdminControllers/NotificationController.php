@@ -173,7 +173,6 @@ class NotificationController extends Controller
 
                 $devices = DB::table('devices')
                     ->where('status','=', $devices_status)
-                    ->where('devices.'.$setting[54]->value,'=', '1')
                     ->where('devices.is_notify','=', '1')
                     ->get();
 
@@ -192,7 +191,7 @@ class NotificationController extends Controller
                     ->select('devices.device_id')
                     ->where('status','=', $devices_status)
                     ->where('devices.is_notify','=', '1')
-                    ->where('devices.'.$setting[54]->value,'=', '1')
+                    // ->where('devices.'.$setting[54]->value,'=', '1')
                     ->where('device_type','=', $device_type)
                     ->get();
 
@@ -210,7 +209,7 @@ class NotificationController extends Controller
                     ->select('devices.device_id')
                     ->where('status','=', $devices_status)
                     ->where('devices.is_notify','=', '1')
-                    ->where('devices.'.$setting[54]->value,'=', '1')
+                    // ->where('devices.'.$setting[54]->value,'=', '1')
                     ->where('device_type','=', $device_type)
                     ->get();
 
@@ -223,13 +222,13 @@ class NotificationController extends Controller
                     $response[] = '2';
                 }
 
-            }else if($device_type =='3'){ 	/* android notification */
+            }else if($device_type =='3'){ 	/* Website notification */
 
                 $devices = DB::table('devices')
                     ->select('devices.device_id')
                     ->where('status','=', $devices_status)
                     ->where('devices.is_notify','=', '1')
-                    ->where('devices.'.$setting[54]->value,'=', '1')
+                    // ->where('devices.'.$setting[54]->value,'=', '1')
                     ->where('device_type','=', $device_type)
                     ->get();
 

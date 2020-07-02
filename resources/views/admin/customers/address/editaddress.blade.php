@@ -1,3 +1,4 @@
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="editManufacturerLabel">{{ trans('labels.EditAddress') }}</h4>
@@ -7,12 +8,6 @@
 {!! Form::hidden('user_id', $data['user_id'], array('class'=>'form-control')) !!}
 {!! Form::hidden('address_book_id', $data['customer_addresses'][0]->address_book_id, array('class'=>'form-control')) !!}
 <div class="modal-body">
-    <div class="form-group">
-        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Company') }}</label>
-        <div class="col-sm-10 col-md-8">
-            {!! Form::text('entry_company', $data['customer_addresses'][0]->entry_company, array('class'=>'form-control field-validate', 'id'=>'entry_company')) !!}
-        </div>
-    </div>
     <div class="form-group">
         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.FirstName') }}*</label>
         <div class="col-sm-10 col-md-8">
@@ -26,22 +21,22 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.FlatAddress') }}</label>
+        <div class="col-sm-10 col-md-8">
+            {!! Form::text('entry_flat_address',  $data['customer_addresses'][0]->entry_flat_address, array('class'=>'form-control', 'id'=>'entry_flat_address')) !!}
+        </div>
+    </div>
+    <div class="form-group">
         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.StreetAddress') }}*</label>
         <div class="col-sm-10 col-md-8">
             {!! Form::text('entry_street_address', $data['customer_addresses'][0]->entry_street_address, array('class'=>'form-control field-validate', 'id'=>'entry_street_address')) !!}
         </div>
     </div>
-    <div class="form-group">
-        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Suburb') }}</label>
-        <div class="col-sm-10 col-md-8">
-            {!! Form::text('entry_suburb', $data['customer_addresses'][0]->entry_suburb, array('class'=>'form-control field-validate', 'id'=>'entry_suburb')) !!}
-        </div>
-    </div>
 
     <div class="form-group">
-        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Postcode') }}*</label>
+        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.contactNumber') }}*</label>
         <div class="col-sm-10 col-md-8">
-            {!! Form::text('entry_postcode', $data['customer_addresses'][0]->entry_postcode, array('class'=>'form-control field-validate', 'id'=>'entry_postcode')) !!}
+            {!! Form::text('contact_number', $data['customer_addresses'][0]->contact_number, array('class'=>'form-control field-validate', 'id'=>'contact_number')) !!}
         </div>
     </div>
     <div class="form-group">
@@ -65,25 +60,17 @@
         </div>
     </div>
 
-    <div class="form-group selectstate" @if(!is_numeric($data['customer_addresses'][0]->entry_state)) style="display: none" @endif>
-        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.State') }}*</label>
+    <div class="form-group">
+        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.addressType') }}</label>
         <div class="col-sm-10 col-md-8">
-            <select class="form-control zoneContent" name="entry_state_box">
-                @foreach($data['zones'] as $zones_data)
-                <option @if($data['customer_addresses'][0]->entry_zone_id == $zones_data->zone_id )
-                    selected
-                    @endif
-                    value="{{ $zones_data->zone_id }}">{{ $zones_data->zone_name }}
-                </option>
-                @endforeach
+            <select id="address_type" class="form-control" name="address_type">
+                <option @if($data['customer_addresses'][0]->address_type == 'Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)' )
+                        selected
+                        @endif value="{{trans('labels.office')}}">{{ trans('labels.office') }}</option>
+                <option @if($data['customer_addresses'][0]->address_type == 'Home (7:00 A.M. - 9:00 P.M., All Day)' )
+                        selected
+                        @endif value="{{ trans('labels.home') }}">{{ trans('labels.home') }}</option>
             </select>
-        </div>
-    </div>
-
-    <div class="form-group otherstate" @if(is_numeric($data['customer_addresses'][0]->entry_state)) style="display: none" @endif>
-        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.State') }}*</label>
-        <div class="col-sm-10 col-md-8">
-            {!! Form::text('entry_state', $data['customer_addresses'][0]->entry_state, array('class'=>'form-control entry_state', 'id'=>'entry_state')) !!}
         </div>
     </div>
 

@@ -166,11 +166,30 @@ jQuery(document).on('click', '.whishlist', function(e){
  });
 });
 jQuery(document).on('click', '.update-cart-value', function(e){
+
 	var parent = jQuery(this);
 	var products_id = jQuery(this).attr('products_id');
 	var baskt_id = jQuery(this).attr('baskt_id');
 	var index = jQuery(this).attr('index');
-	var qty = document.getElementById('number-'+index).value;
+	var action = jQuery(this).attr('action');
+
+	// increase/ decrease value first 
+	if(action == 'increase') {
+		var value = parseInt(document.getElementById('number-'+index).value, 10);
+		value = isNaN(value) ? 0 : value;
+		value++;
+		document.getElementById('number-'+index).value = value;
+	} else {
+		var value = parseInt(document.getElementById('number-'+index).value, 10);
+    value = isNaN(value) ? 0 : value;
+    value < 1 ? value = 1 : '';
+    value--;
+    document.getElementById('number-'+index).value = value;
+
+	}
+
+
+	var qty = value;
 	var message ;
   jQuery(function ($) {
 	jQuery.ajax({
