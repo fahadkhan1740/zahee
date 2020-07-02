@@ -79,11 +79,14 @@
                                                     ?>
                                                     <div class="price">
                                                         @if(!empty($products->final_price))
+                                                       
                                                             {{Session::get('symbol_left')}}{{($flash_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @elseif(!empty($products->discount_price))
+                                                       
                                                             <span class="old-price">{{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
                                                             <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
                                                         @else
+                                                        
                                                             {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @endif
                                                     </div>
@@ -99,14 +102,14 @@
                                            <div class="cart-item-sb-wrap cart-item-bottom">
                                                 <div class="cart-item-sb-col-left cart-item-sb-col  cart-item-product-qty">
                                                     <form class="qty-wrap qty-sm">
-                                                        <div class="value-button" id="decrease-{{$k+1}}" onclick="decreaseValue(`{{$k+1}}`)" value="Decrease Value">-</div>
+                                                        <div class="value-button update-cart-value" id="decrease-{{$k+1}}" action="decrease" products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k+1}}" value="Decrease Value">-</div>
                                                         <input type="number" class="number" id="number-{{$k+1}}" name="quantity[]" readonly value="{{$products->customers_basket_quantity}}" min="{{$products->min_order}}" max="{{$products->max_order}}" />
-                                                        <div class="value-button" id="increase-{{$k+1}}" onclick="increaseValue(`{{$k+1}}`)" value="Increase Value">+</div>
+                                                        <div class="value-button update-cart-value" id="increase-{{$k+1}}" action="increase"  products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k+1}}" value="Increase Value">+</div>
                                                       </form>
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-remove">
                                                      <p><a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}" class="remove"><i class="fa fa-trash" aria-hidden="true"></i>Remove</a></p>
-                                                     <p><a href="javascript:void(0)" products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k+1}}" class="update-cart-value"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Cart</a></p>
+                                                     <!-- <p><a href="javascript:void(0)"  class="update-cart-value"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Cart</a></p> -->
                                                      <p><a href="{{ URL::to('/product-detail/'.$products->products_slug) }}" class="view-product"><i class="fa fa-eye" aria-hidden="true"></i>View</a></p>
                                                 </div>
                                            </div>
@@ -129,7 +132,13 @@
                                                     <figcaption>No Products in your Cart</figcaption>
                                                 </figure>
                                             </div>
+
+                                            <div class="cart-action-wrap text-right ">
+                                    <a href="{{ URL::to('/shop')}}" class="link-btn">@lang('website.Back To Shopping')</a>
+                                    <a href="{{ URL::to('/wishlist')}}" class="btn btn-default">@lang('website.Add from wishlist')</a>
+                                </div>
                                         </div>
+                                        
                                 @endif
                             </div>
 

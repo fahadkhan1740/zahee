@@ -81,7 +81,7 @@ class Shipping_method extends Model
     }
 
     public function shipingMethod4(){
-        $shipping_methods = DB::table('shipping_methods')->where('shipping_methods_id', '=', '4')->get();
+        $shipping_methods = DB::table('shipping_methods')->where('shipping_methods_id', '=', '1')->get();
         return $shipping_methods;
     }
 

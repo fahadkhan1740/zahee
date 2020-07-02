@@ -41,11 +41,11 @@ class ShippingMethodsController extends Controller
 //      $ups_shipping['ups_description'] = $this->Shipping_method->upsDescription();
 //      $result['ups_shipping'] = $ups_shipping;
 //
-//      //flatrate
+     //flatrate
       $flate_rate['flate_rate'] = $this->Shipping_method->flateRate();
-//      $flate_rate['flatrate_description'] = $this->Shipping_method->flateRateDescription();
+     $flate_rate['flatrate_description'] = $this->Shipping_method->flateRateDescription();
 //
-//      $result['flate_rate'] = $flate_rate;
+     $result['flate_rate'] = $flate_rate;
       return view("admin.shippingmethods.index", $title)->with('result', $result);
 
     }
@@ -113,6 +113,7 @@ class ShippingMethodsController extends Controller
       $title = array('pageTitle' => Lang::get("labels.FlateRate"));
       $shipping_methods = $this->Shipping_method->shipingMethods();
       $result['flate_rate'] = $shipping_methods;
+      
 
       $shipping_methods = $this->Shipping_method->shipingMethod4();
       $result['shipping_methods'] = $shipping_methods;
@@ -123,6 +124,8 @@ class ShippingMethodsController extends Controller
 
       $description_data = array();
       foreach($result['languages'] as $languages_data){
+
+      
 
           $description = $this->Shipping_method->description($languages_data,$shipping_methods);
 

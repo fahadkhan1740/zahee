@@ -132,6 +132,15 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.CouponStartDate') }}</label>
+                                                <div class="col-sm-10 col-md-4">
+                                                    {!! Form::text('start_date',  '', array('class'=>'form-control field-validate datepicker', 'id'=>'datepicker', 'readonly'=>'readonly'))!!}
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.CouponStartDateText') }}</span>
+                                                    <span class="help-block hidden">{{ trans('labels.CouponStartDateText') }}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Minimumspend') }}
                                                 </label>
                                                 <div class="col-sm-10 col-md-4">

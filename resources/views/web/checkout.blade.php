@@ -101,22 +101,6 @@
                        </div>
                        <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please select your country')</span>
                      </div>
-{{--                     <div class="form-group">--}}
-{{--                       <label for="exampleSelectState1">@lang('website.State')</label>--}}
-{{--                       <div class="select-control">--}}
-{{--                           <select required class="form-control field-validate" id="entry_zone_id"  name="zone_id" aria-describedby="stateHelp">--}}
-{{--                             <option value="">@lang('website.Select State')</option>--}}
-{{--                              @if(!empty($result['zones'])>0)--}}
-{{--                               @foreach($result['zones'] as $zones)--}}
-{{--                                   <option value="{{$zones->zone_id}}" @if(!empty(session('shipping_address'))>0) @if(session('shipping_address')->zone_id == $zones->zone_id) selected @endif @endif >{{$zones->zone_name}}</option>--}}
-{{--                               @endforeach--}}
-{{--                             @endif--}}
-
-{{--                              <option value="-1" @if(!empty(session('shipping_address'))>0) @if(session('shipping_address')->zone_id == 'Other') selected @endif @endif>@lang('website.Other')</option>--}}
-{{--                             </select>--}}
-{{--                       </div>--}}
-{{--                        <small id="stateHelp" class="form-text text-muted"></small>--}}
-{{--                       </div>--}}
                        <div class="form-group">
                            <label for="exampleSelectCity1">City</label>
                            <input required type="text" class="form-control field-validate" id="city" name="city" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->city}}@endif" placeholder="Enter Your City">
@@ -178,21 +162,7 @@
                              </div>
                              <span class="help-block error-content" hidden>@lang('website.Please select your country')</span>
                            </div>
-                           <div class="form-group">
-                             <label for="exampleSelectState1">@lang('website.State')</label>
-                             <div class="select-control">
-                                 <select required class="form-control same_address_select" name="billing_zone_id" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) disabled @endif @else disabled @endif id="billing_zone_id" aria-describedby="stateHelp">
-                                   <option value="" >@lang('website.Select State')</option>
-                                   @if(!empty($result['zones'])>0)
-                                     @foreach($result['zones'] as $key=>$zones)
-                                         <option value="{{$zones->zone_id}}" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->billing_zone_id == $zones->zone_id) selected @endif @endif >{{$zones->zone_name}}</option>
-                                     @endforeach
-                                   @endif
-                                     <option value="-1" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->billing_zone_id == 'Other') selected @endif @endif>@lang('website.Other')</option>
-                                   </select>
-                             </div>
-                             <span class="help-block error-content" hidden>@lang('website.Please select your state')</span>
-                           </div>
+                    
                            <div class="form-group">
                                <label for="exampleSelectCity1">@lang('website.City')</label>
                                <input type="text" class="form-control same_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_city" name="billing_city" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_city}}@endif" placeholder="Enter Your City">
@@ -236,8 +206,10 @@
                                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                                   <input type="hidden" name="mehtod_name" id="mehtod_name">
                                   <input type="hidden" name="shipping_price" id="shipping_price">
-                                 <input class="shipping_data" id="DHL" type="radio" name="shipping_method" value="DHL" shipping_price="10"  method_name="DHL" checked />
-                                 <label for="DHL">DHL</label>
+                                  @foreach($result['shipping_methods'] as $shippingMethod)
+                                 <input class="shipping_data" id="{{$shippingMethod['name']}}" type="radio" name="shipping_method" value="{{$shippingMethod['name']}}" shipping_price="10"  method_name="{{$shippingMethod['name']}}" checked />
+                                 <label for="{{$shippingMethod['name']}}">{{$shippingMethod['name']}} - {{$shippingMethod['services'][0]['currencyCode']}} {{$shippingMethod['services'][0]['rate']}}</label>
+                                 @endforeach
                                  <div class="alert alert-danger alert-dismissible error_shipping" role="alert" style="display:none;">
                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                      @lang('website.Please select your shipping method')
@@ -253,7 +225,7 @@
                                <?php
                                    $price = 0;
                                ?>
-                               <form method='POST' id="update_cart_form" action='{{ URL::to('/place_order')}}' >
+                               <form method='POST' id="update_cart_form" action="{{ URL::to('/place_order')}}" >
                                  {!! csrf_field() !!}
 
                                        <table class="table top-table">

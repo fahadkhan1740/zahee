@@ -70,9 +70,8 @@
                                                 <td>
                                                     {{ $shipping_methods->name }}
                                                 </td>
-                                                @if($shipping_methods->methods_type_link=='DHL' and $shipping_methods->shipping_methods_id=='1')
-
-                                                    <td>--</td>
+                                                @if($shipping_methods->methods_type_link=='flateRate' and $shipping_methods->shipping_methods_id=='1')                                            
+                                                       <td>{{$result['flate_rate']['flate_rate']->currency.' '.$result['flate_rate']['flate_rate']->flate_rate}}</td>
                                                     <td>
                                                         @if($shipping_methods->status==0)
                                                             <span class="label label-warning">

@@ -46,7 +46,7 @@ Route::group(['namespace' => 'App'], function () {
 
 	//update customer info url
 	Route::post('/updatecustomerinfo', 'CustomersController@updatecustomerinfo');
-	Route::get('/updatepassword', 'CustomersController@updatepassword');
+	Route::post('/updatepassword', 'CustomersController@updatepassword');
 
 	// login url
 	Route::post('/processlogin', 'CustomersController@processlogin');

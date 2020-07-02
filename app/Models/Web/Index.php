@@ -65,6 +65,7 @@ class Index extends Model
   }
 
   public function commonContent(){
+  
     		$languages = DB::table('languages')
     			 					->leftJoin('image_categories','languages.image','image_categories.image_id')
     			 					->select('languages.*','image_categories.path as image_path')
@@ -80,12 +81,22 @@ class Index extends Model
         if(empty(Session::get('currency_title'))){
           session(['currency_title' => $currency->code]);
         }
-        if(empty(Session::get('symbol_right')) && empty(Session::get('symbol_left'))){
-          session(['symbol_right' => $currency->symbol_right]);
-        }
-        if(empty(Session::get('symbol_left')) && empty(Session::get('symbol_right'))){
+        if($languages[0]->languages_id == 1) {
           session(['symbol_left' => $currency->symbol_left]);
+          session(['symbol_right' => '']);
+        } else {
+          session(['symbol_right' => $currency->symbol_right]);
+          session(['symbol_left' => '']);
         }
+        // if(empty(Session::get('symbol_left')) && empty(Session::get('symbol_right'))){
+        //   session(['symbol_left' => $currency->symbol_left]);
+        // }
+
+        // if(empty(Session::get('symbol_right')) && empty(Session::get('symbol_left'))){
+        //   session(['symbol_right' => $currency->symbol_right]);
+        // }
+       
+      
         if(empty(Session::get('currency_code'))){
           session(['currency_code' => $currency->code]);
         }
