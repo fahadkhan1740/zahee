@@ -148,13 +148,22 @@ class NotificationController extends Controller
             $extensions = $this->myVarSetting->imageType();
             $setting = $this->myVarSetting->getSetting();
 
+            // dd($request->image_id);
+
 
             if($request->image_id !== null){
 
-                $websiteURL =  "https://" . $_SERVER['SERVER_NAME'] .'/demos/website/'. $request->image_id;
+                // fectch image
+                $images = new Images;
+                $imageDetail = $images->getimagedetail($request->image_id);
+
+                // dd($imageDetail[0]->path);
+
+                $websiteURL =  "https://" . $_SERVER['SERVER_NAME'] .'/public/'. $imageDetail[0]->path;
             }else{
                 $websiteURL = '';
             }
+            // dd($websiteURL);
 
             $sendData = array
             (
@@ -163,6 +172,7 @@ class NotificationController extends Controller
                 'icon'	=> 'myicon',/*Default Icon*/
                 'sound' => 'mySound',/*Default sound*/
                 'image' => $websiteURL,
+                // "image" => "https://static.pexels.com/photos/4825/red-love-romantic-flowers.jpg"
             );
 
             //get function from other controller
@@ -178,7 +188,7 @@ class NotificationController extends Controller
 
                 if(count($devices)>0){
                     foreach($devices as $devices_data){
-                        $response[] = $this->onesignalNotification($devices_data->device_id, $sendData, $pageResponse);
+                        $response[] = $this->fcmNotification($devices_data->device_id, $sendData, $pageResponse);
                     }
                 }else{
                     $response[] = '2';
@@ -197,7 +207,7 @@ class NotificationController extends Controller
 
                 if(count($devices)>0){
                     foreach($devices as $devices_data){
-                        $response[] = $this->onesignalNotification($devices_data->device_id, $sendData, $pageResponse);
+                        $response[] = $this->fcmNotification($devices_data->device_id, $sendData, $pageResponse);
                     }
                 }else{
                     $response[] = '2';
@@ -216,7 +226,7 @@ class NotificationController extends Controller
 
                 if(count($devices)>0){
                     foreach($devices as $devices_data){
-                        $response[] = $this->onesignalNotification($devices_data->device_id, $sendData, $pageResponse);
+                        $response[] = $this->fcmNotification($devices_data->device_id, $sendData, $pageResponse);
                     }
                 }else{
                     $response[] = '2';
@@ -235,7 +245,7 @@ class NotificationController extends Controller
 
                 if(count($devices)>0){
                     foreach($devices as $devices_data){
-                        $response[] = $this->onesignalNotification($devices_data->device_id, $sendData, $pageResponse);
+                        $response[] = $this->fcmNotification($devices_data->device_id, $sendData, $pageResponse);
                     }
                 }else{
                     $response[] = '2';
@@ -286,7 +296,6 @@ class NotificationController extends Controller
         //get function from other controller
 
         $setting = $this->myVarSetting->getSetting();
-
         #API access key from Google API's Console
         if (!defined('API_ACCESS_KEY')){
             define('API_ACCESS_KEY', $setting[12]->value);
@@ -295,7 +304,7 @@ class NotificationController extends Controller
         $fields = array
         (
             'to'		=> $device_id,
-            'data'	=> $sendData
+            'notification'	=> $sendData
         );
 
 
@@ -314,6 +323,7 @@ class NotificationController extends Controller
         curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
         $result = curl_exec($ch);
         $data = json_decode($result);
+        // dd($data);
         if($result === false)
             die('Curl failed ' . curl_error());
 

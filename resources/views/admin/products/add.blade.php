@@ -47,8 +47,8 @@
                                                         <select class="form-control field-validate prodcust-type" name="products_type" onChange="prodcust_type();">
                                                             <option value="">{{ trans('labels.Choose Type') }}</option>
                                                             <option value="0">{{ trans('labels.Simple') }}</option>
-                                                            <option value="1">{{ trans('labels.Variable') }}</option>
-                                                            <option value="2">{{ trans('labels.External') }}</option>
+                                                            <!-- <option value="1">{{ trans('labels.Variable') }}</option>
+                                                            <option value="2">{{ trans('labels.External') }}</option> -->
                                                         </select><span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                                             {{ trans('labels.Product Type Text') }}.</span>
                                                     </div>

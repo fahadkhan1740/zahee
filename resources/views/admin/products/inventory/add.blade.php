@@ -159,14 +159,14 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="form-group">
+                                                                <!-- <div class="form-group">
                                                                     <label for="name" class="col-sm-2 col-md-4 control-label">{{ trans('labels.Reference / Purchase Code') }}</label>
                                                                     <div class="col-sm-10 col-md-8">
-                                                                        <input type="text" name="reference_code" value="" class="form-control field-required">
+                                                                        <input type="text" name="reference_code" value="" class="form-control ">
                                                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                                                             {{ trans('labels.Reference / Purchase Code Text') }}</span>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
 
                                                                 <!-- /.users-list -->
                                                             </div>

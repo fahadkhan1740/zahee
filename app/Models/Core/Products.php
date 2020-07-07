@@ -94,6 +94,8 @@ class Products extends Model
                 ->groupBy('products.products_id')->paginate($commonsetting['pagination']);
         }
 
+        // dd($products);
+
         return $products;
     }
 

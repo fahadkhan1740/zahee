@@ -59,12 +59,14 @@ $(function() {
 $("img").click(function() {
     $(this).toggleClass("hover");
       var id = [];
+	  console.log(jQuery(this).attr("image_id"));
     $(".hover").each(function() {
+
     //jQuery.each('.hover', function() {
       id.push(jQuery(this).attr("image_id"));
+	  console.log(id);
 
     });
-  //  id.push(jQuery('.test_image').attr("image_id"));
     jQuery('#images').val(id);
 	console.log(id);
   });
