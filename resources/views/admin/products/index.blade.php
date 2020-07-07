@@ -97,9 +97,6 @@
                                                         {{ $product->products_name }} @if(!empty($product->products_model)) ( {{ $product->products_model }} ) @endif
                                                     </td>
                                                     <td>
-                                                        {{ $product->first_name }} {{ $product->last_name }}
-                                                    </td>
-                                                    <td>
                                                         <strong>{{ trans('labels.Product Type') }}:</strong>
                                                         @if($product->products_type==0)
                                                             {{ trans('labels.Simple') }}
@@ -114,7 +111,7 @@
                                                         @endif
                                                         <strong>{{ trans('labels.Price') }}: </strong>     {{ $results['currency'][19]->value }}{{ $product->products_price }}<br>
                                                         <strong>{{ trans('labels.Weight') }}: </strong>  {{ $product->products_weight }}{{ $product->products_weight_unit }}<br>
-                                                        <strong>{{ trans('labels.Viewed') }}: </strong>  {{ $product->products_viewed }}<br>
+                                                        <!-- <strong>{{ trans('labels.Viewed') }}: </strong>  {{ $product->products_viewed }}<br> -->
                                                         @if(!empty($product->specials_id))
                                                             <strong class="badge bg-light-blue">{{ trans('labels.Special Product') }}</strong><br>
                                                             <strong>{{ trans('labels.SpecialPrice') }}: </strong>  {{ $product->specials_products_price }}<br>
@@ -138,11 +135,10 @@
                                                     <td>
                                                       <a class="btn btn-primary" style="width: 100%; margin-bottom: 5px;" href="{{url('admin/products/edit')}}/{{ $product->products_id }}">{{ trans('labels.EditProduct') }}</a>
                                                       </br>
-{{--                                                      @if($product->products_type==1)--}}
                                                           <a class="btn btn-info" style="width: 100%;  margin-bottom: 5px;" href="{{url('admin/products/attach/attribute/display')}}/{{ $product->products_id }}">{{ trans('labels.ProductAttributes') }}</a>
 
                                                           </br>
-{{--                                                      @endif--}}
+
                                                       <a class="btn btn-warning" style="width: 100%;  margin-bottom: 5px;" href="{{url('admin/products/images/display/'. $product->products_id) }}">{{ trans('labels.ProductImages') }}</a>
                                                       </br>
                                                       <a class="btn btn-danger" style="width: 100%;  margin-bottom: 5px;" id="deleteProductId" products_id="{{ $product->products_id }}">{{ trans('labels.DeleteProduct') }}</a>

@@ -2102,6 +2102,7 @@ return [
     'addressType' => 'Address Type',
     'office' => 'Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)',
     'home' => 'Home (7:00 A.M. - 9:00 P.M., All Day)',
-    'contactNumber' => 'Contact Number',
+	'contactNumber' => 'Contact Number',
+	'Save_And_complete' => 'Save and Complete',
 
 ];

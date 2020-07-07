@@ -122,26 +122,23 @@
                                                                             {{ trans('labels.Purchase Price Text') }}</span>
                                                                     </div>
                                                                 </div>
-
+<!-- 
                                                                 <div class="form-group">
                                                                     <label for="name" class="col-sm-2 col-md-4 control-label">{{ trans('labels.Reference / Purchase Code') }}</label>
                                                                     <div class="col-sm-10 col-md-8">
-                                                                        <input type="text" name="reference_code" value="" class="form-control field-validate">
+                                                                        <input type="text" name="reference_code" value="" class="form-control">
                                                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                                                             {{ trans('labels.Reference / Purchase Code Text') }}</span>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
 
                                                                 <!-- /.users-list -->
                                                             </div>
-                                                           @if(count($result['products'])> 0)
-                                                                @if(count($result['attributes'])>0 and $result['products'][0]->products_type==1 or $result['products'][0]->products_type==0)
-                                                                <!-- /.box-body -->
+                                                         
                                                                 <div class="box-footer text-center">
                                                                     <button type="submit" id="attribute-btn" class="btn btn-primary pull-right">{{ trans('labels.Add Stock') }}</button>
                                                                 </div>
-                                                                @endif
-                                                            @endif
+                                                              
 
                                                             {!! Form::close() !!}
                                                             <!-- /.box-footer -->
@@ -219,9 +216,9 @@
                                             </div>
 
                                             <div class="box-footer col-xs-12">
-                                                @if(count($result['products'])> 0 && $result['products'][0]->products_type==1)
+                                                <!-- @if(count($result['products'])> 0 && $result['products'][0]->products_type==1) -->
                                                 <a href="{{ URL::to("admin/products/attach/attribute/display/".$result['products'][0]->products_id) }}" class="btn btn-default pull-left">{{ trans('labels.AddOptions') }}</a>
-                                                @endif
+                                                <!-- @endif -->
                                             </div>
                                         </div>
                                     </div>

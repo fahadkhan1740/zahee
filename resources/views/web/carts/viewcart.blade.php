@@ -120,9 +120,14 @@
                                 </div>
                                 @endforeach
                                 <!-- cart -items -->
+                                @php
+                                $total = ($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '');
+                                var_dump($total);
+                                @endphp
                                 <div class="cart-action-wrap text-right ">
                                     <a href="{{ URL::to('/shop')}}" class="link-btn">@lang('website.Back To Shopping')</a>
-                                    <a href="{{ URL::to('/checkout')}}" class="btn btn-default">@lang('website.proceedToCheckout')</a>
+                                    <a href="{{ URL::to('/wishlist')}}" class="btn btn-default">@lang('website.Add from wishlist')</a>
+                                    <a href="{{ URL::to('/checkout')}}" class="btn btn-default" @if( $total != 5.00){ 'disabled' } @enfif>@lang('website.proceedToCheckout')</a>
                                 </div>
                                     @else
                                         <div class="cart-item">
