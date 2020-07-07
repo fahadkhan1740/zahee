@@ -1063,3 +1063,18 @@ body[dir="rtl"] .checkout-module .heading
 {
     color: #fff !important;
 }
+
+
+.product-action-ele>h6 {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.product-wrap .product-slider .slick-arrow
+{
+    top: -30px !important;  
+} 
+
+.titlee-right {
+    padding-right: 120px;
+}
