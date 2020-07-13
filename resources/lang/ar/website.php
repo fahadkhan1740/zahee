@@ -718,5 +718,6 @@ return [
     'Big Saving' => 'توفير كبير',
     'What’s HOT' => 'ما الحار',
     'Buy Now' => 'اشتري الآن',
-    'Add from wishlist' => 'أضف من قائمة الرغبات',
+	'Add from wishlist' => 'أضف من قائمة الرغبات',
+	'Oldest' => 'الأقدم - الأحدث',
 ];

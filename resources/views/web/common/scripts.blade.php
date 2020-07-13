@@ -83,6 +83,7 @@ jQuery( document ).ready( function () {
 	getZonesBilling();
 	paymentMethods();
 @endif
+
 	//default product cart
 jQuery(document).on('click', '.cart', function(e){
 	var parent = jQuery(this);
@@ -172,6 +173,7 @@ jQuery(document).on('click', '.update-cart-value', function(e){
 	var baskt_id = jQuery(this).attr('baskt_id');
 	var index = jQuery(this).attr('index');
 	var action = jQuery(this).attr('action');
+	// var products_price = jQuery(this).attr('products_price');
 
 	// increase/ decrease value first 
 	if(action == 'increase') {
@@ -187,7 +189,6 @@ jQuery(document).on('click', '.update-cart-value', function(e){
     document.getElementById('number-'+index).value = value;
 
 	}
-
 
 	var qty = value;
 	var message ;
@@ -209,7 +210,7 @@ jQuery(document).on('click', '.update-cart-value', function(e){
 function isHTML(str) {
         var doc = new DOMParser().parseFromString(str, "text/html");
         return Array.from(doc.body.childNodes).some(node => node.nodeType === 1);
-    }
+}
 
 jQuery(document).on('click', '.modal_show', function(e){
     // e.preventDefault();
@@ -232,6 +233,8 @@ jQuery(document).on('click', '.modal_show', function(e){
  });
 });
 
+
+
 // Product Listing Shop Page jquery
     jQuery(document).on('click', '#apply_options_btn', function(e){
         // alert('jdjhd');
@@ -250,7 +253,7 @@ jQuery(document).on('click', '.modal_show', function(e){
 
 
 //load more products
-    jQuery(document).on('click', '#load_products', function(e){
+    jQuery(document).on('click', '#load_products', function(e){sort_by_type
         jQuery('#loader').css('display','flex');
         var page_number = jQuery('#page_number').val();
         var total_record = jQuery('#total_record').val();
@@ -281,7 +284,15 @@ jQuery(document).on('click', '.modal_show', function(e){
                 jQuery('#loader').hide();
             },
         });
-    });
+	});
+// Sorting products	
+jQuery(document).on('change', '#sort_by_type',function(e){
+	jQuery("#load_products_form").submit();
+ });
+
+ jQuery(document).on('change', '#sort_by_limit',function(e){
+	jQuery("#load_products_form").submit();
+ });
 
 	//commeents
 jQuery(document).on('focusout','#order_comments', function(e){

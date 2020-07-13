@@ -1,21 +1,35 @@
 
 <script type="text/javascript">
-window.onload = function() {
-
-    //sortby
-    document.getElementById('sortbytype').addEventListener('change',function(){
-        jQuery("#load_products_form").submit();
-
-    });
-
-//sortby
-    document.getElementById('sortbylimit').addEventListener('change',function(){
-        jQuery("#load_products_form").submit();
-
-    });
+// window.onload = function() {
+    jQuery(function(){
+        jQuery("#sortbytype").on('change', function(){
+   alert("Works");
+ })
+  
+});
+// });
+    
 }
 //Display grid/list 3 Column
 jQuery(document).ready(function () {
+
+    //sortbytype
+    // document.getElementById('sortbytype').addEventListener('change',function(){
+    //     alert(1234);
+    //     jQuery("#load_products_form").submit();
+
+    // });
+
+//sortbylimit
+    // document.getElementById('sortbylimit').addEventListener('change',function(){
+    //     jQuery("#load_products_form").submit();
+
+    // });
+
+    jQuery('#sortbytype').on('change', function() {
+        alert(1234);
+        jQuery("#load_products_form").submit();
+    });
 
     jQuery('#list').on('click', function(){
         alert('hjdh');

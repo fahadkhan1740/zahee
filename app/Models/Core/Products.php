@@ -730,6 +730,8 @@ class Products extends Model
         $categories = DB::table('specials')->where('products_id', $products_id)->delete();
         $categories = DB::table('products_description')->where('products_id', $products_id)->delete();
         $categories = DB::table('products_attributes')->where('products_id', $products_id)->delete();
+        $Liked_products = DB::table('liked_products')->where('liked_products_id', $products_id)->delete();
+        $Liked_products = DB::table('customers_basket')->where('products_id', $products_id)->delete();
     }
 
     public function addinventory($id)

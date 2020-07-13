@@ -85,8 +85,83 @@
                                         </div>
                                     </div>
                                         @if(count($result['detail']['product_data'][0]->attributes)>0)
+
+                                    <div class="product-desc product-desc-color">
+
+                                    <label>Color</label>
+                                    <div class="custom___radio product__color__wrap">
+                                       <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+                                           </span>
+                                        </label>
+
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+                                           </span>
+                                        </label>
+
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+                                           </span>
+                                        </label>
+
+
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+                                           </span>
+                                        </label>
+                                        </div>
+                                    </div>
+
                                     <div class="product-desc product-desc-size">
-                                            @foreach( $result['detail']['product_data'][0]->attributes as $key=>$attributes_data )
+                                        <label>Size</label>
+                                    <div class="sizee__wrap custom___radio">
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           32
+                                           </span>
+                                        </label>
+
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           34
+                                           </span>
+                                        </label> 
+
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           36
+                                           </span>
+                                        </label>
+
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           38
+                                           </span>
+                                        </label>  
+
+                                        <label>
+                                           <input type="radio" name="radio" />
+                                           <span class="radio_bx">
+                                           40
+                                           </span>
+                                        </label>
+                                    </div>
+
+
+                                             @foreach( $result['detail']['product_data'][0]->attributes as $key=>$attributes_data )
                                                 <div class="">
                                                     <label>{{ $attributes_data['option']['name'] }}</label>
                                                     <div class="select-control ">
@@ -181,12 +256,12 @@
                                                 <a href="javascript:void(0)" class="btn btn-default stock-cart buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</a>
                                             </div>
                                         </div>
-                                        <div class="product-action-ele">
+                                        <div class="product-action-ele ">
                                             <ul>
                                                 <li><a href="javascript:void(0)" class="red-color whishlist" products_id="{{$result['detail']['product_data'][0]->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i> Add to Wish List</a></li>
                                                 <li class="dropdown">
                                                     <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <ul class="dropdown-menu dropdown-menu-right share__block" aria-labelledby="dropdownMenuLink">
                                                            <li class="dropdown-item">
                                                                <a href="mailto:?subject=I ♥ this product on ZaaHee!&amp;body=Check out this amazing product {{$result['detail']['product_data'][0]->products_name}} in Zaahee Here is the link:  {{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}"
                                                                title="Share by Email">
@@ -252,7 +327,84 @@
 
                         </div>
                         <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+                            <div class="rating__wrap">
+                                 <div class="rating__top__block">
+                                     <div class="left__box">
+                                         <h2>Product Title </h2>
+                                         <p class="grey">Address</p>
+
+                                         <div class="rating__star">
+                                             <h3>5.0</h3>
+                                             <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png" />
+                                             <p class="grey">18 reviews</p>
+                                         </div>
+                                     </div>
+                                     <div class="right__box">
+                                         <a href="#" class="edit__btn">Write a Review</a>
+                                     </div>
+                                 </div>
+
+                                 <div class="rating__comment">
+                                     <div class="list">
+                                         <figure style="background-image:url('https://via.placeholder.com/100');"></figure>
+                                         <div class="comment">
+                                             <div class="author">
+                                                 <h6>Author Name</h6>
+                                                 <p class="grey">1 Review</p>
+
+                                                 <div class="rating__star">
+                                                    <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png" />
+                                                    <p>18 reviews</p>
+                                                </div>
+                                             </div>
+
+                                             <div class="comment_content">
+                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                             </div>
+                                         </div>
+                                     </div>
+
+                                     <div class="list">
+                                         <figure style="background-image:url('https://via.placeholder.com/100');"></figure>
+                                         <div class="comment">
+                                             <div class="author">
+                                                 <h6>Author Name</h6>
+                                                 <p class="grey">1 Review</p>
+
+                                                 <div class="rating__star">
+                                                    <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png" />
+                                                    <p>18 reviews</p>
+                                                </div>
+                                             </div>
+
+                                             <div class="comment_content">
+                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                             </div>
+                                         </div>
+                                     </div>
+
+
+                                     <div class="list">
+                                         <figure style="background-image:url('https://via.placeholder.com/100');"></figure>
+                                         <div class="comment">
+                                             <div class="author">
+                                                 <h6>Author Name</h6>
+                                                 <p class="grey">1 Review</p>
+
+                                                 <div class="rating__star">
+                                                    <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png" />
+                                                    <p>18 reviews</p>
+                                                </div>
+                                             </div>
+
+                                             <div class="comment_content">
+                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

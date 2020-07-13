@@ -179,8 +179,9 @@
 
                              <label>@lang('website.Sort')</label>
                              <div class="form-group">
-                                 <select name="type" id="sortbytype" class="form-control">
+                                 <select name="type" id="sort_by_type" class="form-control">
                                    <option value="desc" @if(app('request')->input('type')=='desc') selected @endif>@lang('website.Newest')</option>
+                                   <option value="desc" @if(app('request')->input('type')=='asc') selected @endif>@lang('website.Oldest')</option>
                                    <option value="atoz" @if(app('request')->input('type')=='atoz') selected @endif>@lang('website.A - Z')</option>
                                    <option value="ztoa" @if(app('request')->input('type')=='ztoa') selected @endif>@lang('website.Z - A')</option>
                                    <option value="hightolow" @if(app('request')->input('type')=='hightolow') selected @endif>@lang('website.Price: High To Low')</option>
@@ -193,16 +194,13 @@
 
                              <label>@lang('website.Limit')</label>
                              <div class="form-group">
-                                 <select class="form-control"name="limit"id="sortbylimit">
+                                 <select class="form-control"name="limit" id="sort_by_limit">
                                    <option value="15" @if(app('request')->input('limit')=='15') selected @endif>15</option>
                                    <option value="30" @if(app('request')->input('limit')=='30') selected @endif>30</option>
                                    <option value="60" @if(app('request')->input('limit')=='60') selected @endif>60</option>
                                    </select>
                              </div>
                              <label>@lang('website.per page')</label>
-                                 @section('scripts')
-                           @include('web.common.scripts.shop_page_load_products')
-                                 @endsection
                            </form>
                         </div>
                        </div>

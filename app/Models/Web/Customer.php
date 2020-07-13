@@ -370,6 +370,12 @@ class Customer extends Model
 
           DB::table('products')->where('products_id','=',$liked_products_id)->decrement('products_liked');
           $products = DB::table('products')->where('products_id','=',$liked_products_id)->get();
+        //   ->LeftJoin('specials', function($join) {
+        //     $join->on('specials.products_id', '=', 'products.products_id')
+        //               ->where( function($query) {
+        //                   $query->where('specials.status','=', 1);
+        //               });
+        // })->select('specials.specials_new_products_price as discount_price','products.*')
             //get wishlist count
             $total_count = DB::table('liked_products')->where([
                 'liked_customers_id' => $liked_customers_id
@@ -479,7 +485,8 @@ class Customer extends Model
     		}
 
     		$data = array('page_number'=>0, 'type'=>'wishlist', 'limit'=>$limit, 'categories_id'=>'', 'search'=>'', 'min_price'=>'', 'max_price'=>'' );
-    		$products =  $productss->products($data);
+        $products =  $productss->products($data);
+  
     		$result['products'] = $products;
     		$cart = '';
     		$result['cartArray'] = $productss->cartIdArray($cart);

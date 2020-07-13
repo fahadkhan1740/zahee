@@ -44,9 +44,9 @@
                <div class="title-box">
                    <h6>Recent Search</h6>
                </div>
-               <!-- <div class="titlee-right">
+               <div class="titlee-right">
                    <a href="#" class="see-all-btn">See All</a>
-               </div> -->
+               </div>
            </div>
            <div class="product-slider b-product-slider">
 
@@ -105,6 +105,7 @@
                                        {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
                                    @endif
                                </p>
+                               <a href="{{ URL::to('/product-detail/'.$viewedProd->products_slug)}}" class="link-btn">Shop Now!</a>
                            </div>
                        </a>
                    </div>

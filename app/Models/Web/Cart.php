@@ -345,7 +345,6 @@ class Cart extends Model
 					 'products_id'  => $products_id,
 					 'session_id'   => $session_id,
 					 'customers_basket_quantity' => $customers_basket_quantity,
-					 'final_price' => $final_price,
 					 'customers_basket_date_added' => $customers_basket_date_added,
 				]);
 //        dd($request->option_id);

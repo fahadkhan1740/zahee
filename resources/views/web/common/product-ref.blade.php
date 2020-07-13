@@ -42,16 +42,18 @@
             <div class="items-content">
                 <h6>{{$products->products_name}}</h6>
                 <p>
-                    <span class="price ">
+                    <!-- <span class="price "> -->
                          @if(empty($products->discount_price))
-                            <span> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
-                    </span>
+                         <span class="price "> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
+                    <!-- </span> -->
                         @else
                         <span class="price new-price">{{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}</span>
                             <span class="price old-price"> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
 
                         @endif
-
+                </p>
+                <span class="price ">
+                <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn">Shop Now!</a>
             </div>
         </a>
     </div>

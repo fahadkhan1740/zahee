@@ -25,7 +25,7 @@
                                    $currency_value = $session_currency->value;
                                   }
 
-                              @endphp
+                              @endphp 
 
                             <div class="cart-items-wrap">
                                 @if(count($result['cart']) > 0)
@@ -78,10 +78,10 @@
                                                     }
                                                     ?>
                                                     <div class="price">
-                                                        @if(!empty($products->final_price))
+                                                        @if(!empty($products->final_price) && empty($products->discount_price))
                                                        
                                                             {{Session::get('symbol_left')}}{{($flash_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
-                                                        @elseif(!empty($products->discount_price))
+                                                        @elseif(!empty($products->discount_price) && !empty($products->final_price))
                                                        
                                                             <span class="old-price">{{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
                                                             <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
@@ -109,25 +109,28 @@
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-remove">
                                                      <p><a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}" class="remove"><i class="fa fa-trash" aria-hidden="true"></i>Remove</a></p>
-                                                     <!-- <p><a href="javascript:void(0)"  class="update-cart-value"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Cart</a></p> -->
                                                      <p><a href="{{ URL::to('/product-detail/'.$products->products_slug) }}" class="view-product"><i class="fa fa-eye" aria-hidden="true"></i>View</a></p>
                                                 </div>
                                            </div>
                                     </div>
                                     <div class="cart-item-col cart-item-right">
-                                        <p>Delivered by Mon, 20th ‘18</p>
+                                        <!-- <p>Delivered by Mon, 20th ‘18</p> -->
                                     </div>
                                 </div>
                                 @endforeach
                                 <!-- cart -items -->
                                 @php
-                                $total = ($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '');
-                                var_dump($total);
+                                    $total = ($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '');
                                 @endphp
                                 <div class="cart-action-wrap text-right ">
-                                    <a href="{{ URL::to('/shop')}}" class="link-btn">@lang('website.Back To Shopping')</a>
+                                @if($total < 5 )
+                                    <div class="alert alert-secondary" role="alert">
+                                      Minimum order amount is 5.00 KWD.
+                                    </div>
+                                    @endif
+                                    <a href="{{ URL::to('/shop')}}" class="btn btn-default">@lang('website.Back To Shopping')</a>
                                     <a href="{{ URL::to('/wishlist')}}" class="btn btn-default">@lang('website.Add from wishlist')</a>
-                                    <a href="{{ URL::to('/checkout')}}" class="btn btn-default" @if( $total != 5.00){ 'disabled' } @enfif>@lang('website.proceedToCheckout')</a>
+                                    <a href="@if($total < 5 ) javascript:void(0); @else {{ URL::to('/checkout')}} @endif" class="btn btn-default" @if($total < 5 ) disabled @endif >@lang('website.proceedToCheckout')</a>
                                 </div>
                                     @else
                                         <div class="cart-item">
@@ -137,12 +140,12 @@
                                                     <figcaption>No Products in your Cart</figcaption>
                                                 </figure>
                                             </div>
-
-                                            <div class="cart-action-wrap text-right ">
-                                    <a href="{{ URL::to('/shop')}}" class="link-btn">@lang('website.Back To Shopping')</a>
+                                            </div>
+                                   <div class="cart-action-wrap text-center ">
+                                    <a href="{{ URL::to('/shop')}}" class="btn btn-default">@lang('website.Back To Shopping')</a>
                                     <a href="{{ URL::to('/wishlist')}}" class="btn btn-default">@lang('website.Add from wishlist')</a>
                                 </div>
-                                        </div>
+                                       
                                         
                                 @endif
                             </div>

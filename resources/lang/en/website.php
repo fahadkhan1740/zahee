@@ -452,7 +452,7 @@ return [
 
 	'Shop'=>'Shop',
 
-	'Newest'=>'Newest',
+	'Newest'=>'Newest - Oldest',
 
 	'Price: High To Low'=>'Price: High To Low',
 
@@ -773,4 +773,5 @@ return [
     'What’s HOT' => 'What’s HOT',
     'Buy Now' => 'Buy Now',
     'Add from wishlist' => 'Add from wishlist',
+    'Oldest' => 'Oldest - Newest',
 ];

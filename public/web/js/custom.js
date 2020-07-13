@@ -171,7 +171,7 @@ jQuery(document).ready(function() {
         infinite: false,
         rewind:true,
         speed: 1000,
-        slidesToShow: 6,
+        slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000

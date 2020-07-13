@@ -287,8 +287,10 @@ private function recursivecategories1(){
     			}
     			//wishlist customer id
     			if($type == "wishlist"){
-    				$categories->LeftJoin('liked_products', 'liked_products.liked_products_id', '=', 'products.products_id')
-            ->select('products.*','image_categories.path as image_path', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url');
+					$categories->LeftJoin('liked_products', 'liked_products.liked_products_id', '=', 'products.products_id')
+					->LeftJoin('specials', function ($join) use ($currentDate) {
+    					$join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1')->where('expires_date', '>', $currentDate);
+					})->select('products.*','image_categories.path as image_path', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url','specials.specials_new_products_price as discount_price');
 
     			}
     			//parameter special
@@ -534,7 +536,9 @@ private function recursivecategories1(){
 
     			//count
     			$total_record = $categories->get();
-    			$products  = $categories->skip($skip)->take($take)->get();
+				$products  = $categories->skip($skip)->take($take)->get();
+				
+				// dd($products);
 
     			$result = array();
     			$result2 = array();

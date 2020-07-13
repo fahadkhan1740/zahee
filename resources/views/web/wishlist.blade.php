@@ -106,13 +106,12 @@
 													?>
 													<h5><a href="{{url('/shop')}}">{{$products->products_name}}</a></h5>
 													<h6>Total Price:
-                                                        @php //dd($products); @endphp
-														@if(!empty($products->discount_price))
-					                  {{Session::get('symbol_left')}}{{$discounted_price+0}}{{Session::get('symbol_right')}}
-					                  <span> {{Session::get('symbol_left')}}{{$products->price+0}}{{Session::get('symbol_right')}}</span>
-					                  @else
-					                  {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
-					                  @endif
+													@if(!empty($products->discount_price))
+													<span class="old-price">{{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}</span>
+                                                            <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)}}{{Session::get('symbol_right')}}</span>				
+													@else
+													<span class="new-price">{{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}</span>
+													@endif
 													</h6>
 													<div class="buttons">
                                                         <input type="hidden" id="number"  value="1" />
