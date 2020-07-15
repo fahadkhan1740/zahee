@@ -1564,6 +1564,8 @@ return [
     'home' => 'Home (7:00 A.M. - 9:00 P.M., All Day)',
     'contactNumber' => 'Contact Number',
     'Save_And_complete' => 'Save and Complete',
+    'ProductSubTitle' => 'Product Sub Title',
+    'EnterProductSubTitle' => 'Enter Product Sub Title',
 
 
 ];

@@ -497,6 +497,16 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="form-group">
+                                                                    <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.ProductSubTitle') }}<span style="color:red;">*</span> ({{ $languages->name }})</label>
+                                                                    <div class="col-sm-10 col-md-8">
+                                                                        <input type="text" name="product_sub_title_<?=$description_data['languages_id']?>" class="form-control field-validate" value='{{$description_data['product_sub_title']}}'>
+                                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                                            {{ trans('labels.EnterProductSubTitle') }} {{ $description_data['language_name'] }} </span>
+                                                                        <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
+                                                                    </div>
+                                                                </div>
+
                                                             <div class="form-group external_link" style="display: none">
                                                                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.External URL') }} ({{ $description_data['language_name'] }})</label>
                                                                 <div class="col-sm-10 col-md-4">

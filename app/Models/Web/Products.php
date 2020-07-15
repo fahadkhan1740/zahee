@@ -255,7 +255,10 @@ private function recursivecategories1(){
     		}elseif($type == "flashsale"){ //flashsale products
     			$sortby = "flash_sale.flash_start_date";
     			$order = "asc";
-    		}else{
+    		}elseif($type == "asc"){
+				$sortby = "products.products_id";
+    			$order = "asc";
+			}else{
     			$sortby = "products.products_id";
     			$order = "desc";
     		}

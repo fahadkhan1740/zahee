@@ -1,3 +1,4 @@
+
 <main id="scrollbar-body" data-scrollbar>
     <!-- banner wrap -->
 
@@ -72,7 +73,8 @@
                                             @endif
                                             <li class="active">{{$result['detail']['product_data'][0]->products_name}}</li>
                                         </ul>
-                                        <h6>{{$result['detail']['product_data'][0]->products_name}}</h6>
+                                        <h4>{{$result['detail']['product_data'][0]->products_name}}</h4>
+                                        <h6>{{$result['detail']['product_data'][0]->product_sub_title}}</h6>
 
                                         <div class="product-desc-sub">
                                             <div class="product-desc-sub-ele">
@@ -87,82 +89,61 @@
                                         @if(count($result['detail']['product_data'][0]->attributes)>0)
 
                                     <div class="product-desc product-desc-color">
-
-                                    <label>Color</label>
-                                    <div class="custom___radio product__color__wrap">
-                                       <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-                                           </span>
-                                        </label>
-
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-                                           </span>
-                                        </label>
-
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-                                           </span>
-                                        </label>
-
-
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-                                           </span>
-                                        </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-desc product-desc-size">
-                                        <label>Size</label>
-                                    <div class="sizee__wrap custom___radio">
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           32
-                                           </span>
-                                        </label>
-
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           34
-                                           </span>
-                                        </label> 
-
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           36
-                                           </span>
-                                        </label>
-
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           38
-                                           </span>
-                                        </label>  
-
-                                        <label>
-                                           <input type="radio" name="radio" />
-                                           <span class="radio_bx">
-                                           40
-                                           </span>
-                                        </label>
-                                    </div>
-
-
                                              @foreach( $result['detail']['product_data'][0]->attributes as $key=>$attributes_data )
-                                                <div class="">
+                                             <div class="product-desc product-desc-color">
+
+<!-- <label>Color</label>
+<div class="custom___radio product__color__wrap">
+   <label>
+       <input type="radio" name="radio" />
+       <span class="radio_bx">
+       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+       </span>
+    </label>
+
+    <label>
+       <input type="radio" name="radio" />
+       <span class="radio_bx">
+       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+       </span>
+    </label>
+
+    <label>
+       <input type="radio" name="radio" />
+       <span class="radio_bx">
+       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+       </span>
+    </label>
+
+
+    <label>
+       <input type="radio" name="radio" />
+       <span class="radio_bx">
+       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
+       </span>
+    </label>
+    </div>
+</div> -->
+
+                                                <div class="product-desc product-desc-size">
+                                                    <label>
+                                                    {{ $attributes_data['option']['name'] }} 
+                                                    <input type="hidden" name="{{ $attributes_data['option']['id'] }}" class="currentstock attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}" />
+                                                    </label>
+                                                <div class="sizee__wrap custom___radio">
+                                                @foreach($attributes_data['values'] as $values_data)
+                                                    <label>
+                                                    <input type="radio" attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}" />
+                                                    
+                                                               
+                                                                <span class="radio_bx">
+                                                                {{ $values_data['value'] }}
+                                                              
+                                                    </label>
+                                                    @endforeach
+                                                </div>
+                                                </div>
+                                                                                                <!-- <div class="">
                                                     <label>{{ $attributes_data['option']['name'] }}</label>
                                                     <div class="select-control ">
                                                         <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
@@ -185,11 +166,11 @@
                                                             @endif
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             @endforeach
                                     </div>
                                         @endif
-{{--                                        @if($result['detail']['product_data'][0]->defaultStock > 0)--}}
+{{--                                        @if($result['detail']['product_data'][0]->defaultStock > 0
                                     <div class="product-desc product-desc-qty">
                                         <div class="product-label-wrap">
                                             <div class="label"><p>Quantity:</p></div>
@@ -252,8 +233,20 @@
 
                                             </h6>
                                             <div class="button-outer">
-                                                <button type="button" class="btn btn-border add-to-Cart stock-cart" products_id="{{$result['detail']['product_data'][0]->products_id}}">Add to Cart</button>
-                                                <a href="javascript:void(0)" class="btn btn-default stock-cart buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</a>
+                                                @if(!in_array($result['detail']['product_data'][0]->products_id ,$result['cartArray']))
+                                                    @if($result['detail']['product_data'][0]->defaultStock  == 0)
+                                                    <button type="button" class="btn btn-block btn-danger" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Out of Stock')</button>
+                                                    @else
+                                                    <button type="button" class="btn btn-border add-to-Cart stock-cart" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Add to Cart')</button>
+                                                    <a href="javascript:void(0)" class="btn btn-default stock-cart buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</a>
+                                                    @endif
+                                                @else 
+                                                    @if($result['detail']['product_data'][0]->defaultStock  == 0)
+                                                    <button type="button" class="btn btn-block btn-danger" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Out of Stock')</button>
+                                                    @else
+                                                    <a href="{{ URL::to('/viewcart')}}" class="btn btn-default stock-cart buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Go to Cart')</a>
+                                                    @endif
+                                              @endif
                                             </div>
                                         </div>
                                         <div class="product-action-ele ">
@@ -303,7 +296,6 @@
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -314,17 +306,11 @@
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" data-toggle="tab" href="#nav-des">Description</a>
                         <a class="nav-item nav-link"  data-toggle="tab" href="#nav-review" >Reviews</a>
-                        <a class="nav-item nav-link"  data-toggle="tab" href="#nav-tag" >Need Help ?</a>
-
                     </div>
 
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-des" role="tabpanel" aria-labelledby="nav-home-tab">
                             <?=stripslashes($result['detail']['product_data'][0]->products_description)?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-tag" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-
                         </div>
                         <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <div class="rating__wrap">

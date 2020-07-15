@@ -215,6 +215,7 @@ class Products extends Model
             $products_name = 'products_name_' . $languages_data->languages_id;
             $products_url = 'products_url_' . $languages_data->languages_id;
             $products_description = 'products_description_' . $languages_data->languages_id;
+            $product_sub_title = 'product_sub_title' . $languages_data->languages_id;
             //left banner
             $products_left_banner = 'products_left_banner_' . $languages_data->languages_id;
             $products_left_banner_start_date = 'products_left_banner_start_date_' . $languages_data->languages_id;
@@ -283,10 +284,12 @@ class Products extends Model
                 $rightBanner = '';
             }
             $req_products_name = $request->$products_name;
+            $req_product_sub_title = $request->$product_sub_title;
             $req_products_url = $request->$products_url;
             $req_products_description = $request->$products_description;
             DB::table('products_description')->insert([
                 'products_name' => $req_products_name,
+                'product_sub_title' => $req_product_sub_title,
                 'language_id' => $languages_data->languages_id,
                 'products_id' => $products_id,
                 'products_url' => $req_products_url,
@@ -443,6 +446,7 @@ class Products extends Model
 
             if (count($description) > 0) {
                 $description_data[$languages_data->languages_id]['products_name'] = $description[0]->products_name;
+                $description_data[$languages_data->languages_id]['product_sub_title'] = $description[0]->product_sub_title;
                 $description_data[$languages_data->languages_id]['products_url'] = $description[0]->products_url;
                 $description_data[$languages_data->languages_id]['products_description'] = $description[0]->products_description;
                 $description_data[$languages_data->languages_id]['products_left_banner'] = $description[0]->products_left_banner;
@@ -459,6 +463,7 @@ class Products extends Model
             } else {
                 $description_data[$languages_data->languages_id]['products_name'] = '';
                 $description_data[$languages_data->languages_id]['products_url'] = '';
+                $description_data[$languages_data->languages_id]['product_sub_title'] = '';
                 $description_data[$languages_data->languages_id]['products_description'] = '';
                 $description_data[$languages_data->languages_id]['products_left_banner'] = '';
                 $description_data[$languages_data->languages_id]['products_left_banner_start_date'] = '';
@@ -566,6 +571,7 @@ class Products extends Model
             $products_name = 'products_name_' . $languages_data->languages_id;
             $products_url = 'products_url_' . $languages_data->languages_id;
             $products_description = 'products_description_' . $languages_data->languages_id;
+            $product_sub_title = 'product_sub_title_' . $languages_data->languages_id;
             //left banner
             $products_left_banner = 'products_left_banner_' . $languages_data->languages_id;
             $products_left_banner_start_date = 'products_left_banner_start_date_' . $languages_data->languages_id;
@@ -617,10 +623,12 @@ class Products extends Model
                 $req_products_name = $request->$products_name;
                 $req_products_url = $request->$products_url;
                 $req_products_description = $request->$products_description;
+                $req_product_sub_title = $request->$product_sub_title;
 
                 DB::table('products_description')->where('products_id', '=', $products_id)
                     ->where('language_id', '=', $languages_data->languages_id)->update([
                         'products_name' => $req_products_name,
+                        'product_sub_title' => $req_product_sub_title,
                         'products_url' => $req_products_url,
                         'products_left_banner' => $leftBanner,
                         'products_right_banner' => $rightBanner,
@@ -635,8 +643,10 @@ class Products extends Model
                 $req_products_name = $request->$products_name;
                 $req_products_url = $request->$products_url;
                 $req_products_description = $request->$products_description;
+                $req_product_sub_title = $request->$product_sub_title;
                 DB::table('products_description')->insert([
                     'products_name' => $req_products_name,
+                    'product_sub_title' => $req_product_sub_title,
                     'language_id' => $languages_data->languages_id,
                     'products_id' => $products_id,
                     'products_url' => $req_products_url,

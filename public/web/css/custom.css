@@ -1272,3 +1272,31 @@ body[dir="rtl"] .checkout-module .heading
     top:0;
     left: 0;
 }
+
+
+.banner-ads-full
+{
+    height: 400px;
+}
+.banner-ads-full>div
+{
+    width: 100%;
+    height: 100%;
+}
+.banner-ads-full figure >a,
+.banner-ads-full figure
+{
+    height: 100%;
+    width: 100%;
+}
+.banner-ads-full figure img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ads__warp .titlee-right
+{
+    padding-right: 0;
+}

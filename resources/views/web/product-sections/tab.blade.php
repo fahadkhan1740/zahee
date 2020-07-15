@@ -1,4 +1,25 @@
 <?php //dd($result['top_seller']['product_data']); ?>
+
+<div class="product-wrap ads__warp">
+<div class="title-wrap d-flex justify-content-between align-items-center">
+    <div class="title-box">
+      <h6>TRENDs</h6>
+    </div>
+    <div class="titlee-right">
+        <a href="#" class="see-all-btn">See All</a>
+    </div>
+  </div>
+   <div class="banner  banner-ads-full  row">
+        <div  class="col-md-12">
+            <figure>
+                <a href="#">
+                 <img src="https://via.placeholder.com/1500X400" alt="placeholder" />
+                </a>
+            </figure>
+        </div>
+    </div>
+ </div>
+ 
 <div class="product-wrap" >
     @if($result['special']['success']==1)
     <div class="title-wrap d-flex justify-content-between align-items-center">
@@ -85,6 +106,8 @@
               <p class="primary-color"><?php echo (int)$discount_percentage; ?>% Off</p>
                 <?php }?>
               <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn">Shop Now!</a>
+              <a href="javascript:void(0);" class="link-btn cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+              <!-- <button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button> -->
             </div>
               </a>
           </div>
@@ -222,6 +245,7 @@
                                 <h6>{{$products->products_name}}</h6>
                                 <p class="primary-color"><?php echo @round($discount_percentage); ?> % Off</p>
                                 <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn">Shop Now!</a>
+                                <a href="javascript:void(0);" class="link-btn cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
                             </div>
                         </div>
                     </div>

@@ -54,6 +54,7 @@
                 </p>
                 <span class="price ">
                 <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn">Shop Now!</a>
+                <a href="javascript:void(0);" class="link-btn cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
             </div>
         </a>
     </div>

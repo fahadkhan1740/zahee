@@ -234,9 +234,12 @@
                                        <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="{{$products->products_id}}"><i class="fas fa-eye"></i></div>
                                          <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
                                        </div>
-                                   <!-- <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"> -->
-                                      <img class="img-fluid" src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}">
-                                   <!-- </a> -->
+                                   <a style="max-width: 100%;height: 100%;object-fit: cover;" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
+                                   <!-- <figure> -->
+                                      <img  src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
+                                  <!-- </figure> -->
+                                      <!-- <img class="img-fluid" src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}"> -->
+                                   </a>
                                  </div>
                                    @section('scripts')
                                  @include('web.common.scripts.addToCompare')
