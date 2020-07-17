@@ -131,16 +131,14 @@
                                                     <input type="hidden" name="{{ $attributes_data['option']['id'] }}" class="currentstock attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}" />
                                                     </label>
                                                 <div class="sizee__wrap custom___radio">
-                                                @foreach($attributes_data['values'] as $values_data)
+                                                @foreach($attributes_data['values'] as $k => $values_data)
                                                     <label>
-                                                    <input type="radio" attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}" />
-                                                    
-                                                               
-                                                                <span class="radio_bx">
-                                                                {{ $values_data['value'] }}
-                                                              
+                                                    <input type="radio" attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = "{{ $values_data['price_prefix'] }}"  value_price ="{{ $values_data['price']+0 }}" name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity(`{{ $attributes_data['option']['id'] }}`)" class="currentstock attributeid_<?=$index++?>" attributeid = "{{$attributes_data['option']['id']}}" />
+                                                    <span class="radio_bx">{{ $values_data['value'] }}</span>
                                                     </label>
+                                                    
                                                     @endforeach
+                                                    <span id="current_stocks"></span>
                                                 </div>
                                                 </div>
                                                                                                 <!-- <div class="">
@@ -170,18 +168,18 @@
                                             @endforeach
                                     </div>
                                         @endif
-{{--                                        @if($result['detail']['product_data'][0]->defaultStock > 0
+                                    @if($result['detail']['product_data'][0]->defaultStock > 0)
                                     <div class="product-desc product-desc-qty">
                                         <div class="product-label-wrap">
                                             <div class="label"><p>Quantity:</p></div>
                                             <div class="qty-wrap qty-sm">
                                                     <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                                    <input type="number" id="number" readonly name="quantity" value="{{$result['detail']['product_data'][0]->products_min_order}}">
+                                                    <input type="number" id="number" readonly name="quantity" class="qty" value="{{$result['detail']['product_data'][0]->products_min_order}}">
                                                     <div class="value-button" id="increase" onclick="increaseValue()" >+</div>
                                             </div>
                                         </div>
                                     </div>
-{{--                                        @endif--}}
+                                    @endif
 
 
                                     <div class="product-desc product-desc-action">
@@ -224,11 +222,11 @@
                                                 }
                                                 ?>
                                                 @if(!empty($result['detail']['product_data'][0]->flash_price))
-                                                    {{Session::get('symbol_left')}}{{$flash_price+0}}{{Session::get('symbol_right')}}
+                                                    {{Session::get('symbol_left')}} {{$flash_price+0}} {{Session::get('symbol_right')}}
                                                 @elseif(!empty($result['detail']['product_data'][0]->discount_price))
-                                                    {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
+                                                    {{Session::get('symbol_left')}} {{$discount_price+0}} {{Session::get('symbol_right')}}
                                                 @else
-                                                    {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
+                                                    {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}
                                                 @endif
 
                                             </h6>
@@ -244,7 +242,7 @@
                                                     @if($result['detail']['product_data'][0]->defaultStock  == 0)
                                                     <button type="button" class="btn btn-block btn-danger" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Out of Stock')</button>
                                                     @else
-                                                    <a href="{{ URL::to('/viewcart')}}" class="btn btn-default stock-cart buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Go to Cart')</a>
+                                                    <a href="{{ URL::to('/viewcart')}}" class="btn btn-default" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Go to Cart')</a>
                                                     @endif
                                               @endif
                                             </div>
@@ -316,8 +314,8 @@
                             <div class="rating__wrap">
                                  <div class="rating__top__block">
                                      <div class="left__box">
-                                         <h2>Product Title </h2>
-                                         <p class="grey">Address</p>
+                                         <!-- <h2>Product Title </h2>
+                                         <p class="grey">Address</p> -->
 
                                          <div class="rating__star">
                                              <h3>5.0</h3>
@@ -331,45 +329,6 @@
                                  </div>
 
                                  <div class="rating__comment">
-                                     <div class="list">
-                                         <figure style="background-image:url('https://via.placeholder.com/100');"></figure>
-                                         <div class="comment">
-                                             <div class="author">
-                                                 <h6>Author Name</h6>
-                                                 <p class="grey">1 Review</p>
-
-                                                 <div class="rating__star">
-                                                    <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png" />
-                                                    <p>18 reviews</p>
-                                                </div>
-                                             </div>
-
-                                             <div class="comment_content">
-                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                             </div>
-                                         </div>
-                                     </div>
-
-                                     <div class="list">
-                                         <figure style="background-image:url('https://via.placeholder.com/100');"></figure>
-                                         <div class="comment">
-                                             <div class="author">
-                                                 <h6>Author Name</h6>
-                                                 <p class="grey">1 Review</p>
-
-                                                 <div class="rating__star">
-                                                    <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png" />
-                                                    <p>18 reviews</p>
-                                                </div>
-                                             </div>
-
-                                             <div class="comment_content">
-                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                             </div>
-                                         </div>
-                                     </div>
-
-
                                      <div class="list">
                                          <figure style="background-image:url('https://via.placeholder.com/100');"></figure>
                                          <div class="comment">
@@ -402,7 +361,7 @@
         <div class="container">
             <div class="title-wrap d-flex justify-content-between align-items-center">
                 <div class="title-box">
-                    <h6>You may Like</h6>
+                    <h6>@lang('website.Related Products')</h6>
                 </div>
             </div>
             <div class="product-slider b-product-slider">

@@ -41,7 +41,9 @@
                                     <div class="cart-item-col cart-item-left">
                                            <div class="cart-item-sb-wrap cart-item-top">
                                                 <div class="cart-item-sb-col-left cart-item-sb-col cart-item-product">
+                                                <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
                                                     <figure class="cart-figure-pro"><img src="{{url('public').'/'.$products->image_path}}" alt="{{$products->products_name}}"></figure>
+                                                    </a>
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-detail">
                                                     <h6><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h6>
@@ -78,16 +80,17 @@
                                                     }
                                                     ?>
                                                     <div class="price">
-                                                        @if(!empty($products->final_price) && empty($products->discount_price))
-                                                       
-                                                            {{Session::get('symbol_left')}}{{($flash_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
+                                                        @if(!empty($products->final_price) && empty($products->discount_price))                                                       
+                                                            Price: {{Session::get('symbol_left')}}{{($flash_price+0)}}{{Session::get('symbol_right')}}
+                                                            Sub Total: {{Session::get('symbol_left')}}{{($flash_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @elseif(!empty($products->discount_price) && !empty($products->final_price))
-                                                       
-                                                            <span class="old-price">{{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
-                                                            <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}</span>
-                                                        @else
-                                                        
-                                                            {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
+                                                        Price:
+                                                            <span class="old-price"> {{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}</span>
+                                                            <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)}}{{Session::get('symbol_right')}}</span>
+                                                        Sub Total: {{Session::get('symbol_left')}}{{($discount_price+0)}}{{Session::get('symbol_right')}}   
+                                                        @else                        
+                                                        Price: {{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}
+                                                        Sub Total: {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
                                                         @endif
                                                     </div>
                                                 </div>
@@ -104,7 +107,7 @@
                                                     <form class="qty-wrap qty-sm">
                                                         <div class="value-button update-cart-value" id="decrease-{{$k+1}}" action="decrease" products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k+1}}" value="Decrease Value">-</div>
                                                         <input type="number" class="number" id="number-{{$k+1}}" name="quantity[]" readonly value="{{$products->customers_basket_quantity}}" min="{{$products->min_order}}" max="{{$products->max_order}}" />
-                                                        <div class="value-button update-cart-value" id="increase-{{$k+1}}" action="increase"  products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k+1}}" value="Increase Value">+</div>
+                                                        <div class="value-button update-cart-value" id="increase-{{$k+1}}" action="increase"  products_id="{{$products->products_id}}" baskt_id="{{$products->customers_basket_id}}" index="{{$k+1}}"  value="Increase Value">+</div>
                                                       </form>
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-remove">
@@ -185,11 +188,11 @@
                                     </li>
                                     <li>
                                         <span class="cart-price-col">Delivery Charges</span>
-                                        <span class="cart-price-col">{{Session::get('symbol_left')}}0{{Session::get('symbol_right')}}</span>
+                                        <span class="cart-price-col">{{Session::get('symbol_left')}} {{session('shipping_detail')['shipping_price']}} {{Session::get('symbol_right')}}</span>
                                     </li>
                                     <li class="total-amount">
                                         <span class="cart-price-col">@lang('website.Total')</span>
-                                        <span class="cart-price-col">{{Session::get('symbol_left')}}{{($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '')}}{{Session::get('symbol_right')}}</span>
+                                        <span class="cart-price-col">{{Session::get('symbol_left')}} {{($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '')+session('shipping_detail')['shipping_price']}} {{Session::get('symbol_right')}}</span>
                                     </li>
                                 </ul>
                             </div>

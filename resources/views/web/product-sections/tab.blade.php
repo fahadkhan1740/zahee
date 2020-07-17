@@ -27,7 +27,7 @@
       <h6>@lang('website.Deals of the day')</h6>
     </div>
     <div class="titlee-right">
-        <a href="#" class="see-all-btn">See All</a>
+        <a href="{{ URL::to('/shop?load_products=1&type=special&limit=15')}}" class="see-all-btn">See All</a>
     </div>
   </div>
     <div class="product-slider b-product-slider">
@@ -68,7 +68,7 @@
           @foreach($result['flash_sale']['product_data'] as $key=>$products)
         <div class="items-list text-center">
           <div class="items-box-wrap">
-          <a href="#" class="heart-icon whishlist" products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
+          <a href="{{ URL::to('/shop?load_products=1&type=flashsale&limit=15')}}" class="heart-icon whishlist" products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
               <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
             <figure>
                 <img src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
@@ -127,7 +127,7 @@
           <h6>@lang('website.Most Selling')</h6>
         </div>
         <div class="titlee-right">
-            <a href="#" class="see-all-btn">See All</a>
+            <a href="{{ URL::to('/shop?load_products=1&type=topseller&limit=15')}}" class="see-all-btn">See All</a>
         </div>
       </div>
         <div class="product-slider b-product-slider">
@@ -200,7 +200,7 @@
                 <h6>@lang('website.What’s HOT')</h6>
             </div>
             <div class="titlee-right">
-                <a href="#" class="see-all-btn">See All</a>
+                <a href="{{ URL::to('/shop?load_products=1&type=mostliked&limit=15')}}" class="see-all-btn">See All</a>
             </div>
         </div>
 

@@ -474,6 +474,11 @@ header .account-wrap .dropdown .dropdown-toggle img
 }
 .old-price {
     text-decoration: line-through solid red;
+    font-size: 17px;
+}
+
+.new-price {
+    color:#000;
 }
 .view-cart{background-color:#f7f7f7 !important;}
 
@@ -1082,8 +1087,8 @@ body[dir="rtl"] .checkout-module .heading
 .product-wrap .product-slider .items-list .items-box-wrap a>figure img,
 .product-wrap .product-slider .items-list .items-box-wrap figure>a img
  {
-    height: 100%;
-    object-fit: contain;
+    height: 100%;  
+    object-fit: cover;
     width: 100%;
 }  
 
@@ -1300,3 +1305,28 @@ body[dir="rtl"] .checkout-module .heading
 {
     padding-right: 0;
 }
+
+.items-list figure img
+{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.listing .product article .thumb>a>img,
+.griding .product article .thumb>a>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+@media only screen and (max-width:1499px)
+{
+    header .navbar .navbar-collapse ul>li 
+    {
+        margin-right: 20px;
+    }
+}
+
+
+

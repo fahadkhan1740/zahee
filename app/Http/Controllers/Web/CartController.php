@@ -18,6 +18,7 @@ use Illuminate\Routing\Controller;
 use App\Models\Web\Products;
 use App\Models\Web\Index;
 use App\Models\Web\Cart;
+use App\Models\Core\Shipping_method;
 
 //for Carbon a value
 use Carbon;
@@ -30,12 +31,14 @@ class CartController extends Controller
 	public function __construct(
 		                  Index $index,
 											Products $products,
-											Cart $cart
+											Cart $cart,
+											Shipping_method $Shipping_method
 											)
 	{
 		$this->index = $index;
 		$this->products = $products;
 		$this->cart = $cart;
+		$this->Shipping_method = $Shipping_method;
 		$this->theme = new ThemeController();
 
 	}
@@ -62,7 +65,15 @@ class CartController extends Controller
 				}
 			}
 		}
-		//dd($result['cart']);
+
+		// Get Shipping price  Data 
+		$flate_rate= $this->Shipping_method->flateRate();
+		// dd($flate_rate['flate_rate']);
+		session(['shipping_detail' => array(
+			'shipping_price' => $flate_rate->flate_rate,
+			'mehtod_name' => 'Flat Rate'
+		)]);
+
 		return view("web.carts.viewcart", ['title' => $title,'final_theme' => $final_theme])->with('result', $result);
 	}
 

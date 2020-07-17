@@ -106,17 +106,17 @@
                        @if($result['products']['success']==1)
                        @foreach($result['products']['product_data'] as $key=>$products)
 
-                       <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                       <div class="col-12 col-sm-12 col-md-6 col-lg-4 griding">
                            <!-- Product -->
                            <div class="product">
                              <article>
                                <div class="thumb">
                                    <div class="icons mobile-icons d-lg-none d-xl-none">
                                      <div class="icon-liked">
-                                       <a class="icon active is_liked" products_id="<?=$products->products_id?>">
+                                       <a href="#" class="icon active is_liked" products_id="<?=$products->products_id?>">
                                          <i class="fas fa-heart"></i>
-                                         <span  class="badge badge-secondary counter"  >{{$products->products_liked}}</span>
                                        </a>
+                                         <span  class="badge badge-secondary counter"  >{{$products->products_liked}}</span>
                                      </div>
                                      <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="{{$products->products_id}}"><i class="fas fa-eye"></i></div>
                                        <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
@@ -204,10 +204,10 @@
                                <div class="product-hover d-none d-lg-block d-xl-block">
                                    <div class="icons">
                                      <div class="icon-liked">
-                                       <a class="icon active is_liked" products_id="<?=$products->products_id?>">
+                                       <a href="#" class="icon active is_liked" products_id="<?=$products->products_id?>">
                                          <i class="fas fa-heart"></i>
-                                         <span  class="badge badge-secondary counter"  >{{$products->products_liked}}</span>
                                        </a>
+                                         <span  class="badge badge-secondary counter"  >{{$products->products_liked}}</span>
                                      </div>
                                      <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="{{$products->products_id}}"><i class="fas fa-eye"></i></div>
                                        <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
@@ -432,3 +432,4 @@
 
    </div>
  </section>
+  

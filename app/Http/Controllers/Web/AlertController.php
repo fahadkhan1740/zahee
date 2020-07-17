@@ -202,8 +202,10 @@ class AlertController extends Controller
 				$functionName = 'onesignalNotification';
 			}
 
+		// dd($existUser[0]);
+
 			//get device id
-			$device_id = $this->userDevice($existUser[0]->customers_id);
+			$device_id = $this->userDevice($existUser[0]->id);
 			if(!empty($device_id)){
 				$response = $this->$functionName($device_id, $sendData);
 			}

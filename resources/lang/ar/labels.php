@@ -1074,7 +1074,7 @@ return [
 	'NewProductEmailPart2'=>'is addedd with affordable price',
 	'newsNotificationTitle'=>'New News',
 	'newsNotficationMessagePart1'=>'',
-	'fogotPasswordEmailTitle'=>'Ionic Zaahee Password Recovery',
+	'fogotPasswordEmailTitle'=>'Zaahee Password Recovery',
 	'WelcometoEcommerce'=>'Welcome to Zaahee',
 	'forgotNotificationTitle'=>'Forgot Password',
 	'forgotNotificationMessage'=>'Your password has been sent to your email address.',
@@ -1566,6 +1566,7 @@ return [
     'Save_And_complete' => 'Save and Complete',
     'ProductSubTitle' => 'Product Sub Title',
     'EnterProductSubTitle' => 'Enter Product Sub Title',
+    'Status' => 'Status',
 
 
 ];

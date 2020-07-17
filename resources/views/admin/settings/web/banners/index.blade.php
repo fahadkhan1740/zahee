@@ -22,7 +22,7 @@
           <div class="box-header">
             <h3 class="box-title">{{ trans('labels.ListingConstantBanners') }} </h3>
             <div class="box-tools pull-right">
-            	<!-- <a href="{{ URL::to('admin/addconstantbanner') }}" type="button" class="btn btn-block btn-primary">{{ trans('labels.AddNewBanner') }}</a> -->
+            	<a href="{{ URL::to('admin/addconstantbanner') }}" type="button" class="btn btn-block btn-primary">{{ trans('labels.AddNewBanner') }}</a>
             </div>
           </div>
 
@@ -67,7 +67,7 @@
 
                             <td><a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Edit') }}" href="editconstantbanner/{{ $banners->banners_id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                            <!-- <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Delete') }}" id="deleteBannerId" banners_id ="{{ $banners->banners_id }}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+                            <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Delete') }}" id="deleteBannerId" banners_id ="{{ $banners->banners_id }}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </tr>
                     @endforeach
                     @else

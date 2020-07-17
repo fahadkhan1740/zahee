@@ -41,10 +41,10 @@
                         <h1>{{$result['detail']['product_data'][0]->products_name}}</h1>
                         <div class="list-main">
                             <div class="icon-liked">
-                              <a class="icon active is_liked" products_id="<?=$result['detail']['product_data'][0]->products_id?>">
+                              <a href="#" class="icon active is_liked" products_id="<?=$result['detail']['product_data'][0]->products_id?>">
                                 <i class="fas fa-heart"></i>
-                                <span  class="badge badge-secondary counter"  >{{$result['detail']['product_data'][0]->products_liked}}</span>
                               </a>
+                                <span  class="badge badge-secondary counter"  >{{$result['detail']['product_data'][0]->products_liked}}</span>
                               </div>
                             <ul class="list">
                               @if(!empty($result['category_name']) and !empty($result['sub_category_name']))
@@ -138,7 +138,6 @@
                         <div class="product-buttons">
                             <h2>Total Price:
                               <span class="total_price">
-
                                 <?php
                                 $default_currency = DB::table('currencies')->where('is_default',1)->first();
                                 if($default_currency->id == Session::get('currency_id')){

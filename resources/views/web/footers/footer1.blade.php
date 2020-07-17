@@ -31,11 +31,11 @@
                         <h6>Company Information</h6>
                         <ul>
                             <li><a href="{{ url('/page/about-us') }}">About Us</a></li>
-                            <li><a href="{{ url('/page/about-us') }}">FAQ</a></li>
-                            <li><a href="{{ url('/page/about-us') }}">Sitemap </a></li>
-                            <li><a href="{{ url('/page/about-us') }}">Delivery Terms</a></li>
-                            <li><a href="{{ url('/page/about-us') }}">How to Order</a></li>
-                            <li><a href="{{ url('/page/about-us') }}">Customer Service</a></li>
+                            <li><a href="{{ url('/page/faq') }}">FAQ</a></li>
+                            <li><a href="{{ url('/page/sitemap') }}">Sitemap </a></li>
+                            <li><a href="{{ url('/page/delivery-terms') }}">Delivery Terms</a></li>
+                            <li><a href="{{ url('/page/How-to-Order') }}">How to Order</a></li>
+                            <li><a href="{{ url('/page/customer-service') }}">Customer Service</a></li>
                             <li><a href="{{ url('/page/refund-policy') }}">Exchange and Returns</a></li>
                             <li><a href="{{ url('/page/privacy-policy') }}">Privacy Policy</a></li>
                             <li><a href="{{ url('/page/term-services') }}">Terms and Conditions</a></li>

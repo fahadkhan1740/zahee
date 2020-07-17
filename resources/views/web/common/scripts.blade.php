@@ -99,7 +99,12 @@ jQuery(document).on('click', '.cart', function(e){
 		data: '&products_id='+products_id,
 		success: function (res) {
 			if(res.status == 'exceed'){
-				swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
+				swal({
+						title: "Something Happened To Stock",
+						text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')</a>",
+						html: true, // add this if you want to show HTML
+						type: "error" // type can be error/warning/success
+					});
 			}
 			else{
 				jQuery('.head-cart-content').html(res);
@@ -128,7 +133,12 @@ jQuery(document).on('click', '.buy-now', function(e){
 
             success: function (res) {
                 if(res['status'] == 'exceed'){
-                    swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
+					swal({
+						title: "Something Happened To Stock",
+						text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')</a>",
+						html: true, // add this if you want to show HTML
+						type: "error" // type can be error/warning/success
+					});
                 }
                 else {
                     jQuery('.head-cart-content').html(res);
@@ -183,10 +193,10 @@ jQuery(document).on('click', '.update-cart-value', function(e){
 		document.getElementById('number-'+index).value = value;
 	} else {
 		var value = parseInt(document.getElementById('number-'+index).value, 10);
-    value = isNaN(value) ? 0 : value;
-    value < 1 ? value = 1 : '';
-    value--;
-    document.getElementById('number-'+index).value = value;
+		value = isNaN(value) ? 0 : value;
+		value--;
+		value < 1 ? value = 1 : '';
+		document.getElementById('number-'+index).value = value;
 
 	}
 
@@ -383,6 +393,7 @@ jQuery( function() {
 //add-to-Cart with custom options
 jQuery(document).on('click', '.add-to-Cart', function(e){
     var formData = jQuery("#add-Product-form").serialize();
+	// console.log(formData);
     if(jQuery('#number').val() > 0) {
         var url = jQuery('#checkout_url').val();
         var message;
@@ -393,8 +404,17 @@ jQuery(document).on('click', '.add-to-Cart', function(e){
             data: formData,
 
             success: function (res) {
+				
+				// swal( title: "Something Happened To Stock", content: "", icon:"error");
+                
                 if(res['status'] == 'exceed'){
-                    swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')", "error");
+					swal({
+						title: "Something Happened To Stock",
+						text: "<a href='mailto:?subject=Query regarding product &amp;body=anuva.kataria@imarkinfotech.com'>@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')</a>",
+						html: true, // add this if you want to show HTML
+						type: "error" // type can be error/warning/success
+					});
+                    // swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin') <a>Contact through Email with admin</a>", "error");
                 }
                 else {
                     jQuery('.head-cart-content').html(res);
@@ -758,7 +778,9 @@ function cartPrice(){
 	var i = 0;
 	jQuery(".currentstock").each(function() {
 		var value_price = jQuery('option:selected', this).attr('value_price');
-		var attributes_value = jQuery('option:selected', this).attr('attributes_value');
+		
+		var attributes_value = jQuery("input[type='radio']:checked", this).attr('attributes_value');
+		console.log(attributes_value);
 		var prefix = jQuery('option:selected', this).attr('prefix');
 		jQuery('#attributeid_' + i).val(value_price);
 		jQuery('#attribute_sign_' + i++).val(prefix);
@@ -767,13 +789,14 @@ function cartPrice(){
 }
 
 //ajax call for add option value
-function getQuantity(){
+function getQuantity(attr_name){
 	var attributeid = [];
 	var i = 0;
 
 	jQuery(".currentstock").each(function() {
-		var value_price = jQuery('option:selected', this).attr('value_price');
-		var attributes_value = jQuery('option:selected', this).attr('attributes_value');
+		var value_price = jQuery("input:radio[name='"+attr_name+"']").attr('value_price');
+		var attributes_value = jQuery("input:radio[name='"+attr_name+"']").attr('attributes_value');
+		
 		jQuery('#function_' + i).val(value_price);
 		jQuery('#attributeids_' + i++).val(attributes_value);
 	});
@@ -786,8 +809,8 @@ function getQuantity(){
 		data: formData,
 		dataType: "json",
 		success: function (res) {
-
-			jQuery('#current_stocks').html(res.remainingStock);
+			// console.log(res.remainingStock);
+			jQuery('#current_stocks').html(res.remainingStock+ ' Stock(s) left');
 			var min_level = 0;
 			var max_level = 0;
 			var inventory_ref_id = res.inventory_ref_id;
@@ -797,10 +820,10 @@ function getQuantity(){
 				max_level = res.minMax[0].max_level;
 			}
 
-			if(res.remainingStock>0){
-
-				jQuery('.stock-cart').removeAttr('hidden');
+			jQuery('.stock-cart').removeAttr('hidden');
 				jQuery('.stock-out-cart').attr('hidden',true);
+
+			if(res.remainingStock>0 && res.remainingStock<=10){
 				var max_order = jQuery('#max_order').val();
 
 				if(max_order.trim()!=0){

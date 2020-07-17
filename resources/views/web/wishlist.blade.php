@@ -53,7 +53,7 @@
 							</h2>
 							<hr >
 						</div>
-
+						@if( count($result['products']['product_data']) > 0)
 					<div class="col-12 media-main">
 						@foreach($result['products']['product_data'] as $key=>$products)
 								<div class="media">
@@ -107,10 +107,10 @@
 													<h5><a href="{{url('/shop')}}">{{$products->products_name}}</a></h5>
 													<h6>Total Price:
 													@if(!empty($products->discount_price))
-													<span class="old-price">{{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}</span>
-                                                            <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)}}{{Session::get('symbol_right')}}</span>				
+													<span class="old-price">{{Session::get('symbol_left')}} {{($orignal_price+0)}} {{Session::get('symbol_right')}}</span> &nbsp;
+                                                            <span class="new-price" >{{Session::get('symbol_left')}} {{($discount_price+0)}} {{Session::get('symbol_right')}}</span>				
 													@else
-													<span class="new-price">{{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}</span>
+													<span class="new-price" >{{Session::get('symbol_left')}} {{($orignal_price+0)}} {{Session::get('symbol_right')}}</span>
 													@endif
 													</h6>
 													<div class="buttons">
@@ -153,6 +153,20 @@
 							</div>
 					</div>
 					<hr class="border-line">
+					@else 
+					<div class="col-12 media-main">
+					<div class="cart-item-col cart-item-center">
+                                                <figure>
+                                                    <img src="{{asset('public/web/images/cus/wishlist.png')}}" alt="empty-cart" style="width:15%">
+                                                    <figcaption>No Products in your Wishlist</figcaption>
+                                                </figure>
+                                        
+					</div>
+					<div class="cart-action-wrap text-center ">
+                                    <a href="{{ URL::to('/shop')}}" class="btn btn-default">@lang('website.Back To Shopping')</a>
+                                    <!-- <a href="{{ URL::to('/wishlist')}}" class="btn btn-default">@lang('website.Add from wishlist')</a> -->
+                                </div>
+					@endif
 
 				<!-- ............the end..... -->
 			</div>

@@ -90,7 +90,7 @@
                   <div class="form-check">
                   <input class="form-check-input default_address" address_id="{{$address_data->address_id}}" type="radio" name="default" @if($address_data->default_address == 1) checked @endif>
                   <label class="form-check-label" for="gridCheck">
-                    {{$address_data->firstname}}, {{$address_data->lastname}}, {{$address_data->flat}} {{$address_data->street}}, {{$address_data->city}}, {{$address_data->zone_name}}, {{$address_data->country_name}}
+                    {{$address_data->firstname}}, {{$address_data->lastname}}, {{$address_data->flat}} {{$address_data->street}}, {{$address_data->city}}, {{$address_data->country_name}}
                   </label>
                 </div>
               </td>
@@ -179,9 +179,9 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="exampleInputAddress1">@lang('website.Address')</label>
-                        <input type="text" required class="form-control field-validate" name="flat" id="flat" aria-describedby="addressHelp" placeholder="@lang('website.address_flat')">
+                        <input type="text" required class="form-control field-validate" name="flat" id="flat" @if(!empty($result['editAddress'])) value="{{$result['editAddress'][0]->flat}}" @endif aria-describedby="addressHelp" placeholder="@lang('website.address_flat')">
                         <br>
-                        <input type="text" required class="form-control field-validate" name="street" id="street" aria-describedby="addressHelp" placeholder="@lang('website.address_street')">
+                        <input type="text" required class="form-control field-validate" name="street" id="street" aria-describedby="addressHelp" @if(!empty($result['editAddress'])) value="{{$result['editAddress'][0]->street}}" @endif placeholder="@lang('website.address_street')">
                         <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your address')</span>
                     </div>
                     <div class="form-group select-control col-md-6">
@@ -196,18 +196,6 @@
                     </div>
                   </div>
                   <div class="form-row">
-{{--                    <div class="form-group select-control col-md-6">--}}
-{{--                      <label for="inputState">@lang('website.State')</label>--}}
-{{--                      <select required name="entry_zone_id" id="entry_zone_id" class="form-control field-validate">--}}
-{{--                          <option value="-1">Others</option>--}}
-{{--                          @if(!empty($result['zones']))--}}
-{{--                          @foreach($result['zones'] as $zones)--}}
-{{--                          <option value="{{$zones->zone_id}}" @if(!empty($result['editAddress'])) @if($zones->zone_id==$result['editAddress'][0]->zone_id) selected @endif @endif>{{$zones->zone_name}}</option>--}}
-{{--                          @endforeach--}}
-{{--                          @endif--}}
-{{--                      </select>--}}
-{{--                      <span class="help-block error-content6" hidden>@lang('website.Please select your state')</span>--}}
-{{--                    </div>--}}
                     <div class="form-group select-control col-md-6">
                       <label for="inputState"><span class="star">*</span> @lang('website.City')</label>
                       <input type="text" name="entry_city" class="form-control field-validate" id="entry_city1" @if(!empty($result['editAddress'])) value="{{$result['editAddress'][0]->city}}" @endif>
@@ -217,7 +205,7 @@
                   <div class="form-row">
                     <div class="form-group select-control col-md-6">
                         <label for="exampleInputNumber1">@lang('website.Phone Number')</label>
-                        <input required type="text" class="form-control" id="delivery_phone" aria-describedby="numberHelp" placeholder="Enter Your Phone Number" name="delivery_phone" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->delivery_phone}}@endif">
+                        <input required type="text" class="form-control" id="delivery_phone" aria-describedby="numberHelp" @if(!empty($result['editAddress'])) value="{{$result['editAddress'][0]->contact_number}}" @endif placeholder="Enter Your Phone Number" name="delivery_phone" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->delivery_phone}}@endif">
                         <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your valid phone number')</span>
                     </div>
                   </div>
@@ -225,8 +213,8 @@
                       <div class="form-group select-control col-md-6">
                           <label for="exampleInputZpCode1">@lang('website.address_type')</label>
                           <select class="form-control" id="address_type" name="address_type" required>
-                              <option value="home"> @lang('website.home')</option>
-                              <option value="office">@lang('website.office')</option>
+                              <option value="Home (7:00 A.M. - 9:00 P.M., All Day)" @if(!empty($result['editAddress']) && $result['editAddress'][0]->address_type == 'Home (7:00 A.M. - 9:00 P.M., All Day)' ) checked @endif > @lang('website.home')</option>
+                              <option value="Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)" @if(!empty($result['editAddress']) && $result['editAddress'][0]->address_type == 'Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)' ) checked @endif>@lang('website.office')</option>
                           </select>
                           <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please select your address type')</span>
                       </div>

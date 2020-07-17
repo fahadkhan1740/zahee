@@ -9,7 +9,7 @@ class Alert extends Model
 {
 
     public function getUserDevices($customers_id){
-      $device = DB::table('devices')->where('customers_id','=', $customers_id)->get();
+      $device = DB::table('devices')->where('user_id','=', $customers_id)->get();
       return $device;
     }
 

@@ -27,6 +27,7 @@ class Shipping extends Model
 		$entry_zone_id             				=   $request->entry_zone_id;
 		$entry_gender							=   $request->entry_gender;
 		$delivery_phone							=   $request->delivery_phone;
+		$address_type            			=   $request->address_type;
 		$customers_default_address_id			=   $request->customers_default_address_id;
 
 		if(!empty($customers_id)){
@@ -34,16 +35,14 @@ class Shipping extends Model
 				'entry_firstname'               =>   $entry_firstname,
 				'entry_lastname'                =>   $entry_lastname,
 				'entry_street_address'          =>   $entry_street_address,
-				'entry_flat'          =>   $entry_flat,
-				'entry_postcode'            	=>   $entry_postcode,
+				'entry_flat_address'           =>   $entry_flat,
 				'entry_city'             		=>   $entry_city,
-				'entry_state'            		=>   $entry_state,
-				'entry_country_id'            	=>   $entry_country_id,
-				'entry_zone_id'             	=>   $entry_zone_id,
-				'customers_id'             		=>   $customers_id,
-				'user_id'             		=>   $customers_id,
-				'entry_gender'					=>   $entry_gender,
-				'delivery_phone'					=>   $delivery_phone,
+					'entry_country_id'            	=>   $entry_country_id,
+					'entry_gender'					=>   $entry_gender,
+					'contact_number'					=>   $delivery_phone,
+					'address_type'					=>   $address_type,
+					'entry_latitude'        =>   '',
+					'entry_longitude'       =>   ''
 			);
 
 			//add address into address book
@@ -61,26 +60,22 @@ class Shipping extends Model
 		$addresses = DB::table('user_to_address')
 					->leftjoin('address_book','user_to_address.address_book_id','=','address_book.address_book_id')
 					->leftJoin('countries', 'countries.countries_id', '=' ,'address_book.entry_country_id')
-					->leftJoin('zones', 'zones.zone_id', '=' ,'address_book.entry_zone_id')
+					// ->leftJoin('zones', 'zones.zone_id', '=' ,'address_book.entry_zone_id')
 					->select(
-							'user_to_address.is_default as default_address',
-							'address_book.address_book_id as address_id',
-							'address_book.entry_gender as gender',
-							'address_book.entry_firstname as firstname',
-							'address_book.entry_lastname as lastname',
-							'address_book.entry_street_address as street',
-							'address_book.entry_flat as flat',
-							'address_book.delivery_phone',
-							'address_book.entry_postcode as postcode',
-							'address_book.entry_city as city',
-							'address_book.entry_state as state',
-							'countries.countries_id as countries_id',
-							'countries.countries_name as country_name',
-							'zones.zone_id as zone_id',
-							'zones.zone_code as zone_code',
-							'zones.zone_name as zone_name'
+						'user_to_address.is_default as default_address',
+						'address_book.address_book_id as address_id',
+						'address_book.entry_gender as gender',
+						'address_book.entry_firstname as firstname',
+						'address_book.entry_lastname as lastname',
+						'address_book.entry_street_address as street',
+						'address_book.entry_flat_address as flat',
+						'address_book.contact_number',
+						'address_book.address_type',
+						'address_book.entry_city as city',
+						'countries.countries_id as countries_id',
+						'countries.countries_name as country_name'
 							)
-					->where('address_book.customers_id', auth()->guard('customer')->user()->id);
+					->where('user_to_address.user_id', auth()->guard('customer')->user()->id);
 
 			if(!empty($address_id)){
 				$addresses->where('address_book.address_book_id', '=', $address_id);

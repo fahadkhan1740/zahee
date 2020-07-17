@@ -439,6 +439,8 @@ class ProductsController extends Controller
 		$result['cartArray'] = $this->products->cartIdArray($cart);
 
 		//Add to recently Viewed
+
+		if(!is_null(session()->get('recently_viewed'))){
         if(count(session()->get('recently_viewed'))){
             // check if product already exists
             $recently_viewed_data = session()->get('recently_viewed');
@@ -449,7 +451,10 @@ class ProductsController extends Controller
 //            dd($valueCheck);
         } else {
             session()->push('recently_viewed', $detail['product_data'][0]);
-        }
+		}
+	} else {
+		session()->push('recently_viewed', $detail['product_data'][0]);
+	}
 
 		//liked products
 		$result['liked_products'] = $this->products->likedProducts();

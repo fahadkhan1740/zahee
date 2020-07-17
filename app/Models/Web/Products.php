@@ -688,6 +688,7 @@ private function recursivecategories1(){
   }
   //currentstock
 	function productQuantity($data){
+		// dd($data);
 		if(!empty($data['attributes'])){
 		$inventory_ref_id = '';
 		$products_id = $data['products_id'];
