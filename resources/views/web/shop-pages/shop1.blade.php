@@ -1,7 +1,7 @@
 <section class="shop-content shop-four">
    <div class="container">
        <div class="row">
-         <div class="col-12 col-lg-3  d-lg-block d-xl-block right-menu">
+         <div class="col-12 col-lg-2  d-lg-block d-xl-block right-menu">
            <div class="right-menu-categories">
             @if(!empty($result['categories']))
              @foreach($result['categories'] as $category)
@@ -219,7 +219,7 @@
                          @if($result['products']['success']==1)
                          @foreach($result['products']['product_data'] as $key=>$products)
 
-                         <div class="col-12 col-sm-12 col-md-6 col-lg-4 griding">
+                         <div class="col-12 col-sm-12 col-md-6 col-lg-3 griding">
                              <!-- Product -->
                              <div class="product">
                                <article>

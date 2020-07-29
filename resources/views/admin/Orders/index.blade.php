@@ -57,7 +57,7 @@
                                                     <td>{{ $orderData->orders_id }}</td>
                                                     <td>{{ $orderData->customers_name }}</td>
                                                     <td>{{ $listingOrders['currency'][19]->value }}{{ $orderData->order_price }}</td>
-                                                    <td>{{ date('d/m/Y', strtotime($orderData->date_purchased)) }}</td>
+                                                    <td>{{ date('d-M-Y', strtotime($orderData->date_purchased)) }}</td>
                                                     <td>
                                                         @if($orderData->orders_status_id==1)
                                                             <span class="label label-warning">

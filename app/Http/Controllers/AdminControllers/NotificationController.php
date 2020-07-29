@@ -108,7 +108,7 @@ class NotificationController extends Controller
         (
             'body' 	=> $message,
             'title'	=> $title ,
-            'icon'	=> 'myicon', /*Default Icon*/
+            'icon'	=> 'https://res.cloudinary.com/dgyl1lq5p/image/upload/v1595226814/admin-logo_wes3km.png', /*Default Icon*/
             'sound' => 'mySound', /*Default sound*/
             'image' => $websiteURL,
         );
@@ -169,7 +169,7 @@ class NotificationController extends Controller
             (
                 'body' 	=> $message,
                 'title'	=> $title ,
-                'icon'	=> 'myicon',/*Default Icon*/
+                'icon'	=> 'https://res.cloudinary.com/dgyl1lq5p/image/upload/v1595226814/admin-logo_wes3km.png',/*Default Icon*/
                 'sound' => 'mySound',/*Default sound*/
                 'image' => $websiteURL,
                 // "image" => "https://static.pexels.com/photos/4825/red-love-romantic-flowers.jpg"

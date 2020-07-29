@@ -204,6 +204,7 @@ class Index extends Model
          'categories_description.categories_name as name',
          'image_categories.path as path'
          )
+         ->where('categories.categories_status','=',1)
       ->where('categories_description.language_id','=', Session::get('language_id'))
       ->where('parent_id','0')
       ->groupBy('categories.categories_id')

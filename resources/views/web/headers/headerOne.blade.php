@@ -9,7 +9,6 @@
                                 @if(count($languages) > 1)
                                     <div class="dropdown">
                                         <a href= "#" class="dropdown-toggle"  data-toggle="dropdown" >
-{{--                                            <img src="{{asset('public').'/'.session('language_image')}}" width="17px" />--}}
                                             {{	session('language_name')}}
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-right">
@@ -22,7 +21,9 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    @include('web.common.scripts.changeLanguage')
+                                    @section('scripts')
+                                      @include('web.common.scripts.changeLanguage')
+                                    @endsection
                                 @endif
                             </div>
             </div>
@@ -39,9 +40,9 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search" name="search" style="height:47px;"/>
+                            <input type="text" class="form-control" placeholder="Search" name="search"/>
                             <div class="input-group-append">
-                                <button style="min-width: 0;    background: #FF5722;" class="btn btn-outline-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
 
 {{--                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>--}}

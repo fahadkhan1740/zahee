@@ -85,11 +85,27 @@ return [
 
 	'Discount'=>'خصم',
 
+	'FAQ' => 'التعليمات',
+
 	'About Us'=>'معلومات عنا',
 
 	'Contact Us'=>'اتصل بنا',
 
 	'Terms & Condtions'=>'البنود و الظروف',
+
+	'Sitemap'=> 'خريطة الموقع',
+
+	'We Accept'=>'نحن نقبل',
+
+	'Delivery Terms'=>'شروط التوصيل',
+
+	'How to Order'=>'كيف تطلب',
+
+	'Exchange and Returns'=>'الصرف والعوائد',
+
+	'Customer Service' => 'خدمة العملاء',
+
+	'Connect with Us' => 'اتصل بنا',
 
 	'Wishlist'=>'الأماني',
 
@@ -101,7 +117,7 @@ return [
 
 	'Email'=>'البريد الإلكتروني',
 
-	'Copy Rights'=>'2017 شركة ، وشركة',
+	'Copy Rights'=>'© '.date('Y',time()).' Zaahee. All Rights Reserved.',
 
 	'From our News'=>'من أخبارنا',
 
@@ -720,4 +736,7 @@ return [
     'Buy Now' => 'اشتري الآن',
 	'Add from wishlist' => 'أضف من قائمة الرغبات',
 	'Oldest' => 'الأقدم - الأحدث',
+	'Trends' => 'اتجاهات',
+	'See All' => 'اظهار الكل',
+	'Shop Now!' => 'تسوق الآن!'
 ];

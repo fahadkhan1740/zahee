@@ -19,8 +19,6 @@
                            @lang('website.Shipping Address')
                        @elseif(session('step')==1)
                            @lang('website.Billing Address')
-                       @elseif(session('step')==2)
-                           @lang('website.Shipping Methods')
                        @elseif(session('step')==3)
                            @lang('website.Order Detail')
                        @endif
@@ -44,9 +42,9 @@
                  <li class="nav-item">
                    <a class="nav-link @if(session('step')==1) active @elseif(session('step')>1) active-check @endif" @if(session('step')>=1) id="pills-billing-tab" data-toggle="pill" href="#pills-billing" role="tab" aria-controls="pills-billing" aria-selected="false"  @endif >@lang('website.Billing Address')</a>
                  </li>
-                 <li class="nav-item">
+                 <!-- <li class="nav-item">
                    <a class="nav-link @if(session('step')==2) active @elseif(session('step')>2) active-check @endif" @if(session('step')>=2) id="pills-method-tab" data-toggle="pill" href="#pills-method" role="tab" aria-controls="pills-method" aria-selected="false" @endif> @lang('website.Shipping Methods')</a>
-                 </li>
+                 </li> -->
                  <li class="nav-item">
                      <a class="nav-link @if(session('step')==3) active @elseif(session('step')>3) active-check @endif"  @if(session('step')>=3) id="pills-order-tab" data-toggle="pill" href="#pills-order" role="tab" aria-controls="pills-order" aria-selected="false"@endif>@lang('website.Order Detail')</a>
                    </li>
@@ -58,9 +56,9 @@
                  <li class="nav-item second">
                    <a class="nav-link @if(session('step')==1) active @elseif(session('step')>1) active-check @endif" @if(session('step')>=1) id="pills-billing-tab" data-toggle="pill" href="#pills-billing" role="tab" aria-controls="pills-billing" aria-selected="false"  @endif >2</a>
                  </li>
-                 <li class="nav-item third">
+                 <!-- <li class="nav-item third">
                    <a class="nav-link @if(session('step')==2) active @elseif(session('step')>2) active-check @endif" @if(session('step')>=2) id="pills-method-tab" data-toggle="pill" href="#pills-method" role="tab" aria-controls="pills-method" aria-selected="false" @endif>3</a>
-                 </li>
+                 </li> -->
                  <li class="nav-item fourth">
                    <a class="nav-link @if(session('step')==3) active @elseif(session('step')>3) active-check @endif"  @if(session('step')>=3) id="pills-order-tab" data-toggle="pill" href="#pills-order" role="tab" aria-controls="pills-order" aria-selected="false"@endif>4</a>
                    </li>
@@ -127,7 +125,6 @@
                    </form>
                  </div>
                  <div class="tab-pane fade @if(session('step') == 1) show active @endif"  id="pills-billing" role="tabpanel" aria-labelledby="pills-billing-tab">
-
                      <form name="signup" enctype="multipart/form-data" action="{{ URL::to('/checkout_billing_address')}}" method="post">
                        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                          <div class="form-group">
@@ -197,7 +194,7 @@
                              </div>
                        </form>
                  </div>
-                 <div class="tab-pane fade  @if(session('step') == 2) show active @endif" id="pills-method" role="tabpanel" aria-labelledby="pills-method-tab">
+                 <!-- <div class="tab-pane fade  @if(session('step') == 2) show active @endif" id="pills-method" role="tabpanel" aria-labelledby="pills-method-tab">
 
                              <div class="col-12 col-sm-12 ">
                                 <div class="row"> <p>@lang('website.Please select a prefered shipping method to use on this order')</p></div>
@@ -220,7 +217,7 @@
                                </form>
 
 
-                 </div>
+                 </div> -->
                  <div class="tab-pane fade @if(session('step') == 3) show active @endif" id="pills-order" role="tabpanel" aria-labelledby="pills-method-order">
                                <?php
                                    $price = 0;
@@ -305,8 +302,8 @@
                                        </table>
                                                    <?php
                                                        if(!empty(session('shipping_detail')) and !empty(session('shipping_detail'))>0){
-                                                           @$shipping_price = session('shipping_detail')->shipping_price;
-                                         $shipping_name = session('shipping_detail')->mehtod_name;
+                                                           @$shipping_price = session('shipping_detail')['shipping_price'];
+                                         $shipping_name = session('shipping_detail')['mehtod_name'];
                                                        }else{
                                                            @$shipping_price = 0;
                                          $shipping_name = '';
@@ -346,166 +343,38 @@
                                                    @lang('website.Please select your payment method')
                                                </div>
 
-                                               <form name="shipping_mehtods" method="post" id="payment_mehtods_form" enctype="multipart/form-data" action="{{ URL::to('/order_detail')}}">
+                                               <form name="shipping_mehtods" method="post" id="payment_mehtods_form" enctype="multipart/form-data" action="{{ URL::to('/place_order')}}">
                                                  <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                                   <ul class="list"style="list-style:none; padding: 0px;">
+                                                   <ul class="list"style="list-style:none; padding: 0px;display: flex; justify-content: space-between;">
                                                        @foreach($result['payment_methods'] as $payment_methods)
-                                                           @if($payment_methods['active']==1)
-                                                               <input id="payment_currency" type="hidden" onClick="paymentMethods();" name="payment_currency" value="{{$payment_methods['payment_currency']}}">
-                                                               @if($payment_methods['payment_method']=='braintree')
-
-                                                                   <input id="{{$payment_methods['payment_method']}}_public_key" type="hidden" name="public_key" value="{{$payment_methods['public_key']}}">
-                                                                   <input id="{{$payment_methods['payment_method']}}_environment" type="hidden" name="{{$payment_methods['payment_method']}}_environment" value="{{$payment_methods['environment']}}">
-                                                                   <li>
-                                                                    <input type="radio" onClick="paymentMethods();" name="payment_method" class="payment_method" value="{{$payment_methods['payment_method']}}" @if(!empty(session('payment_method'))) @if(session('payment_method')==$payment_methods['payment_method']) checked @endif @endif>
-                                                                       <label for="{{$payment_methods['payment_method']}}">{{$payment_methods['name']}}</label>
-                                                                   </li>
-
-                                                               @else
-                                                                   <input id="{{$payment_methods['payment_method']}}_public_key" type="hidden" name="public_key" value="{{$payment_methods['public_key']}}">
-                                                                   <input id="{{$payment_methods['payment_method']}}_environment" type="hidden" name="{{$payment_methods['payment_method']}}_environment" value="{{$payment_methods['environment']}}">
-
-                                                                   <li>
-                                                                    <input onClick="paymentMethods();" type="radio" name="payment_method" class="payment_method" value="{{$payment_methods['payment_method']}}" @if(!empty(session('payment_method'))) @if(session('payment_method')==$payment_methods['payment_method']) checked @endif @endif>
-                                                                    <label for="{{$payment_methods['payment_method']}}">{{$payment_methods['name']}}</label>
-                                                                   </li>
-                                                               @endif
-
-                                                           @endif
+                                                                  <li>
+                                                                    <input type="radio" name="payment_method" class="payment_method" value="{{$payment_methods->PaymentMethodId}}">
+                                                                    <label for="{{$payment_methods->PaymentMethodEn}}">
+                                                                    <img src="{{$payment_methods->ImageUrl}}" alt="{{$payment_methods->PaymentMethodEn}}"/>
+                                                                    </label>
+                                                                  </li>
+                                                            
+                                                   
                                                        @endforeach
+                                                    
+                                                               
+                                                               <!-- <input type="hidden" name="payment_method_id" value="0"> -->
+                                                              <li>
+                                                                <input type="radio" name="payment_method" class="payment_method" value="0">
+                                                                <label>
+                                                              COD
+                                                                </label>
+                                                              </li>
                                                    </ul>
+
+                                                   <div class="button">
+                                               <button id="pay_button" class="btn btn-default payment_btns">@lang('website.Order Now')</button>
+                                           </div>
                                                </form>
                                            </div>
-                                           <div class="button">
-                                               <button id="cash_on_delivery_button" class="btn btn-default payment_btns" style="display: none">@lang('website.Order Now')</button>
-                                           </div>
+                                           
                                        </div>
-                                       <!-- The braintree Modal -->
-                                       <div class="modal fade" id="braintreeModel">
-                                         <div class="modal-dialog">
-                                           <div class="modal-content">
-                                               <form id="checkout" method="post" action="{{ URL::to('/place_order')}}">
-                                                 <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                                   <!-- Modal Header -->
-                                                   <div class="modal-header">
-                                                       <h4 class="modal-title">@lang('website.BrainTree Payment')</h4>
-                                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                   </div>
-                                                   <div class="modal-body">
-                                                         <div id="payment-form"></div>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                       <button type="submit" class="btn btn-dark">@lang('website.Pay') {{Session::get('symbol_left')}}{{number_format((float)$total_price+0, 2, '.', '')}}{{Session::get('symbol_right')}}</button>
-                                                   </div>
-                                               </form>
-                                           </div>
-                                          </div>
-                                       </div>
-
-                                       <!-- The instamojo Modal -->
-                                       <div class="modal fade" id="instamojoModel">
-                                         <div class="modal-dialog">
-                                           <div class="modal-content">
-                                               <form id="instamojo_form" method="post" action="">
-                                                 <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                                 <input type="hidden" name="amount" value="{{number_format((float)$total_price+0, 2, '.', '')}}">
-                                                   <!-- Modal Header -->
-                                                   <div class="modal-header">
-                                                       <h4 class="modal-title">@lang('website.Instamojo Payment')</h4>
-                                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                   </div>
-                                                  <div class="modal-body">
-                                                    <div class="from-group mb-3">
-                                    									<div class="col-12"> <label for="inlineFormInputGroup">@lang('website.Full Name')</label></div>
-                                    									<div class="input-group col-12">
-                                    										<input type="text" name="firstName" id="firstName" placeholder="@lang('website.Full Name')" class="form-control">
-                                    										<span class="help-block error-content" hidden>@lang('website.Please enter your full name')</span>
-                                    								 </div>
-                                    								</div>
-                                                    <div class="from-group mb-3">
-                                    									<div class="col-12"> <label for="inlineFormInputGroup">@lang('website.Email')</label></div>
-                                    									<div class="input-group col-12">
-                                    										<input type="text" name="email_id" id="email_id" placeholder="@lang('website.Email')" class="form-control">
-                                    										<span class="help-block error-content" hidden>@lang('website.Please enter your email address')</span>
-                                    								 </div>
-                                    								</div>
-                                                    <div class="from-group mb-3">
-                                    									<div class="col-12"> <label for="inlineFormInputGroup">@lang('website.Phone Number')</label></div>
-                                    									<div class="input-group col-12">
-                                    										<input type="text" name="phone_number" id="insta_phone_number" placeholder="@lang('website.Phone Number')" class="form-control">
-                                    										<span class="help-block error-content" hidden>@lang('website.Please enter your valid phone number')</span>
-                                    								 </div>
-                                    								</div>
-
-                                                        <div class="alert alert-danger alert-dismissible" id="insta_mojo_error" role="alert" style="display: none">
-                                                           <span class="sr-only">@lang('website.Error'):</span>
-                                                           <span id="instamojo-error-text"></span>
-                                                       </div>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                       <button type="button" id="pay_instamojo" class="btn btn-dark">@lang('website.Pay') {{$web_setting[19]->value}}{{number_format((float)$total_price+0, 2, '.', '')}}</button>
-                                                   </div>
-                                               </form>
-                                           </div>
-                                          </div>
-                                       </div>
-
-                                       <!-- The stripe Modal -->
-                                       <div class="modal fade" id="stripeModel">
-                                           <div class="modal-dialog">
-                                               <div class="modal-content">
-
-                                               <main>
-                                               <div class="container-lg">
-                                                   <div class="cell example example2">
-                                                       <form>
-                                                         <div class="row">
-                                                           <div class="field">
-                                                             <div id="example2-card-number" class="input empty"></div>
-                                                             <label for="example2-card-number" data-tid="elements_examples.form.card_number_label">@lang('website.Card number')</label>
-                                                             <div class="baseline"></div>
-                                                           </div>
-                                                         </div>
-                                                         <div class="row">
-                                                           <div class="field half-width">
-                                                             <div id="example2-card-expiry" class="input empty"></div>
-                                                             <label for="example2-card-expiry" data-tid="elements_examples.form.card_expiry_label">@lang('website.Expiration')</label>
-                                                             <div class="baseline"></div>
-                                                           </div>
-                                                           <div class="field half-width">
-                                                             <div id="example2-card-cvc" class="input empty"></div>
-                                                             <label for="example2-card-cvc" data-tid="elements_examples.form.card_cvc_label">@lang('website.CVC')</label>
-                                                             <div class="baseline"></div>
-                                                           </div>
-                                                         </div>
-                                                       <button type="submit" class="btn btn-dark" data-tid="elements_examples.form.pay_button">@lang('website.Pay') {{$web_setting[19]->value}}{{number_format((float)$total_price+0, 2, '.', '')}}</button>
-
-                                                         <div class="error" role="alert"><svg xmlns="https://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">
-                                                             <path class="base" fill="#000" d="M8.5,17 C3.80557963,17 0,13.1944204 0,8.5 C0,3.80557963 3.80557963,0 8.5,0 C13.1944204,0 17,3.80557963 17,8.5 C17,13.1944204 13.1944204,17 8.5,17 Z"></path>
-                                                             <path class="glyph" fill="#FFF" d="M8.5,7.29791847 L6.12604076,4.92395924 C5.79409512,4.59201359 5.25590488,4.59201359 4.92395924,4.92395924 C4.59201359,5.25590488 4.59201359,5.79409512 4.92395924,6.12604076 L7.29791847,8.5 L4.92395924,10.8739592 C4.59201359,11.2059049 4.59201359,11.7440951 4.92395924,12.0760408 C5.25590488,12.4079864 5.79409512,12.4079864 6.12604076,12.0760408 L8.5,9.70208153 L10.8739592,12.0760408 C11.2059049,12.4079864 11.7440951,12.4079864 12.0760408,12.0760408 C12.4079864,11.7440951 12.4079864,11.2059049 12.0760408,10.8739592 L9.70208153,8.5 L12.0760408,6.12604076 C12.4079864,5.79409512 12.4079864,5.25590488 12.0760408,4.92395924 C11.7440951,4.59201359 11.2059049,4.59201359 10.8739592,4.92395924 L8.5,7.29791847 L8.5,7.29791847 Z"></path>
-                                                           </svg>
-                                                           <span class="message"></span></div>
-                                                       </form>
-                                                                   <div class="success">
-                                                                     <div class="icon">
-                                                                       <svg width="84px" height="84px" viewBox="0 0 84 84" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
-                                                                         <circle class="border" cx="42" cy="42" r="40" stroke-linecap="round" stroke-width="4" stroke="#000" fill="none"></circle>
-                                                                         <path class="checkmark" stroke-linecap="round" stroke-linejoin="round" d="M23.375 42.5488281 36.8840688 56.0578969 64.891932 28.0500338" stroke-width="4" stroke="#000" fill="none"></path>
-                                                                       </svg>
-                                                                     </div>
-                                                                     <h3 class="title" data-tid="elements_examples.success.title">@lang('website.Payment successful')</h3>
-                                                                     <p class="message"><span data-tid="elements_examples.success.message">@lang('website.Thanks You Your payment has been processed successfully')</p>
-                                                                   </div>
-
-                                                               </div>
-                                                           </div>
-                                                       </main>
-                                                   </div>
-                                             </div>
-                                         </div>
-
-                                   </div>
-
+          
                  </div>
                </div>
          </div>
@@ -521,7 +390,7 @@
        $currency_value = $session_currency->value;
      }
      @endphp
-     <div class="col-12 col-xl-3 checkout-right">
+     <!-- <div class="col-12 col-xl-3 checkout-right">
        <table class="table right-table">
          <thead>
            <tr>
@@ -532,41 +401,46 @@
          <tbody>
            <tr>
              <th scope="row">@lang('website.SubTotal')</th>
-             <td align="right">{{Session::get('symbol_left')}}{{$price+0}}{{Session::get('symbol_right')}}</td>
+             <td align="right">{{Session::get('symbol_left')}} {{$price+0}} {{Session::get('symbol_right')}}</td>
 
            </tr>
            <tr>
              <th scope="row">@lang('website.Discount')</th>
-             <td align="right">{{Session::get('symbol_left')}}{{number_format((float)session('coupon_discount'), 2, '.', '')+0*$currency_value}}{{Session::get('symbol_right')}}</td>
+             <td align="right">{{Session::get('symbol_left')}} {{number_format((float)session('coupon_discount'), 2, '.', '')+0*$currency_value}} {{Session::get('symbol_right')}}</td>
 
            </tr>
            <tr>
                <th scope="row">@lang('website.Tax')</th>
-               <td align="right">{{Session::get('symbol_left')}}{{$tax_rate*$currency_value}}{{Session::get('symbol_right')}}</td>
+               <td align="right">{{Session::get('symbol_left')}} {{$tax_rate*$currency_value}} {{Session::get('symbol_right')}}</td>
+
+             </tr>
+             <tr>
+               <th scope="row">@lang('website.Service Tax')</th>
+               <td align="right">{{Session::get('symbol_left')}} {{$tax_rate*$currency_value}} {{Session::get('symbol_right')}}</td>
 
              </tr>
              <tr>
                  <th scope="row">@lang('website.Shipping Cost')</th>
-                 <td align="right">{{Session::get('symbol_left')}}{{$shipping_price*$currency_value}}{{Session::get('symbol_right')}}</td>
+                 <td align="right">{{Session::get('symbol_left')}} {{$shipping_price*$currency_value}} {{Session::get('symbol_right')}}</td>
 
                </tr>
            <tr class="item-price">
              <th scope="row">@lang('website.Total')</th>
-             <td align="right" >{{Session::get('symbol_left')}}{{number_format((float)$total_price+0, 2, '.', '')+0*$currency_value}}{{Session::get('symbol_right')}}</td>
+             <td align="right" >{{Session::get('symbol_left')}} {{number_format((float)$total_price+0, 2, '.', '')+0*$currency_value}} {{Session::get('symbol_right')}}</td>
 
            </tr>
          </tbody>
        </table>
-       </div>
+       </div> -->
    </div>
  </div>
  </div>
 </section>
 @section('scripts')
 <script>
-jQuery(document).on('click', '#cash_on_delivery_button', function(e){
-	jQuery("#update_cart_form").submit();
-});
+// jQuery(document).on('click', '#cash_on_delivery_button', function(e){
+// 	jQuery("#update_cart_form").submit();
+// });
 </script>
 @endsection
 

@@ -1,7 +1,7 @@
 <main id="scrollbar-body" data-scrollbar>
     <!-- banner wrap -->
-    <section class="main-warp">
-      <div class="container">
+    <section class="main-warp pt-0">
+
         <div class="banner">
           <div id="banner-Carousel" class="carousel slide banner-carousel" data-ride="carousel">
             <!-- Wrapper for slides -->
@@ -30,6 +30,8 @@
             </a>
           </div>
         </div>
+
+        <div class="container">
 {{--      </div>--}}
 {{--    </section>--}}
 {{--</main>--}}

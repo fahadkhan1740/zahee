@@ -47,7 +47,7 @@
 <script src="{!! asset('public/admin/plugins/sparkline/jquery.sparkline.min.js') !!}"></script>
 
 <!-- CK Editor -->
-<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{!! asset('public/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}"></script>
 

@@ -20,6 +20,9 @@ class Order extends Model
 
   //place_order
 	public function place_order($request){
+
+		
+		
           $cart = new Cart();
 					$date_added								=	date('Y-m-d h:i:s');
 					$customers_id            				=   auth()->guard('customer')->user()->id;
@@ -36,13 +39,7 @@ class Order extends Model
 					$delivery_phone            				=   session('shipping_address')->delivery_phone;
 					$delivery_address_type          				=   session('shipping_address')->address_type;
 
-					$delivery = DB::table('zones')->where('zone_id', '=', session('shipping_address')->zone_id)->get();
-					if(count($delivery)>0){
-						$delivery_state            				=   $delivery[0]->zone_code;
-					}else{
-						$delivery_state            				=   'other';
-					}
-
+		
 					$country = DB::table('countries')->where('countries_id','=', session('shipping_address')->countries_id)->get();
 
 					$delivery_country            			=   $country[0]->countries_name;
@@ -54,41 +51,25 @@ class Order extends Model
 					$billing_suburb	            			=   '';
 					$billing_city            				=   session('billing_address')->billing_city;
 					$billing_phone            				=   session('billing_address')->billing_phone;
-					$billing_address_type            				=   session('billing_address')->billing_address_type;
+					$billing_address_type            		=   session('billing_address')->billing_address_type;
 
-					$billing = DB::table('zones')->where('zone_id', '=', session('billing_address')->billing_zone_id)->get();
-
-					if(count($billing)>0){
-						$billing_state            			=   $billing[0]->zone_code;
-					}else{
-						$billing_state         				=   'other';
-					}
+		
 
 					$country = DB::table('countries')->where('countries_id','=', session('billing_address')->billing_countries_id)->get();
 
 					$billing_country            			=   $country[0]->countries_name;
 
-					$payment_method            				=   session('payment_method');
+					$payment_method            				=   $request->payment_method;
+				
 					$order_information 						=	array();
 
-					if(!empty($request->cc_type)){
-						$cc_type            				=   $request->cc_type;
-						$cc_owner            				=   $request->cc_owner;
-						$cc_number            				=   $request->cc_number;
-						$cc_expires            				=   $request->cc_expires;
-					}else{
-						$cc_type            				=   '';
-						$cc_owner            				=   '';
-						$cc_number            				=   '';
-						$cc_expires            				=   '';
-					}
-
+				
 					$last_modified            			=   date('Y-m-d H:i:s');
 					$date_purchased            			=   date('Y-m-d H:i:s');
 
 					//price
 					if(!empty(session('shipping_detail'))){
-						$shipping_price = session('shipping_detail')->shipping_price;
+						$shipping_price = session('shipping_detail')['shipping_price'];
 					}else{
 						$shipping_price = 0;
 					}
@@ -96,9 +77,9 @@ class Order extends Model
 					$coupon_discount = number_format((float)session('coupon_discount'), 2, '.', '');
 					$order_price = (session('products_price')+$tax_rate+$shipping_price)-$coupon_discount;
 
-					$shipping_cost            			=   !empty(session('shipping_detail')->shipping_price)?session('shipping_detail')->shipping_price:0;
-					$shipping_method            		=   !empty(session('shipping_detail')->mehtod_name)?session('shipping_detail')->mehtod_name:'DHL';
-					$orders_status            			=   '1';
+					$shipping_cost            			=   !empty(session('shipping_detail')['shipping_price'])?session('shipping_detail')['shipping_price']:0;
+					$shipping_method            		=   !empty(session('shipping_detail')['mehtod_name'])?session('shipping_detail')['mehtod_name']:'Flat Rate';
+					
 					//$orders_date_finished            	=   $request->orders_date_finished;
 
 					if(!empty(session('order_comments'))){
@@ -109,7 +90,7 @@ class Order extends Model
 
 					$web_setting = DB::table('settings')->get();
 					$currency            				=   $web_setting[19]->value;
-					$total_tax									=	number_format((float)session('tax_rate'), 2, '.', '');
+					$total_tax							=	number_format((float)session('tax_rate'), 2, '.', '');
 					$products_tax 						= 	1;
 
 					$coupon_amount = 0;
@@ -138,12 +119,42 @@ class Order extends Model
 
 
 					//payment methods
-				if($payment_method == 'cash_on_delivery'){
+				if($payment_method == 0){
 						$payments_setting = $this->payments_setting_for_cod();
-
-						$payment_method = $payments_setting->name;
+						$orders_status            			=   '1';
 						$payment_status='success';
 
+					} else {
+						$orders_status            			=   '0';
+						$payment_status='Processing';
+						$token= "7Fs7eBv21F5xAocdPvvJ-sCqEyNHq4cygJrQUFvFiWEexBUPs4AkeLQxH4pzsUrY3Rays7GVA6SojFCz2DMLXSJVqk8NG-plK-cZJetwWjgwLPub_9tQQohWLgJ0q2invJ5C5Imt2ket_-JAlBYLLcnqp_WmOfZkBEWuURsBVirpNQecvpedgeCx4VaFae4qWDI_uKRV1829KCBEH84u6LYUxh8W_BYqkzXJYt99OlHTXHegd91PLT-tawBwuIly46nwbAs5Nt7HFOozxkyPp8BW9URlQW1fE4R_40BXzEuVkzK3WAOdpR92IkV94K_rDZCPltGSvWXtqJbnCpUB6iUIn1V-Ki15FAwh_nsfSmt_NQZ3rQuvyQ9B3yLCQ1ZO_MGSYDYVO26dyXbElspKxQwuNRot9hi3FIbXylV3iN40-nCPH4YQzKjo5p_fuaKhvRh7H8oFjRXtPtLQQUIDxk-jMbOp7gXIsdz02DrCfQIihT4evZuWA6YShl6g8fnAqCy8qRBf_eLDnA9w-nBh4Bq53b1kdhnExz0CMyUjQ43UO3uhMkBomJTXbmfAAHP8dZZao6W8a34OktNQmPTbOHXrtxf6DS-oKOu3l79uX_ihbL8ELT40VjIW3MJeZ_-auCPOjpE3Ax4dzUkSDLCljitmzMagH2X8jN8-AYLl46KcfkBV";
+						
+						$data = array (
+							'PaymentMethodId' => $payment_method,
+							'CustomerName' => $billing_firstname.' '. $billing_lastname,
+							'DisplayCurrencyIso' => 'KWD',
+							'InvoiceValue' => (float)$order_price,
+							'CallBackUrl' => 'https://zaahee.shop/',
+							'ErrorUrl' => 'https://zaahee.shop/',							
+						);
+
+						$basURL = "https://apitest.myfatoorah.com";
+						
+						$curl = curl_init();
+						curl_setopt_array($curl, array(
+						CURLOPT_URL => "$basURL/v2/ExecutePayment",
+						CURLOPT_CUSTOMREQUEST => "POST",
+						CURLOPT_POSTFIELDS =>  json_encode($data),
+						CURLOPT_HTTPHEADER => array("Authorization: Bearer $token","Content-Type: application/json"),
+						));
+						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+						$paymentExecuteResponse = curl_exec($curl);
+						$err = curl_error($curl);
+
+						curl_close($curl);
+
+				
 					}
 
 					//check if order is verified
@@ -153,42 +164,31 @@ class Order extends Model
 											[	 'customers_id' => $customers_id,
 												 'customers_name'  => $delivery_firstname.' '.$delivery_lastname,
 												 'customers_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
-												 'customers_suburb'  =>  $delivery_suburb,
 												 'customers_city' => $delivery_city,
-												 'customers_state' => $delivery_state,
 												 'customers_country'  =>  $delivery_country,
-												 //'customers_telephone' => $customers_telephone,
+												 'customers_telephone' => $delivery_phone,
 												 'email'  => $email,
-												// 'customers_address_format_id' => $delivery_address_format_id,
+												
 
 												 'delivery_name'  =>  $delivery_firstname.' '.$delivery_lastname,
 												 'delivery_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
-												 'delivery_suburb'  => $delivery_suburb,
+											
 												 'delivery_city' => $delivery_city,
-												 'delivery_state' => $delivery_state,
+											
 												 'delivery_country'  => $delivery_country,
-												// 'delivery_address_format_id' => $delivery_address_format_id,
 
 												 'billing_name'  => $billing_firstname.' '.$billing_lastname,
 												 'billing_street_address' => $billing_street_address.' ,'.$billing_flat_address,
-												 'billing_suburb'  =>  $billing_suburb,
 												 'billing_city' => $billing_city,
-												 'billing_state' => $billing_state,
 												 'billing_country'  =>  $billing_country,
-												 //'billing_address_format_id' => $billing_address_format_id,
 
 												 'payment_method'  =>  $payment_method,
-												 'cc_type' => $cc_type,
-												 'cc_owner'  => $cc_owner,
-												 'cc_number' =>$cc_number,
-												 'cc_expires'  =>  $cc_expires,
+												
 												 'last_modified' => $last_modified,
 												 'date_purchased'  => $date_purchased,
 												 'order_price'  => $order_price,
 												 'shipping_cost' =>$shipping_cost,
 												 'shipping_method'  =>  $shipping_method,
-												 //'orders_status' => $orders_status,
-												 //'orders_date_finished'  => $orders_date_finished,
 												 'currency'  =>  $currency,
 												 'order_information' => 	json_encode($order_information),
 												 'coupon_code'		 =>		$code,
@@ -315,7 +315,7 @@ class Order extends Model
 										$ordersData['subtotal']    				=	$subtotal;
 
 										//notification/email
-										$myVar = new AlertController();
+										// $myVar = new AlertController();
 										//$alertSetting = $myVar->orderAlert($ordersData);
 
 										if(session('step')=='4'){
@@ -328,6 +328,184 @@ class Order extends Model
 										//change status of cart products
 										DB::table('customers_basket')->where('customers_id',auth()->guard('customer')->user()->id)->update(['is_order'=>'1']);
 										return $payment_status;
+					} else if($payment_status == 'Processing') {
+						$orders_id = DB::table('orders')->insertGetId(
+							[	 'customers_id' => $customers_id,
+								 'customers_name'  => $delivery_firstname.' '.$delivery_lastname,
+								 'customers_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
+								 'customers_city' => $delivery_city,
+								 'customers_country'  =>  $delivery_country,
+								 'customers_telephone' => $delivery_phone,
+								 'email'  => $email,
+								
+
+								 'delivery_name'  =>  $delivery_firstname.' '.$delivery_lastname,
+								 'delivery_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
+							
+								 'delivery_city' => $delivery_city,
+							
+								 'delivery_country'  => $delivery_country,
+
+								 'billing_name'  => $billing_firstname.' '.$billing_lastname,
+								 'billing_street_address' => $billing_street_address.' ,'.$billing_flat_address,
+								 'billing_city' => $billing_city,
+								 'billing_country'  =>  $billing_country,
+
+								 'payment_method'  =>  $payment_method,
+								//  'cc_type' => $cc_type,
+								//  'cc_owner'  => $cc_owner,
+								//  'cc_number' =>$cc_number,
+								//  'cc_expires'  =>  $cc_expires,
+								 'last_modified' => $last_modified,
+								 'date_purchased'  => $date_purchased,
+								 'order_price'  => $order_price,
+								 'shipping_cost' =>$shipping_cost,
+								 'shipping_method'  =>  $shipping_method,
+								 'currency'  =>  $currency,
+								 'order_information' => 	json_encode($order_information),
+								 'coupon_code'		 =>		$code,
+								 'coupon_amount' 	 =>		$coupon_amount,
+								  'total_tax'		 =>		$total_tax,
+								 'ordered_source' 	 => 	'1',
+								 'delivery_phone'	 =>	 	$delivery_phone,
+								 'billing_phone'	 =>	 	$billing_phone,
+							]);
+
+						 //orders status history
+						 $orders_history_id = DB::table('orders_status_history')->insertGetId(
+							[	 'orders_id'  => $orders_id,
+								 'orders_status_id' => $orders_status,
+								 'date_added'  => $date_added,
+								 'customer_notified' =>'1',
+								 'comments'  =>  $comments
+							]);
+
+
+						 $cart = $cart->myCart(array());
+
+
+						 foreach($cart as $products){
+							//get products info
+							$orders_products_id = DB::table('orders_products')->insertGetId(
+								[
+									 'orders_id' 		 => 	$orders_id,
+									 'products_id' 	 	 =>		$products->products_id,
+									 'products_name'	 => 	$products->products_name,
+									 'products_price'	 =>  	$products->price,
+									 'final_price' 		 =>  	$products->final_price*$products->customers_basket_quantity,
+									 'products_tax' 	 =>  	$products_tax,
+									 'products_quantity' =>  	$products->customers_basket_quantity,
+								]);
+
+							$inventory_ref_id = DB::table('inventory')->insertGetId([
+									'products_id'   		=>   $products->products_id,
+									'reference_code'  		=>   '',
+									'stock'  				=>   $products->customers_basket_quantity,
+									'admin_id'  			=>   0,
+									'added_date'	  		=>   time(),
+									'purchase_price'  		=>   0,
+									'stock_type'  			=>   'out',
+								]);
+
+							DB::table('customers_basket')->where('products_id',$products->products_id)->update(['is_order'=>'1']);
+
+							if(!empty($products->attributes)){
+								foreach($products->attributes as $attribute){
+									DB::table('orders_products_attributes')->insert(
+									[
+										 'orders_id' => $orders_id,
+
+										 'products_id'  => $products->products_id,
+										 'orders_products_id'  => $orders_products_id,
+										 'products_options' =>$attribute->attribute_name,
+										 'products_options_values'  =>  $attribute->attribute_value,
+										 'options_values_price'  =>  $attribute->values_price,
+										 'price_prefix'  =>  $attribute->prefix
+									]);
+
+									DB::table('inventory_detail')->insert([
+										'inventory_ref_id'  =>   $inventory_ref_id,
+										'products_id'  		=>   $products->products_id,
+										'attribute_id'		=>   $attribute->products_attributes_id,
+									]);
+								}
+							}
+
+						 }
+
+						$responseData = array('success'=>'1', 'data'=>array(), 'message'=>"");
+
+						//send order email to user
+						$order = DB::table('orders')
+							->LeftJoin('orders_status_history', 'orders_status_history.orders_id', '=', 'orders.orders_id')
+							->LeftJoin('orders_status', 'orders_status.orders_status_id', '=' ,'orders_status_history.orders_status_id')
+							->where('orders.orders_id', '=', $orders_id)->orderby('orders_status_history.date_added', 'DESC')->get();
+
+					//foreach
+					foreach($order as $data){
+						$orders_id	 = $data->orders_id;
+
+						$orders_products = DB::table('orders_products')
+							->join('products', 'products.products_id','=', 'orders_products.products_id')
+							->select('orders_products.*', 'products.products_image as image')
+							->where('orders_products.orders_id', '=', $orders_id)->get();
+							$i = 0;
+							$total_price  = 0;
+							$product = array();
+							$subtotal = 0;
+							foreach($orders_products as $orders_products_data){
+								$product_attribute = DB::table('orders_products_attributes')
+									->where([
+										['orders_products_id', '=', $orders_products_data->orders_products_id],
+										['orders_id', '=', $orders_products_data->orders_id],
+									])
+									->get();
+
+								$orders_products_data->attribute = $product_attribute;
+								$product[$i] = $orders_products_data;
+								//$total_tax	 = $total_tax+$orders_products_data->products_tax;
+								$total_price = $total_price+$orders_products[$i]->final_price;
+								$subtotal += $orders_products[$i]->final_price;
+								$i++;
+							}
+
+						$data->data = $product;
+						$orders_data[] = $data;
+					}
+
+						$orders_status_history = DB::table('orders_status_history')
+							->LeftJoin('orders_status', 'orders_status.orders_status_id', '=' ,'orders_status_history.orders_status_id')
+							->orderBy('orders_status_history.date_added', 'desc')
+							->where('orders_id', '=', $orders_id)->get();
+
+						$orders_status = DB::table('orders_status')->get();
+
+						$ordersData['orders_data']		 	 	=	$orders_data;
+						$ordersData['total_price']  			=	$total_price;
+						$ordersData['orders_status']			=	$orders_status;
+						$ordersData['orders_status_history']    =	$orders_status_history;
+						$ordersData['subtotal']    				=	$subtotal;
+
+						//notification/email
+						// $myVar = new AlertController();
+						//$alertSetting = $myVar->orderAlert($ordersData);
+
+						if(session('step')=='4'){
+							session(['step' => array()]);
+						}
+
+						session(['paymentResponseData'=>'']);
+						session(['paymentResponse'=>'']);
+
+						//change status of cart products
+						DB::table('customers_basket')->where('customers_id',auth()->guard('customer')->user()->id)->update(['is_order'=>'1']);
+						
+						// Curl Payment URL 
+						$json  = json_decode((string)$paymentExecuteResponse, true);
+						$payment_url = $json["Data"]["PaymentURL"];
+
+						header("Location: $payment_url"); 
+						exit();
 					}
 					else if($payment_status == "failed"){
 						return $payment_status;

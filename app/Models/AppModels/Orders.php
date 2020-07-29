@@ -807,43 +807,45 @@ public static function addtoorder($request)
 			$delivery_firstname  	          		=   $request->delivery_firstname;
 			$delivery_lastname            			=   $request->delivery_lastname;
 			$delivery_street_address            	=   $request->delivery_street_address;
-			$delivery_suburb            			=   $request->delivery_suburb;
+			$delivery_flat_address            	=   $request->delivery_flat_address;
+			// $delivery_suburb            			=   $request->delivery_suburb;
 			$delivery_city            				=   $request->delivery_city;
-			$delivery_postcode            			=   $request->delivery_postcode;
+			// $delivery_postcode            			=   $request->delivery_postcode;
 
 
-			$delivery = DB::table('zones')->where('zone_name', '=', $request->delivery_zone)->get();
+			// $delivery = DB::table('zones')->where('zone_name', '=', $request->delivery_zone)->get();
 
-			if(count($delivery)){
-				$delivery_state            				=   $delivery[0]->zone_code;
-			}else{
-				$delivery_state            				=   'other';
-			}
+			// if(count($delivery)){
+			// 	$delivery_state            				=   $delivery[0]->zone_code;
+			// }else{
+			// 	$delivery_state            				=   'other';
+			// }
 
 			$delivery_country            			=   $request->delivery_country;
 			$billing_firstname            			=   $request->billing_firstname;
 			$billing_lastname            			=   $request->billing_lastname;
 			$billing_street_address            		=   $request->billing_street_address;
-			$billing_suburb	            			=   $request->billing_suburb;
+			$billing_flat_address            		=   $request->billing_flat_address;
+			// $billing_suburb	            			=   $request->billing_suburb;
 			$billing_city            				=   $request->billing_city;
-			$billing_postcode            			=   $request->billing_postcode;
+			// $billing_postcode            			=   $request->billing_postcode;
 
-			$billing = DB::table('zones')->where('zone_name', '=', $request->billing_zone)->get();
+			// $billing = DB::table('zones')->where('zone_name', '=', $request->billing_zone)->get();
 
-			if(count($billing)){
-				$billing_state            				=   $billing[0]->zone_code;
-			}else{
-				$billing_state            				=   'other';
-			}
+			// if(count($billing)){
+			// 	$billing_state            				=   $billing[0]->zone_code;
+			// }else{
+			// 	$billing_state            				=   'other';
+			// }
 
 			$billing_country            			=   $request->billing_country;
 			$payment_method            				=   $request->payment_method;
 			$order_information 						=	array();
 
-			$cc_type            				=   $request->cc_type;
-			$cc_owner            				=   $request->cc_owner;
-			$cc_number            				=   $request->cc_number;
-			$cc_expires            				=   $request->cc_expires;
+			// $cc_type            				=   $request->cc_type;
+			// $cc_owner            				=   $request->cc_owner;
+			// $cc_number            				=   $request->cc_number;
+			// $cc_expires            				=   $request->cc_expires;
 			$last_modified            			=   date('Y-m-d H:i:s');
 			$date_purchased            			=   date('Y-m-d H:i:s');
       $order_price						        =   $request->totalPrice;
@@ -898,236 +900,45 @@ public static function addtoorder($request)
 				$coupon_amount            			=   0;
 			}
 
-			//payment methods
-			$payments_setting = Orders::payments_setting_for_brain_tree($request);
-
-			if($payment_method == 'braintree_card' or $payment_method == 'braintree_paypal'){
-				if($payment_method == 'braintree_card'){
-					$fieldName = 'sub_name_1';
-				}else{
-					$fieldName = 'sub_name_2';
-				}
-
-				$paymentMethodName = $payments_setting->$fieldName;
-
-				//braintree transaction with nonce
-				$is_transaction  = '1'; 			# For payment through braintree
-				$nonce    		 =   $request->nonce;
-
-        if($payments_setting['merchant_id']->environment=='0'){
-    			$braintree_enviroment = 'Test';
-    		}else{
-    			$braintree_enviroment = 'Live';
-    		}
-
-        $braintree_merchant_id = $payments_setting['merchant_id']->value;
-        $braintree_public_key  = $payments_setting['public_key']->value;
-        $braintree_private_key = $payments_setting['private_key']->value;
-
-				//brain tree credential
-				require_once app_path('braintree/Braintree.php');
-
-				if ($result->success)
-				{
-				if($result->transaction->id)
-					{
-						$order_information = array(
-							'braintree_id'=>$result->transaction->id,
-							'status'=>$result->transaction->status,
-							'type'=>$result->transaction->type,
-							'currencyIsoCode'=>$result->transaction->currencyIsoCode,
-							'amount'=>$result->transaction->amount,
-							'merchantAccountId'=>$result->transaction->merchantAccountId,
-							'subMerchantAccountId'=>$result->transaction->subMerchantAccountId,
-							'masterMerchantAccountId'=>$result->transaction->masterMerchantAccountId,
-							//'orderId'=>$result->transaction->orderId,
-							'createdAt'=>time(),
-	//						'updatedAt'=>$result->transaction->updatedAt->date,
-							'token'=>$result->transaction->creditCard['token'],
-							'bin'=>$result->transaction->creditCard['bin'],
-							'last4'=>$result->transaction->creditCard['last4'],
-							'cardType'=>$result->transaction->creditCard['cardType'],
-							'expirationMonth'=>$result->transaction->creditCard['expirationMonth'],
-							'expirationYear'=>$result->transaction->creditCard['expirationYear'],
-							'customerLocation'=>$result->transaction->creditCard['customerLocation'],
-							'cardholderName'=>$result->transaction->creditCard['cardholderName']
-						);
-						$payment_status = "success";
-					}
-				}
-				else
-					{
-						$payment_status = "failed";
-					}
-
-			}else if($payment_method == 'stripe'){				#### stipe payment
-
-        $payments_setting = Orders::payments_setting_for_stripe($request);
-				$paymentMethodName = $payments_setting['publishable_key']->name;
-
-				//require file
-				require_once app_path('stripe/config.php');
-
-				//get token from app
-				$token  = $request->nonce;
-
-				$customer = \Stripe\Customer::create(array(
-				  'email' => $email,
-				  'source'  => $token
-				));
-
-				$charge = \Stripe\Charge::create(array(
-				  'customer' => $customer->id,
-				  'amount'   => 100*$order_price,
-				  'currency' => 'usd'
-				));
-
-				 if($charge->paid == true){
-					 $order_information = array(
-							'paid'=>'true',
-							'transaction_id'=>$charge->id,
-							'type'=>$charge->outcome->type,
-							'balance_transaction'=>$charge->balance_transaction,
-							'status'=>$charge->status,
-							'currency'=>$charge->currency,
-							'amount'=>$charge->amount,
-							'created'=>date('d M,Y', $charge->created),
-							'dispute'=>$charge->dispute,
-							'customer'=>$charge->customer,
-							'address_zip'=>$charge->source->address_zip,
-							'seller_message'=>$charge->outcome->seller_message,
-							'network_status'=>$charge->outcome->network_status,
-							'expirationMonth'=>$charge->outcome->type
-						);
-
-						$payment_status = "success";
-
-				 }else{
-						$payment_status = "failed";
-				 }
-
-			}else if($payment_method == 'cod'){
+ if($payment_method == 'cash_on_delivery'){
 
         $payments_setting = Orders::payments_setting_for_cod($request);
 				$paymentMethodName =  $payments_setting->name;
 				$payment_method = 'Cash on Delivery';
 				$payment_status='success';
 
-			} else if($payment_method == 'paypal'){
-
-        $payments_setting = Orders::payments_setting_for_paypal($request);
-				$paymentMethodName = $payments_setting['id']->name;
-				$payment_method = 'PayPal Express Checkout';
-				$payment_status='success';
-				$order_information = $request->nonce;
-
-			} else if($payment_method == 'instamojo'){
-
-        $payments_setting = Orders::payments_setting_for_instamojo($request);
-				$paymentMethodName = $payments_setting['auth_token']->name;
-				$payment_method = 'Instamojo';
-				$payment_status='success';
-				$order_information = array('payment_id'=>$request->nonce, 'transaction_id'=>$request->transaction_id);
-
-			}else if($payment_method == 'hyperpay'){
-        $payments_setting = Orders::payments_setting_for_hyperpay($request);
-				$paymentMethodName = $payments_setting['userid']->name;
-				$payment_method = 'Hyperpay';
-				$payment_status='success';
 			}
 
 
 			//check if order is verified
 			if($payment_status=='success'){
-				if( $payment_method == 'hyperpay'){
-				$cyb_orders = DB::table('orders')->where('transaction_id','=',$request->transaction_id)->get();
-				//dd($cyb_orders);
-				$orders_id = $cyb_orders[0]->orders_id;
-
-				//update database
-				DB::table('orders')->where('transaction_id','=',$request->transaction_id)->update(
-					[	 'customers_id' => $customers_id,
-						 'customers_name'  => $delivery_firstname.' '.$delivery_lastname,
-						 'customers_street_address' => $delivery_street_address,
-						 'customers_suburb'  =>  $delivery_suburb,
-						 'customers_city' => $delivery_city,
-						 'customers_postcode'  => $delivery_postcode,
-						 'customers_state' => $delivery_state,
-						 'customers_country'  =>  $delivery_country,
-						 'customers_telephone' => $customers_telephone,
-						 'email'  => $email,
-
-						 'delivery_name'  =>  $delivery_firstname.' '.$delivery_lastname,
-						 'delivery_street_address' => $delivery_street_address,
-						 'delivery_suburb'  => $delivery_suburb,
-						 'delivery_city' => $delivery_city,
-						 'delivery_postcode'  =>  $delivery_postcode,
-						 'delivery_state' => $delivery_state,
-						 'delivery_country'  => $delivery_country,
-						 'billing_name'  => $billing_firstname.' '.$billing_lastname,
-						 'billing_street_address' => $billing_street_address,
-						 'billing_suburb'  =>  $billing_suburb,
-						 'billing_city' => $billing_city,
-						 'billing_postcode'  => $billing_postcode,
-						 'billing_state' => $billing_state,
-						 'billing_country'  =>  $billing_country,
-
-						 'payment_method'  =>  $paymentMethodName,
-						 'cc_type' => $cc_type,
-						 'cc_owner'  => $cc_owner,
-						 'cc_number' =>$cc_number,
-						 'cc_expires'  =>  $cc_expires,
-						 'last_modified' => $last_modified,
-						 'date_purchased'  => $date_purchased,
-						 'order_price'  => $order_price,
-						 'shipping_cost' =>$shipping_cost,
-						 'shipping_method'  =>  $shipping_method,
-						 'currency'  =>  $currency_code,
-						 'currency_value' => $last_modified,
-						 'coupon_code'		 =>		$code,
-						 'coupon_amount' 	 =>		$coupon_amount,
-						 'total_tax'		 =>		$total_tax,
-						 'ordered_source' 	 => 	'2',
-						 'delivery_phone'	 =>		$delivery_phone,
-						 'billing_phone'	 =>		$billing_phone
-					]);
-
-				}else{
-
 				//insert order
 				$orders_id = DB::table('orders')->insertGetId(
 					[	 'customers_id' => $customers_id,
 						 'customers_name'  => $delivery_firstname.' '.$delivery_lastname,
-						 'customers_street_address' => $delivery_street_address,
-						 'customers_suburb'  =>  $delivery_suburb,
+             'customers_street_address' => $delivery_flat_address.' '.$delivery_street_address,
 						 'customers_city' => $delivery_city,
-						 'customers_postcode'  => $delivery_postcode,
-						 'customers_state' => $delivery_state,
+						
 						 'customers_country'  =>  $delivery_country,
 						 'customers_telephone' => $customers_telephone,
 						 'email'  => $email,
 
 						 'delivery_name'  =>  $delivery_firstname.' '.$delivery_lastname,
-						 'delivery_street_address' => $delivery_street_address,
-						 'delivery_suburb'  => $delivery_suburb,
+						 'delivery_street_address' => $delivery_flat_address.' '.$delivery_street_address,
+						
 						 'delivery_city' => $delivery_city,
-						 'delivery_postcode'  =>  $delivery_postcode,
-						 'delivery_state' => $delivery_state,
 						 'delivery_country'  => $delivery_country,
 
 						 'billing_name'  => $billing_firstname.' '.$billing_lastname,
-						 'billing_street_address' => $billing_street_address,
-						 'billing_suburb'  =>  $billing_suburb,
+             'billing_street_address' => $billing_flat_address.' '.$billing_street_address,
+            //  'billing_flat_address'  => $delivery_flat_address,
+						
 						 'billing_city' => $billing_city,
-						 'billing_postcode'  => $billing_postcode,
-						 'billing_state' => $billing_state,
+					
 						 'billing_country'  =>  $billing_country,
 
 						 'payment_method'  =>  $paymentMethodName,
-						 'cc_type' => $cc_type,
-						 'cc_owner'  => $cc_owner,
-						 'cc_number' =>$cc_number,
-						 'cc_expires'  =>  $cc_expires,
+					
 						 'last_modified' => $last_modified,
 						 'date_purchased'  => $date_purchased,
 						 'order_price'  => $order_price,
@@ -1142,9 +953,8 @@ public static function addtoorder($request)
 						 'ordered_source' 	 => 	'2',
 						 'delivery_phone'	 =>		$delivery_phone,
 						 'billing_phone'	 =>		$billing_phone,
-					]);
-
-				}
+          ]);
+          
 				 //orders status history
 				 $orders_history_id = DB::table('orders_status_history')->insertGetId(
 					[	 'orders_id'  => $orders_id,

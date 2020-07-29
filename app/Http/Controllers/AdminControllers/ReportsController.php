@@ -122,8 +122,13 @@ class ReportsController extends Controller
 		$products_ids = array();
 		$data = array();
 		foreach($products as $products_data){
+		
 			$currentStocks = DB::table('inventory')->where('products_id',$products_data->products_id)->get();
 
+			// product images 
+			$prodImages  = DB::table('image_categories')->where('image_categories.image_id','=',$products_data->products_image)->where('image_categories.image_type', '=', 'THUMBNAIL')->first();
+			$products_data->products_image = $prodImages->path;
+		
 			if(count($currentStocks)>0){
 				if($products_data->products_type!=1){
 					$c_stock_in = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','in')->sum('stock');
@@ -146,11 +151,10 @@ class ReportsController extends Controller
 
 			}
 		}
-
 		$result['products'] = $data;
 		$myVar = new SiteSettingController();
 		$result['currency'] = $myVar->getSetting();
-			return view("admin.reports.outofstock",$title)->with('result', $result);
+		return view("admin.reports.outofstock",$title)->with('result', $result);
 	}
 
 	//lowinstock
@@ -161,10 +165,15 @@ class ReportsController extends Controller
 
 		$products = DB::table('products')
 			->leftJoin('products_description','products_description.products_id','=','products.products_id')
+			->leftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+			->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
+			->leftJoin('categories_description', 'categories.categories_id', '=', 'categories_description.categories_id')
 			//->leftJoin('inventory','inventory.products_id','=','products.products_id')
-			->where('products_description.language_id','=', $language_id)
+			->whereColumn('products.products_quantity', '<=', 'products.low_limit')
+			->where('products_description.language_id', '=', $language_id)
+			->where('products.low_limit', '>', 0)
 			->orderBy('products.products_id', 'DESC')
-			->get();
+			->get(['products.*', 'products_description.*','categories_description.categories_name']);
 
 		$result2 = array();
 		$products_array  = array();
@@ -172,6 +181,10 @@ class ReportsController extends Controller
 		$lowLimit = 0;
 		$outOfStock = 0;
 		foreach($products as $product){
+
+				// product images 
+				$prodImages  = DB::table('image_categories')->where('image_categories.image_id','=',$product->products_image)->where('image_categories.image_type', '=', 'THUMBNAIL')->first();
+				$product->products_image = $prodImages->path;
 
 			if($product->products_type==1){
 

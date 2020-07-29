@@ -108,17 +108,31 @@ return [
 
 	'Terms & Condtions'=>'Terms & Condtions',
 
+	'Sitemap'=> 'Sitemap',
+
 	'Wishlist'=>'Wishlist',
 
 	'Shopping Cart'=>'Shopping Cart',
 
 	'Privacy Policy'=>'Privacy Policy',
 
+	'We Accept'=>'We Accept',
+
+	'Delivery Terms'=>'Delivery Terms',
+
+	'How to Order'=>'How to Order',
+
+	'Exchange and Returns'=>'Exchange and Returns',
+
+	'Customer Service'=>'Customer Service',
+
+	'Connect with Us' => 'Connect with Us',
+
 	'Phone'=>'Phone',
 
 	'Email'=>'Email',
 
-	'Copy Rights'=>date('Y',time()).' Company, Inc',
+	'Copy Rights'=>'© '.date('Y',time()).' Zaahee. All Rights Reserved.',
 
 	'From our News'=>'From our News',
 
@@ -773,5 +787,9 @@ return [
     'What’s HOT' => 'What’s HOT',
     'Buy Now' => 'Buy Now',
     'Add from wishlist' => 'Add from wishlist',
-    'Oldest' => 'Oldest - Newest',
+	'Oldest' => 'Oldest - Newest',
+	'Trends' => 'Trends',
+	'See All' => 'See All',
+	'Shop Now!' => 'Shop Now!',
+	'FAQ' => 'FAQ',
 ];

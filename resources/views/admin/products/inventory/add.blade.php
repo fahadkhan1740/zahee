@@ -79,7 +79,7 @@
                                                                 </div>
                                                                 @endif
 
-                                                                @if($result['products'][0]->products_type==1)
+                                                           
                                                                 <div class="form-group">
                                                                     <label for="name" class="col-sm-2 col-md-4 control-label">{{ trans('labels.products_attributes') }}</label>
                                                                     <div class="col-sm-10 col-md-8">
@@ -99,7 +99,7 @@
                                                                         <span class="help-block hidden">{{ trans('labels.Select Option values Text') }}</span>
                                                                     </div>
                                                                 </div>
-                                                                @endif
+                                                           
 
                                                                  <div class="form-group">
                                                                     <label for="name" class="col-sm-2 col-md-4 control-label">

@@ -30,15 +30,15 @@
                     <div class="footer-col quick-links">
                         <h6>Company Information</h6>
                         <ul>
-                            <li><a href="{{ url('/page/about-us') }}">About Us</a></li>
-                            <li><a href="{{ url('/page/faq') }}">FAQ</a></li>
-                            <li><a href="{{ url('/page/sitemap') }}">Sitemap </a></li>
-                            <li><a href="{{ url('/page/delivery-terms') }}">Delivery Terms</a></li>
-                            <li><a href="{{ url('/page/How-to-Order') }}">How to Order</a></li>
-                            <li><a href="{{ url('/page/customer-service') }}">Customer Service</a></li>
-                            <li><a href="{{ url('/page/refund-policy') }}">Exchange and Returns</a></li>
-                            <li><a href="{{ url('/page/privacy-policy') }}">Privacy Policy</a></li>
-                            <li><a href="{{ url('/page/term-services') }}">Terms and Conditions</a></li>
+                            <li><a href="{{ url('/page/about-us') }}">@lang('website.About Us')</a></li>
+                            <li><a href="{{ url('/page/faq') }}">@lang('website.FAQ')</a></li>
+                            <li><a href="{{ url('/page/sitemap') }}">@lang('website.Sitemap') </a></li>
+                            <li><a href="{{ url('/page/delivery-terms') }}">@lang('website.Delivery Terms')</a></li>
+                            <li><a href="{{ url('/page/How-to-Order') }}">@lang('website.How to Order')</a></li>
+                            <li><a href="{{ url('/page/customer-service') }}">@lang('website.Customer Service')</a></li>
+                            <li><a href="{{ url('/page/refund-policy') }}">@lang('website.Exchange and Returns')</a></li>
+                            <li><a href="{{ url('/page/privacy-policy') }}">@lang('website.Privacy Policy')</a></li>
+                            <li><a href="{{ url('/page/term-services') }}">@lang('website.Terms & Condtions')</a></li>
                         </ul>
 
                         <div class="store-paymate-wrap">
@@ -48,7 +48,7 @@
                                 <a href="#"><img src="https://zaahee.shop/public/web/images/cus/store-2.png" alt="store-2.png" /></a>
                             </div>
                             <div class="payment-wrap">
-                                <h6>We Accept</h6>
+                                <h6>@lang('website.We Accept')</h6>
 
                                 <ul>
                                     <li>
@@ -76,7 +76,7 @@
 
                 <div class="col-md-3">
                     <div class="footer-col contact-info">
-                        <h6>Contact Us</h6>
+                        <h6>@lang('website.Contact Us')</h6>
                         <ul>
                             <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+11234567890" target="_blank">+1 123 - 456 - 7890</a></li>
                             <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:hello@zaahee.com" target="_blank">hello@zaahee.com</a></li>
@@ -92,10 +92,9 @@
     <div class="copyright">
         <div class="container">
             <div class="col-left">
-                <p>Copyright © 2020 Zaahee. All Rights Reserved.</p>
+                <p>@lang('website.Copy Rights')</p>
             </div>
             <div class="col-right">
-{{--                <p>Powered By -<a href="#"> iMark Infotech</a></p>--}}
             </div>
         </div>
     </div>

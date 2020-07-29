@@ -569,7 +569,9 @@
         @foreach($result['languages'] as $languages)
         // Replace the <textarea id="editor1"> with a CKEditor
         // instance, using default configuration.
-        CKEDITOR.replace('editor{{$languages->languages_id}}');
+        CKEDITOR.replace('editor{{$languages->languages_id}}', {
+            language: '{{$languages->code}}'
+        });
         @endforeach
         //bootstrap WYSIHTML5 - text editor
         $(".textarea").wysihtml5();

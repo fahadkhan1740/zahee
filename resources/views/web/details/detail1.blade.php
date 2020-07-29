@@ -134,7 +134,11 @@
                                                 @foreach($attributes_data['values'] as $k => $values_data)
                                                     <label>
                                                     <input type="radio" attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = "{{ $values_data['price_prefix'] }}"  value_price ="{{ $values_data['price']+0 }}" name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity(`{{ $attributes_data['option']['id'] }}`)" class="currentstock attributeid_<?=$index++?>" attributeid = "{{$attributes_data['option']['id']}}" />
+                                                   @if($attributes_data['option']['name']  === 'Color')
+                                                    <span class="radio_bx" style=" background:{{ $values_data['value'] }}; "></span>
+                                                    @else 
                                                     <span class="radio_bx">{{ $values_data['value'] }}</span>
+                                                    @endif
                                                     </label>
                                                     
                                                     @endforeach
@@ -304,6 +308,7 @@
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" data-toggle="tab" href="#nav-des">Description</a>
                         <a class="nav-item nav-link"  data-toggle="tab" href="#nav-review" >Reviews</a>
+                        <a class="nav-item nav-link"  data-toggle="tab" href="#nav-help" >Need Help ?</a>
                     </div>
 
                     <div class="tab-content" id="nav-tabContent">
@@ -350,6 +355,9 @@
                                  </div>
 
                             </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-help" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <?=stripslashes($result['detail']['product_data'][0]->products_description)?>
                         </div>
                     </div>
                 </div>

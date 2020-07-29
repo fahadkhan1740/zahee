@@ -101,7 +101,6 @@ class OrdersController extends Controller
 				session(['step' => '0']);
 			}
 
-//			dd(auth()->guard('customer')->user()->customers_default_address_id);
 			if(!empty(auth()->guard('customer')->user()->customers_default_address_id)){
 
 				$address_id = auth()->guard('customer')->user()->customers_default_address_id;
@@ -130,31 +129,15 @@ class OrdersController extends Controller
 			// $result['zones'] = $this->shipping->zones($countries_id);
 
 
-			//get tax
-			if(!empty(session('shipping_address')->zone_id)){
-				$tax_zone_id = session('shipping_address')->zone_id;
-				$tax = $this->calculateTax($tax_zone_id);
-				session(['tax_rate' => $tax]);
-			}else{
-				session(['tax_rate' => '0']);
-			}
+			// //get tax
+			// if(!empty(session('shipping_address')->zone_id)){
+			// 	$tax_zone_id = session('shipping_address')->zone_id;
+			// 	$tax = $this->calculateTax($tax_zone_id);
+			// 	session(['tax_rate' => $tax]);
+			// }else{
+			// 	session(['tax_rate' => '0']);
+			// }
 
-			
-
-			try{
-			//shipping methods
-			$result['shipping_methods'] = $this->shipping_methods();
-		
-
-			//payment methods
-			$result['payment_methods'] = $this->getPaymentMethods();
-			// dd($result['payment_methods']);
-			}
-			catch(\Exception $e){
-				$msg = $e->getMessage();
-
-				return redirect('general_error/'.$msg);
-			}
 
 			//price
 			$price=0;
@@ -166,11 +149,42 @@ class OrdersController extends Controller
 				session(['products_price' => $price]);
 			}
 
+			
 
-			//breaintree token
-//			$token = $this->generateBraintreeTokenWeb();
-//			session(['braintree_token' => $token]);
+			try{
+			//shipping methods
+				$result['shipping_methods'] = $this->shipping_methods();
 
+				// Get Payment methods from Myfootarah
+
+				$token = "7Fs7eBv21F5xAocdPvvJ-sCqEyNHq4cygJrQUFvFiWEexBUPs4AkeLQxH4pzsUrY3Rays7GVA6SojFCz2DMLXSJVqk8NG-plK-cZJetwWjgwLPub_9tQQohWLgJ0q2invJ5C5Imt2ket_-JAlBYLLcnqp_WmOfZkBEWuURsBVirpNQecvpedgeCx4VaFae4qWDI_uKRV1829KCBEH84u6LYUxh8W_BYqkzXJYt99OlHTXHegd91PLT-tawBwuIly46nwbAs5Nt7HFOozxkyPp8BW9URlQW1fE4R_40BXzEuVkzK3WAOdpR92IkV94K_rDZCPltGSvWXtqJbnCpUB6iUIn1V-Ki15FAwh_nsfSmt_NQZ3rQuvyQ9B3yLCQ1ZO_MGSYDYVO26dyXbElspKxQwuNRot9hi3FIbXylV3iN40-nCPH4YQzKjo5p_fuaKhvRh7H8oFjRXtPtLQQUIDxk-jMbOp7gXIsdz02DrCfQIihT4evZuWA6YShl6g8fnAqCy8qRBf_eLDnA9w-nBh4Bq53b1kdhnExz0CMyUjQ43UO3uhMkBomJTXbmfAAHP8dZZao6W8a34OktNQmPTbOHXrtxf6DS-oKOu3l79uX_ihbL8ELT40VjIW3MJeZ_-auCPOjpE3Ax4dzUkSDLCljitmzMagH2X8jN8-AYLl46KcfkBV";
+				$basURL = "https://apitest.myfatoorah.com";
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				CURLOPT_URL => "$basURL/v2/InitiatePayment",
+				CURLOPT_CUSTOMREQUEST => "POST",
+				CURLOPT_POSTFIELDS => "{\"InvoiceAmount\": $price,\"CurrencyIso\": \"KWD\"}",
+				CURLOPT_HTTPHEADER => array("Authorization: Bearer $token","Content-Type: application/json"),
+				));
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+				$response = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+
+				$response = json_decode($response);
+
+				if($response->IsSuccess) {
+					$result['payment_methods'] = $response->Data->PaymentMethods;
+				} else {
+					$result['payment_methods'] = [];
+				}
+			}
+			catch(\Exception $e){
+				$msg = $e->getMessage();
+
+				return redirect('general_error/'.$msg);
+			}
 
 			return view("web.checkout", ['title' =>$title,'final_theme' => $final_theme])->with('result', $result);
 		}
@@ -230,7 +244,7 @@ class OrdersController extends Controller
 	//checkout_billing_address
 	public function checkout_billing_address(Request $request){
 		if(session('step')=='1'){
-			session(['step' => '2']);
+			session(['step' => '3']);
 		}
 
 		if(empty($request->same_billing_address)){
@@ -320,7 +334,6 @@ class OrdersController extends Controller
 			return redirect()->back()->with('error', Lang::get("website.Error while placing order"));
 		}
 	}
-
 
 	//orders
 	public function orders(Request $request){

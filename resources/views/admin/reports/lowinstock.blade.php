@@ -32,23 +32,26 @@
                     <tr>
                       <th>{{ trans('labels.ID') }}</th>
                       <th>{{ trans('labels.Image') }}</th>
+                      <th>{{ trans('labels.Category') }}</th>
                       <th>{{ trans('labels.Products') }}</th>
-                      <!--<th>{{ trans('labels.Quantity') }}</th>-->
+                      <th>{{ trans('labels.Quantity') }}</th>
                       <th>{{ trans('labels.ViewStock') }}</th>
                     </tr>
                   </thead>
                   <tbody>
                  @if(count($result['lowQunatity']) > 0)
                     @foreach ($result['lowQunatity'] as  $key=>$lowQunatityProducts)
+                  
                         <tr>
                             <td>{{ $lowQunatityProducts->products_id }}</td>
                             <td><img src="{{asset('public').'/'.'/'.$lowQunatityProducts->products_image}}" alt="" width=" 100px" height="100px"></td>
+                            <td>{{$lowQunatityProducts->categories_name}}</td>
                             <td width="45%">
-                                <strong>{{ $lowQunatityProducts->products_name }} ( {{ $lowQunatityProducts->products_model }} )</strong><br>
+                                <strong>{{ $lowQunatityProducts->products_name }}</strong><br>
                             </td>
-                            <!--<td>
+                            <td>
                                 {{ $lowQunatityProducts->products_quantity }}
-                            </td>-->
+                            </td>
                             <td>
                                 <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.View') }}" href="stockin?products_id={{ $lowQunatityProducts->products_id }}" class="badge bg-light-blue"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
@@ -56,7 +59,7 @@
                     @endforeach
                  @else
                  <tr>
-                 	<td colspan="4">
+                 	<td colspan="6">
                  		{{ trans('labels.NoRecordFound') }}
                     </td>
                  </tr>

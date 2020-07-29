@@ -1164,8 +1164,10 @@ class Products extends Model
             $result['stocks'] = $stocks;
             $result['min_level'] = $min_level;
             $result['max_level'] = $max_level;
-            $products_attribute = DB::table('products_attributes')->where('products_id', '=', 1)->get();
+            $products_attribute = DB::table('products_attributes')->get();
+           
             $products_attribute = $products_attribute->unique('options_id')->keyBy('options_id');
+        
             if (count($products_attribute) > 0) {
                 $index2 = 0;
                 foreach ($products_attribute as $attribute_data) {
@@ -1265,7 +1267,7 @@ class Products extends Model
             'stock_type' => 'in'
 
         ]);
-        if ($products[0]->products_type == 1) {
+        // if ($products[0]->products_type == 1) {
             foreach ($request->attributeid as $attribute) {
                 if (!empty($attribute)) {
                     DB::table('inventory_detail')->insert([
@@ -1275,7 +1277,7 @@ class Products extends Model
                     ]);
                 }
             }
-        }
+        // }
 
     }
 

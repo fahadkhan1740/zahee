@@ -39,12 +39,11 @@
                   <tbody>
 					@if(count($result['products']) > 0)
                     	@foreach ($result['products'] as  $key=>$outOfStockData)
-
                             <tr>
                                 <td>{{ $outOfStockData->products_id }}</td>
                                 <td><img src="{{asset('public').'/'.'/'.$outOfStockData->products_image}}" alt="" width=" 100px" height="100px"></td>
                                 <td width="45%">
-                                    <strong>{{ $outOfStockData->products_name }} ( {{ $outOfStockData->products_model }} )</strong><br>
+                                    <strong>{{ $outOfStockData->products_name }}</strong><br>
                                 </td>
                                 <!--<td>
                                     {{ $outOfStockData->products_quantity }}

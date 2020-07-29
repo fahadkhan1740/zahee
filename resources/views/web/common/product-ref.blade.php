@@ -35,28 +35,29 @@
 <div class="items-list text-center">
     <div class="items-box-wrap">
         <a href="#" class="heart-icon whishlist" products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
-        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
+
             <figure>
-                <img src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
+            <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"> <img src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" /></a>
             </figure>
             <div class="items-content">
-                <h6>{{$products->products_name}}</h6>
+                <h6><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"> {{$products->products_name}}</a></h6>
                 <p>
                     <!-- <span class="price "> -->
                          @if(empty($products->discount_price))
-                         <span class="price "> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
+                         <span class="price "> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
                     <!-- </span> -->
                         @else
-                        <span class="price new-price">{{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}</span>
-                            <span class="price old-price"> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
+                        <span class="price new-price">{{Session::get('symbol_left')}} {{$discount_price+0}} {{Session::get('symbol_right')}}</span>
+                            <span class="price old-price"> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
 
                         @endif
                 </p>
-                <span class="price ">
-                <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn">Shop Now!</a>
-                <a href="javascript:void(0);" class="link-btn cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                <div class="items-bottom-button">
+                  <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                  <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                </div>
             </div>
-        </a>
+
     </div>
 
 </div>

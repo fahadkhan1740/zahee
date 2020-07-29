@@ -444,10 +444,11 @@ class Customer extends Model
                 'created_at' => time(),
             );
 
+
             $existUser = DB::table('customers')->where('fb_id', '=', $fb_id)->get();
             if (count($existUser) > 0) {
 
-                $customers_id = $existUser[0]->customers_id;
+                $customers_id = $existUser[0]->user_id;
                 $success = "2";
                 $message = "Customer record has been updated.";
                 //update data of customer
@@ -561,7 +562,7 @@ class Customer extends Model
 
             $existUser = DB::table('customers')->where('google_id', '=', $google_id)->get();
             if (count($existUser) > 0) {
-                $customers_id = $existUser[0]->customers_id;
+                $customers_id = $existUser[0]->user_id;
                 DB::table('users')->where('id', $customers_id)->update($customer_data);
             } else {
                 //insert data into customer
@@ -572,6 +573,7 @@ class Customer extends Model
                 ]);
 
             }
+            // dd($existUser);
 
             $userData = DB::table('users')->where('id', '=', $customers_id)->get();
 
