@@ -1,32 +1,39 @@
-<section class="shop-content shop-four">
+<section class="shop-content shop-four elem-cover">
    <div class="container">
        <div class="row">
-         <div class="col-12 col-lg-2  d-lg-block d-xl-block right-menu">
-           <div class="right-menu-categories">
-            @if(!empty($result['categories']))
-             @foreach($result['categories'] as $category)
-             <a class=" main-manu"  @if(array_key_exists("childs",$category)) href="#{{$category->slug}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="men-cloth"  @else  href="{{url('shop?category=').$category->slug}}"  @endif>
-               <img class="img-fuild" src="{{asset('public/'.$category->image_path)}}">
-                  {{$category->categories_name}} <span><i class="fas fa-minus"></i></span>
-             </a>
-                 @if(array_key_exists("childs",$category))
-                    <div class="sub-manu collapse" id="{{$category->slug}}">
-                           <ul class="unorder-list">
-                             @if(array_key_exists("childs",$category))
-                             @foreach($category->childs as $cat)
-                               <li class="list-item">
-                                 <a class="list-link"  href="{{url('shop?category=').$cat->slug}}" >
-                                     <i class="fas fa-angle-right"></i>{{$cat->categories_name}}
-                                 </a>
-                               </li>
-                               @endforeach
-                               @endif
-                           </ul>
-                         </div>
-                 @endif
-             @endforeach
-            @endif
-           </div>
+         <div class="col-12 col-lg-3 d-lg-block d-xl-block right-menu elem-left">
+            <div class="right-menu-categories">
+              @if(!empty($result['categories']))
+                @foreach($result['categories'] as $category)
+                  <div class="card">
+                    <a class=" main-manu collapsed"  @if(array_key_exists("childs",$category)) href="#{{$category->slug}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="men-cloth"  @else  href="{{url('shop?category=').$category->slug}}"  @endif>
+                      <img class="img-fuild" src="{{asset('public/'.$category->image_path)}}">
+                      {{$category->categories_name}}
+                      <span>
+                      @if(array_key_exists("childs",$category))
+                      <i class="fas fa-minus"></i>
+                      @endif
+                      </span>
+                    </a>
+                    @if(array_key_exists("childs",$category))
+                      <div class="sub-manu collapse" id="{{$category->slug}}">
+                        <ul class="unorder-list">
+                        @if(array_key_exists("childs",$category))
+                        @foreach($category->childs as $cat)
+                          <li class="list-item">
+                            <a class="list-link"  href="{{url('shop?category=').$cat->slug}}" >
+                                <i class="fas fa-angle-right"></i>{{$cat->categories_name}}
+                            </a>
+                          </li>
+                          @endforeach
+                          @endif
+                        </ul>
+                      </div>
+                    @endif
+                  </div>
+                @endforeach
+              @endif
+            </div>
            @if(!empty($result['categories']))
            <form enctype="multipart/form-data" name="filters" id="test" method="get">
              <input type="hidden" name="min_price" id="min_price" value="0">
@@ -136,7 +143,7 @@
              </form>
              @endif
          </div>
-         <div class="col-12 col-lg-9">
+         <div class="col-12 col-lg-9 elem-right">
              <div class="breadcum-area">
                  <ul class="arrows">
                      @if(!empty($result['category_name']) and !empty($result['sub_category_name']))
@@ -158,7 +165,7 @@
                      <div class="row">
                        <div class="col-12 col-lg-12">
                          <div class="row">
-                         <div class="col-12 col-xl-6">
+                         <div class="col-12 col-sm-4 align-self-center">
                            <div class="block">
                              <label>@lang('website.Display')</label>
                              <label>
@@ -167,7 +174,7 @@
                              </label>
                            </div>
                          </div>
-                         <div class="col-12 col-xl-6">
+                         <div class="col-12 col-sm-8">
                            <form class="form-inline" id="load_products_form">
                              @if(!empty(app('request')->input('search')))
                               <input type="hidden"  name="search" value="{{ app('request')->input('search') }}">
@@ -234,7 +241,7 @@
                                        <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="{{$products->products_id}}"><i class="fas fa-eye"></i></div>
                                          <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
                                        </div>
-                                   <a style="max-width: 100%;height: 100%;object-fit: cover;" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
+                                   <a class="product-img" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
                                    <!-- <figure> -->
                                       <img  src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
                                   <!-- </figure> -->
@@ -292,6 +299,7 @@
                                  <div class="product-detaill">
                                    <div class="product__left">
                                  <h4 class="title text-center"><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h4>
+                                 <p>{{$products->product_sub_title}}</p>
                                  <div class="price">
                                    @if(empty($products->discount_price))
                                          {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}

@@ -278,19 +278,17 @@ private function recursivecategories1(){
     						->Join('categories', function($join) {
 								$join->on('categories.categories_id','=','products_to_categories.categories_id')
 								->where('categories.categories_status','=',1);
-							});
-					
-					
-
-
-    			if(!empty($data['categories_id'])){
-    				$categories->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
-    						->Join('categories', function($join) {
-								$join->on('categories.categories_id','=','products_to_categories.categories_id')
-								->where('categories.categories_status','=',1);
 							})
-    						->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id');
-    			}
+					->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id');
+					
+					
+
+
+    			// if(!empty($data['categories_id'])){
+    			// 	$categories->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+    			// 			->LeftJoin('categories', 'categories.categories_id','=','products_to_categories.categories_id')
+    					
+    			// }
 
     			if(!empty($data['filters']) and empty($data['search'])){
     				$categories->leftJoin('products_attributes','products_attributes.products_id','=','products.products_id');

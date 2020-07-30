@@ -1,7 +1,7 @@
 <?php //dd($result['top_seller']['product_data']); ?>
 
 <div class="product-wrap ads__warp">
-<div class="title-wrap d-flex justify-content-between align-items-center">
+<div class="title-wrap d-flex justify-content-between align-items-center no-slider ">
     <div class="title-box">
       <h6>@lang('website.Trends')</h6>
     </div>
@@ -19,7 +19,7 @@
         </div>
     </div>
  </div>
- 
+
 <div class="product-wrap" >
     @if($result['special']['success']==1)
     <div class="title-wrap d-flex justify-content-between align-items-center">
@@ -39,7 +39,7 @@
     </div>
     @endif
 
-    
+
     <div class="banner  banner-ads row">
         @foreach($result['commonContent']['homeBanners'] as $homeBanner)
             @if($homeBanner->status && $homeBanner->languages_id === Session::get('language_id'))
@@ -68,14 +68,14 @@
          <a href="{{ URL::to('/shop?load_products=1&type=flashsale&limit=15')}}" class="see-all-btn">@lang('website.See All')</a>
         </div>
       </div>
-      
+
       <div class="product-slider b-product-slider">
 
           @foreach($result['flash_sale']['product_data'] as $key=>$products)
         <div class="items-list text-center">
           <div class="items-box-wrap">
           <a href="javascript:void(0)" class="heart-icon whishlist" products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
-             
+
             <figure>
             <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
                 <img src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
@@ -110,7 +110,7 @@
                     $discounted_price = 0;
                 }
                 ?>
-                
+
               <p class="primary-color"><?php echo (int)$discount_percentage; ?>% Off</p>
               <p>
                     <!-- <span class="price "> -->
@@ -148,7 +148,7 @@
             <a href="{{ URL::to('/shop?load_products=1&type=topseller&limit=15')}}" class="see-all-btn">@lang('website.See All')</a>
         </div>
         </div>
-        
+
       </div>
         <div class="product-slider b-product-slider">
 
@@ -263,13 +263,13 @@
                             </figure>
                             <div class="items-content">
                                 <h6>{{$products->products_name}}</h6>
-                            
+
                                 <p class="primary-color"><?php echo @round($discount_percentage); ?> % Off</p>
                                     <p>
-                                   
+
                                         @if(empty($products->discount_price))
                                         <span class="price "> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
-                                  
+
                                         @else
                                         <span class="price new-price">{{Session::get('symbol_left')}} {{$discount_price+0}} {{Session::get('symbol_right')}}</span>
                                             <span class="price old-price"> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>

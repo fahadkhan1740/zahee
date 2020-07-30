@@ -71,6 +71,8 @@ Route::group(['namespace' => 'Web'], function () {
 		Route::get('/stripeForm', 'OrdersController@stripeForm')->middleware('Customer');
 		Route::get('/view-order/{id}', 'OrdersController@viewOrder')->middleware('Customer');
 		Route::post('/pay-instamojo', 'OrdersController@payIinstamojo')->middleware('Customer');
+		Route::post('/payment/success', 'OrdersController@success');
+		Route::post('/payment/error', 'OrdersController@error');
 
 		Route::get('/checkout/hyperpay', 'OrdersController@hyperpay')->middleware('Customer');
 		Route::get('/checkout/hyperpay/checkpayment', 'OrdersController@checkpayment')->middleware('Customer');
