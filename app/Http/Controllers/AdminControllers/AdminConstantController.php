@@ -52,17 +52,17 @@ class AdminConstantController extends Controller
 
 	public function addNewConstantBanner(Request $request){
 		//check exist banner
-		$exist = ConstantBanner::existbanner($request);
+		// $exist = ConstantBanner::existbanner($request);
 
-		if($exist==1){
-			return redirect()->back()->with('error', Lang::get("labels.constantBannerErrorMessage"));
-		}else{
+		// if($exist==1){
+		// 	return redirect()->back()->with('error', Lang::get("labels.constantBannerErrorMessage"));
+		// }else{
 
 			//add banner
 			$insert = ConstantBanner::insert($request);
 
 			return redirect()->back()->with('success', Lang::get("labels.BannerAddedMessage"));
-			}
+			// }
 
 	}
 

@@ -44,6 +44,7 @@
                                         <tr>
                                             <th>{{ trans('labels.ID') }}</th>
                                             <th>{{ trans('labels.CustomerName') }}</th>
+                                            <th>{{ trans('labels.ProductName') }}</th>
                                             <th>{{ trans('labels.OrderTotal') }}</th>
                                             <th>{{ trans('labels.DatePurchased') }}</th>
                                             <th>{{ trans('labels.Status') }} </th>
@@ -56,7 +57,8 @@
                                                 <tr>
                                                     <td>{{ $orderData->orders_id }}</td>
                                                     <td>{{ $orderData->customers_name }}</td>
-                                                    <td>{{ $listingOrders['currency'][19]->value }}{{ $orderData->order_price }}</td>
+                                                    <td>{{ $orderData->customers_company }}</td>
+                                                    <td>{{ $listingOrders['currency'][19]->value }} {{ $orderData->order_price }}</td>
                                                     <td>{{ date('d-M-Y', strtotime($orderData->date_purchased)) }}</td>
                                                     <td>
                                                         @if($orderData->orders_status_id==1)

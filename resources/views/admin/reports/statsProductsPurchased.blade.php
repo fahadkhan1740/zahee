@@ -32,6 +32,7 @@
                       <th>{{ trans('labels.ID') }}</th>
                       <th>{{ trans('labels.Image') }}</th>
                       <th>{{ trans('labels.Products') }}</th>
+                      <th>{{ trans('labels.Category') }}</th>
                       <th>{{ trans('labels.PurchasedDate') }}</th>
                       <th>{{ trans('labels.UpdatedDate') }}</th>
                       <th>{{ trans('labels.Stock') }}</th>
@@ -51,11 +52,12 @@
                                 @endif
                                 </strong><br>
                             </td>
+                            <td>{{ $products->categories_name }}</td>
                             <td align="">
 
                                 @php
                                   $date = new DateTime($products->created_at);
-                                  $myDate = $date->format('d-m-Y');
+                                  $myDate = $date->format('d-M-Y');
                                   print $myDate;
                                 @endphp
 

@@ -96,7 +96,8 @@
               <th>{{ trans('labels.ProductName') }}</th>
               <th>{{ trans('labels.ProductModal') }}</th>
               <th>{{ trans('labels.Options') }}</th>
-              <th>{{ trans('labels.Price') }}</th>
+              <th>{{ trans('labels.Unit Price') }}</th>
+              <th>{{ trans('labels.Total') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -116,13 +117,14 @@
                 </td>
                 <td>
                 @foreach($products->attribute as $attributes)
-                	<b>{{ trans('labels.Name') }}:</b> {{ $attributes->products_options }}<br>
-                    <b>{{ trans('labels.Value') }}:</b> {{ $attributes->products_options_values }}<br>
-                    <b>{{ trans('labels.Price') }}:</b> {{ $data['currency'][19]->value }}{{ $attributes->options_values_price }}<br>
+                	<!-- <b>{{ trans('labels.Name') }}:</b> <br> -->
+                    <b>{{ $attributes->products_options }}:</b> {{ $attributes->products_options_values }}<br>
+                    <!-- <b>{{ trans('labels.Price') }}:</b> {{ $data['currency'][19]->value }}{{ $attributes->options_values_price }}<br> -->
 
                 @endforeach</td>
-
-                <td>{{ $data['currency'][19]->value }}{{ $products->final_price }}</td>
+                <td>{{ $data['currency'][19]->value }} {{ (float)($products->final_price/$products->products_quantity) }}</td>
+                <td>{{ $data['currency'][19]->value }} {{ $products->final_price }}</td>
+                 
              </tr>
             @endforeach
 
@@ -189,25 +191,25 @@
             <table class="table order-table">
               <tr>
                 <th style="width:50%">{{ trans('labels.Subtotal') }}:</th>
-                <td>{{ $data['currency'][19]->value }}{{ $data['subtotal'] }}</td>
+                <td>{{ $data['currency'][19]->value }} {{ $data['subtotal'] }}</td>
               </tr>
               <tr>
                 <th>{{ trans('labels.Tax') }}:</th>
-                <td>{{ $data['currency'][19]->value }}{{ $data['orders_data'][0]->total_tax }}</td>
+                <td>{{ $data['currency'][19]->value }} {{ $data['orders_data'][0]->total_tax }}</td>
               </tr>
               <tr>
                 <th>{{ trans('labels.ShippingCost') }}:</th>
-                <td>{{ $data['currency'][19]->value }}{{ $data['orders_data'][0]->shipping_cost }}</td>
+                <td>{{ $data['currency'][19]->value }} {{ $data['orders_data'][0]->shipping_cost }}</td>
               </tr>
               @if(!empty($data['orders_data'][0]->coupon_code))
               <tr>
                 <th>{{ trans('labels.DicountCoupon') }}:</th>
-                <td>{{ $data['currency'][19]->value }}{{ $data['orders_data'][0]->coupon_amount }}</td>
+                <td>{{ $data['currency'][19]->value }} {{ $data['orders_data'][0]->coupon_amount }}</td>
               </tr>
               @endif
               <tr>
                 <th>{{ trans('labels.Total') }}:</th>
-                <td>{{ $data['currency'][19]->value }}{{ $data['orders_data'][0]->order_price }}</td>
+                <td>{{ $data['currency'][19]->value }} {{ $data['orders_data'][0]->order_price }}</td>
               </tr>
             </table>
           </div>

@@ -36,14 +36,10 @@ class Languages extends Model
 
         public function getter(){
           $languages = Languages::sortable(['languages_id'=>'desc'])->leftJoin('images','images.id', '=', 'languages.image')
-              ->leftJoin('image_categories','image_categories.image_id', '=', 'languages.image')
-              ->select('languages.languages_id','languages.name','languages.code','languages.status','languages.directory','languages.is_default','languages.direction','languages.sort_order','image_categories.path')
-              ->where(function($query) {
-                  $query->where('image_categories.image_type', '=',  'THUMBNAIL')
-                      ->where('image_categories.image_type','!=',   'THUMBNAIL')
-                      ->orWhere('image_categories.image_type','=',   'ACTUAL');
-                    })->groupby('languages_id')->get();
+              ->select('languages.languages_id','languages.name','languages.code','languages.status','languages.directory','languages.is_default','languages.direction','languages.sort_order')
+              ->groupby('languages_id')->get();
              return $languages;
+            //  dd($languages);
         }
 
     public function insert($request){

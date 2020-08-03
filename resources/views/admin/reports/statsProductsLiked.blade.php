@@ -33,6 +33,7 @@
                       <th>{{ trans('labels.Image') }}</th>
                       <th>{{ trans('labels.Products') }}</th>
                       <th>{{ trans('labels.Liked') }}</th>
+                      <th>{{ trans('labels.Category') }}</th>
                       <th>{{ trans('labels.View') }}</th>
                     </tr>
                   </thead>
@@ -40,12 +41,15 @@
                     @foreach ($result['data'] as  $key=>$products)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td><img src="{{asset('public').'/'.'/'.$products->products_image}}" alt="" width=" 100px" height="100px"></td>
+                            <td><img src="{{asset('public').'/'.$products->path}}" alt="" width=" 100px" height="100px"></td>
                             <td width="45%">
                             	<strong>{{ $products->products_name }} @if(!empty($products->products_model)) ( {{ $products->products_model }} ) @endif</strong><br>
                             </td>
                             <td>
                             	{{ $products->products_liked }}
+                            </td>
+                            <td>
+                            	{{ $products->categories_name }}
                             </td>
 
                             <td>

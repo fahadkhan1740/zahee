@@ -93,7 +93,7 @@
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="categories_id" id="categories_id">
                                       @foreach($result['categories'] as $category)
-                                		<option value="{{ $category->slug}}">{{ $category->name}}</option>
+                                		<option value="{{ $category->slug}}"  @if($result['sliders'][0]->sliders_url== $category->slug) selected @endif>{{ $category->name}}</option>
                                       @endforeach
                                       </select>
                                       <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
@@ -106,7 +106,7 @@
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="products_id" id="products_id">
                                       @foreach($result['products'] as $products_data)
-                                		<option value="{{ $products_data->products_slug }}">{{ $products_data->products_name }}</option>
+                                		<option value="{{ $products_data->products_slug }}" @if($result['sliders'][0]->sliders_url== $products_data->products_slug) selected @endif>{{ $products_data->products_name }}</option>
                                       @endforeach
                                       </select>
                                      <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">

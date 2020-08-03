@@ -263,6 +263,7 @@ return [
 	'Manufacturer' => 'Manufacturer',
 	'Quantity' => 'Quantity',
 	'Price' => 'Price',
+	'Unit Price' => 'Unit Price',
 	'Weight' => 'Weight',
 	'Viewed' => 'Viewed',
 	'SpecialPrice' => 'Special Price',
@@ -1567,6 +1568,8 @@ return [
     'ProductSubTitle' => 'Product Sub Title',
     'EnterProductSubTitle' => 'Enter Product Sub Title',
     'Status' => 'Status',
-
-
+	'Ranking in Orders' => 'Ranking in Orders',
+	'Member Since' => 'Member Since',
+	'# of orders' => '# of orders',
+	'Category' => 'Category'
 ];

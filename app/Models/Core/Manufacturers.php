@@ -34,7 +34,7 @@ class Manufacturers extends Model
          $manufacturers =  Manufacturers::sortable(['manufacturers_id'=>'desc'])->leftJoin('manufacturers_info','manufacturers_info.manufacturers_id', '=', 'manufacturers.manufacturers_id')
                                    ->leftJoin('images','images.id', '=', 'manufacturers.manufacturer_image')
                                    ->leftJoin('image_categories','image_categories.image_id', '=', 'manufacturers.manufacturer_image')
-                                   ->select('manufacturers.manufacturers_id as id', 'manufacturers.manufacturer_image as image',  'manufacturers.manufacturer_name as name', 'manufacturers_info.manufacturers_url as url', 'manufacturers_info.url_clicked', 'manufacturers_info.date_last_click as clik_date','image_categories.path as path')
+                                   ->select('manufacturers.manufacturers_id as id', 'manufacturers.manufacturer_image as image',  'manufacturers.manufacturer_name as name','manufacturers.is_active', 'manufacturers_info.manufacturers_url as url', 'manufacturers_info.url_clicked', 'manufacturers_info.date_last_click as clik_date','image_categories.path as path')
                                    ->where('manufacturers_info.languages_id', '1')->where('image_categories.image_type','=','THUMBNAIL' or 'image_categories.image_type','=','ACTUAL')->paginate(5);
 
 
@@ -49,7 +49,7 @@ class Manufacturers extends Model
                                    ->leftJoin('images','images.id', '=', 'manufacturers.manufacturer_image')
                                    ->leftJoin('image_categories','image_categories.image_id', '=', 'manufacturers.manufacturer_image')
                                    ->select('manufacturers.manufacturers_id as id', 'manufacturers.manufacturer_image as image',  'manufacturers.manufacturer_name as name', 'manufacturers_info.manufacturers_url as url', 'manufacturers_info.url_clicked', 'manufacturers_info.date_last_click as clik_date','image_categories.path as path')
-                                   ->where('manufacturers_info.languages_id', $language_id)->where('image_categories.image_type','=','THUMBNAIL' or 'image_categories.image_type','=','ACTUAL')->get();
+                                   ->where('manufacturers_info.languages_id', $language_id)->where('manufacturers.is_active','=',1)->where('image_categories.image_type','=','THUMBNAIL' or 'image_categories.image_type','=','ACTUAL')->get();
         return $manufacturers;
     }
 
@@ -79,7 +79,8 @@ class Manufacturers extends Model
               'manufacturer_image'   =>   $request->image_id,
               'created_at'			=>   $date_added,
               'manufacturer_name' 	=>   $request->name,
-              'manufacturers_slug'	=>	 $slug
+              'manufacturers_slug'	=>	 $slug,
+              'is_active'           =>   $request->status
           ]);
 
           DB::table('manufacturers_info')->insert([
@@ -97,7 +98,7 @@ class Manufacturers extends Model
             ->leftJoin('manufacturers_info','manufacturers_info.manufacturers_id', '=', 'manufacturers.manufacturers_id')
             ->leftJoin('images','images.id', '=', 'manufacturers.manufacturer_image')
             ->leftJoin('image_categories','image_categories.image_id', '=', 'manufacturers.manufacturer_image')
-            ->select('manufacturers.manufacturers_id as id', 'manufacturer_image as image',  'manufacturers.manufacturer_name as name', 'manufacturers_info.manufacturers_url as url', 'manufacturers_info.url_clicked', 'manufacturers_info.date_last_click as clik_date', 'manufacturers.manufacturers_slug as slug','image_categories.path as path')
+            ->select('manufacturers.manufacturers_id as id','manufacturers.is_active', 'manufacturer_image as image',  'manufacturers.manufacturer_name as name', 'manufacturers_info.manufacturers_url as url', 'manufacturers_info.url_clicked', 'manufacturers_info.date_last_click as clik_date', 'manufacturers.manufacturers_slug as slug','image_categories.path as path')
             ->where( 'manufacturers.manufacturers_id', $manufacturers_id )
             ->where('image_categories.image_type','=','THUMBNAIL' or 'image_categories.image_type','=','ACTUAL')
             ->get();
@@ -213,7 +214,8 @@ class Manufacturers extends Model
                     'manufacturer_image'   =>   $uploadImage,
                     'updated_at'			=>   $last_modified,
                     'manufacturer_name' 	=>   $request->name,
-                    'manufacturers_slug'	=>	 $slug
+                    'manufacturers_slug'	=>	 $slug,
+                    'is_active'           =>   $request->status
                 ]);
                 DB::table('manufacturers_info')->where('manufacturers_id', $request->id)->update([
                     'manufacturers_url'     =>     $request->manufacturers_url,

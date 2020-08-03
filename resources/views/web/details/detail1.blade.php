@@ -274,7 +274,7 @@
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
-                                                            <a href="javascript:void(0)">
+                                                            <a href="https://twitter.com/intent/tweet?url={{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}" target="_blank">
                                                                 <img class="share-img" src="{{asset('public/web/images/cus/twitter.svg')}}" />
                                                             </a>
                                                         </li>

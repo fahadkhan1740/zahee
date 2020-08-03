@@ -139,6 +139,18 @@
                                                 </div>
 
                                             </div>
+
+                                            <div class="form-group">
+                                  <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Status') }}</label>
+                                  <div class="col-sm-10 col-md-4">
+                                      <select class="form-control" name="status">
+                                          <option value="1" @if($editManufacturer[0]->is_active==1) selected @endif>{{ trans('labels.Active') }}</option>
+                                          <option value="0" @if($editManufacturer[0]->is_active==0) selected @endif>{{ trans('labels.InActive') }}</option>
+                                      </select>
+                                      <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                      {{ trans('labels.StatusBannerText') }}</span>
+                                  </div>
+                                </div>
                                             <!-- /.box-body -->
                                             <div class="box-footer text-center">
                                                 <button type="submit" class="btn btn-primary">{{ trans('labels.Submit') }}</button>

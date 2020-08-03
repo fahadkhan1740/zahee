@@ -397,7 +397,7 @@ class Products extends Model
         $getManufacturers = DB::table('manufacturers')
             ->leftJoin('manufacturers_info', 'manufacturers_info.manufacturers_id', '=', 'manufacturers.manufacturers_id')
             ->select('manufacturers.manufacturers_id as id', 'manufacturers.manufacturer_image as image', 'manufacturers.manufacturer_name as name', 'manufacturers_info.manufacturers_url as url', 'manufacturers_info.url_clicked', 'manufacturers_info.date_last_click as clik_date')
-            ->where('manufacturers_info.languages_id', $language_id)->get();
+            ->where('manufacturers_info.languages_id', $language_id)->where('manufacturers.is_active','=',1)->get();
         $result['manufacturer'] = $getManufacturers;
         $product = DB::table('products')
             ->LeftJoin('image_categories', function ($join) {

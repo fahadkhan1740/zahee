@@ -32,7 +32,7 @@ class ReportsController extends Controller
 
 		$cusomters = DB::table('users')
             ->join('orders', 'orders.customers_id', '=', 'users.id')
-            ->select('users.*', 'order_price', DB::raw('SUM(order_price) as price'), DB::raw('count(orders_id) as total_orders'))
+            ->select('users.*', 'order_price', DB::raw('SUM(order_price) as price'), DB::raw('count(orders_id) as total_orders'),'delivery_phone')
             ->where('role_id', 2)
             ->groupby('users.id')
             ->orderby('total_orders', 'desc')
@@ -63,7 +63,11 @@ class ReportsController extends Controller
                             ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                     });
 			})
-			->select('products_description.*','image_categories.path as path', 'inventory.*')
+			->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+    		->LeftJoin('categories', 'categories.categories_id','=','products_to_categories.categories_id')
+			->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id')
+			->select('products_description.*','image_categories.path as path', 'inventory.*', 'categories_description.categories_name')
+			->where('categories_description.language_id', '=', 1)
 			->where('stock_type', 'in')
 			->orderBy('products_ordered', 'DESC')
 			->where('products_description.language_id','=','1')
@@ -85,6 +89,18 @@ class ReportsController extends Controller
 
 		$products = DB::table('products')
 			->join('products_description', 'products_description.products_id', '=', 'products.products_id')
+			->LeftJoin('image_categories', function ($join) {
+                $join->on('image_categories.image_id', '=', 'products.products_image')
+                    ->where(function ($query) {
+                        $query->where('image_categories.image_type', '=', 'THUMBNAIL')
+                            ->where('image_categories.image_type', '!=', 'THUMBNAIL')
+                            ->orWhere('image_categories.image_type', '=', 'ACTUAL');
+                    });
+			})
+			->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+    		->LeftJoin('categories', 'categories.categories_id','=','products_to_categories.categories_id')
+			->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id')
+			->where('categories_description.language_id', '=', 1)
 			->where('products.products_liked', '>', '0')
 			->where('products_description.language_id','=','1')
 			->orderBy('products_liked', 'DESC')

@@ -46,7 +46,7 @@ class Index extends Model
 								 'sliders_title as title',
 								 'image_categories.path'
 								 )
-				->where('status', '=', '1')
+				->where('status', '=', 1)
 			 ->where('carousel_id', '=', $carousel_id)
 			 ->where('languages_id', '=', session('language_id'))
 			 ->groupBy('sliders_images.sliders_id')
@@ -172,7 +172,6 @@ class Index extends Model
         ->leftJoin('image_categories','constant_banners.banners_image','=','image_categories.image_id')
         ->select('constant_banners.*','image_categories.path')
     		->where('languages_id', session('language_id'))
-        ->orwhere('languages_id', 1)
         ->groupBy('constant_banners.banners_id')
     		->orderby('type','ASC')
     		->get();

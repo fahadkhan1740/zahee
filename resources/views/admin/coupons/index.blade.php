@@ -75,7 +75,8 @@
                                             <th>@sortablelink('discount_type', trans('labels.CouponType') )</th>
                                             <th>@sortablelink('amount', trans('labels.CouponAmount') )</th>
                                             <th>@sortablelink('description', trans('labels.Description') )</th>
-                                            <th>@sortablelink('expiry_date', trans('labels.ExpiryDate') )</th>
+                                            <th>@sortablelink('expiry_date', trans('labels.CouponStartDate') )</th>
+                                            <th>@sortablelink('expiry_date', trans('labels.CouponExpiryDate') )</th>
                                             <th>{{ trans('labels.Action') }}</th>
                                         </tr>
                                         </thead>
@@ -95,7 +96,8 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $coupan->description }} </td>
-                                                    <td>{{ date('d/m/Y',strtotime($coupan->expiry_date)) }} </td>
+                                                    <td>{{ date('d-M-Y',strtotime($coupan->start_date)) }} </td>
+                                                    <td>{{ date('d-M-Y',strtotime($coupan->expiry_date)) }} </td>
 
                                                     <td><a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Edit') }}" href="{{ url('admin/coupons/edit')}}/{{$coupan->coupans_id}}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                         <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Delete') }}" id="deleteCoupans_id" coupans_id ="{{ $coupan->coupans_id }}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>

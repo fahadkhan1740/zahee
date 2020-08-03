@@ -30,15 +30,21 @@ class OrdersController extends Controller
         $errorMessage = array();
 
         $orders = DB::table('orders')->orderBy('created_at', 'DESC')
-            ->where('customers_id', '!=', '')->paginate(40);
+            ->where('customers_id', '!=', '')->paginate(10);
 
         $index = 0;
         $total_price = array();
+        // $product_name = array();
 
         foreach ($orders as $orders_data) {
-            $orders_products = DB::table('orders_products')->sum('final_price');
+            // $orders_products = DB::table('orders_products')->sum('final_price');
+           
+            $prod_name = DB::table('orders_products')
+            ->select('orders_products.*',DB::raw('sum(final_price) as final_price, orders_products.products_name'))
+            ->where('orders_products.orders_id', '=', $orders_data->orders_id)->first();
 
-            $orders[$index]->total_price = $orders_products;
+            $orders[$index]->customers_company = $prod_name->products_name;
+            $orders[$index]->total_price = $prod_name->final_price;
 
             $orders_status_history = DB::table('orders_status_history')
                 ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
@@ -47,7 +53,7 @@ class OrdersController extends Controller
                 ->where('orders_status_description.language_id', '=', $language_id)
                 ->where('orders_id', '=', $orders_data->orders_id)
                 ->orderby('orders_status_history.date_added', 'DESC')->limit(1)->get();
-//            dd($orders_status_history);
+
 
             $orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
             $orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
@@ -59,6 +65,7 @@ class OrdersController extends Controller
         $ordersData['errorMessage'] = $errorMessage;
         $ordersData['orders'] = $orders;
         $ordersData['currency'] = $this->myVarsetting->getSetting();
+        // dd($ordersData);
         return view("admin.Orders.index", $title)->with('listingOrders', $ordersData);
     }
 
@@ -97,7 +104,7 @@ class OrdersController extends Controller
                                 ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                         });
                 })
-                ->select('orders_products.*', 'image_categories.path as image')
+                ->select('orders_products.*', 'image_categories.path as image','products.products_price')
                 ->where('orders_products.orders_id', '=', $orders_id)->get();
             $i = 0;
             $total_price = 0;

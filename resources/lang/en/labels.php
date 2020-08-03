@@ -2107,5 +2107,10 @@ return [
 	'ProductSubTitle' => 'Product Sub Title',
 	'EnterProductSubTitle' => 'Enter Product Sub Title',
 	'Status' => 'Status',
+	'Ranking in Orders' => 'Ranking in Orders',
+	'Member Since' => 'Member Since',
+	'# of orders' => '# of orders',
+	'Category' => 'Category',
+	'Unit Price' => 'Unit Price',
 
 ];

@@ -49,16 +49,18 @@
                   <tbody>
                   @if(count($result['cusomters'])>0)
                     @foreach ($result['cusomters'] as $key=>$orderData)
+                  
                         <tr>
                             <td>{{ ++$key }}</td>
                             <td>{{ $orderData->first_name }} {{ $orderData->last_name }}</td>
                             <td> {{ $orderData->email }}</td>
-                            <td>{{ $orderData->country_code }} {{ $orderData->phone }}</td>
-                            <td> {{ $orderData->created_at }}</td>
+                            <td>{{ $orderData->delivery_phone }}</td>
+                            <td> {{ date('d-M-Y H:i a' , strtotime($orderData->created_at)) }}</td>
                             <td> {{ $orderData->total_orders }}</td>
                             <td>{{ $result['setting'][19]->value }}{{ $orderData->price }}</td>
                             <!-- <td><a href="{{ URL::to('admin/customers/edit')}}/{{$orderData->id}}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td> -->
                         </tr>
+                        
                     @endforeach
                   @else
                   	<tr>

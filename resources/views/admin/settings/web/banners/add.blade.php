@@ -53,7 +53,7 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Language') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="languages_id">
-                                          @foreach($result['languages'] as $language)
+                                          @foreach($result['languages'] as $language) 
                                               <option value="{{$language->languages_id}}">{{ $language->name }}</option>
                                           @endforeach
                                       </select>
@@ -61,8 +61,9 @@
                                       {{ trans('labels.ChooseLanguageText') }}</span>
                                   </div>
                                 </div>
+                                <input type="hidden" value="40" name="type" />
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Side Banner') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="type">
@@ -113,7 +114,7 @@
                                       <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                       {{ trans('labels.AddBannerText') }}</span>
                                   </div>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group">
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Image') }}</label>

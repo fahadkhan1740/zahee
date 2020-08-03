@@ -120,6 +120,18 @@ class Categories extends Model
        return $listingCategories;
     }
 
+    public function gettAllCat($language_id){
+        $listingCategories = DB::table('categories')
+            ->leftJoin('categories_description','categories_description.categories_id', '=', 'categories.categories_id')
+            ->select('categories.categories_id as id', 'categories.categories_image as image',  'categories.created_at as date_added', 'categories.updated_at as last_modified', 'categories_description.categories_name as name', 'categories.categories_slug as slug')
+            ->where('categories_description.language_id','=', $language_id )
+            // ->where('parent_id','>', '0')
+            ->where('categories_status', '1')
+            ->get();
+  
+         return $listingCategories;
+      }
+
     public function allcategories($language_id){
         $listingCategories = DB::table('categories')
             ->leftJoin('categories_description','categories_description.categories_id', '=', 'categories.categories_id')

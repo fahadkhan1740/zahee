@@ -51,7 +51,8 @@ class PagesController extends Controller
 
 			$data = DB::table('pages')
 				->LeftJoin('pages_description', 'pages_description.page_id', '=', 'pages.page_id')
-				->where('pages_description.language_id', '=', $language_id)->get();
+				->where('pages_description.language_id', '=', $language_id)
+				->where('pages_description.type', 1)->get();
 
 			$result = array();
 			$index = 0;

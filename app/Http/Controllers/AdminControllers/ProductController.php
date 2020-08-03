@@ -128,6 +128,7 @@ class ProductController extends Controller
      $result['categories'] = $option;
 
      $result['manufacturer'] = $this->manufacturer->getter($language_id);
+  
      $taxClass = DB::table('tax_class')->get();
      $result['taxClass'] = $taxClass;
      $result['languages'] = $this->myVarsetting->getLanguages();
@@ -193,6 +194,7 @@ class ProductController extends Controller
 
     $option .= '</ul>';
     $result['categories'] = $option;
+  
     $title = array('pageTitle' => Lang::get("labels.EditProduct"));
     return view("admin.products.edit", $title)->with('result', $result)->with('allimage',$allimage);
 
