@@ -35,13 +35,27 @@ class WebSettingController extends Controller
 		if($request->ajax()){
 		   $request->session()->put('locale', $request->locale);
 		   //set language
-
-				$language =	 $settings->getLanguage($request->languages_id);
-			 $request->session()->put('language_id', $language->languages_id);
+		   $language =	 $settings->getLanguage($request->languages_id);
+		 $request->session()->put('language_id', $language->languages_id);
 		   $request->session()->put('direction', $language->direction);
 			 $request->session()->put('locale', $language->code);
 			 $request->session()->put('language_name', $language->name);
 			 $request->session()->put('language_image', $language->image_path);
+
+			//  $currency = $settings->getCurrency(10);
+			//  if($request->languages_id == 1) {
+			// 	$request->session()->put('currency_id', $currency->id);
+			// 	$request->session()->put('currency_title', $currency->code);
+			// 	  $request->session()->put('symbol_right', NULL);
+			// 	  $request->session()->put('symbol_left', $currency->symbol_left);
+			// 	  $request->session()->put('currency_code', $currency->code);
+			//  } else {
+			// 	$request->session()->put('currency_id', $currency->id);
+			// 	$request->session()->put('currency_title', $currency->code);
+			// 	  $request->session()->put('symbol_right', $currency->symbol_right);
+			// 	  $request->session()->put('symbol_left', NULL);
+			// 	  $request->session()->put('currency_code', $currency->code);
+			//  }
 			 if(Session::has('locale')){
 				 $locale = Session::get('locale', Config::get('app.locale'));
 			 }else{

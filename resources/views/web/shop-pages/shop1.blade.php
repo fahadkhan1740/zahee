@@ -233,7 +233,7 @@
                                  <div class="thumb">
                                      <div class="icons mobile-icons d-lg-none d-xl-none">
                                        <div class="icon-liked">
-                                         <a href="#" class="icon active is_liked" products_id="<?=$products->products_id?>">
+                                       <a href="javascript:void(0)" class="icon active is_liked heart-icon whishlist" products_id="{{$products->products_id}}">
                                            <i class="fas fa-heart"></i>
                                          </a>
                                            <span  class="badge badge-secondary counter"  >{{$products->products_liked}}</span>
@@ -265,17 +265,16 @@
                                       }
                                       $orignal_price = $products->products_price * $session_currency->value;
                                     }
-                                     if(!empty($products->discount_price)){
-
+                                    if(!empty($products->discount_price)){
                                       if(($orignal_price+0)>0){
-                                     $discounted_price = $orignal_price-$discount_price;
-                                     $discount_percentage = $discounted_price/$orignal_price*100;
-                                     }else{
-                                       $discount_percentage = 0;
-                                       $discounted_price = 0;
-                                   }
-                                 ?>
-                                <?php }
+                                        $discounted_price = $orignal_price-$discount_price;
+                                        $discount_percentage = $discounted_price/$orignal_price*100;
+                                      }
+                                      else{
+                                        $discount_percentage = 0;
+                                        $discounted_price = 0;
+                                       }                                
+                                    }
                                 $current_date = date("Y-m-d", strtotime("now"));
 
                                 $string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));
@@ -291,36 +290,42 @@
                                   print '</span>';
                                 }
                                  ?>
-                                 <span class="tag">
-                                   @foreach($products->categories as $key=>$category)
-                                       {{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif
-                                   @endforeach
-                                 </span>
+                                 @if((int)$products->discount_price > 0)
+                                    <span class="tag">
+                                    {{(int)$products->discount_price}}% Off
+                                    </span>
+                                 @endif
                                  <div class="product-detaill">
                                    <div class="product__left">
-                                 <h4 class="title text-center"><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h4>
-                                 <p>{{$products->product_sub_title}}</p>
-                                 <div class="price">
-                                   @if(empty($products->discount_price))
-                                         {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
-                                   @else
-                                         {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
-                                         <span class="old-price"> {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}</span>
-                                   @endif
-                                 </div>
-                                 </div>
-                                 <div class="product__right">
-                                 <div class="product-hover d-none d-lg-block d-xl-block">
-                                     <div class="icons">
+                                   <div class="icons">
                                        <div class="icon-liked">
-                                         <a href="#" class="icon active is_liked" products_id="<?=$products->products_id?>">
+                                       <a href="javascript:void(0)" class="icon active is_liked heart-icon whishlist" products_id="{{$products->products_id}}">
                                            <i class="fas fa-heart"></i>
                                          </a>
                                            <span  class="badge badge-secondary counter"  >{{$products->products_liked}}</span>
                                        </div>
                                        <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="{{$products->products_id}}"><i class="fas fa-eye"></i></div>
-{{--                                         <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>--}}
-                                       </div>
+                                     </div>
+                                 <h4 class="title text-center"><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">{{$products->products_name}}</a></h4>
+                                 @if($products->product_sub_title)
+                                 <p>{{$products->product_sub_title}}</p>
+                                 @endif
+                                 
+                                 </div>
+                                 <div class="product__right">
+                                 <p>
+                                      <!-- <span class="price "> -->
+                                      @if(empty($products->discount_price))
+                                          <span class="price "> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                      <!-- </span> -->
+                                          @else
+                                          <span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$products->discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                          <span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+
+                                          @endif
+                                  </p>
+                                 <div class="product-hover d-none d-lg-block d-xl-block">
+                                     
                                    <div class="buttons">
                                         @if(!in_array($products->products_id,$result['cartArray']))
                                             @if($products->defaultStock==0)
@@ -350,6 +355,7 @@
 
                              </div>
                          </div>
+                         
                          @endforeach
                          @endif
                              @section('scripts')

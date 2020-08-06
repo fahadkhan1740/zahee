@@ -7,6 +7,9 @@
                             <div class="navbar-lang">
                                 <!--  CHANGE LANGUAGE CODE SECTION -->
                                 @if(count($languages) > 1)
+                                @section('scripts')
+                                      @include('web.common.scripts.changeLanguage')
+                                    @endsection
                                     <div class="dropdown">
                                         <a href= "#" class="dropdown-toggle"  data-toggle="dropdown" >
                                             {{	session('language_name')}}
@@ -21,9 +24,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    @section('scripts')
-                                      @include('web.common.scripts.changeLanguage')
-                                    @endsection
+                                  
                                 @endif
                             </div>
             </div>

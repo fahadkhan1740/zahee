@@ -792,4 +792,5 @@ return [
 	'See All' => 'See All',
 	'Shop Now!' => 'Shop Now!',
 	'FAQ' => 'FAQ',
+	'Recently Viewed' => 'Recently Viewed'
 ];

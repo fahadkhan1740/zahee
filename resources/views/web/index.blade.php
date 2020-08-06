@@ -42,11 +42,11 @@
             @if(count($result['recently_viewed']) >0 )
            <div class="title-wrap d-flex justify-content-between align-items-center">
                <div class="title-box">
-                   <h6>Recent Search</h6>
+                   <h6>@lang('website.Recently Viewed')</h6>
                </div>
-               <div class="titlee-right">
+               <!-- <div class="titlee-right">
                    <a href="#" class="see-all-btn">See All</a>
-               </div>
+               </div> -->
            </div>
            <div class="product-slider b-product-slider">
 
@@ -97,15 +97,23 @@
                                        $discounted_price = $orignal_price;
                                    }
                                   @endphp
-                                   @if(!empty($viewedProd->flash_price))
-                                       {{Session::get('symbol_left')}}{{$flash_price+0}}{{Session::get('symbol_right')}}
-                                   @elseif(!empty($viewedProd->discount_price))
-                                       {{Session::get('symbol_left')}}{{$discount_price+0}}{{Session::get('symbol_right')}}
-                                   @else
-                                       {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
-                                   @endif
+                                  
+                                        @if(!empty($viewedProd->discount_price))
+                                        <span class="price new-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{$discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                        <span class="price old-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                        @else 
+                                        <span class="price">  @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                        @endif
                                </p>
-                               <a href="{{ URL::to('/product-detail/'.$viewedProd->products_slug)}}" class="link-btn">Shop Now!</a>
+                               <div class="items-bottom-button">
+                                    @if($viewedProd->defaultStock==0)
+                                        <a href="{{ URL::to('/product-detail/'.$viewedProd->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$viewedProd->products_id}}">@lang('website.Out of Stock')</a>
+                                    @else
+                                        <a href="{{ URL::to('/product-detail/'.$viewedProd->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$viewedProd->products_id}}">@lang('website.Add to Cart')</a>
+                                    @endif
+                                </div>
                            </div>
                        </a>
                    </div>

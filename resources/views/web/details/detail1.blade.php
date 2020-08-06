@@ -50,7 +50,7 @@
                                         ?>
                                         @foreach( $result['detail']['product_data'][0]->attributes as $key=>$attributes_data )
                                             <?php
-//                                                dd($result['detail']['product_data'][0]->attributes);
+
                                             $functionValue = 'function_'.$key++;
                                             ?>
                                             <input type="hidden" name="option_name[]" value="{{ $attributes_data['option']['name'] }}" >
@@ -91,40 +91,6 @@
                                     <div class="product-desc product-desc-color">
                                              @foreach( $result['detail']['product_data'][0]->attributes as $key=>$attributes_data )
                                              <div class="product-desc product-desc-color">
-
-<!-- <label>Color</label>
-<div class="custom___radio product__color__wrap">
-   <label>
-       <input type="radio" name="radio" />
-       <span class="radio_bx">
-       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-       </span>
-    </label>
-
-    <label>
-       <input type="radio" name="radio" />
-       <span class="radio_bx">
-       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-       </span>
-    </label>
-
-    <label>
-       <input type="radio" name="radio" />
-       <span class="radio_bx">
-       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-       </span>
-    </label>
-
-
-    <label>
-       <input type="radio" name="radio" />
-       <span class="radio_bx">
-       <img src="https://via.placeholder.com/100" alt="placeholder.png" />
-       </span>
-    </label>
-    </div>
-</div> -->
-
                                                 <div class="product-desc product-desc-size">
                                                     <label>
                                                     {{ $attributes_data['option']['name'] }} 
@@ -140,35 +106,11 @@
                                                     <span class="radio_bx">{{ $values_data['value'] }}</span>
                                                     @endif
                                                     </label>
-                                                    
-                                                    @endforeach
-                                                    <span id="current_stocks"></span>
+                                                @endforeach
+                                                    <!-- <span id="current_stocks"></span> -->
                                                 </div>
                                                 </div>
-                                                                                                <!-- <div class="">
-                                                    <label>{{ $attributes_data['option']['name'] }}</label>
-                                                    <div class="select-control ">
-                                                        <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
-                                                            @if(!empty($result['cart']))
-                                                                @php
-                                                                    $value_ids = array();
-                                                                     foreach($result['cart'][0]->attributes as $values){
-                                                                         $value_ids[] = $values->options_values_id;
-                                                                     }
-                                                                @endphp
-                                                                @foreach($attributes_data['values'] as $values_data)
-                                                                    @if(!empty($result['cart']))
-                                                                        <option @if(in_array($values_data['id'],$value_ids)) selected @endif attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            @else
-                                                                @foreach($attributes_data['values'] as $values_data)
-                                                                    <option attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                </div> -->
+                                                </div>
                                             @endforeach
                                     </div>
                                         @endif
@@ -301,6 +243,7 @@
                     </div>
                 </div>
             </div>
+    
 
 
             <div class="description-detail-wrap">

@@ -42,19 +42,26 @@
             <div class="items-content">
                 <h6><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"> {{$products->products_name}}</a></h6>
                 <p>
-                    <!-- <span class="price "> -->
                          @if(empty($products->discount_price))
-                         <span class="price "> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
-                    <!-- </span> -->
+                         <span class="price "> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
                         @else
-                        <span class="price new-price">{{Session::get('symbol_left')}} {{$discount_price+0}} {{Session::get('symbol_right')}}</span>
-                            <span class="price old-price"> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
+                        <span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                            <span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
 
                         @endif
                 </p>
                 <div class="items-bottom-button">
-                  <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
-                  <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                @if(!in_array($products->products_id,$result['cartArray']))
+                    @if($products->defaultStock==0)
+                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</a>
+                    @else
+                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                    @endif
+                @else
+                    <a class="btn btn-block btn-secondary active" href="{{ URL::to('/viewcart')}}">@lang('website.Go to Cart')</a>
+                @endif
                 </div>
             </div>
 

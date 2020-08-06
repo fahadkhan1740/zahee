@@ -81,22 +81,15 @@ class Index extends Model
         if(empty(Session::get('currency_title'))){
           session(['currency_title' => $currency->code]);
         }
-        if($languages[0]->languages_id == 1) {
+  
+        if(empty(Session::get('symbol_left'))){
           session(['symbol_left' => $currency->symbol_left]);
-          session(['symbol_right' => '']);
-        } else {
-          session(['symbol_right' => $currency->symbol_right]);
-          session(['symbol_left' => '']);
         }
-        // if(empty(Session::get('symbol_left')) && empty(Session::get('symbol_right'))){
-        //   session(['symbol_left' => $currency->symbol_left]);
-        // }
 
-        // if(empty(Session::get('symbol_right')) && empty(Session::get('symbol_left'))){
-        //   session(['symbol_right' => $currency->symbol_right]);
-        // }
+        if(empty(Session::get('symbol_right'))){
+          session(['symbol_right' => $currency->symbol_right]);
+        }
        
-      
         if(empty(Session::get('currency_code'))){
           session(['currency_code' => $currency->code]);
         }

@@ -87,7 +87,7 @@
                                                         Price:
                                                             <span class="old-price"> {{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}</span>
                                                             <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)}}{{Session::get('symbol_right')}}</span>
-                                                        Sub Total: {{Session::get('symbol_left')}}{{($discount_price+0)}}{{Session::get('symbol_right')}}   
+                                                        Sub Total: {{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}   
                                                         @else                        
                                                         Price: {{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}
                                                         Sub Total: {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}

@@ -1,5 +1,3 @@
-<?php //dd($result['top_seller']['product_data']); ?>
-
 <div class="product-wrap ads__warp">
 <div class="title-wrap d-flex justify-content-between align-items-center no-slider ">
     <div class="title-box">
@@ -43,12 +41,11 @@
     <div class="banner  banner-ads row">
         @foreach($result['commonContent']['homeBanners'] as $homeBanner)
             @if($homeBanner->status && $homeBanner->languages_id === Session::get('language_id'))
-                <div  class="col-md-4">
-                   <a href="{{URL::to('shop?category='.$homeBanner->banners_url)}}">
+                <div  class="col-12 col-md-4">
                        <figure style="background-image:url('<?php echo 'public/'.$homeBanner->path ?>')">
-                        <a href="javascript:void(0)"></a>
+                       <a href="{{URL::to('shop?category='.$homeBanner->banners_url)}}">
+                       </a>
                     </figure>
-                   </a>
                 </div>
             @endif
         @endforeach
@@ -115,24 +112,32 @@
               <p>
                     <!-- <span class="price "> -->
                          @if(empty($discount_price))
-                         <span class="price "> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
+                         <span class="price "> @if(Session::get('direction') == 'ltr') {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
                     <!-- </span> -->
                         @else
-                        <span class="price new-price">{{Session::get('symbol_left')}} {{$discount_price+0}} {{Session::get('symbol_right')}}</span>
-                            <span class="price old-price"> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
+                        <span class="price new-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{$discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                            <span class="price old-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
 
                         @endif
                 </p>
                 <?php }?>
                 <div class="items-bottom-button">
-                  <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
-                  <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                @if(!in_array($products->products_id,$result['cartArray']))
+                    @if($products->defaultStock==0)
+                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</a>
+                    @else
+                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                    @endif
+                @else
+                    <a class="btn btn-block btn-secondary active" href="{{ URL::to('/viewcart')}}">@lang('website.Go to Cart')</a>
+                @endif
                 </div>
             </div>
           </div>
         </div>
           @endforeach
-
       </div>
     @endif
 </div>
@@ -151,14 +156,9 @@
 
       </div>
         <div class="product-slider b-product-slider">
-
-                @foreach($result['top_seller']['product_data'] as $key=>$products)
-                    @include('web.common.product-ref')
-                @endforeach
-
-
-
-
+            @foreach($result['top_seller']['product_data'] as $key=>$products)
+                @include('web.common.product-ref')
+            @endforeach
         </div>
     @endif
 </div>
@@ -266,19 +266,28 @@
 
                                 <p class="primary-color"><?php echo @round($discount_percentage); ?> % Off</p>
                                     <p>
-
-                                        @if(empty($products->discount_price))
-                                        <span class="price "> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
-
+                                     <!-- <span class="price "> -->
+                                     @if(empty($products->discount_price))
+                                        <span class="price "> @if(Session::get('direction') == 'ltr') {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rlt'){{Session::get('symbol_right')}}  @endif</span>
+                                    <!-- </span> -->
                                         @else
-                                        <span class="price new-price">{{Session::get('symbol_left')}} {{$discount_price+0}} {{Session::get('symbol_right')}}</span>
-                                            <span class="price old-price"> {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}</span>
+                                        <span class="price new-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{$discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                            <span class="price old-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
 
                                         @endif
                                 </p>
                                 <div class="items-bottom-button">
-                                    <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
-                                    <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                                @if(!in_array($products->products_id,$result['cartArray']))
+                                    @if($products->defaultStock==0)
+                                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</a>
+                                    @else
+                                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                                        <a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+                                    @endif
+                                @else
+                                    <a class="btn btn-block btn-secondary active" href="{{ URL::to('/viewcart')}}">@lang('website.Go to Cart')</a>
+                                @endif
                                 </div>
                             </div>
                         </div>
