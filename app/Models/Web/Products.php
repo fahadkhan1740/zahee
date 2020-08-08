@@ -261,6 +261,9 @@ private function recursivecategories1(){
     		}elseif($type == "asc"){
 				$sortby = "products.products_id";
     			$order = "asc";
+			}elseif($type == "trends"){
+				$sortby = "products.products_id";
+    			$order = "desc";
 			}else{
     			$sortby = "products.products_id";
     			$order = "desc";
@@ -316,6 +319,10 @@ private function recursivecategories1(){
     				//flash sale
     				$categories->LeftJoin('flash_sale', 'flash_sale.products_id', '=', 'products.products_id')
     				->select(DB::raw(time().' as server_time'),'products.*','image_categories.path as image_path', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url','flash_sale.flash_start_date', 'flash_sale.flash_expires_date', 'flash_sale.flash_sale_products_price as flash_price');
+
+    			}elseif($type == "trends"){
+    				//trends
+					$categories->where('products.product_trend','=', '1');
 
     			}elseif($type == "compare"){
     				//flash sale

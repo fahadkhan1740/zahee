@@ -53,7 +53,7 @@
                 <div class="items-bottom-button">
                 @if(!in_array($products->products_id,$result['cartArray']))
                     @if($products->defaultStock==0)
-                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                        <!-- <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a> -->
                         <a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</a>
                     @else
                         <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>

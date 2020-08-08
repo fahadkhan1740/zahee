@@ -1,3 +1,4 @@
+
 @extends('admin.layout')
 @section('content')
 <div class="content-wrapper">
@@ -6,7 +7,7 @@
     <h1> {{ trans('labels.EditSliderImage') }} <small>{{ trans('labels.EditSliderImage') }}...</small> </h1>
     <ol class="breadcrumb">
        <li><a href="{{ URL::to('admin/dashboard/this_month') }}"><i class="fa fa-dashboard"></i> {{ trans('labels.breadcrumb_dashboard') }}</a></li>
-      <li><a href="{{ URL::to('admin/sliders')}}"><i class="fa fa-bars"></i> {{ trans('labels.Sliders') }}</a></li>
+      <li><a href="{{ URL::to('admin/trends')}}"><i class="fa fa-bars"></i> {{ trans('labels.Trend') }}</a></li>
       <li class="active">{{ trans('labels.EditSliderImage') }}</li>
     </ol>
   </section>
@@ -45,17 +46,17 @@
                         <!-- form start -->
                          <div class="box-body">
 
-                            {!! Form::open(array('url' =>'admin/updateSlide', 'method'=>'post', 'class' => 'form-horizontal', 'enctype'=>'multipart/form-data')) !!}
+                            {!! Form::open(array('url' =>'admin/updateTrends', 'method'=>'post', 'class' => 'form-horizontal', 'enctype'=>'multipart/form-data')) !!}
 
-                                {!! Form::hidden('id',  $result['sliders'][0]->sliders_id , array('class'=>'form-control', 'id'=>'id')) !!}
-                                {!! Form::hidden('oldImage',  $result['sliders'][0]->sliders_image, array('id'=>'oldImage')) !!}
+                                {!! Form::hidden('id',  $result['trends'][0]->id , array('class'=>'form-control', 'id'=>'id')) !!}
+                                {!! Form::hidden('oldImage',  $result['trends'][0]->trend_image, array('id'=>'oldImage')) !!}
 
                                 <div class="form-group hidden">
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Language') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="languages_id">
                                           @foreach($result['languages'] as $language)
-                                              <option value="{{$language->languages_id}}" @if($language->languages_id==$result['sliders'][0]->languages_id) selected @endif>{{ $language->name }}</option>
+                                              <option value="{{$language->languages_id}}" @if($language->languages_id==$result['trends'][0]->language_id) selected @endif>{{ $language->name }}</option>
                                           @endforeach
                                       </select>
                                       <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
@@ -66,58 +67,15 @@
                                 <div class="form-group">
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Title') }} </label>
                                   <div class="col-sm-10 col-md-4">
-                                    {!! Form::text('sliders_title', $result['sliders'][0]->sliders_title, array('class'=>'form-control','id'=>'sliders_title')) !!}
+                                    {!! Form::text('trend_title', $result['trends'][0]->trend_title, array('class'=>'form-control','id'=>'trend_title')) !!}
                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.SliderTitletext') }}</span>
-                                  </div>
-                                </div>
-
-                                <div class="form-group">
-                                  <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Categories') }}</label>
-                                  <div class="col-sm-10 col-md-4">
-                                      <select class="form-control" name="type" id="bannerType">
-                                          <option value="category" @if($result['sliders'][0]->type=='category') selected @endif>
-                                          {{ trans('labels.ChooseCategory') }}</option>
-                                          <option value="product" @if($result['sliders'][0]->type=='product') selected @endif>{{ trans('labels.Product') }}</option>
-                                          <option value="topseller" @if($result['sliders'][0]->type=='topseller') selected @endif>{{ trans('labels.TopSeller') }}</option>
-                                          <option value="special" @if($result['sliders'][0]->type=='special') selected @endif>{{ trans('labels.Deals') }}</option>
-                                          <option value="mostliked" @if($result['sliders'][0]->type=='mostliked') selected @endif>{{ trans('labels.MostLiked') }}</option>
-                                      </select>
-                                       <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                                      {{ trans('labels.ChooseSliderToAsscociateWith') }}</span>
-                                  </div>
-                                </div>
-
-
-                                <div class="form-group categoryContent" @if($result['sliders'][0]->type!='category') style="display: none" @endif >
-                                  <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Categories') }}</label>
-                                  <div class="col-sm-10 col-md-4">
-                                      <select class="form-control" name="categories_id" id="categories_id">
-                                      @foreach($result['categories'] as $category)
-                                		<option value="{{ $category->slug}}"  @if($result['sliders'][0]->sliders_url== $category->slug) selected @endif>{{ $category->name}}</option>
-                                      @endforeach
-                                      </select>
-                                      <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                                      {{ trans('labels.CategoriessliderText') }}</span>
-                                  </div>
-                                </div>
-
-                                <div class="form-group productContent" @if($result['sliders'][0]->type!='product') style="display: none" @endif>
-                                  <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Products') }}</label>
-                                  <div class="col-sm-10 col-md-4">
-                                      <select class="form-control" name="products_id" id="products_id">
-                                      @foreach($result['products'] as $products_data)
-                                		<option value="{{ $products_data->products_slug }}" @if($result['sliders'][0]->sliders_url== $products_data->products_slug) selected @endif>{{ $products_data->products_name }}</option>
-                                      @endforeach
-                                      </select>
-                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                                      {{ trans('labels.ProductsSliderText') }}</span>
                                   </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Image') }}</label>
                                     <div class="col-sm-10 col-md-4">
-                                        {{--{!! Form::file('newImage', array('id'=>'newImage')) !!}--}}
+                                    
                                         <!-- Modal -->
                                             <div class="modal fade embed-images" id="Modalmanufactured" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
@@ -158,9 +116,9 @@
                                                 <br>
                                                 {!! Form::hidden('oldImage', $result['languages'][0]->image, array('id'=>'oldImage')) !!}
                                                 @if(($result['languages'][0]->path!== null))
-                                                    <img width="80px" src="{{asset('public/'.$result['sliders'][0]->path)}}" class="img-circle">
+                                                    <img width="80px" src="{{asset('public/'.$result['trends'][0]->path)}}" class="img-circle">
                                                 @else
-                                                    <img width="80px" src="{{asset('public/'.$result['sliders'][0]->path) }}" class="img-circle">
+                                                    <img width="80px" src="{{asset('public/'.$result['trends'][0]->path) }}" class="img-circle">
                                                 @endif
 
                                             </div>
@@ -173,8 +131,8 @@
 
 
 
-                                   @if(!empty($result['sliders'][0]->expires_date))
-                                    {!! Form::text('expires_date', date('d/m/Y', strtotime($result['sliders'][0]->expires_date)), array('class'=>'form-control datepicker', 'id'=>'expires_date')) !!}
+                                   @if(!empty($result['trends'][0]->expires_date))
+                                    {!! Form::text('expires_date', date('d/m/Y', strtotime($result['trends'][0]->expires_date)), array('class'=>'form-control datepicker', 'id'=>'expires_date')) !!}
                                    @else
                                     {!! Form::text('expires_date', '', array('class'=>'form-control datepicker', 'id'=>'expires_date')) !!}
 
@@ -188,8 +146,8 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Status') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="status">
-                                          <option value="1" @if($result['sliders'][0]->status==1) selected @endif>{{ trans('labels.Active') }}</option>
-                                          <option value="0" @if($result['sliders'][0]->status==0) selected @endif>{{ trans('labels.Inactive') }}</option>
+                                          <option value="1" @if($result['trends'][0]->status==1) selected @endif>{{ trans('labels.Active') }}</option>
+                                          <option value="0" @if($result['trends'][0]->status==0) selected @endif>{{ trans('labels.Inactive') }}</option>
                                       </select>
                                      <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                       {{ trans('labels.StatusSliderText') }}</span>
@@ -200,7 +158,7 @@
                               <!-- /.box-body -->
                               <div class="box-footer text-center">
                                 <button type="submit" class="btn btn-primary">{{ trans('labels.Submit') }}</button>
-                                <a href="{{ URL::to('admin/sliders')}}" type="button" class="btn btn-default">{{ trans('labels.back') }}</a>
+                                <a href="{{ URL::to('admin/trends')}}" type="button" class="btn btn-default">{{ trans('labels.back') }}</a>
                               </div>
                               <!-- /.box-footer -->
                             {!! Form::close() !!}

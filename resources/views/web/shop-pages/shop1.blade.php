@@ -1,3 +1,4 @@
+<?php //dd($result['products']['product_data']); ?>
 <section class="shop-content shop-four elem-cover">
    <div class="container">
        <div class="row">
@@ -290,7 +291,7 @@
                                   print '</span>';
                                 }
                                  ?>
-                                 @if((int)$products->discount_price > 0)
+                                 @if(!empty($products->discount_price) && (int)$products->discount_price > 0 )
                                     <span class="tag">
                                     {{(int)$products->discount_price}}% Off
                                     </span>
@@ -299,7 +300,7 @@
                                    <div class="product__left">
                                    <div class="icons">
                                        <div class="icon-liked">
-                                       <a href="javascript:void(0)" class="icon active is_liked heart-icon whishlist" products_id="{{$products->products_id}}">
+                                       <a href="javascript:void(0)" class="icon heart-icon whishlist" products_id="{{$products->products_id}}">
                                            <i class="fas fa-heart"></i>
                                          </a>
                                            <span  class="badge badge-secondary counter"  >{{$products->products_liked}}</span>
@@ -314,15 +315,15 @@
                                  </div>
                                  <div class="product__right">
                                  <p>
-                                      <!-- <span class="price "> -->
-                                      @if(empty($products->discount_price))
+                                      @if(empty($products->discount_price) && empty($products->flash_price))
                                           <span class="price "> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
-                                      <!-- </span> -->
-                                          @else
+                                      @elseif(empty($products->flash_price) && !empty($products->discount_price) )
                                           <span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$products->discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
                                           <span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
-
-                                          @endif
+                                      @else
+                                          <span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$products->flash_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                          <span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                      @endif
                                   </p>
                                  <div class="product-hover d-none d-lg-block d-xl-block">
                                      

@@ -117,7 +117,7 @@ return [
 
 	'Email'=>'البريد الإلكتروني',
 
-	'Copy Rights'=>'© '.date('Y',time()).' Zaahee. All Rights Reserved.',
+	'Copy Rights'=>'© '. date('Y',time()) . ' ZaaHee كل الحقوق محفوظة ',
 
 	'From our News'=>'من أخبارنا',
 
@@ -739,5 +739,14 @@ return [
 	'Trends' => 'اتجاهات',
 	'See All' => 'اظهار الكل',
 	'Shop Now!' => 'تسوق الآن!',
-	'Recently Viewed' => 'شوهدت مؤخرا'
+	'Recently Viewed' => 'شوهدت مؤخرا',
+	'Company Information' => 'معلومات الشركة',
+	'Connect with Us' => 'اتصل بنا',
+	'Minimum order amount is 5.00 KWD.' => 'الحد الأدنى لمبلغ الطلب 5.00 د.ك.',
+	'No Product has been added to your Cart' => 'لم يتم إضافة أي منتج إلى سلة التسوق الخاصة بك',
+	'Price Details' => 'تفاصيل السعر',
+	'Remove' => 'إزالة',
+	'View' => 'رأي',
+	'APPLY' =>'تطبيق',
+	'Delivery Charges' => 'رسوم التوصيل'
 ];

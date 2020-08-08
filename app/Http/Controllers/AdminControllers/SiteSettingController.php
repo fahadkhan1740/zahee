@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Core\Images;
 use App\Models\Core\Language;
 use App\Models\Core\Setting;
+use App\Models\Core\Categories;
+use App\Models\Core\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
+use App\Models\Core\Languages;
 
 class SiteSettingController extends Controller
 {
@@ -533,6 +536,60 @@ class SiteSettingController extends Controller
 
         $message = Lang::get("labels.OrderStatusAddedMessage");
         return redirect()->back()->withErrors([$message]);
+    }
+
+    public function trends(Request $request) {
+        $title = array('pageTitle' => Lang::get("labels.ListingTrends"));
+        $result = array();
+        $orders_status = $this->Setting->trends();
+        $result['trends'] = $orders_status;
+        return view("admin.settings.general.trends.index", $title)->with('result', $result);
+    }
+
+    public function editTrends(Request $request) {
+        $title = array('pageTitle' => Lang::get("labels.EditTrend"));
+        $result = array();
+        $result['trends'] = $this->Setting->editTrends($request);
+
+		$images  = new Images();
+		$allimage = $images->getimages();
+
+		//get function from other controller
+		$myVar = new Languages();
+        $result['languages'] = $myVar->getter();
+		
+		return view('admin.settings.general.trends.edit',$title)->with(['result' => $result,'allimage' => $allimage]);
+    }
+
+    public function updateTrends(Request $request) {
+        $myVar = new Languages();
+		$languages = $myVar->getter();
+		$expiryDate = str_replace('/', '-', $request->expires_date);
+		$expiryDateFormate = date('Y-m-d H:i:s', strtotime($expiryDate));
+		$type = $request->type;
+
+
+		if($request->image_id){
+			$uploadImage = $request->image_id;
+			$countryUpdate = DB::table('trend_images')->where('id', $request->id)->update([
+				'trend_title'  		 =>   $request->sliders_title,
+				'trend_image'			 =>	  $uploadImage,
+				'status'	 			 =>   $request->status,
+				'expires_date'			 =>	  $expiryDateFormate,
+				'language_id'			 =>	  $request->languages_id
+			]);
+		}else{
+			$countryUpdate = DB::table('trend_images')->where('id', $request->id)->update([
+                'trend_title'  		 =>   $request->sliders_title,
+				'status'	 			 =>   $request->status,
+				'expires_date'			 =>	  $expiryDateFormate,
+                'language_id'			 =>	  $request->languages_id
+			]);
+		}
+
+
+		$message = Lang::get("labels.TrendUpdatedMessage");
+		return redirect()->back()->withErrors([$message ]);
     }
 
 }

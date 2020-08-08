@@ -1,4 +1,3 @@
-
 <main id="scrollbar-body" data-scrollbar>
     <!-- banner wrap -->
 
@@ -72,9 +71,17 @@
                                                 <li class=""><a href="{{ URL::to('/shop?category='.$result['category_slug'])}}">{{$result['category_name']}}</a></li>
                                             @endif
                                             <li class="active">{{$result['detail']['product_data'][0]->products_name}}</li>
+                                            
                                         </ul>
                                         <h4>{{$result['detail']['product_data'][0]->products_name}}</h4>
                                         <h6>{{$result['detail']['product_data'][0]->product_sub_title}}</h6>
+                                       <p>
+                                       @if($result['detail']['product_data'][0]->defaultStock == 0)
+                                            <span class="outstock"><i class="fas fa-times"></i>@lang('website.Out of Stock')</span>
+                                            @else
+                                            <span class="instock"><i class="fas fa-check"></i>@lang('website.In stock')</span>
+                                            @endif
+                                       </p>
 
                                         <div class="product-desc-sub">
                                             <div class="product-desc-sub-ele">
@@ -89,7 +96,7 @@
                                         @if(count($result['detail']['product_data'][0]->attributes)>0)
 
                                     <div class="product-desc product-desc-color">
-                                             @foreach( $result['detail']['product_data'][0]->attributes as $key=>$attributes_data )
+                                             @foreach( $result['detail']['product_data'][0]->attributes as $key =>$attributes_data )
                                              <div class="product-desc product-desc-color">
                                                 <div class="product-desc product-desc-size">
                                                     <label>
@@ -99,8 +106,8 @@
                                                 <div class="sizee__wrap custom___radio">
                                                 @foreach($attributes_data['values'] as $k => $values_data)
                                                     <label>
-                                                    <input type="radio" attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = "{{ $values_data['price_prefix'] }}"  value_price ="{{ $values_data['price']+0 }}" name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity(`{{ $attributes_data['option']['id'] }}`)" class="currentstock attributeid_<?=$index++?>" attributeid = "{{$attributes_data['option']['id']}}" />
-                                                   @if($attributes_data['option']['name']  === 'Color')
+                                                    <input type="radio" {{$key}} attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = "{{ $values_data['price_prefix'] }}"  value_price ="{{ $values_data['price']+0 }}" name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity(`{{ $attributes_data['option']['id'] }}`)" class="currentstock attributeid_<?=$index++?>" attributeid = "{{$attributes_data['option']['id']}}" @if($key == 0) 'checked' @endif/>
+                                                   @if($attributes_data['option']['name']  === 'Color' || $attributes_data['option']['name']  === 'اللون')
                                                     <span class="radio_bx" style=" background:{{ $values_data['value'] }}; "></span>
                                                     @else 
                                                     <span class="radio_bx">{{ $values_data['value'] }}</span>
@@ -119,9 +126,14 @@
                                         <div class="product-label-wrap">
                                             <div class="label"><p>Quantity:</p></div>
                                             <div class="qty-wrap qty-sm">
-                                                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                                    <input type="number" id="number" readonly name="quantity" class="qty" value="{{$result['detail']['product_data'][0]->products_min_order}}">
-                                                    <div class="value-button" id="increase" onclick="increaseValue()" >+</div>
+                                                <select id="number" name="quantity" class="qty form-control">
+                                                    @for($i =1; $i <= 10; $i++)
+                                                    <option value="{{$i}}" @if($result['detail']['product_data'][0]->products_min_order === $i) 'selected' @endif>{{$i}}</option>
+                                                    @endfor
+                                                </select>
+                                                    <!-- <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                                                    <input type="number" id="number" readonly name="quantity" class="qty" value="{{$result['detail']['product_data'][0]->products_min_order}}" min="{{$result['detail']['product_data'][0]->products_min_order}}">
+                                                    <div class="value-button" id="increase" onclick="increaseValue()" >+</div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -167,31 +179,27 @@
                                                     $discounted_price = $orignal_price;
                                                 }
                                                 ?>
-                                                @if(!empty($result['detail']['product_data'][0]->flash_price))
-                                                    {{Session::get('symbol_left')}} {{$flash_price+0}} {{Session::get('symbol_right')}}
-                                                @elseif(!empty($result['detail']['product_data'][0]->discount_price))
-                                                    {{Session::get('symbol_left')}} {{$discount_price+0}} {{Session::get('symbol_right')}}
+                                                @if(empty($result['detail']['product_data'][0]->discount_price) && empty($result['detail']['product_data'][0]->flash_price))
+                                                    <span class="price "> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                                @elseif(empty($result['detail']['product_data'][0]->flash_price) && !empty($result['detail']['product_data'][0]->discount_price) )
+                                                    <span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                                    <span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
                                                 @else
-                                                    {{Session::get('symbol_left')}} {{$orignal_price+0}} {{Session::get('symbol_right')}}
+                                                    <span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$flash_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                                    <span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
                                                 @endif
 
                                             </h6>
+                                            @if($result['detail']['product_data'][0]->defaultStock > 0)
                                             <div class="button-outer">
                                                 @if(!in_array($result['detail']['product_data'][0]->products_id ,$result['cartArray']))
-                                                    @if($result['detail']['product_data'][0]->defaultStock  == 0)
-                                                    <button type="button" class="btn btn-block btn-danger" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Out of Stock')</button>
-                                                    @else
-                                                    <button type="button" class="btn btn-border add-to-Cart stock-cart" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Add to Cart')</button>
-                                                    <a href="javascript:void(0)" class="btn btn-default stock-cart buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</a>
-                                                    @endif
-                                                @else 
-                                                    @if($result['detail']['product_data'][0]->defaultStock  == 0)
-                                                    <button type="button" class="btn btn-block btn-danger" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Out of Stock')</button>
-                                                    @else
-                                                    <a href="{{ URL::to('/viewcart')}}" class="btn btn-default" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Go to Cart')</a>
-                                                    @endif
+                                                    <button type="button" class="btn btn-border add-to-Cart" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Add to Cart')</button>
+                                                    <a href="javascript:void(0)" class="btn btn-default buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</a>
+                                                @else                                                     
+                                                    <a href="{{ URL::to('/viewcart')}}" class="btn btn-block btn-default" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Go to Cart')</a>
                                               @endif
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="product-action-ele ">
                                             <ul>

@@ -45,8 +45,6 @@
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
-
-{{--                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>--}}
                         </div>
                     </form>
                 </div>
@@ -55,7 +53,7 @@
                     @if(auth()->guard('customer')->check())
                         <li>
                                 <a href="{{ url('/profile') }}">
-                                        <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp;! {{auth()->guard('customer')->user()->first_name}} <?php }?>
+                                        <span><?php if(auth()->guard('customer')->check()){ ?>@lang('website.Welcome')&nbsp; {{auth()->guard('customer')->user()->first_name}} <?php }?>
                                         </span>
                                 </a>
                         </li>

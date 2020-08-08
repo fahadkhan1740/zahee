@@ -8,7 +8,7 @@
 
 
                         <div class="sm-icon-wrap">
-                            <h6>Connect with Us</h6>
+                            <h6>@lang('website.Connect with Us')</h6>
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-snapchat-ghost" aria-hidden="true"></i></a></li>
@@ -28,7 +28,7 @@
 
                 <div class="col-md-6">
                     <div class="footer-col quick-links">
-                        <h6>Company Information</h6>
+                        <h6>@lang('website.Company Information')</h6>
                         <ul>
                             <li><a href="{{ url('/page/about-us') }}">@lang('website.About Us')</a></li>
                             <li><a href="{{ url('/page/faq') }}">@lang('website.FAQ')</a></li>

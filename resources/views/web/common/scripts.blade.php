@@ -110,9 +110,8 @@ jQuery(document).on('click', '.cart', function(e){
 				jQuery('.head-cart-content').html(res);
 				jQuery(parent).removeClass('cart');
 				jQuery(parent).addClass('active');
-				jQuery(parent).html("@lang('website.Go to Cart')");
-				swal('', "Product Added Successfully Thanks.Continue Shopping", "success");
-                location.reload();
+				// swal('', "Product Added Successfully Thanks.Continue Shopping", "success");
+				jQuery(parent).html('Added');
 			}
 
 		},
@@ -166,8 +165,8 @@ jQuery(document).on('click', '.whishlist', function(e){
 		    // alert(res);
 		    if(isHTML(res)) {
                 jQuery('.head-cart-content').html(res);
-                // jQuery(parent).html("<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>Remove From Wishlist");
-                swal('Wishlist Update', "The Wishlist has been updated successfully", "success");
+                jQuery(parent).html("<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>");
+                // swal('Wishlist Update', "The Wishlist has been updated successfully", "success");
 
             } else {
 		        location.href="{{URL::to('/login')}}"
@@ -812,7 +811,8 @@ function getQuantity(attr_name){
 		jQuery('#attributeids_' + i++).val(attributes_value);
 	});
 
-	var formData = jQuery('#add-Product-form').serialize();
+	var formData = jQuery('#add-Product-form').serializeArray();
+	console.log(formData);
 	jQuery.ajax({
 		headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
 		url: '{{ URL::to("getquantity")}}',
@@ -820,8 +820,6 @@ function getQuantity(attr_name){
 		data: formData,
 		dataType: "json",
 		success: function (res) {
-			// console.log(res.remainingStock);
-			jQuery('#current_stocks').html(res.remainingStock+ ' Stock(s) left');
 			var min_level = 0;
 			var max_level = 0;
 			var inventory_ref_id = res.inventory_ref_id;

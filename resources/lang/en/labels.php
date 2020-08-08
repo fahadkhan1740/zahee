@@ -428,6 +428,7 @@ return [
 	'QuantityLowLimit' => 'Quantity Low Limit',
 	'UploadProductImageText' => 'Upload default product image.',
 	'SelectStatus' => 'Select status Active or Inactive.',
+	'SelectTrend' => 'Select product is Trend  Yes or No.',
 	'SubCategory' => 'Sub Category',
 	'ChooseSubCategory' => 'Choose Sub Category',
 	'AddOptions' => 'Add Options',
@@ -1283,6 +1284,7 @@ return [
 	'CategoriessliderText' => 'Which category do you want to associate this slide?',
 
 	'SliderUpdatedMessage'=>'Image slide has been updated successfully!',
+	'TrendUpdatedMessage'=>'Image trend has been updated successfully!',
 
 	'DeleteSliderText'=>'Do you want to delete this slide?',
 
@@ -2112,5 +2114,7 @@ return [
 	'# of orders' => '# of orders',
 	'Category' => 'Category',
 	'Unit Price' => 'Unit Price',
-
+	'Trend' => 'Trends',
+	'EditTrend' => 'EditTrend',
+	'ListingTrends' => 'ListingTrends'
 ];

@@ -132,7 +132,7 @@ return [
 
 	'Email'=>'Email',
 
-	'Copy Rights'=>'© '.date('Y',time()).' Zaahee. All Rights Reserved.',
+	'Copy Rights'=>'© '.date('Y',time()).' ZaaHee All Rights Reserved',
 
 	'From our News'=>'From our News',
 
@@ -792,5 +792,14 @@ return [
 	'See All' => 'See All',
 	'Shop Now!' => 'Shop Now!',
 	'FAQ' => 'FAQ',
-	'Recently Viewed' => 'Recently Viewed'
+	'Recently Viewed' => 'Recently Viewed',
+	'Company Information' => 'Company Information',
+	'Connect with Us' => 'Connect with Us',
+	'Minimum order amount is 5.00 KWD.' => 'Minimum order amount is 5.00 KWD.',
+	'No Product has been added to your Cart' => 'No Product has been added to your Cart',
+	'Price Details' => 'Price Details',
+	'Remove' => 'Remove',
+	'View' => 'View',
+	'APPLY' =>'APPLY',
+	'Delivery Charges' => 'Delivery Charges'
 ];

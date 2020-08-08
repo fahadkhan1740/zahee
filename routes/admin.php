@@ -170,7 +170,7 @@ Route::group(['middleware' => ['installer']], function () {
         Route::group(['prefix' => 'images'], function () {
             Route::get('/display/{id}/', 'ProductController@displayProductImages')->middleware('view_product');
             Route::get('/add/{id}/', 'ProductController@addProductImages')->middleware('add_product');
-            Route::post('/insertproductimage', 'ProductController@insertProductImages')->middleware('add_product');
+            Route::post('/unitsproductimage', 'ProductController@insertProductImages')->middleware('add_product');
             Route::get('/editproductimage/{id}', 'ProductController@editProductImages')->middleware('edit_product');
             Route::post('/updateproductimage', 'ProductController@updateproductimage')->middleware('edit_product');
             Route::post('/deleteproductimagemodal', 'ProductController@deleteproductimagemodal')->middleware('edit_product');
@@ -452,6 +452,10 @@ Route::group(['middleware' => ['installer']], function () {
         Route::get('/editorderstatus/{id}', 'SiteSettingController@editorderstatus')->middleware('edit_general_setting');
         Route::post('/updateOrderStatus', 'SiteSettingController@updateOrderStatus')->middleware('edit_general_setting');
         Route::post('/deleteOrderStatus', 'SiteSettingController@deleteOrderStatus')->middleware('edit_general_setting');
+
+        Route::get('/trends', 'SiteSettingController@trends')->middleware('view_general_setting');
+        Route::get('/editTrends/{id}', 'SiteSettingController@editTrends')->middleware('edit_general_setting');
+        Route::post('/updateTrends', 'SiteSettingController@updateTrends')->middleware('edit_general_setting');
 
         Route::get('/facebooksettings', 'SiteSettingController@facebookSettings')->middleware('view_general_setting');
         Route::get('/googlesettings', 'SiteSettingController@googleSettings')->middleware('view_general_setting');

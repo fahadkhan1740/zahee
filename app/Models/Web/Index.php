@@ -146,6 +146,17 @@ class Index extends Model
            $wishlist = $this->wishlistCount($data);
       $result['wishlist_count'] = $wishlist;
 
+      // Trend Data
+
+      $trendImage = DB::table('trend_images')
+          ->leftJoin('image_categories','trend_images.trend_image','=','image_categories.image_id')
+          ->select('trend_images.*','image_categories.path')
+          ->where('trend_images.status','1')
+          ->where('trend_images.language_id', Session::get('language_id'))
+          ->get();
+
+          $result['trend_image'] = $trendImage;
+
     		if(count($result['cart'])==0){
     			session(['step' => '0']);
     			session(['coupon' => array()]);
@@ -169,16 +180,24 @@ class Index extends Model
     		->orderby('type','ASC')
     		->get();
     		$result['homeBanners'] = $homeBanners;
-
+// dd(Session::get('language_id'));
     		$result['pages'] = DB::table('pages')
     							->leftJoin('pages_description', 'pages_description.page_id', '=', 'pages.page_id')
     							->where([['type','2'],['status','1'],['pages_description.language_id',session('language_id')]])
-                  ->orwhere([['type','2'],['status','1'],['pages_description.language_id',1]])->orderBy('pages_description.name', 'ASC')->get();
+                  ->orwhere([['type','2'],['status','1'],['pages_description.language_id',Session::get('language_id')]])->orderBy('pages_description.name', 'ASC')->get();
 
         //produt categories
         $result['categories'] = $this->categories();
     		return ($result);
 
+  }
+
+  private function getPages() {
+    $result['pages'] = DB::table('pages')
+    							->leftJoin('pages_description', 'pages_description.page_id', '=', 'pages.page_id')
+    							->where([['type','2'],['status','1'],['pages_description.language_id',session('language_id')]])
+                  ->orwhere([['type','2'],['status','1'],['pages_description.language_id',1]])->orderBy('pages_description.name', 'ASC')->get();
+                  return ($result);
   }
   private function categories(){
 

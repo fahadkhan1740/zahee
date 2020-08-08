@@ -31,16 +31,16 @@ jQuery(document).ready(function () {
 
     jQuery('#list').on('click', function(){	
         jQuery( '#swap .col-12' ).removeClass( 'griding' );
-        jQuery( '#swap .col-12' ).removeClass( 'col-lg-4' );
-        jQuery( '#swap .col-12' ).removeClass( 'col-md-6' );
+        // jQuery( '#swap .col-12' ).removeClass( 'col-lg-4' );
+        // jQuery( '#swap .col-12' ).removeClass( 'col-md-6' );
         jQuery( '#swap .col-12' ).addClass( 'listing' );
         jQuery( this ).addClass( 'active' );
         jQuery( '#grid' ).removeClass( 'active' );
     });
     jQuery('#grid').on('click', function(){	
         jQuery( '#swap .col-12' ).removeClass( 'listing' );
-        jQuery( '#swap .col-12' ).addClass( 'col-lg-4' );
-        jQuery( '#swap .col-12' ).addClass( 'col-md-6' );
+        // jQuery( '#swap .col-12' ).addClass( 'col-lg-4' );
+        // jQuery( '#swap .col-12' ).addClass( 'col-md-6' );
         
         jQuery( '#swap .col-12' ).addClass( 'griding' );
         jQuery( this ).addClass( 'active' );

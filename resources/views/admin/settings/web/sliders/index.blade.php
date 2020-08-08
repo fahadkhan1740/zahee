@@ -22,7 +22,7 @@
           <div class="box-header">
             <h3 class="box-title">{{ trans('labels.ListingAllImages') }} </h3>
             <div class="box-tools pull-right">
-            	<!-- <a href="{{ URL::to('admin/addsliderimage') }}" type="button" class="btn btn-block btn-primary">{{ trans('labels.AddNewImage') }}</a> -->
+            	<a href="{{ URL::to('admin/addsliderimage') }}" type="button" class="btn btn-block btn-primary">{{ trans('labels.AddNewImage') }}</a>
             </div>
           </div>
 
@@ -68,7 +68,7 @@
                             <td>{{ $sliders->language_name }}</td>
                             <td><a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Edit') }}" href="editslide/{{ $sliders->sliders_id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                            <!-- <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Delete') }}" id="deleteSliderId" sliders_id ="{{ $sliders->sliders_id }}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+                            <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Delete') }}" id="deleteSliderId" sliders_id ="{{ $sliders->sliders_id }}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </tr>
                     @endforeach
                     @else

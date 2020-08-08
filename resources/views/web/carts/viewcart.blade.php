@@ -25,7 +25,7 @@
                                    $currency_value = $session_currency->value;
                                   }
 
-                              @endphp 
+                              @endphp
 
                             <div class="cart-items-wrap">
                                 @if(count($result['cart']) > 0)
@@ -80,17 +80,21 @@
                                                     }
                                                     ?>
                                                     <div class="price">
-                                                        @if(!empty($products->final_price) && empty($products->discount_price))                                                       
-                                                            Price: {{Session::get('symbol_left')}}{{($flash_price+0)}}{{Session::get('symbol_right')}}
-                                                            Sub Total: {{Session::get('symbol_left')}}{{($flash_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
+                                                        @if(!empty($products->final_price) && empty($products->discount_price))
+                                                        <span class="price_type">Price:</span>
+                                                        <span class="new-price">  @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{($flash_price+0)}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                                        <br>
+                                                        <span class="sub_total"><span class="price_type">Sub Total:</span> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{($flash_price+0)*$products->customers_basket_quantity}}@if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif </span>
                                                         @elseif(!empty($products->discount_price) && !empty($products->final_price))
-                                                        Price:
-                                                            <span class="old-price"> {{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}</span>
-                                                            <span class="new-price">{{Session::get('symbol_left')}}{{($discount_price+0)}}{{Session::get('symbol_right')}}</span>
-                                                        Sub Total: {{Session::get('symbol_left')}}{{($discount_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}   
-                                                        @else                        
-                                                        Price: {{Session::get('symbol_left')}}{{($orignal_price+0)}}{{Session::get('symbol_right')}}
-                                                        Sub Total: {{Session::get('symbol_left')}}{{($orignal_price+0)*$products->customers_basket_quantity}}{{Session::get('symbol_right')}}
+                                                        <span class="price_type">Price:</span>
+                                                        <span class="old-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{($orignal_price+0)}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                                            <span class="new-price">  @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{($discount_price+0)}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                                            <br>
+                                                            <span class="sub_total"> <span class="price_type">Sub Total:</span> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{($discount_price+0)*$products->customers_basket_quantity}}@if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif </span>
+                                                        @else
+                                                        <span class="new-price">Price: @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{($orignal_price+0)}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+                                                        <br>
+                                                        <span class="sub_total"><span class="price_type">Sub Total:</span> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{($orignal_price+0)*$products->customers_basket_quantity}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif </span>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -111,8 +115,8 @@
                                                       </form>
                                                 </div>
                                                 <div class="cart-item-sb-col cart-item-sb-col-right cart-item-product-remove">
-                                                     <p><a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}" class="remove"><i class="fa fa-trash" aria-hidden="true"></i>Remove</a></p>
-                                                     <p><a href="{{ URL::to('/product-detail/'.$products->products_slug) }}" class="view-product"><i class="fa fa-eye" aria-hidden="true"></i>View</a></p>
+                                                     <p><a href="{{ URL::to('/deleteCart?id='.$products->customers_basket_id)}}" class="remove"><i class="fa fa-trash" aria-hidden="true"></i>@lang('website.Remove')</a></p>
+                                                     <p><a href="{{ URL::to('/product-detail/'.$products->products_slug) }}" class="view-product"><i class="fa fa-eye" aria-hidden="true"></i>@lang('website.view')</a></p>
                                                 </div>
                                            </div>
                                     </div>
@@ -128,7 +132,7 @@
                                 <div class="cart-action-wrap text-right ">
                                 @if($total < 5 )
                                     <div class="alert alert-secondary" role="alert">
-                                      Minimum order amount is 5.00 KWD.
+                                      @lang('website.Minimum order amount is 5.00 KWD.')'
                                     </div>
                                     @endif
                                     <a href="{{ URL::to('/shop')}}" class="btn btn-default">@lang('website.Back To Shopping')</a>
@@ -140,7 +144,7 @@
                                             <div class="cart-item-col cart-item-center">
                                                 <figure>
                                                     <img src="{{asset('public/web/images/cus/empty-cart.png')}}" alt="empty-cart" style="width:15%">
-                                                    <figcaption>No Products in your Cart</figcaption>
+                                                    <figcaption>@lang('website.No Product has been added to your Cart')</figcaption>
                                                 </figure>
                                             </div>
                                             </div>
@@ -148,8 +152,8 @@
                                     <a href="{{ URL::to('/shop')}}" class="btn btn-default">@lang('website.Back To Shopping')</a>
                                     <a href="{{ URL::to('/wishlist')}}" class="btn btn-default">@lang('website.Add from wishlist')</a>
                                 </div>
-                                       
-                                        
+
+
                                 @endif
                             </div>
 
@@ -161,7 +165,7 @@
                             <div class="input-group ">
                                 <input type="text"  id="coupon_code" name="coupon_code" class="form-control" placeholder="Coupon Code">
                                 <div class="input-group-append">
-                                    <button class="btn  btn-secondary" type="button" id="coupon-code">APPLY</button>
+                                    <button class="btn  btn-secondary" type="button" id="coupon-code">@lang('website.APPLY')</button>
                                 </div>
                             </div>
                         </form>
@@ -173,26 +177,26 @@
                      <div class="col-md-3">
                         <div class="cart-col cart-right  box-shadow">
                             <div class="cart-title">
-                                <h6>Price Details</h6>
+                                <h6>@lang('website.Price Details')</h6>
                             </div>
                             <div class="cart-amount-wrap">
                                 <ul>
                                     <li>
                                         <span class="cart-price-col">@lang('website.SubTotal')</span>
-                                        <span class="cart-price-col">{{Session::get('symbol_left')}}{{($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '')}}{{Session::get('symbol_right')}}</span>
+                                        <span class="cart-price-col">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '')}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}} @endif</span>
                                     </li>
 
                                     <li>
                                         <span class="cart-price-col">@lang('website.Discount(Coupon)')</span>
-                                        <span class="cart-price-col">{{Session::get('symbol_left')}}{{abs($currency_value * number_format((float)session('coupon_discount'), 2, '.', '')+0)}}{{Session::get('symbol_right')}}</span>
+                                        <span class="cart-price-col">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{abs($currency_value * number_format((float)session('coupon_discount'), 2, '.', '')+0)}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}} @endif</span>
                                     </li>
                                     <li>
-                                        <span class="cart-price-col">Delivery Charges</span>
-                                        <span class="cart-price-col">{{Session::get('symbol_left')}} {{session('shipping_detail')['shipping_price']}} {{Session::get('symbol_right')}}</span>
+                                        <span class="cart-price-col">@lang('website.Delivery Charges')</span>
+                                        <span class="cart-price-col">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{session('shipping_detail')['shipping_price']}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}} @endif</span>
                                     </li>
                                     <li class="total-amount">
                                         <span class="cart-price-col">@lang('website.Total')</span>
-                                        <span class="cart-price-col">{{Session::get('symbol_left')}} {{($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '')+session('shipping_detail')['shipping_price']}} {{Session::get('symbol_right')}}</span>
+                                        <span class="cart-price-col">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{($currency_value * $price)+0-number_format((float)session('coupon_discount'), 2, '.', '')+session('shipping_detail')['shipping_price']}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}} @endif</span>
                                     </li>
                                 </ul>
                             </div>

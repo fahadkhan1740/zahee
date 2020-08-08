@@ -697,7 +697,7 @@ class Order extends Model
 		$pages = DB::table('pages')
 					->leftJoin('pages_description','pages_description.page_id','=','pages.page_id')
 					->where([['pages.status','1'],['type',2],['pages_description.language_id',session('language_id')],['pages.slug',$slug]])
-					->orwhere([['pages.status','1'],['type',2],['pages_description.language_id',1],['pages.slug',$slug]])
+					->orwhere([['pages.status','1'],['type',2],['pages_description.language_id',Session::get('language_id')],['pages.slug',$slug]])
 					->get();
      return $pages;
 	}

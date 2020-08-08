@@ -58,7 +58,7 @@ class AdminSlidersController extends Controller
 
 		//get function from other controller
 		$myVar = new Categories();
-		$categories = $myVar->getter(1);
+		$categories = $myVar->gettAllCat(1);
 
 		$images  = new Images();
 		$allimage = $images->getimages();

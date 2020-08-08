@@ -63,10 +63,10 @@
                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.SliderTitletext') }}</span>
                                   </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.carousels') }}</label>
                                     <div class="col-sm-10 col-md-4">
-                                        <select class="form-control field-validate" name="carousel_id">
+                                        <select class="form-control field-validate" name="carousel_id" readonly>
                                           @foreach($result['carousels'] as $carousels)
                                               <option value="{{$carousels['id']}}">{{$carousels['name']}}</option>
                                            @endforeach
@@ -74,7 +74,9 @@
                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.carousels') }}</span>
                                         <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
                                     </div>
-                                </div>
+                                </div> -->
+
+                                <input type="hidden" value="{{$result['carousels'][0]['id']}}" name="carousel_id" />
 
                                 <div class="form-group" id="imageIcone">
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Icon') }}</label>
@@ -128,7 +130,7 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Type') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="type" id="bannerType">
-                                          <option value="category">{{ trans('labels.ChooseSubCategory') }}</option>
+                                          <option value="category">{{ trans('labels.ChooseCategory') }}</option>
                                           <option value="product">{{ trans('labels.Product') }}</option>
                                           <option value="topseller">{{ trans('labels.TopSeller') }}</option>
                                           <option value="special">{{ trans('labels.Deals') }}</option>

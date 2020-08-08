@@ -33,6 +33,28 @@ class Setting extends Model
         return $units;
     }
 
+    public function trends() {
+            $trends = DB::table('trend_images')
+            ->leftJoin('languages','languages.languages_id','=','trend_images.language_id')
+            ->leftJoin('image_categories','trend_images.trend_image','=','image_categories.image_id')
+            ->select('trend_images.*','image_categories.path','languages.name as language_name')
+            ->where('trend_images.status','1')
+            ->orderBy('trend_images.id','ASC')
+			->groupBy('trend_images.id')
+            ->paginate(20);
+        return $trends;
+    }
+
+    public function editTrends($request) {
+		$banners = DB::table('trend_images')
+		             ->leftJoin('image_categories','trend_images.trend_image','=','image_categories.image_id')
+								 ->select('trend_images.*','image_categories.path')
+		             ->where('trend_images.id', $request->id)
+								 ->groupBy('trend_images.id')
+								 ->get();
+	    return $banners;
+    }
+
     public function getunits($language_id){
 
         $units = DB::table('units')

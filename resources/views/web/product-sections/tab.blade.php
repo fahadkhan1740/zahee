@@ -4,14 +4,14 @@
       <h6>@lang('website.Trends')</h6>
     </div>
     <div class="titlee-right">
-        <a href="#" class="see-all-btn">@lang('website.See All')</a>
+        <a href="{{ URL::to('/shop?load_products=1&type=trends&limit=15')}}" class="see-all-btn">@lang('website.See All')</a>
     </div>
   </div>
    <div class="banner  banner-ads-full  row">
         <div  class="col-md-12">
             <figure>
-                <a href="#">
-                 <img src="https://via.placeholder.com/1500X400" alt="placeholder" />
+                <a href="{{ URL::to('/shop?load_products=1&type=trends&limit=15')}}">
+                 <img src="{{asset('public').'/'.$result['commonContent']['trend_image'][0]->path}}" alt="placeholder" />
                 </a>
             </figure>
         </div>
@@ -43,7 +43,7 @@
             @if($homeBanner->status && $homeBanner->languages_id === Session::get('language_id'))
                 <div  class="col-12 col-md-4">
                        <figure style="background-image:url('<?php echo 'public/'.$homeBanner->path ?>')">
-                       <a href="{{URL::to('shop?category='.$homeBanner->banners_url)}}">
+                       <a href="{{URL::to($homeBanner->banners_url)}}">
                        </a>
                     </figure>
                 </div>
@@ -124,7 +124,7 @@
                 <div class="items-bottom-button">
                 @if(!in_array($products->products_id,$result['cartArray']))
                     @if($products->defaultStock==0)
-                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                        <!-- <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a> -->
                         <a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</a>
                     @else
                         <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
@@ -227,6 +227,7 @@
         <div class="product-slider">
                 @foreach($result['featured']['product_data'] as $key=>$products)
                     <?php
+                    
                     $default_currency = DB::table('currencies')->where('is_default',1)->first();
                     if($default_currency->id == Session::get('currency_id')){
                         if(!empty($products->discount_price)){
@@ -279,7 +280,7 @@
                                 <div class="items-bottom-button">
                                 @if(!in_array($products->products_id,$result['cartArray']))
                                     @if($products->defaultStock==0)
-                                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>
+                                        <!-- <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a> -->
                                         <a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</a>
                                     @else
                                         <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="link-btn btn btn-block btn-secondary">@lang('website.Shop Now!')</a>

@@ -105,14 +105,17 @@
 												 }
 													?>
 													<h5><a href="{{url('/shop')}}">{{$products->products_name}}</a></h5>
-													<h6>Total Price:
-													@if(!empty($products->discount_price))
-													<span class="old-price">{{Session::get('symbol_left')}} {{($orignal_price+0)}} {{Session::get('symbol_right')}}</span> &nbsp;
-                                                            <span class="new-price" >{{Session::get('symbol_left')}} {{($discount_price+0)}} {{Session::get('symbol_right')}}</span>				
-													@else
-													<span class="new-price" >{{Session::get('symbol_left')}} {{($orignal_price+0)}} {{Session::get('symbol_right')}}</span>
-													@endif
-													</h6>
+													<p>
+														@if(empty($products->discount_price) && empty($products->flash_price))
+															<span class="price "> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+														@elseif(empty($products->flash_price) && !empty($products->discount_price) )
+															<span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$products->discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+															<span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+														@else
+															<span class="price new-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$products->flash_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+															<span class="price old-price">@if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
+														@endif
+													</p>
 													<div class="buttons">
                                                         <input type="hidden" id="number"  value="1" />
 																	@if(!in_array($products->products_id,$result['cartArray']))
