@@ -94,29 +94,40 @@ class OrdersController extends Controller
 
 			$result['commonContent'] = $this->index->commonContent();
 
-			$address = array();
-
+            $address = array();
 
 			if(empty(session('step'))){
 				session(['step' => '0']);
-			}
+            }
 
-			if(!empty(auth()->guard('customer')->user()->customers_default_address_id)){
+            $address = $this->shipping->getDefaulthippingAddress();
 
-				$address_id = auth()->guard('customer')->user()->customers_default_address_id;
-				$address = $this->shipping->getShippingAddress($address_id);
-				if(!empty($address)){
-					$address = $address[0];
+            if(!is_null($address)) {
+                $address = $address;
+            } else {
+                $address = $this->shipping->getShippingAddress('');
+                if(!empty($address)){
+                    $address = $address[0];
+                    $address->delivery_phone=auth()->guard('customer')->user()->customers_telephone;
+                }else{
+                    $address = '';
+                }
+            }
 
-					$address->delivery_phone=auth()->guard('customer')->user()->customers_telephone;
-				}else{
-					$address = '';
-				}
-			}
+			// if(!empty(auth()->guard('customer')->user()->customers_default_address_id)) {
+			// 	$address_id = auth()->guard('customer')->user()->customers_default_address_id;
+			// 	$address = $this->shipping->getShippingAddress($address_id);
+			// 	if(!empty($address)){
+			// 		$address = $address[0];
+			// 		$address->delivery_phone=auth()->guard('customer')->user()->customers_telephone;
+			// 	}else{
+			// 		$address = '';
+			// 	}
+			// }
 
 			if(empty(session('shipping_address'))){
 				session(['shipping_address' => $address]);
-			}
+            }
 
 			//shipping counties
 			if(!empty(session('shipping_address')->countries_id)){
@@ -126,18 +137,6 @@ class OrdersController extends Controller
 			}
 
 			$result['countries'] = $this->shipping->countries();
-			// $result['zones'] = $this->shipping->zones($countries_id);
-
-
-			// //get tax
-			// if(!empty(session('shipping_address')->zone_id)){
-			// 	$tax_zone_id = session('shipping_address')->zone_id;
-			// 	$tax = $this->calculateTax($tax_zone_id);
-			// 	session(['tax_rate' => $tax]);
-			// }else{
-			// 	session(['tax_rate' => '0']);
-			// }
-
 
 			//price
 			$price=0;
@@ -149,15 +148,13 @@ class OrdersController extends Controller
 				session(['products_price' => $price]);
 			}
 
-			
-
 			try{
-			//shipping methods
-				$result['shipping_methods'] = $this->shipping_methods();
+			    //shipping methods
+                $result['shipping_methods'] = $this->shipping_methods();
 
 				// Get Payment methods from Myfootarah
 
-				$token = "7Fs7eBv21F5xAocdPvvJ-sCqEyNHq4cygJrQUFvFiWEexBUPs4AkeLQxH4pzsUrY3Rays7GVA6SojFCz2DMLXSJVqk8NG-plK-cZJetwWjgwLPub_9tQQohWLgJ0q2invJ5C5Imt2ket_-JAlBYLLcnqp_WmOfZkBEWuURsBVirpNQecvpedgeCx4VaFae4qWDI_uKRV1829KCBEH84u6LYUxh8W_BYqkzXJYt99OlHTXHegd91PLT-tawBwuIly46nwbAs5Nt7HFOozxkyPp8BW9URlQW1fE4R_40BXzEuVkzK3WAOdpR92IkV94K_rDZCPltGSvWXtqJbnCpUB6iUIn1V-Ki15FAwh_nsfSmt_NQZ3rQuvyQ9B3yLCQ1ZO_MGSYDYVO26dyXbElspKxQwuNRot9hi3FIbXylV3iN40-nCPH4YQzKjo5p_fuaKhvRh7H8oFjRXtPtLQQUIDxk-jMbOp7gXIsdz02DrCfQIihT4evZuWA6YShl6g8fnAqCy8qRBf_eLDnA9w-nBh4Bq53b1kdhnExz0CMyUjQ43UO3uhMkBomJTXbmfAAHP8dZZao6W8a34OktNQmPTbOHXrtxf6DS-oKOu3l79uX_ihbL8ELT40VjIW3MJeZ_-auCPOjpE3Ax4dzUkSDLCljitmzMagH2X8jN8-AYLl46KcfkBV";
+				$token = "cxu2LdP0p0j5BGna0velN9DmzKJTrx3Ftc0ptV8FmvOgoDqvXivkxZ_oqbi_XM9k7jgl3SUriQyRE2uaLWdRumxDLKTn1iNglbQLrZyOkmkD6cjtpAsk1_ctrea_MeOQCMavsQEJ4EZHnP4HoRDOTVRGvYQueYZZvVjsaOLOubLkdovx6STu9imI1zf5OvuC9rB8p0PNIR90rQ0-ILLYbaDZBoQANGND10HdF7zM4qnYFF1wfZ_HgQipC5A7jdrzOoIoFBTCyMz4ZuPPPyXtb30IfNp47LucQKUfF1ySU7Wy_df0O73LVnyV8mpkzzonCJHSYPaum9HzbvY5pvCZxPYw39WGo8pOMPUgEugtaqepILwtGKbIJR3_T5Iimm_oyOoOJFOtTukb_-jGMTLMZWB3vpRI3C08itm7ealISVZb7M3OMPPXgcss9_gFvwYND0Q3zJRPmDASg5NxRlEDHWRnlwNKqcd6nW4JJddffaX8p-ezWB8qAlimoKTTBJCe5CnjT4vNjnWlJWscvk38VNIIslv4gYpC09OLWn4rDNeoUaGXi5kONdEQ0vQcRjENOPAavP7HXtW1-Vz83jMlU3lDOoZsdEKZReNYpvdFrGJ5c3aJB18eLiPX6mI4zxjHCZH25ixDCHzo-nmgs_VTrOL7Zz6K7w6fuu_eBK9P0BDr2fpS";
 				$basURL = "https://apitest.myfatoorah.com";
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
@@ -172,7 +169,8 @@ class OrdersController extends Controller
 				$err = curl_error($curl);
 				curl_close($curl);
 
-				$response = json_decode($response);
+                $response = json_decode($response);
+
 
 				if($response->IsSuccess) {
 					$result['payment_methods'] = $response->Data->PaymentMethods;
@@ -234,7 +232,7 @@ class OrdersController extends Controller
 			session(['billing_address' => $billing_address]);
 		}
 
-		$address = (object) $shipping_data;
+        $address = (object) $shipping_data;
 		session(['shipping_address' => $address]);
 
 		return redirect()->back();
@@ -381,15 +379,15 @@ class OrdersController extends Controller
 			$toAddress	  = 'gh';
 			$countries = $this->order->getCountries($countries_id);
 			$toCountry = $countries[0]->countries_iso_code_2;
-	
-		
+
+
 		}else{
 			$countries_id = '';
 			$toPostalCode = '';
 			$toCity		  = '';
 			$toAddress	  = '';
 			$toCountry = '';
-		
+
 		}
 
 		//product weight

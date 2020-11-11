@@ -4,7 +4,7 @@
               <div class="product">
                 <article>
 
-                	<div class="thumb"><img class="img-fluid" src="{{asset('public').'/'.$products->products_image}}" alt="{{$products->products_name}}"></div>
+                	<div class="thumb"><img class="img-fluid" src="{{asset($products->products_image)}}" alt="{{$products->products_name}}"></div>
                   <?php
 						$current_date = date("Y-m-d", strtotime("now"));
 						$string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));
@@ -72,26 +72,20 @@
                             @endif
                         </div>
 
-                        <div class="buttons">
-
-                        	@if($products->products_type==0)
-                                @if(!in_array($products->products_id,$result['cartArray']))
-                                    @if($products->defaultStock==0)
-                                        <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
-                                    @elseif($products->products_min_order>1)
-                                        <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                    @else
-                                        <button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>
-                                    @endif
-                                @else
-                                    <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
-                                @endif
-                            @elseif($products->products_type==1)
-                                <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                            @elseif($products->products_type==2)
-                                <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
-                            @endif
-                        </div>
+                        <div class="items-bottom-button">
+													<a class="link-btn btn btn-block btn-secondary" href="{{ URL::to("/UnlikeMyProduct")}}/{{$products->products_id}}">@lang('website.Remove')</a>
+													@if(!in_array($products->products_id,$result['cartArray']))
+														@if($products->defaultStock==0)
+															<a href="javascript:void(0);" class="link-btn btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</a>
+															<a href="{{ URL::to('/product-detail/'.$products->products_slug) }}" class="link-btn btn btn-block btn-secondary">@lang('website.View')</a>
+														@else
+															<a href="{{ URL::to('/product-detail/'.$products->products_slug) }}" class="link-btn btn btn-block btn-secondary">@lang('website.View')</a>
+															<a href="javascript:void(0);" class="link-btn btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</a>
+														@endif
+													@else
+														<a class="btn btn-block btn-secondary active" href="{{ URL::to('/viewcart')}}">@lang('website.Go to Cart')</a>
+													@endif
+												</div>
                     </div>
                 </article>
               </div>

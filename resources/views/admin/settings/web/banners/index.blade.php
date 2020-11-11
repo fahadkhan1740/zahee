@@ -61,7 +61,7 @@
                             <td>{{ $banners->banners_id }}</td>
                             <td>{{ $banners->language_name }}</td>
                       	  	<td>{{ $banners->banners_title }}</td>
-                            <td><img src="{{asset('public').'/'.$banners->path}}" alt="" width=" 100px"></td>
+                            <td><img src="{{asset($banners->path)}}" alt="" width=" 100px"></td>
                             <td><strong>{{ trans('labels.AddedDate') }}: </strong> {{ date('d M, Y', strtotime($banners->date_added)) }}<br>
                             </td>
 

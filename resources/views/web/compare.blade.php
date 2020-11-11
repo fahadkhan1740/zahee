@@ -12,7 +12,7 @@
               <thead>
                 <td align="center">
                   <div class="img-div">
-                      <img class="img-fluid" src="{{$products['product_data'][0]->image_path}}">
+                      <img class="img-fluid" src="{{$products['product_data'][0]->image_path)}}">
                   </div>
 
                 </td>

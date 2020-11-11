@@ -20,7 +20,6 @@ class Pages extends Model
      ->leftJoin('pages_description', 'pages_description.page_id', '=', 'pages.page_id')
      ->where([
            ['pages_description.language_id','=',$language_id],
-           ['pages.type','=','1']
          ])
      ->orderBy('pages.page_id', 'ASC')
      ->paginate(20);
@@ -59,7 +58,7 @@ public static function addnewpage($request)
 
   		$page_id = DB::table('pages')->insertGetId([
   					'slug'		 			 =>   $slug,
-  					'type'		 			 =>   1,
+  					'type'		 			 =>   2,
   					'status'		 		 =>   $request->status,
   					]);
 
@@ -136,7 +135,7 @@ public static function updatepage($request)
 
   		DB::table('pages')->where('page_id','=',$page_id)->update([
   					'slug'		 			 =>   $slug,
-  					'type'		 			 =>   1,
+  					'type'		 			 =>   2,
   					'status'		 		 =>   $request->status,
   					]);
 
@@ -187,7 +186,6 @@ public static function webpages($request)
     ->leftJoin('pages_description', 'pages_description.page_id', '=', 'pages.page_id')
     ->where([
           ['pages_description.language_id','=',$language_id],
-          ['pages.type','=','2']
         ])
     ->orderBy('pages.page_id', 'ASC')
     ->paginate(20);

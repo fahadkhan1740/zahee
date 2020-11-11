@@ -92,23 +92,35 @@ class Customer extends Model
     $customers_id            					=   auth()->guard('customer')->user()->id;
     $new_password								=   $request->new_password;
     $old_password								=   $request->old_password;
-    //$customers_email_address    		   		=   $request->customers_email_address;
+    $confirm_password								=   $request->confirm_password;
     $updated_at 								=   date('y-m-d h:i:s');
     $customers_info_date_account_last_modified 	=   date('y-m-d h:i:s');
+    $user = DB::table('users')->where('id', $customers_id)->first();
 
+    if(Hash::check($old_password, $user->password)) {
+      if($confirm_password === $new_password) {
+        $customer_data = array(
+          'password'			=>  bcrypt($new_password),
+          'updated_at'		=>  date('y-m-d h:i:s'),
+        );
+    
+        // dd($request);
+    
+        $userData = DB::table('users')->where('id', $customers_id)->update($customer_data);
+       
+    
+        DB::table('customers_info')->where('customers_info_id', $customers_id)->update(['customers_info_date_account_last_modified'   =>   $customers_info_date_account_last_modified]);
+    
+        $message = Lang::get("website.Password has been updated successfully");
+          
+      } else {
+        $message = Lang::get("website.Confirm Password and New Password does not match");
+      }
 
-    $customer_data = array(
-      'password'			=>  bcrypt($new_password),
-      'updated_at'		=>  date('y-m-d h:i:s'),
-    );
-
-    $userData = DB::table('users')->where('id', $customers_id)->update($customer_data);
-    $user = DB::table('users')->where('id', $customers_id)->get();
-
-    DB::table('customers_info')->where('customers_info_id', $customers_id)->update(['customers_info_date_account_last_modified'   =>   $customers_info_date_account_last_modified]);
-
-    $message = Lang::get("website.Password has been updated successfully");
-      return  $message;
+    } else {
+      $message = Lang::get("website.Password has been updated successfully");
+    }
+    return  $message;
 
   }
 
@@ -470,9 +482,10 @@ class Customer extends Model
 
       			DB::table('products')->where('products_id','=',$liked_products_id)->decrement('products_liked');
 
-  	}
+  }
 
-  public function wishlist($request){
+ 
+    public function wishlist($request){
         $index = new Index();
         $productss = new Products();
         $result = array();

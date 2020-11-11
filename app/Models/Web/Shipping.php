@@ -28,7 +28,8 @@ class Shipping extends Model
 		$entry_gender							=   $request->entry_gender;
 		$delivery_phone							=   $request->delivery_phone;
 		$address_type            			=   $request->address_type;
-		$customers_default_address_id			=   $request->customers_default_address_id;
+        $customers_default_address_id			=   $request->customers_default_address_id;
+        $is_default                             =  $request->is_default;
 
 		if(!empty($customers_id)){
 			$address_book_data = array(
@@ -50,7 +51,7 @@ class Shipping extends Model
 
 			//default address id
 				DB::table('user_to_address')
-				->insert(['user_id' => auth()->guard('customer')->user()->id,'address_book_id' => $address_book_id,'is_default' => 0]);
+				->insert(['user_id' => auth()->guard('customer')->user()->id,'address_book_id' => $address_book_id,'is_default' => $is_default]);
 		}
 
 	}
@@ -105,13 +106,48 @@ class Shipping extends Model
 
 		}
 
-  public function updateAddressBook($address_book_data,$address_book_id){
-		DB::table('address_book')->where('address_book_id', $address_book_id)->update($address_book_data);
+
+        public function updateAddressBook($address_book_data,$address_book_id, $is_default){
+        DB::table('address_book')->where('address_book_id', $address_book_id)->update($address_book_data);
+
+        //default address id
+		DB::table('user_to_address')->where('address_book_id', $address_book_id)->update(['is_default' => $is_default]);
 	}
 
 	public function updateCustomer($customers_id,$address_book_id){
-		DB::table('customers')->where('customers_id', $customers_id)->update(['customers_default_address_id' => $address_book_id]);
-	}
+		DB::table('customers')->where('customers_id', $customers_id)->update(['default_address_id' => $address_book_id]);
+    }
+
+    public function getDefaulthippingAddress() {
+        $addresses = DB::table('user_to_address')
+					->leftjoin('address_book','user_to_address.address_book_id','=','address_book.address_book_id')
+					->leftJoin('countries', 'countries.countries_id', '=' ,'address_book.entry_country_id')
+					// ->leftJoin('zones', 'zones.zone_id', '=' ,'address_book.entry_zone_id')
+					->select(
+						'user_to_address.is_default as default_address',
+						'address_book.address_book_id as address_id',
+						'address_book.entry_gender as gender',
+						'address_book.entry_firstname as firstname',
+						'address_book.entry_lastname as lastname',
+						'address_book.entry_street_address as street',
+						'address_book.entry_flat_address as flat',
+						'address_book.contact_number',
+						'address_book.address_type',
+						'address_book.entry_city as city',
+						'countries.countries_id as countries_id',
+						'countries.countries_name as country_name'
+							)
+                    ->where('user_to_address.user_id', auth()->guard('customer')->user()->id)
+                    ->where('user_to_address.is_default', 1);
+
+			if(!empty($address_id)){
+				$addresses->where('address_book.address_book_id', '=', $address_id);
+			}
+						$result = $addresses->first();
+
+			return $result;
+
+    }
 
 	public function deleteAddress($id){
 

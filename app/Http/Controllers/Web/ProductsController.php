@@ -150,10 +150,18 @@ class ProductsController extends Controller
 			$result['filter_attribute']['option_values'] = $option_values;
 		}
 
-		$data = array('page_number'=>$page_number, 'type'=>$type, 'limit'=>$limit,
-		 'categories_id'=>$categories_id, 'search'=>$search,
-		 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );
-		$products = $this->products->products($data);
+		$data = array(
+            'page_number'=>$page_number,
+            'type'=>$type,
+            'limit'=>$limit,
+            'categories_id'=>$categories_id,
+            'search'=>$search,
+            'page' => '',
+            'filters'=>$filters,
+            'limit'=>$limit,
+            'min_price'=>$min_price,
+            'max_price'=>$max_price );
+        $products = $this->products->products($data);
 		$result['products'] = $products;
 
 		$data = array('limit'=>$limit, 'categories_id'=>$categories_id );
@@ -365,8 +373,6 @@ class ProductsController extends Controller
 			$min_price = '';
 		}
 
-
-
 		//max_price
 		if(!empty($request->max_price)){
 			$max_price = $request->max_price;
@@ -383,7 +389,9 @@ class ProductsController extends Controller
 		$products = $this->products->getProductsBySlug($request->slug);
 
 		//category
-		$category = $this->products->getCategoryByParent($products[0]->products_id);
+        $category = $this->products->getCategoryByParent($products[0]->products_id);
+
+        $reviews = $this->products->productReviews($products[0]->products_id);
 
 
 		if(!empty($category)){
@@ -421,8 +429,6 @@ class ProductsController extends Controller
 		$detail = $this->products->products($data);
 		$result['detail'] = $detail;
 
-
-
 		$i = 0;
 		foreach($result['detail']['product_data'][0]->categories as $postCategory){
 			if($i==0){
@@ -455,9 +461,10 @@ class ProductsController extends Controller
 	} else {
 		session()->push('recently_viewed', $detail['product_data'][0]);
 	}
-
 		//liked products
-		$result['liked_products'] = $this->products->likedProducts();
+        $result['liked_products'] = $this->products->likedProducts();
+        $result['product_review'] = $reviews;
+        // dd($result);
 		return view("web.detail", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
 	}
 
@@ -477,15 +484,12 @@ class ProductsController extends Controller
 		print_r(json_encode($result));
 	}
 
-
     function find_key_value($array, $val)
     {
         foreach ($array as $item)
         {
-//            dd($item->products_id,$val);
             if (isset($item->products_id) && $item->products_id === $val) return true;
         }
-
         return false;
     }
 

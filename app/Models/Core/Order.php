@@ -14,6 +14,7 @@ class Order extends Model
         $language_id = '1';
         $orders = DB::table('orders')
             ->LeftJoin('currencies', 'currencies.code', '=', 'orders.currency')
+            ->orderby('orders.date_purchased', 'DESC')
             ->get();
 
         $index = 0;

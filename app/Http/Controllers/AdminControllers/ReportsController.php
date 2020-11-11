@@ -126,7 +126,9 @@ class ReportsController extends Controller
 
 		$products = DB::table('products')
 			->leftJoin('products_description','products_description.products_id','=','products.products_id')
+			->leftJoin('image_categories','image_categories.image_id','=','products.products_image')
 			->where('products_description.language_id','=', $language_id)
+			->where('image_categories.image_type', '=', 'THUMBNAIL')
 			->orderBy('products.products_id', 'DESC')
 			->get();
 
@@ -137,14 +139,12 @@ class ReportsController extends Controller
 		$outOfStock = 0;
 		$products_ids = array();
 		$data = array();
+		// dd($products);
 		foreach($products as $products_data){
-		
+
+
 			$currentStocks = DB::table('inventory')->where('products_id',$products_data->products_id)->get();
 
-			// product images 
-			$prodImages  = DB::table('image_categories')->where('image_categories.image_id','=',$products_data->products_image)->where('image_categories.image_type', '=', 'THUMBNAIL')->first();
-			$products_data->products_image = $prodImages->path;
-		
 			if(count($currentStocks)>0){
 				if($products_data->products_type!=1){
 					$c_stock_in = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','in')->sum('stock');
@@ -175,72 +175,89 @@ class ReportsController extends Controller
 
 	//lowinstock
 	public function lowinstock(Request $request){
-		$title = array('pageTitle' => Lang::get("labels.Low Stock Products"));
-
-		$language_id = 1;
+        $title = array('pageTitle' => Lang::get("labels.Low Stock Products"));
 
 		$products = DB::table('products')
-			->leftJoin('products_description','products_description.products_id','=','products.products_id')
+            ->leftJoin('products_description',function ($join) {
+                $join->on('products_description.products_id','=','products.products_id')
+                    ->where(function ($query) {
+                        $query->where('products_description.language_id', '=', 1);
+                    });
+                })
 			->leftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
 			->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
-			->leftJoin('categories_description', 'categories.categories_id', '=', 'categories_description.categories_id')
-			//->leftJoin('inventory','inventory.products_id','=','products.products_id')
-			->whereColumn('products.products_quantity', '<=', 'products.low_limit')
-			->where('products_description.language_id', '=', $language_id)
+            ->leftJoin('categories_description',function ($join) {
+                $join->on('categories.categories_id', '=', 'categories_description.categories_id')
+                    ->where(function ($query) {
+                        $query->where('categories_description.language_id', '=', 1);
+                    });
+                })
+            ->LeftJoin('image_categories', function ($join) {
+                $join->on('image_categories.image_id', '=', 'products.products_image')
+                    ->where(function ($query) {
+                        $query->where('image_categories.image_type', '=', 'THUMBNAIL');
+                    });
+			})
 			->where('products.low_limit', '>', 0)
-			->orderBy('products.products_id', 'DESC')
-			->get(['products.*', 'products_description.*','categories_description.categories_name']);
+            ->orderBy('products.products_id', 'DESC')
+            ->get(['products.*', 'products_description.*','categories_description.categories_name','image_categories.*']);
 
 		$result2 = array();
 		$products_array  = array();
 		$index = 0;
 		$lowLimit = 0;
-		$outOfStock = 0;
+        $outOfStock = 0;
 		foreach($products as $product){
 
-				// product images 
-				$prodImages  = DB::table('image_categories')->where('image_categories.image_id','=',$product->products_image)->where('image_categories.image_type', '=', 'THUMBNAIL')->first();
-				$product->products_image = $prodImages->path;
+            $inventories = DB::table('inventory')->where('products_id',$product->products_id)->where('stock_type', 'in')->get();
 
-			if($product->products_type==1){
+            $stockIn = 0;
+            if(count($inventories) > 0) {
+                foreach($inventories as $inventory){
+                    $stockIn += $inventory->stock;
+                }
 
+            } else {
+                $stockIn = 0;
+            }
 
-			}elseif($product->products_type==0 or $product->products_type==2){
-				$inventories = DB::table('inventory')->where('products_id',$product->products_id)->get();
-				$stockIn = 0;
-				foreach($inventories as $inventory){
-					$stockIn += $inventory->stock;
-				}
+            $orders_products = DB::table('orders_products')
+                                ->select(DB::raw('count(orders_products.products_quantity) as stockout'))
+                                ->where('products_id',$product->products_id)->get();
 
-				$orders_products = DB::table('orders_products')
-									->select(DB::raw('count(orders_products.products_quantity) as stockout'))
-									->where('products_id',$product->products_id)->get();
+            $stockOut = 0;
+            $inventoryData = DB::table('inventory')->where('products_id',$product->products_id)->where('stock_type', 'out')->get();
+            if(count($inventoryData) > 0) {
+                foreach($inventoryData as $inventory){
+                    $stockOut += $inventory->stock;
+                }
 
-				$stocks = $stockIn-$orders_products[0]->stockout;
+            } else {
+                $stockOut = 0;
+            }
 
-				$manageLevel = DB::table('manage_min_max')->where('products_id',$product->products_id)->get();
+            $stocks = $stockIn-($orders_products[0]->stockout+$stockOut);
 
-				$min_level = 0;
-				$max_level = 0;
+            // $manageLevel = DB::table('manage_min_max')->where('products_id',$product->products_id)->get();
 
-				if(count($manageLevel)>0){
-					$min_level = $manageLevel[0]->min_level;
-					$max_level = $manageLevel[0]->max_level;
-				}
+            // $min_level = 0;
+            // $max_level = 0;
 
-				if($stocks <= $min_level){
-					array_push($products_array,$product);
-				}
+            // if(count($manageLevel)>0){
+            //     $min_level = $manageLevel[0]->min_level;
+            //     $max_level = $manageLevel[0]->max_level;
+            // }
 
-			}
-		}
-
-		$lowQunatity = DB::table('products')
-			->LeftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
-			->whereColumn('products.products_quantity', '<=', 'products.low_limit')
-			->where('products_description.language_id', '=', 1)
-			->where('products.low_limit', '>', 0)
-			->paginate(10);
+            if($stocks <= $product->low_limit && $stocks > 0){
+                array_push($products_array,array(
+                    'products_image' => $product->path,
+                    'products_name' => $product->products_name,
+                    'products_quantity' => $stocks,
+                    'products_id' => $product->products_id,
+                    'categories_name' => $product->categories_name
+                ));
+            }
+        }
 
 		$result['lowQunatity'] = $products_array;
 
@@ -288,7 +305,6 @@ class ReportsController extends Controller
 		$dateTo 	= date('Y-m-t',  $date);
 	}
 
-	//public function productSaleReport($reportBase){
 	public function productSaleReport(Request $request){
 
 		$saleData = array();
@@ -436,303 +452,290 @@ class ReportsController extends Controller
 			}
 		}else{
 			$reportBase = str_replace('dateRange','', $reportBase);
-		$reportBase = str_replace('=','', $reportBase);
-		$reportBase = str_replace('-','/', $reportBase);
+            $reportBase = str_replace('=','', $reportBase);
+            $reportBase = str_replace('-','/', $reportBase);
 
-		$dateFrom = substr($reportBase,0,10);
-		$dateTo = substr($reportBase,11,21);
+            $dateFrom = substr($reportBase,0,10);
+            $dateTo = substr($reportBase,11,21);
 
-		$diff = abs(strtotime($dateFrom) - strtotime($dateTo));
-		$years = floor($diff / (365*60*60*24));
-		$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-		$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-		$totalDays = floor($diff / (60 * 60 * 24));
-	//	print ('day: '.$days.' months: '.$months.' years: '.$years.'<br>');
-		$totalMonths = floor($diff / 60 / 60 / 24 / 30);
-
-		if($diff == 0 && $days == 0 && $years == 0 && $months == 0){
-			//print 'asdsad';
+            $diff = abs(strtotime($dateFrom) - strtotime($dateTo));
+            $years = floor($diff / (365*60*60*24));
+            $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+            $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+            $totalDays = floor($diff / (60 * 60 * 24));
 
-			$dateLimitFrom 	= date('G',  strtotime($dateFrom));
-			$dateLimitTo 	= date('d',  strtotime($dateTo));
-			$selecteddate 	= date('m',  strtotime($dateFrom));
-			$selecteddate	= date('Y',  strtotime($dateFrom));
-
-			//for current month
-			for($j = 1; $j <= 24; $j++){
-
-				$dateFrom   = date('Y-m-d'.' '.$j.':00:00', strtotime($dateFrom));
-				$dateTo   = date('Y-m-d'.' '.$j.':59:59', strtotime($dateFrom));
-
-				//sold products
-				$orders = DB::table('orders')
-					->whereBetween('date_purchased', [$dateFrom, $dateTo])
-					->get();
-
-				$totalSale = 0;
-				foreach($orders as $orders_data){
-
-					$orders_status = DB::table('orders_status_history')
-						->where('orders_id', '=', $orders_data->orders_id)
-						->orderby('date_added', 'DESC')->limit(1)->get();
-
-					if($orders_status[0]->orders_status_id != 3){
-						$totalSale++;
-					}
-				}
-
-				//purchase products
-				$products = DB::table('products')
-					->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
-					->whereBetween('products_date_added', [$dateFrom, $dateTo])
-					->get();
-
-				$saleData[$j-1]['date'] = date('h a',strtotime($dateFrom));
-				$saleData[$j-1]['totalSale'] = $totalSale;
-
-				if(empty($products[0]->products_quantity)){
-					$producQuantity = 0;
-				}else{
-					$producQuantity = $products[0]->products_quantity;
-				}
-
-				$saleData[$j-1]['productQuantity'] = $producQuantity;
-				//print $dateLimitFrom.'<br>';
-
-			}
-
-		}else if($days > 1 && $years == 0 && $months == 0){
-
-			//print 'daily';
-
-			$dateLimitFrom 	= date('d',  strtotime($dateFrom));
-			$dateLimitTo 	= date('d',  strtotime($dateTo));
-			$selectedMonth 	= date('m',  strtotime($dateFrom));
-			$selectedYear	= date('Y',  strtotime($dateFrom));
-			//print $selectedYear;
-
-			//for current month
-			for($j = 1; $j <= $totalDays; $j++){
-
-				//print 'dateFrom: '.date('Y-m-'.$j.' 00:00:00', time()).'dateTo: '.date('Y-m-'.$j.' 23:59:59', time());
-				//print '<br>';
-
-				$dateFrom   = date($selectedYear.'-'.$selectedMonth.'-'.$dateLimitFrom, strtotime($dateFrom));
-				//$dateTo 	= date('Y-m-'.$j.' 23:59:59', time());
-				//print $dateFrom .'<br>';
-				$lastday   =  date('t',strtotime($dateFrom));
-				//print 'lastday: '.$lastday .' <br>';
-
-
-				//sold products
-				$orders = DB::table('orders')
-					->whereBetween('date_purchased', [$dateFrom, $dateTo])
-					->get();
-
-				$totalSale = 0;
-				foreach($orders as $orders_data){
-
-					$orders_status = DB::table('orders_status_history')
-						->where('orders_id', '=', $orders_data->orders_id)
-						->orderby('date_added', 'DESC')->limit(1)->get();
-
-					if($orders_status[0]->orders_status_id != 3){
-						$totalSale++;
-					}
-				}
-
-				//purchase products
-				$products = DB::table('products')
-					->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
-					->whereBetween('products_date_added', [$dateFrom, $dateTo])
-					->get();
-
-				$saleData[$j-1]['date'] = date('d M',strtotime($dateFrom));
-				$saleData[$j-1]['totalSale'] = $totalSale;
-
-				if(empty($products[0]->products_quantity)){
-					$producQuantity = 0;
-				}else{
-					$producQuantity = $products[0]->products_quantity;
-				}
-
-				$saleData[$j-1]['productQuantity'] = $producQuantity;
-				//print $dateLimitFrom.'<br>';
-				if($dateLimitFrom == $lastday ){
-					$dateLimitFrom = '1';
-					$selectedMonth++;
-
-				}else{
-					$dateLimitFrom++;
-				}
-
-				if($selectedMonth > 12){
-					$selectedMonth = '1';
-					$selectedYear++;
-				}
-			}
-		}else if($months >= 1 && $years == 0){
-
-			//for check if date range enter into another month
-			if($days>0){
-				$months+=1;
-			}
-
-			$dateLimitFrom 	= date('d',  strtotime($dateFrom));
-			$dateLimitTo 	= date('d',  strtotime($dateTo));
-			$selectedMonth 	= date('m',  strtotime($dateFrom));
-			$selectedYear	= date('Y',  strtotime($dateFrom));
-			//print $selectedMonth;
-
-			$i = 0;
-			//for current month
-			for($j = 1; $j <= $months; $j++){
-				if($j==$months){
-					$lastday = $dateLimitTo;
-				}else{
-					$lastday  =  date('t',strtotime($dateLimitFrom.'-'.$selectedMonth.'-'.$selectedYear));
-				}
-
-				$dateFrom   = date($selectedYear.'-'.$selectedMonth.'-'.$dateLimitFrom, strtotime($dateFrom));
-				$dateTo   = date($selectedYear.'-'.$selectedMonth.'-'.$lastday, strtotime($dateTo));
-				//print $dateFrom.' '.$dateTo.'<br>';
-
-
-				//sold products
-				$orders = DB::table('orders')
-					->whereBetween('date_purchased', [$dateFrom, $dateTo])
-					->get();
-
-				$totalSale = 0;
-				foreach($orders as $orders_data){
-
-					$orders_status = DB::table('orders_status_history')
-						->where('orders_id', '=', $orders_data->orders_id)
-						->orderby('date_added', 'DESC')->limit(1)->get();
-
-					if($orders_status[0]->orders_status_id != 3){
-						$totalSale++;
-					}
-				}
-
-				//purchase products
-				$products = DB::table('products')
-					->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
-					->whereBetween('products_date_added', [$dateFrom, $dateTo])
-					->get();
-
-				$saleData[$i]['date'] = date('M Y',strtotime($dateFrom));
-				$saleData[$i]['totalSale'] = $totalSale;
-
-				if(empty($products[0]->products_quantity)){
-					$producQuantity = 0;
-				}else{
-					$producQuantity = $products[0]->products_quantity;
-				}
-
-				$saleData[$i]['productQuantity'] = $producQuantity;
-
-				$selectedMonth++;
-				if($selectedMonth > 12){
-					$selectedMonth = '1';
-					$selectedYear++;
-				}
-				$i++;
-			}
-
-		} else if($years >= 1){
-
-			//print $years.'sadsa';
-			if($months>0){
-				$years+=1;
-			}
-
-			//print $years;
-
-			$dateLimitFrom 	= date('d',  strtotime($dateFrom));
-			$dateLimitTo 	= date('d',  strtotime($dateTo));
-
-			$selectedMonthFrom 	= date('m',  strtotime($dateFrom));
-			$selectedMonthTo 	= date('m',  strtotime($dateTo));
-
-			$selectedYearFrom	= date('Y',  strtotime($dateFrom));
-			$selectedYearTo	= date('Y',  strtotime($dateTo));
-			//print $selectedYearFrom.' '.$selectedYearTo;
-
-			$i = 0;
-			//for current month
-			for($j = $selectedYearFrom; $j <= $selectedYearTo; $j++){
-
-				if($j==$selectedYearTo){
-					$selectedYearTo = $selectedYearTo;
-					$dateLimitTo = $dateLimitTo;
-				}else{
-					$selectedMonthTo = 12;
-					$dateLimitTo = 31;
-				}
-
-				if( $selectedYearFrom == $j ){
-					$selectedMonthFrom = $selectedMonthFrom;
-				}else{
-					$selectedMonthFrom = 1;
-				}
-
-			//	print $j.'-'.$selectedMonthFrom.'-'.$dateLimitFrom.'<br>';
-				//print $j.'-'.$selectedMonthTo.'-'.$dateLimitTo.'<br>';
-				//$lastday  =  date('t',strtotime($dateLimitFrom.'-'.$selectedMonth.'-'.$selectedYear));
-
-
-				$dateFrom   = date($j.'-'.$selectedMonthFrom.'-'.$dateLimitFrom, strtotime($dateFrom));
-				$dateTo   	= date($j.'-'.$selectedMonthTo.'-'.$dateLimitTo, strtotime($dateTo));
-			//	print $dateFrom.' '.$dateTo.'<br>';
-				//print $dateFrom.'<br>';
-
-
-				//sold products
-				$orders = DB::table('orders')
-					->whereBetween('date_purchased', [$dateFrom, $dateTo])
-					->get();
-
-				$totalSale = 0;
-				foreach($orders as $orders_data){
-
-					$orders_status = DB::table('orders_status_history')
-						->where('orders_id', '=', $orders_data->orders_id)
-						->orderby('date_added', 'DESC')->limit(1)->get();
-
-					if($orders_status[0]->orders_status_id != 3){
-						$totalSale++;
-					}
-				}
-
-				//purchase products
-				$products = DB::table('products')
-					->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
-					->whereBetween('products_date_added', [$dateFrom, $dateTo])
-					->get();
-
-				$saleData[$i]['date'] = date('Y',strtotime($dateFrom));
-				$saleData[$i]['totalSale'] = $totalSale;
-
-				if(empty($products[0]->products_quantity)){
-					$producQuantity = 0;
-				}else{
-					$producQuantity = $products[0]->products_quantity;
-				}
-
-				$saleData[$i]['productQuantity'] = $producQuantity;
-				//$selectedYear++;
-				//$selectedMonth++;
-				$i++;
-			}
-
-
-		}
-			//print_r($saleData);
-		}
-
-		 //$reportBase = str_replace('dateRange','', $reportBase);
+            $totalMonths = floor($diff / 60 / 60 / 24 / 30);
 
+            if($diff == 0 && $days == 0 && $years == 0 && $months == 0){
+                //print 'asdsad';
+
+                $dateLimitFrom 	= date('G',  strtotime($dateFrom));
+                $dateLimitTo 	= date('d',  strtotime($dateTo));
+                $selecteddate 	= date('m',  strtotime($dateFrom));
+                $selecteddate	= date('Y',  strtotime($dateFrom));
+
+                //for current month
+                for($j = 1; $j <= 24; $j++){
+
+                    $dateFrom   = date('Y-m-d'.' '.$j.':00:00', strtotime($dateFrom));
+                    $dateTo   = date('Y-m-d'.' '.$j.':59:59', strtotime($dateFrom));
+
+                    //sold products
+                    $orders = DB::table('orders')
+                        ->whereBetween('date_purchased', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $totalSale = 0;
+                    foreach($orders as $orders_data){
+
+                        $orders_status = DB::table('orders_status_history')
+                            ->where('orders_id', '=', $orders_data->orders_id)
+                            ->orderby('date_added', 'DESC')->limit(1)->get();
+
+                        if($orders_status[0]->orders_status_id != 3){
+                            $totalSale++;
+                        }
+                    }
+
+                    //purchase products
+                    $products = DB::table('products')
+                        ->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
+                        ->whereBetween('products_date_added', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $saleData[$j-1]['date'] = date('h a',strtotime($dateFrom));
+                    $saleData[$j-1]['totalSale'] = $totalSale;
+
+                    if(empty($products[0]->products_quantity)){
+                        $producQuantity = 0;
+                    }else{
+                        $producQuantity = $products[0]->products_quantity;
+                    }
+
+                    $saleData[$j-1]['productQuantity'] = $producQuantity;
+                    //print $dateLimitFrom.'<br>';
+
+                }
+
+            }else if($days > 1 && $years == 0 && $months == 0){
+
+                //print 'daily';
+
+                $dateLimitFrom 	= date('d',  strtotime($dateFrom));
+                $dateLimitTo 	= date('d',  strtotime($dateTo));
+                $selectedMonth 	= date('m',  strtotime($dateFrom));
+                $selectedYear	= date('Y',  strtotime($dateFrom));
+                //print $selectedYear;
+
+                //for current month
+                for($j = 1; $j <= $totalDays; $j++){
+
+                    //print 'dateFrom: '.date('Y-m-'.$j.' 00:00:00', time()).'dateTo: '.date('Y-m-'.$j.' 23:59:59', time());
+                    //print '<br>';
+
+                    $dateFrom   = date($selectedYear.'-'.$selectedMonth.'-'.$dateLimitFrom, strtotime($dateFrom));
+                    //$dateTo 	= date('Y-m-'.$j.' 23:59:59', time());
+                    //print $dateFrom .'<br>';
+                    $lastday   =  date('t',strtotime($dateFrom));
+                    //print 'lastday: '.$lastday .' <br>';
+
+
+                    //sold products
+                    $orders = DB::table('orders')
+                        ->whereBetween('date_purchased', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $totalSale = 0;
+                    foreach($orders as $orders_data){
+
+                        $orders_status = DB::table('orders_status_history')
+                            ->where('orders_id', '=', $orders_data->orders_id)
+                            ->orderby('date_added', 'DESC')->limit(1)->get();
+
+                        if($orders_status[0]->orders_status_id != 3){
+                            $totalSale++;
+                        }
+                    }
+
+                    //purchase products
+                    $products = DB::table('products')
+                        ->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
+                        ->whereBetween('products_date_added', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $saleData[$j-1]['date'] = date('d M',strtotime($dateFrom));
+                    $saleData[$j-1]['totalSale'] = $totalSale;
+
+                    if(empty($products[0]->products_quantity)){
+                        $producQuantity = 0;
+                    }else{
+                        $producQuantity = $products[0]->products_quantity;
+                    }
+
+                    $saleData[$j-1]['productQuantity'] = $producQuantity;
+                    //print $dateLimitFrom.'<br>';
+                    if($dateLimitFrom == $lastday ){
+                        $dateLimitFrom = '1';
+                        $selectedMonth++;
+
+                    }else{
+                        $dateLimitFrom++;
+                    }
+
+                    if($selectedMonth > 12){
+                        $selectedMonth = '1';
+                        $selectedYear++;
+                    }
+                }
+            }else if($months >= 1 && $years == 0){
+
+                //for check if date range enter into another month
+                if($days>0){
+                    $months+=1;
+                }
+
+                $dateLimitFrom 	= date('d',  strtotime($dateFrom));
+                $dateLimitTo 	= date('d',  strtotime($dateTo));
+                $selectedMonth 	= date('m',  strtotime($dateFrom));
+                $selectedYear	= date('Y',  strtotime($dateFrom));
+                //print $selectedMonth;
+
+                $i = 0;
+                //for current month
+                for($j = 1; $j <= $months; $j++){
+                    if($j==$months){
+                        $lastday = $dateLimitTo;
+                    }else{
+                        $lastday  =  date('t',strtotime($dateLimitFrom.'-'.$selectedMonth.'-'.$selectedYear));
+                    }
+
+                    $dateFrom   = date($selectedYear.'-'.$selectedMonth.'-'.$dateLimitFrom, strtotime($dateFrom));
+                    $dateTo   = date($selectedYear.'-'.$selectedMonth.'-'.$lastday, strtotime($dateTo));
+                    //print $dateFrom.' '.$dateTo.'<br>';
+
+
+                    //sold products
+                    $orders = DB::table('orders')
+                        ->whereBetween('date_purchased', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $totalSale = 0;
+                    foreach($orders as $orders_data){
+
+                        $orders_status = DB::table('orders_status_history')
+                            ->where('orders_id', '=', $orders_data->orders_id)
+                            ->orderby('date_added', 'DESC')->limit(1)->get();
+
+                        if($orders_status[0]->orders_status_id != 3){
+                            $totalSale++;
+                        }
+                    }
+
+                    //purchase products
+                    $products = DB::table('products')
+                        ->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
+                        ->whereBetween('products_date_added', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $saleData[$i]['date'] = date('M Y',strtotime($dateFrom));
+                    $saleData[$i]['totalSale'] = $totalSale;
+
+                    if(empty($products[0]->products_quantity)){
+                        $producQuantity = 0;
+                    }else{
+                        $producQuantity = $products[0]->products_quantity;
+                    }
+
+                    $saleData[$i]['productQuantity'] = $producQuantity;
+
+                    $selectedMonth++;
+                    if($selectedMonth > 12){
+                        $selectedMonth = '1';
+                        $selectedYear++;
+                    }
+                    $i++;
+                }
+
+            } else if($years >= 1){
+
+                //print $years.'sadsa';
+                if($months>0){
+                    $years+=1;
+                }
+
+                //print $years;
+
+                $dateLimitFrom 	= date('d',  strtotime($dateFrom));
+                $dateLimitTo 	= date('d',  strtotime($dateTo));
+
+                $selectedMonthFrom 	= date('m',  strtotime($dateFrom));
+                $selectedMonthTo 	= date('m',  strtotime($dateTo));
+
+                $selectedYearFrom	= date('Y',  strtotime($dateFrom));
+                $selectedYearTo	= date('Y',  strtotime($dateTo));
+                //print $selectedYearFrom.' '.$selectedYearTo;
+
+                $i = 0;
+                //for current month
+                for($j = $selectedYearFrom; $j <= $selectedYearTo; $j++){
+
+                    if($j==$selectedYearTo){
+                        $selectedYearTo = $selectedYearTo;
+                        $dateLimitTo = $dateLimitTo;
+                    }else{
+                        $selectedMonthTo = 12;
+                        $dateLimitTo = 31;
+                    }
+
+                    if( $selectedYearFrom == $j ){
+                        $selectedMonthFrom = $selectedMonthFrom;
+                    }else{
+                        $selectedMonthFrom = 1;
+                    }
+
+                    $dateFrom   = date($j.'-'.$selectedMonthFrom.'-'.$dateLimitFrom, strtotime($dateFrom));
+                    $dateTo   	= date($j.'-'.$selectedMonthTo.'-'.$dateLimitTo, strtotime($dateTo));
+
+                    //sold products
+                    $orders = DB::table('orders')
+                        ->whereBetween('date_purchased', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $totalSale = 0;
+                    foreach($orders as $orders_data){
+
+                        $orders_status = DB::table('orders_status_history')
+                            ->where('orders_id', '=', $orders_data->orders_id)
+                            ->orderby('date_added', 'DESC')->limit(1)->get();
+
+                        if($orders_status[0]->orders_status_id != 3){
+                            $totalSale++;
+                        }
+                    }
+
+                    //purchase products
+                    $products = DB::table('products')
+                        ->select('products_quantity', DB::raw('SUM(products_quantity) as products_quantity'))
+                        ->whereBetween('products_date_added', [$dateFrom, $dateTo])
+                        ->get();
+
+                    $saleData[$i]['date'] = date('Y',strtotime($dateFrom));
+                    $saleData[$i]['totalSale'] = $totalSale;
+
+                    if(empty($products[0]->products_quantity)){
+                        $producQuantity = 0;
+                    }else{
+                        $producQuantity = $products[0]->products_quantity;
+                    }
+
+                    $saleData[$i]['productQuantity'] = $producQuantity;
+                    //$selectedYear++;
+                    //$selectedMonth++;
+                    $i++;
+                }
+
+            }
+        }
 		// return $reportBase;
 		 return $saleData;
 	}

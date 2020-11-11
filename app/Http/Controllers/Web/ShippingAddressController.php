@@ -124,7 +124,8 @@ class ShippingAddressController extends Controller
         $entry_zone_id             				=   $request->entry_zone_id;
         $entry_gender							=   $request->entry_gender;
         $delivery_phone							=   $request->delivery_phone;
-		$customers_default_address_id			=   $request->customers_default_address_id;
+        $customers_default_address_id			=   $request->customers_default_address_id;
+        $is_default                             =  $request->is_default;
 
 		if(!empty($customers_id)){
 
@@ -132,25 +133,19 @@ class ShippingAddressController extends Controller
                 'entry_firstname'               =>   $entry_firstname,
                 'entry_lastname'                =>   $entry_lastname,
                 'entry_street_address'          =>   $entry_street_address,
-                'entry_flat'          =>   $entry_flat,
-                'entry_postcode'            	=>   $entry_postcode,
+                'entry_flat_address'          =>   $entry_flat,
                 'entry_city'             		=>   $entry_city,
-                'entry_state'            		=>   $entry_state,
                 'entry_country_id'            	=>   $entry_country_id,
-                'entry_zone_id'             	=>   $entry_zone_id,
-                'customers_id'             		=>   $customers_id,
-                'user_id'             		=>   $customers_id,
                 'entry_gender'					=>   $entry_gender,
-                'delivery_phone'					=>   $delivery_phone,
+                'contact_number'					=>   $delivery_phone,
 			);
 
 			//add address into address book
-			$this->shipping->updateAddressBook($address_book_data,$address_book_id);
+			$this->shipping->updateAddressBook($address_book_data,$address_book_id, $is_default);
 
 			//default address id
-			if($customers_default_address_id == '1'){
-			 $this->shipping->updateCustomer($customers_id,$address_book_id);
-			}
+			//  $this->shipping->updateCustomer($customers_id,$address_book_id);
+
 			return redirect('shipping-address?action=update');
 		}
 

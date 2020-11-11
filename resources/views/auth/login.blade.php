@@ -56,12 +56,12 @@
 								</div>
 								<div class="from-group mb-3">
 									 <label for="inlineFormInputGroup">@lang('website.Password')</label>
-									 
+
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<div class="input-group-text"><i class="fas fa-lock"></i></div>
 											</div>
-										<input type="password" name="password" id="password" placeholder="Please Enter Password" class="form-control field-validate">
+										<input type="password" name="password" id="password" placeholder="@lang('website.Please enter your password')" class="form-control field-validate">
 										<span class="help-block" hidden>@lang('website.This field is required')</span>										</div>
 									</div>
 
@@ -83,14 +83,14 @@
 						<div class="registration-socials">
 					<div class="row align-items-center justify-content-between">
 									<div class="col-12 col-sm-12 mb-3">
-											Access Your Account Through Your Social Networks
+                                    @lang('website.Access Your Account Through Your Social Networks')
 									</div>
 									<div class="col-12 col-sm-12">
 										  @if($result['commonContent']['setting'][61]->value==1)
-											<a href="login/google" type="button" class="btn-google"><i class="fab fa-google-plus-g"></i>&nbsp;Google</a>
+											<a href="login/google" type="button" class="btn-google"><i class="fab fa-google-plus-g"></i>&nbsp;@lang('website.Google')</a>
 											@endif
 											@if($result['commonContent']['setting'][2]->value==1)
-											<a  href="login/facebook" type="button" class="btn-facebook"><i class="fab fa-facebook-f"></i>&nbsp;Facebook</a>
+											<a  href="login/facebook" type="button" class="btn-facebook"><i class="fab fa-facebook-f"></i>&nbsp;@lang('website.Facebook')</a>
 											@endif
 									</div>
 							</div>
@@ -99,7 +99,7 @@
 				</div>
 
 				<div class="col-12 col-sm-12 col-md-6">
-						<div class="title-head"><h4 class="heading login-heading">NEW CUSTOMER</h4></div>
+						<div class="title-head"><h4 class="heading login-heading">@lang('website.NEW CUSTOMER')</h4></div>
 						<div class="registration-process">
 							@if( count($errors) > 0)
 								@foreach($errors->all() as $error)
@@ -141,7 +141,7 @@
 							<form name="signup" enctype="multipart/form-data"  action="{{ URL::to('/signupProcess')}}" method="post">
 								{{csrf_field()}}
 								<div class="from-group mb-3"><label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.First Name')</label>
-								
+
 									<div class="input-group">
 										<div class="input-group-prepend">
 												<div class="input-group-text"><i class="fas fa-signature"></i></div>
@@ -152,29 +152,29 @@
 								</div>
 								<div class="from-group mb-3">
 									<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Last Name')</label>
-									
+
 									<div class="input-group">
 										<div class="input-group-prepend">
 												<div class="input-group-text"><i class="fas fa-signature"></i></div>
 										</div>
-										<input  name="lastName" type="text" class="form-control field-validate field-validate" id="lastName" placeholder="@lang('website.Please enter your first name')" value="{{ old('lastName') }}">
+										<input  name="lastName" type="text" class="form-control field-validate field-validate" id="lastName" placeholder="@lang('website.Please enter your last name')" value="{{ old('lastName') }}">
 										<span class="help-block" hidden>@lang('website.Please enter your last name')</span>
 									</div>
 								</div>
 									<div class="from-group mb-3">
 										<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Email Adrress')</label>
-										
+
 										<div class="input-group">
 											<div class="input-group-prepend">
 													<div class="input-group-text"><i class="fas fa-at"></i></div>
 											</div>
-											<input  name="email" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter Your Email or Username" value="{{ old('email') }}">
+											<input  name="email" type="text" class="form-control" id="inlineFormInputGroup" placeholder="@lang('website.Please enter your valid email address')" value="{{ old('email') }}">
 											<span class="help-block" hidden>@lang('website.Please enter your valid email address')</span>
 										</div>
 									</div>
 									<div class="from-group mb-3">
 										<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Password')</label>
-										
+
 											<div class="input-group">
 												<div class="input-group-prepend">
 														<div class="input-group-text"><i class="fas fa-lock"></i></div>
@@ -186,12 +186,12 @@
 										</div>
 										<div class="from-group mb-3">
 											<label for="inlineFormInputGroup"><strong style="color: red;">*</strong>@lang('website.Confirm Password')</label>
-											
+
 												<div class="input-group">
 													<div class="input-group-prepend">
 															<div class="input-group-text"><i class="fas fa-lock"></i></div>
 													</div>
-													<input type="password" class="form-control" id="re_password" name="re_password" placeholder="Enter Your Password">
+													<input type="password" class="form-control" id="re_password" name="re_password" placeholder="@lang('website.Please enter your password')">
 													<span class="help-block" hidden>@lang('website.Please re-enter your password')</span>
 													<span class="help-block" hidden>@lang('website.Password does not match the confirm password')</span>
 												</div>

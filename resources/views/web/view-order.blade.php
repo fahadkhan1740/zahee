@@ -206,7 +206,7 @@
                 ?>
             <tr class="d-flex responsive-lay">
               <td class="col-12 col-md-2">
-                <img class="img-fluid order-img" src="{{asset('public').'/'.$products->image}}" alt="{{$products->products_name}}" class="mr-3">
+                <img class="img-fluid order-img" src="{{asset($products->image}}" alt="{{$products->products_name}}" class="mr-3">
               </td>
               <td class="col-12 col-md-3 item-detail-left">
                 <div class="text-body">

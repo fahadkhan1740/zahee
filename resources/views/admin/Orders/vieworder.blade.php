@@ -68,7 +68,7 @@
 
             <strong>{{ trans('labels.Phone') }}: </strong>{{ $data['orders_data'][0]->delivery_phone }}<br>
            <strong> {{ trans('labels.ShippingMethod') }}:</strong> {{ $data['orders_data'][0]->shipping_method }} <br>
-           <strong> {{ trans('labels.ShippingCost') }}:</strong> @if(!empty($data['orders_data'][0]->shipping_cost)) {{ $data['currency'][19]->value }}{{ $data['orders_data'][0]->shipping_cost }} @else --- @endif <br>
+           <strong> {{ trans('labels.ShippingCost') }}:</strong> @if(!empty($data['orders_data'][0]->shipping_cost)) {{ $data['currency'][19]->value }} {{ $data['orders_data'][0]->shipping_cost }} @else --- @endif <br>
           </address>
         </div>
         <!-- /.col -->
@@ -107,7 +107,7 @@
             <tr>
                 <td>{{  $products->products_quantity }}</td>
                 <td >
-                   <img src="{{ asset('public').'/'.$products->image }}" width="60px"> <br>
+                   <img src="{{ asset($products->image }}" width="60px"> <br>
                 </td>
                 <td  width="30%">
                     {{  $products->products_name }}<br>
@@ -124,7 +124,7 @@
                 @endforeach</td>
                 <td>{{ $data['currency'][19]->value }} {{ (float)($products->final_price/$products->products_quantity) }}</td>
                 <td>{{ $data['currency'][19]->value }} {{ $products->final_price }}</td>
-                 
+
              </tr>
             @endforeach
 
@@ -141,7 +141,11 @@
         <div class="col-xs-7">
           <p class="lead" style="margin-bottom:10px">{{ trans('labels.PaymentMethods') }}:</p>
           <p class="text-muted well well-sm no-shadow" style="text-transform:capitalize">
-           	{{ str_replace('_',' ', $data['orders_data'][0]->payment_method) }}
+          @if($data['orders_data'][0]->payment_method == 0)
+              Cash On Delivery
+           @else
+               Prepaid
+           @endif
           </p>
           @if(!empty($data['orders_data'][0]->coupon_code))
               <p class="lead" style="margin-bottom:10px">{{ trans('labels.Coupons') }}:</p>
@@ -178,8 +182,11 @@
 
 		  <p class="lead" style="margin-bottom:10px">{{ trans('labels.Orderinformation') }}:</p>
           <p class="text-muted well well-sm no-shadow" style="text-transform:capitalize; word-break:break-all;">
-           @if(trim($data['orders_data'][0]->order_information) != '[]' or !empty($data['orders_data'][0]->order_information))
+
+           @if(trim($data['orders_data'][0]->order_information) != '[]' && !empty($data['orders_data'][0]->order_information))
            		{{ $data['orders_data'][0]->order_information }}
+            @else
+            N/A
            @endif
           </p>
         </div>

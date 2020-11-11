@@ -1,0 +1,1 @@
+<?php /**PATH /Users/fkhan/Projects/freelance/zahee/resources/views/web/product-sections/banner_section.blade.php ENDPATH**/ ?>

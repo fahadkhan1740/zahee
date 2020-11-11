@@ -23,7 +23,7 @@
                     <div class="box-body box-profile">
                         @if(!empty($result['devices'][0]->customers_picture))
                         <img class="profile-user-img img-responsive img-circle"
-                            src="{{asset('public').'/'.$result['devices'][0]->customers_picture}}"
+                            src="{{asset($result['devices'][0]->customers_picture}}"
                             alt="{{ $result['devices'][0]->customers_firstname }} profile picture">
                         <h3 class="profile-username text-center">{{ $result['devices'][0]->customers_firstname }}
                             {{ $result['devices'][0]->customers_lastname }}</h3>
@@ -142,7 +142,7 @@
                                                         id="select_img">
                                                         <option value=""></option>
                                                         @foreach($allimage as $key=>$image)
-                                                        <option data-img-src="{{asset('public/'.$image->path)}}"
+                                                        <option data-img-src="{{asset(''.$image->path)}}"
                                                             class="imagedetail" data-img-alt="{{$key}}"
                                                             value="{{$image->id}}"> {{$image->id}} </option>
                                                         @endforeach

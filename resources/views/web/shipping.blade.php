@@ -194,6 +194,7 @@
                       </select>
                       <span class="help-block error-content1" hidden>@lang('website.Please select your country')</span>
                     </div>
+
                   </div>
                   <div class="form-row">
                     <div class="form-group select-control col-md-6">
@@ -201,8 +202,6 @@
                       <input type="text" name="entry_city" class="form-control field-validate" id="entry_city1" @if(!empty($result['editAddress'])) value="{{$result['editAddress'][0]->city}}" @endif>
                       <span class="help-block error-content7" hidden>@lang('website.Please enter your city')</span>
                     </div>
-                  </div>
-                  <div class="form-row">
                     <div class="form-group select-control col-md-6">
                         <label for="exampleInputNumber1">@lang('website.Phone Number')</label>
                         <input required type="text" class="form-control" id="delivery_phone" aria-describedby="numberHelp" @if(!empty($result['editAddress'])) value="{{$result['editAddress'][0]->contact_number}}" @endif placeholder="Enter Your Phone Number" name="delivery_phone" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->delivery_phone}}@endif">
@@ -210,15 +209,24 @@
                     </div>
                   </div>
                   <div class="form-row">
-                      <div class="form-group select-control col-md-6">
+                    <div class="form-group select-control col-md-6">
                           <label for="exampleInputZpCode1">@lang('website.address_type')</label>
                           <select class="form-control" id="address_type" name="address_type" required>
                               <option value="Home (7:00 A.M. - 9:00 P.M., All Day)" @if(!empty($result['editAddress']) && $result['editAddress'][0]->address_type == 'Home (7:00 A.M. - 9:00 P.M., All Day)' ) checked @endif > @lang('website.home')</option>
                               <option value="Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)" @if(!empty($result['editAddress']) && $result['editAddress'][0]->address_type == 'Office/Commercial (10:00 A.M. - 6:00 P.M. Delivery)' ) checked @endif>@lang('website.office')</option>
                           </select>
                           <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please select your address type')</span>
-                      </div>
+                    </div>
+                    <div class="form-group select-control col-md-6">
+                      <label for="is_default"><span class="star">*</span> @lang('website.Default address')</label>
+                      <select name="is_default"  id="is_default" class="form-control field-validate">
+                          <option value="1">@lang('website.Yes')</option>
+                          <option value="0">@lang('website.No')</option>
+                      </select>
+                    </div>
+
                   </div>
+
                   <div class="button">
                   @if(!empty($result['editAddress']))
                       <a href="{{ URL::to('/shipping-address')}}" class="btn btn-default">@lang('website.cancel')</a>

@@ -99,10 +99,10 @@ class AdminConstantController extends Controller
 		$title = array('pageTitle' => Lang::get("labels.EditBanner"));
 
 		if($exist==1){
-			return redirect()->back()->with('error', Lang::get("labels.constantBannerErrorMessage"));
-		}else{
 			$exist = ConstantBanner::updatebanner($request);
-			return redirect()->back()->with('success', Lang::get("labels.BannerUpdatedMessage"));
+			return redirect()->back()->with('success', Lang::get("labels.BannerUpdatedMessage"));	
+		}else{
+			return redirect()->back()->with('error', Lang::get("labels.constantBannerErrorMessage"));
 		}
 	}
 

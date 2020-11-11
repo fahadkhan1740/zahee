@@ -89,7 +89,7 @@
                                             @foreach ($resultsProduct as  $key=>$product)
                                                 <tr>
                                                     <td>{{ $product->products_id }}</td>
-                                                    <td><img src="{{asset('public/'.$product->path)}}" alt="" height="50px"></td>
+                                                    <td><img src="{{asset(''.$product->path)}}" alt="" height="50px"></td>
                                                     <td>
                                                         {{ $product->categories_name }}
                                                     </td>

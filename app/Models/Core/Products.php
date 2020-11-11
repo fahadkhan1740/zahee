@@ -190,6 +190,8 @@ class Products extends Model
         } else {
             $tax_Class_id = $request->tax_class_id;
         }
+
+
         $products_id = DB::table('products')->insertGetId([
             'products_image' => $uploadImage,
             'manufacturers_id' => $request->manufacturers_id,
@@ -202,13 +204,14 @@ class Products extends Model
             'products_status' => $request->products_status,
             'products_tax_class_id' => $tax_Class_id,
             'products_weight_unit' => $request->products_weight_unit,
-            'low_limit' => 0,
+            'low_limit' => 10,
             'products_slug' => 0,
             'products_type' => $request->products_type,
             'is_feature' => $request->is_feature,
             'products_min_order' => $request->products_min_order,
             'products_max_stock' => $request->products_max_stock,
-            'is_current' => 1
+            'is_current' => 1,
+            'home_display' => $request->home_display
         ]);
 
         $slug_flag = false;
@@ -216,7 +219,7 @@ class Products extends Model
             $products_name = 'products_name_' . $languages_data->languages_id;
             $products_url = 'products_url_' . $languages_data->languages_id;
             $products_description = 'products_description_' . $languages_data->languages_id;
-            $product_sub_title = 'product_sub_title' . $languages_data->languages_id;
+            $product_sub_title = 'product_sub_title_' . $languages_data->languages_id;
             //left banner
             $products_left_banner = 'products_left_banner_' . $languages_data->languages_id;
             $products_left_banner_start_date = 'products_left_banner_start_date_' . $languages_data->languages_id;
@@ -402,7 +405,6 @@ class Products extends Model
         $result['manufacturer'] = $getManufacturers;
         $product = DB::table('products')
             ->LeftJoin('image_categories', function ($join) {
-
                 $join->on('image_categories.image_id', '=', 'products.products_image')
                     ->where(function ($query) {
                         $query->where('image_categories.image_type', '=', 'THUMBNAIL')
@@ -561,13 +563,13 @@ class Products extends Model
             'products_status' => $request->products_status,
             'products_tax_class_id' => $request->tax_class_id,
             'products_weight_unit' => $request->products_weight_unit,
-            'low_limit' => 0,
+            'low_limit' => 10,
             'products_slug' => $slug,
             'products_type' => $request->products_type,
             'is_feature' => $request->is_feature,
             'products_min_order' => $request->products_min_order,
-            'products_max_stock' => $request->products_max_stock
-
+            'products_max_stock' => $request->products_max_stock,
+            'home_display' => $request->home_display
         ]);
         foreach ($languages as $languages_data) {
             $products_name = 'products_name_' . $languages_data->languages_id;
@@ -766,7 +768,7 @@ class Products extends Model
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
 
             })
-            ->select('products.*', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url', 'specials.specials_id', 'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price', 'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified', 'specials.expires_date')
+            ->select('products.products_id', 'products_description.products_name', 'products.products_type')
             ->where('products_description.language_id', '=', $language_id);
 
 
@@ -986,6 +988,48 @@ class Products extends Model
         return $result;
     }
 
+    public function deleteStock($id, $stock) {
+        $setting = new Setting();
+        $myVarsetting = new SiteSettingController($setting);
+        $myVaralter = new AlertController($setting);
+        $language_id = '1';
+        $products_id = $id;
+        $result = array();
+        $message = array();
+        $errorMessage = array();
+        $result['currency'] = $myVarsetting->getSetting();
+
+        // delete Stock
+        $insertArray = array(
+            'stock_type' => 'out',
+            'purchase_price' => '0.00',
+            'stock' => $stock,
+            'products_id' => $products_id,
+            'admin_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        );
+
+        $data = DB::table('inventory')->insertGetId($insertArray);
+
+        if($data) {
+            $result = array(
+                'status' => 1,
+                'stock' => 0
+            );
+        }  else {
+            $result = array(
+                'status' => 0,
+                'stock' => ''
+            );
+        }
+
+
+
+        return $result;
+
+    }
+
     public function ajax_min_max($id)
     {
         $setting = new Setting();
@@ -1127,8 +1171,7 @@ class Products extends Model
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
 
             })
-            ->select('products.*', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url', 'specials.specials_id', 'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price', 'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified', 'specials.expires_date')
-            ->where('products_description.language_id', '=', $language_id);
+            ->select('products.products_id', 'products_description.products_name', 'products.products_type')->where('products_description.language_id', '=', $language_id);
 
         $product = $product->get();
         $result['products'] = $product;
@@ -1167,9 +1210,9 @@ class Products extends Model
             $result['min_level'] = $min_level;
             $result['max_level'] = $max_level;
             $products_attribute = DB::table('products_attributes')->get();
-           
+
             $products_attribute = $products_attribute->unique('options_id')->keyBy('options_id');
-        
+
             if (count($products_attribute) > 0) {
                 $index2 = 0;
                 foreach ($products_attribute as $attribute_data) {
@@ -1229,6 +1272,22 @@ class Products extends Model
         return $result;
     }
 
+    public function productList() {
+        $setting = new Setting();
+        $myVarsetting = new SiteSettingController($setting);
+        $myVaralter = new AlertController($setting);
+        $language_id = '1';
+        $result = array();
+        $message = array();
+        $errorMessage = array();
+        $result['currency'] = $myVarsetting->getSetting();
+        $product = DB::table('products')
+            ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
+            ->select('products.products_id', 'products_description.products_name')->where('products_description.language_id', '=', $language_id);
+        $product = $product->get();
+        $result['products'] = $product;
+    }
+
     public function addnewstock($request)
     {
         $products_id = $request->products_id;
@@ -1269,7 +1328,7 @@ class Products extends Model
             'stock_type' => 'in'
 
         ]);
-        // if ($products[0]->products_type == 1) {
+        if (!empty($request->attributeid) && count($request->attributeid) > 0) {
             foreach ($request->attributeid as $attribute) {
                 if (!empty($attribute)) {
                     DB::table('inventory_detail')->insert([
@@ -1279,7 +1338,7 @@ class Products extends Model
                     ]);
                 }
             }
-        // }
+        }
 
     }
 

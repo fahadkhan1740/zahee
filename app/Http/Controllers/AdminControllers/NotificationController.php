@@ -167,7 +167,7 @@ class NotificationController extends Controller
 
             $sendData = array
             (
-                'body' 	=> $message,
+                'body' 	=> strip_tags($message),
                 'title'	=> $title ,
                 'icon'	=> 'https://res.cloudinary.com/dgyl1lq5p/image/upload/v1595226814/admin-logo_wes3km.png',/*Default Icon*/
                 'sound' => 'mySound',/*Default sound*/

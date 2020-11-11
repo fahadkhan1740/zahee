@@ -1,6 +1,5 @@
 @extends('web.layout')
 @section('content')
-
 <section class="aboutus-content aboutus-content-one">
   <div class="container">
     <div class="heading">
@@ -11,7 +10,6 @@
     </div>
   <?=stripslashes($result['pages'][0]->description)?>     
   </div>
-
 </section>
 
 @endsection

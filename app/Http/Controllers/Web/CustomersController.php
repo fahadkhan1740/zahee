@@ -100,7 +100,7 @@ class CustomersController extends Controller
 					 return redirect('login')->with('loginError',Lang::get("website.You Are Not Allowed With These Credentials!"));
 				   }
 				}
-				$result = $this->customer->processLogin($request,$old_session);
+                $result = $this->customer->processLogin($request,$old_session);
 				if(!empty( session('previous'))){
 						return Redirect::to( session('previous'));
 					}else{
@@ -172,9 +172,14 @@ class CustomersController extends Controller
 
     public function handleSocialLoginCallback($social){
 		  $result =  $this->customer->handleSocialLoginCallback($social);
-//		  dd($result);
 			if(!empty($result)){
-				return redirect()->intended('/')->with('result', $result);
+                // return redirect()->intended('/')->with('result', $result);
+
+                if(!empty( session('previous'))){
+                    return Redirect::to( session('previous'));
+                }else{
+                    return redirect()->intended('/')->with('result', $result);
+                }
 			}
     }
 
@@ -185,11 +190,9 @@ class CustomersController extends Controller
 
 	public function likeMyProduct(Request $request){
 		$cartResponse = $this->customer->likeMyProduct($request);
-//        dd($cartResponse['success'] == 0);
         if($cartResponse['success']== 0){
             return json_encode($cartResponse);
         }
-
         return view("web.headers.cartButtons.cartButton")->with('result', $cartResponse);
 
 	}
@@ -209,7 +212,8 @@ class CustomersController extends Controller
 	public function wishlist(Request $request){
 		$title = array('pageTitle' => Lang::get("website.Wishlist"));
 		$final_theme = $this->theme->theme();
-    $result = $this->customer->wishlist($request);
+	$result = $this->customer->wishlist($request);
+	// dd($result);
 		return view("web.wishlist", ['title' => $title,'final_theme' => $final_theme])->with('result', $result);
 	}
 
@@ -367,7 +371,11 @@ class CustomersController extends Controller
 									if( $res['insert'] == "true"){
 										if($res['auth'] == "true"){
 											$result = $res['result'];
-											return redirect()->intended('/')->with('result', $result);
+                                            if(!empty( session('previous'))){
+                                                return Redirect::to( session('previous'));
+                                            }else{
+                                                return redirect()->intended('/')->with('result', $result);
+                                            }
 										}else{
 
 											return redirect('login')->with('loginError', Lang::get("website.Email or password is incorrect"));

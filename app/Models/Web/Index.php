@@ -27,8 +27,7 @@ class Index extends Model
     						 )
     	 ->where('status', '=', '1')
     	 ->where('languages_id', '=', session('language_id'))
-//       ->orwhere('status', '=', '1')
-//       ->where('languages_id', '=', session('language_id'))
+
     	 ->get();
        return $slides;
   }
@@ -175,7 +174,7 @@ class Index extends Model
     		$homeBanners = DB::table('constant_banners')
         ->leftJoin('image_categories','constant_banners.banners_image','=','image_categories.image_id')
         ->select('constant_banners.*','image_categories.path')
-    		->where('languages_id', session('language_id'))
+    		->where('languages_id', 1)
         ->groupBy('constant_banners.banners_id')
     		->orderby('type','ASC')
     		->get();

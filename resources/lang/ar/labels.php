@@ -1576,5 +1576,6 @@ return [
 	'Category' => 'Category',
 	'Trend' => 'Trends',
 	'EditTrend' => 'EditTrend',
-	'ListingTrends' => 'ListingTrends'
+    'ListingTrends' => 'ListingTrends',
+    'ProductHomeDisplay' => 'Product Home Display'
 ];

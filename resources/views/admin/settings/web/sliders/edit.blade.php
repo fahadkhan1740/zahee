@@ -131,7 +131,7 @@
                                                                 <select class="image-picker show-html " name="image_id" id="select_img">
                                                                     <option  value=""></option>
                                                                     @foreach($allimage as $key=>$image)
-                                                                        <option data-img-src="{{asset('public/'.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                        <option data-img-src="{{asset(''.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                     @endforeach
                                                                 </select>
                                                             @endif
@@ -158,9 +158,9 @@
                                                 <br>
                                                 {!! Form::hidden('oldImage', $result['languages'][0]->image, array('id'=>'oldImage')) !!}
                                                 @if(($result['languages'][0]->path!== null))
-                                                    <img width="80px" src="{{asset('public/'.$result['sliders'][0]->path)}}" class="img-circle">
+                                                    <img width="80px" src="{{asset(''.$result['sliders'][0]->path)}}" class="img-circle">
                                                 @else
-                                                    <img width="80px" src="{{asset('public/'.$result['sliders'][0]->path) }}" class="img-circle">
+                                                    <img width="80px" src="{{asset(''.$result['sliders'][0]->path) }}" class="img-circle">
                                                 @endif
 
                                             </div>

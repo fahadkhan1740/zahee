@@ -7,7 +7,7 @@
 </style>
 <div class="login-box">
   <div class="login-logo">
-      <img src="{{asset('public/web/images/cus/logo.png')}}" class="website-hide">
+      <img src="{{asset('web/images/cus/logo.png')}}" class="website-hide">
 {{--  	@if(empty($web_setting[15]->value))--}}
 {{--        @if($web_setting[66]->value=='1' and $web_setting[67]->value=='0')--}}
 {{--        	--}}
@@ -15,7 +15,7 @@
 {{--   			<img src="{{asset('images/admin_logo/logo-laravel-blue-v1.png')}}" class="website-hide">--}}
 {{--    	@endif--}}
 {{--    @else--}}
-{{--    	<img style="width: 60%" src="{{asset('public').'/'.$web_setting[15]->value}}">--}}
+{{--    	<img style="width: 60%" src="{{asset($web_setting[15]->value}}">--}}
 {{--    @endif--}}
 
     <div style="

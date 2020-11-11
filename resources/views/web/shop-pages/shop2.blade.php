@@ -100,7 +100,7 @@
                                      <div class="icon modal_show" data-toggle="modal" data-target="#myModal" products_id="{{$products->products_id}}"><i class="fas fa-eye"></i></div>
                                        <a onclick="myFunction3({{$products->products_id}})"class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
                                      </div>
-                                 <img class="img-fluid" src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}">
+                                 <img class="img-fluid" src="{{asset($products->image_path)}}" alt="{{$products->products_name}}">
                                </div>
                                @include('web.common.scripts.addToCompare')
                                <?php
@@ -399,7 +399,7 @@
                     @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                        @if($homeBanners->type==7)
                        <div class="img-main">
-                           <a href="{{ $homeBanners->banners_url}}" ><img class="img-fluid" src="{{asset('public').'/'.$homeBanners->path}}"></a>
+                           <a href="{{ $homeBanners->banners_url}}" ><img class="img-fluid" src="{{asset($homeBanners->path)}}"></a>
                        </div>
                      @endif
                     @endforeach

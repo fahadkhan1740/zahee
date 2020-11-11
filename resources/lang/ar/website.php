@@ -210,7 +210,7 @@ return [
 
 	'Please enter your first name'=>'الرجاء إدخال اسمك الأول.',
 
-	'Please enter your last name'=>'الرجاء إدخال اسمك الأخير.',
+	'Please enter your last name'=>'الرجاء إدخال اسمك الأخير',
 
 	'Login'=>'دخول',
 
@@ -742,11 +742,32 @@ return [
 	'Recently Viewed' => 'شوهدت مؤخرا',
 	'Company Information' => 'معلومات الشركة',
 	'Connect with Us' => 'اتصل بنا',
-	'Minimum order amount is 5.00 KWD.' => 'الحد الأدنى لمبلغ الطلب 5.00 د.ك.',
+	'Minimum order amount is 5.00 KWD.' => 'الحد الأدنى لمبلغ الطلب 5.00 د.ك',
 	'No Product has been added to your Cart' => 'لم يتم إضافة أي منتج إلى سلة التسوق الخاصة بك',
 	'Price Details' => 'تفاصيل السعر',
 	'Remove' => 'إزالة',
 	'View' => 'رأي',
 	'APPLY' =>'تطبيق',
-	'Delivery Charges' => 'رسوم التوصيل'
+	'Delivery Charges' => 'رسوم التوصيل',
+	'My Cart' => 'عربة التسوق',
+	'Price' => 'السعر',
+	'Sub Total' => 'المجموع الفرعي',
+	'No Products in your Wishlist'  => 'لا توجد منتجات في قائمة الرغبات الخاصة بك',
+	'Old Password'  => 'كلمة المرور القديمة',
+	'Please enter your old password'  => 'الرجاء إدخال كلمة المرور القديمة الخاصة بك',
+	'Confirm Password'  => 'تأكيد كلمة المرور',
+	'Please confirm your password'  => 'يرجى التأكد من صحة كلمة المرور الخاصة بك',
+	'Confirm Password and New Password does not match' => 'تأكيد كلمة المرور وكلمة المرور الجديدة غير متطابقين',
+	'Password has been updated successfully' => 'تم تحديث كلمة المرور بنجاح',
+    'Product' => 'المنتج',
+    'Access Your Account Through Your Social Networks' => 'الوصول إلى حسابك من خلال الشبكات الاجتماعية الخاصة بك',
+    'Google' => 'جوجل',
+    'Facebook' => 'موقع التواصل الاجتماعي الفيسبوك',
+    'NEW CUSTOMER' => 'عميل جديد',
+    'Coupon Code' => 'رمز الكوبون',
+    'Logout'=>'تسجيل خروج',
+    'Search' => 'بحث',
+    'Yes' => 'نعم',
+    'No' => 'لا',
+    'Default address' => 'Default address'
 ];

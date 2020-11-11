@@ -49,18 +49,19 @@
                          <div class="box-body">
 
                             {!! Form::open(array('url' =>'admin/addNewConstantBanner', 'method'=>'post', 'class' => 'form-horizontal form-validate', 'enctype'=>'multipart/form-data')) !!}
-                            	<div class="form-group">
+                            	<!-- <div class="form-group">
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Language') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="languages_id">
-                                          @foreach($result['languages'] as $language) 
+                                          @foreach($result['languages'] as $language)
                                               <option value="{{$language->languages_id}}">{{ $language->name }}</option>
                                           @endforeach
                                       </select>
                                       <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                       {{ trans('labels.ChooseLanguageText') }}</span>
                                   </div>
-                                </div>
+                                </div> -->
+                                <input type="hidden" value="1" name="languages_id" />
                                 <input type="hidden" value="40" name="type" />
 
                                 <!-- <div class="form-group">
@@ -133,7 +134,7 @@
                                                                 <select class="image-picker show-html field-validate" name="image_id" id="select_img">
                                                                     <option  value=""></option>
                                                                     @foreach($allimage as $key=>$image)
-                                                                        <option data-img-src="{{asset('public/'.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                        <option data-img-src="{{asset(''.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                     @endforeach
                                                                 </select>
                                                             @endif

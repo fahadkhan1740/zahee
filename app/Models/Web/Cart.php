@@ -16,7 +16,6 @@ class Cart extends Model
 {
 	//mycart
 	public function myCart($baskit_id){
-//        DB::enableQueryLog();
 		$cart = DB::table('customers_basket')
 			->join('products', 'products.products_id','=', 'customers_basket.products_id')
 			->join('products_description', 'products_description.products_id','=', 'products.products_id')
@@ -56,8 +55,6 @@ class Cart extends Model
 
 
 		$baskit = $cart->get();
-//        dd(DB::getQueryLog());
-
 		$total_carts = count($baskit);
 		$result = array();
 		$index = 0;
@@ -65,28 +62,7 @@ class Cart extends Model
 			foreach($baskit as $cart_data){
 				array_push($result, $cart_data);
 
-				//default product
 				$stocks = 0;
-				if($cart_data->products_type == '0'){
-
-					$currentStocks = DB::table('inventory')->where('products_id',$cart_data->products_id)->get();
-						if(count($currentStocks)>0){
-							foreach($currentStocks as $currentStock){
-								$stocks += $currentStock->stock;
-							}
-						}
-
-					if(!empty($cart_data->max_order) and $cart_data->max_order!=0){
-						if($cart_data->max_order >= $stocks){
-							$result[$index]->max_order = $stocks;
-						}
-					}else{
-						$result[$index]->max_order = $stocks;
-					}
-
-				}
-
-
 
 				$attributes = DB::table('customers_basket_attributes')
 					->join('products_options', 'products_options.products_options_id','=','customers_basket_attributes.products_options_id')
@@ -111,31 +87,44 @@ class Cart extends Model
 
 					$attributes_data = $attributes->get();
 
-					//if($index==0){
+					if($index==0){
 						$products_attributes_id = array();
-					//}
-
-					foreach($attributes_data as $attributes_datas){
-						if($cart_data->products_type == '1'){
-								$products_attributes_id[] = $attributes_datas->products_attributes_id;
-
-						}
-
 					}
-					$myVar = new Products();
 
-					$qunatity['products_id'] = $cart_data->products_id;
-					$qunatity['attributes'] = $products_attributes_id;
-
-					$content = $myVar->productQuantity($qunatity);
-					$stocks = $content['remainingStock'];
-					if(!empty($cart_data->max_order) and $cart_data->max_order!=0){
-						if($cart_data->max_order >= $stocks){
-							$result[$index]->max_order = $stocks;
+					if(count($attributes_data) > 0) {
+						foreach($attributes_data as $attributes_datas){
+							$products_attributes_id[] = $attributes_datas->products_attributes_id;
 						}
+						$myVar = new Products();
+
+						$qunatity['products_id'] = $cart_data->products_id;
+						$qunatity['attributes'] = $products_attributes_id;
+
+						$content = $myVar->productQuantity($qunatity);
+						$stocks = $content['remainingStock'];
+					} else {
+						$currentStocks = DB::table('inventory')->where('products_id',$cart_data->products_id)->get();
+						if(count($currentStocks)>0){
+							foreach($currentStocks as $currentStock){
+								$stocks += $currentStock->stock;
+							}
+					    }
+
+                    }
+
+                   if(!empty($cart_data->max_order) and $cart_data->max_order!=0){
+                        if($cart_data->max_order >= $stocks){
+                            $result[$index]->max_order = $stocks;
+                        }
 					}else{
 						$result[$index]->max_order = $stocks;
-					}
+                    }
+
+                    // Remove the product from cart with 0 stock
+                    // dd($cart_data->products_id);
+                   if($stocks == 0) {
+                       $deleteData = DB::table('customers_basket')->where('products_id', $cart_data->products_id)->delete();
+                   }
 
 					$result[$index]->attributes_id = $products_attributes_id;
 
@@ -156,6 +145,7 @@ class Cart extends Model
 					$index++;
 			}
 		}
+		// dd($result);
 		return($result);
 	}
   //getCart

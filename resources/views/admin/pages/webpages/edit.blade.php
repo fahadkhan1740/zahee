@@ -123,17 +123,20 @@
     <script type="text/javascript">
         $(function () {
 
-            //for multiple languages
-            @foreach($result['languages'] as $languages)
-            // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-            CKEDITOR.replace('editor_{{$languages->languages_id}}');
+            $(function () {
 
-            @endforeach
+//for multiple languages
+@foreach($result['languages'] as $languages)
+// Replace the <textarea id="editor1"> with a CKEditor
+// instance, using default configuration.
+CKEDITOR.replace('editor_{{$languages->languages_id}}', {
+  language: '{{$languages->code}}'
+});
+@endforeach
+//bootstrap WYSIHTML5 - text editor
+$(".textarea").wysihtml5();
 
-            //bootstrap WYSIHTML5 - text editor
-            $(".textarea").wysihtml5();
-
+});
         });
     </script>
 @endsection

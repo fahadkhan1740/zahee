@@ -140,11 +140,23 @@
                                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Trend') }} </label>
                                                     <div class="col-sm-10 col-md-8">
                                                         <select class="form-control" name="product_trend">
-                                                            <option value="1" @if($result['product'][0]->product_trend==1) selected @endif >{{ trans('labels.Yes') }}</option>
-                                                            <option value="0" @if($result['product'][0]->product_trend==0) selected @endif>{{ trans('labels.No') }}</option>
+                                                            <option value="1" @if($result['product'][0]->product_trend == 1) selected @endif >{{ trans('labels.Yes') }}</option>
+                                                            <option value="0" @if($result['product'][0]->product_trend == 0) selected @endif>{{ trans('labels.No') }}</option>
                                                         </select>
                                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                                             {{ trans('labels.SelectTrend') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.ProductHomeDisplay') }} </label>
+                                                    <div class="col-sm-10 col-md-8">
+                                                        <select class="form-control" name="home_display">
+                                                            <option value="1" @if($result['product'][0]->home_display == 1) selected @endif>{{ trans('labels.Yes') }}</option>
+                                                            <option value="0" @if($result['product'][0]->home_display == 0) selected @endif>{{ trans('labels.No') }}</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,7 +279,7 @@
                                                                         <select class="image-picker show-html " name="image_id" id="select_img">
                                                                             <option value=""></option>
                                                                             @foreach($allimage as $key=>$image)
-                                                                            <option data-img-src="{{asset('public/'.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                            <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                             @endforeach
                                                                         </select>
                                                                         @endif

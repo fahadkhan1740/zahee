@@ -160,8 +160,9 @@ Route::group(['middleware' => ['installer']], function () {
         Route::get('/filter', 'ProductController@filter')->middleware('view_product');
         Route::group(['prefix' => 'inventory'], function () {
             Route::get('/display', 'ProductController@addinventoryfromsidebar')->middleware('view_product');
-            // Route::post('/addnewstock', 'ProductController@addinventory')->middleware('view_product');
+            Route::post('/productList', 'ProductController@productList')->middleware('prod_list');
             Route::get('/ajax_min_max/{id}/', 'ProductController@ajax_min_max')->middleware('view_product');
+            Route::get('/deleteStock/{id}/{stock}', 'ProductController@deleteStock')->middleware('view_product');
             Route::get('/ajax_attr/{id}/', 'ProductController@ajax_attr')->middleware('view_product');
             Route::post('/addnewstock', 'ProductController@addnewstock')->middleware('add_product');
             Route::post('/addminmax', 'ProductController@addminmax')->middleware('add_product');
@@ -170,7 +171,7 @@ Route::group(['middleware' => ['installer']], function () {
         Route::group(['prefix' => 'images'], function () {
             Route::get('/display/{id}/', 'ProductController@displayProductImages')->middleware('view_product');
             Route::get('/add/{id}/', 'ProductController@addProductImages')->middleware('add_product');
-            Route::post('/unitsproductimage', 'ProductController@insertProductImages')->middleware('add_product');
+            Route::post('/insertproductimage', 'ProductController@insertProductImages')->middleware('add_product');
             Route::get('/editproductimage/{id}', 'ProductController@editProductImages')->middleware('edit_product');
             Route::post('/updateproductimage', 'ProductController@updateproductimage')->middleware('edit_product');
             Route::post('/deleteproductimagemodal', 'ProductController@deleteproductimagemodal')->middleware('edit_product');
@@ -486,4 +487,17 @@ Route::group(['middleware' => ['installer']], function () {
 
         Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     });
+
+    Route::group(['prefix'=>'admin/managements','middleware' => 'auth','namespace' => 'AdminControllers'], function () {
+        Route::get('/merge', 'ManagementsController@merge')->middleware('edit_management');
+              Route::get('/backup', 'ManagementsController@backup')->middleware('edit_management');
+              Route::post('/take_backup', 'ManagementsController@take_backup')->middleware('edit_management');
+              Route::get('/import', 'ManagementsController@import')->middleware('edit_management');
+              Route::post('/importdata', 'ManagementsController@importdata')->middleware('edit_management');
+        Route::post('/mergecontent', 'ManagementsController@mergecontent')->middleware('edit_management');
+        Route::get('/updater', 'ManagementsController@updater')->middleware('edit_management');
+        Route::post('/checkpassword', 'ManagementsController@checkpassword')->middleware('edit_management');
+        Route::post('/updatercontent', 'ManagementsController@updatercontent')->middleware('edit_management');
+      });
+
 });

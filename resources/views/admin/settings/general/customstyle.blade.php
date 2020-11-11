@@ -87,7 +87,7 @@
         </section>
         <!-- /.content -->
     </div>
-    {{--<script src="{!! asset('public/'.'resources/views/admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>--}}
+    {{--<script src="{!! asset(''.'resources/views/admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>--}}
     <!--<script type="text/javascript">
             $(function () {
 

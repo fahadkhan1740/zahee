@@ -99,7 +99,7 @@
                                                 </div>
                                             </div>
 
-                                    
+
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Message') }}</label>
                                                 <div class="col-sm-10 col-md-4">
@@ -125,7 +125,7 @@
                                                                         <select class="image-picker show-html " name="image_id" id="select_img">
                                                                             <option value=""></option>
                                                                             @foreach($allimage as $key=>$image)
-                                                                            <option data-img-src="{{asset('public/'.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                            <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                             @endforeach
                                                                         </select>
                                                                         @endif

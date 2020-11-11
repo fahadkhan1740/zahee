@@ -52,26 +52,47 @@
                                         <div class="box-body">
                                             {!! Form::open(array('url' =>'admin/manufacturers/add', 'method'=>'post', 'class' => 'form-horizontal form-validate ', 'enctype'=>'multipart/form-data')) !!}
 
+
+                                            @foreach($result['languages'] as $languages)
                                             <div class="form-group">
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Name') }}<span style="color:red;">*</span> ({{ $languages->name }})</label>
+                                                <div class="col-sm-10 col-md-4">
+                                                    <input name="categoryName_<?=$languages->languages_id?>" class="form-control field-validate">
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                        {{ trans('labels.SubCategoryName') }} ({{ $languages->name }}).</span>
+                                                    <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Description') }}<span style="color:red;">*</span> ({{ $languages->name }})</label>
+                                                <div class="col-sm-10 col-md-8">
+                                                    <textarea id="editor<?=$languages->languages_id?>" name="products_description_<?=$languages->languages_id?>" class="form-control" rows="5"></textarea>
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                        {{ trans('labels.EnterProductDetailIn') }} {{ $languages->name }}</span>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            <!-- <div class="form-group">
                                                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Name') }}<span style="color:red;">*</span></label>
                                                 <div class="col-sm-10 col-md-4">
                                                     {!! Form::text('name',  '', array('class'=>'form-control  field-validate', 'id'=>'name'), value(old('name'))) !!}
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.ManufacturerNameExample') }}</span>
                                                     <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group">
-                                  <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Status') }}</label>
-                                  <div class="col-sm-10 col-md-4">
-                                      <select class="form-control" name="status">
-                                          <option value="1">{{ trans('labels.Active') }}</option>
-                                          <option value="0">{{ trans('labels.InActive') }}</option>
-                                      </select>
-                                      <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                                      {{ trans('labels.StatusBannerText') }}</span>
-                                  </div>
-                                </div>
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Status') }}</label>
+                                                <div class="col-sm-10 col-md-4">
+                                                    <select class="form-control" name="status">
+                                                        <option value="1">{{ trans('labels.Active') }}</option>
+                                                        <option value="0">{{ trans('labels.InActive') }}</option>
+                                                    </select>
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    {{ trans('labels.StatusBannerText') }}</span>
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.ManufacturerURL') }}<span style="color:red;">*</span></label>
@@ -94,11 +115,11 @@
                                                                     <h3 class="modal-title text-primary" id="myModalLabel">{{ trans('labels.Choose Image') }} </h3>
                                                                 </div>
                                                                 <div class="modal-body manufacturer-image-embed">
-                                                                    @if(isset($allimage))
+                                                                    @if(isset($result['allimage']))
                                                                     <select class="image-picker show-html " name="image_id" id="select_img">
                                                                         <option value=""></option>
-                                                                        @foreach($allimage as $key=>$image)
-                                                                          <option data-img-src="{{asset('public/'.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                        @foreach($result['allimage'] as $key=>$image)
+                                                                          <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                         @endforeach
                                                                     </select>
                                                                     @endif
@@ -155,4 +176,17 @@
         </section>
         <!-- /.content -->
     </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(function() {
+        @foreach($result['languages'] as $languages)
+            CKEDITOR.replace('editor{{$languages->languages_id}}', {
+                language: '{{$languages->code}}'
+            });
+        @endforeach
+        $(".textarea").wysihtml5();
+
+    });
+</script>
 @endsection

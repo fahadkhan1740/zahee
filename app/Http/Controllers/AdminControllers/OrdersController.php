@@ -30,7 +30,7 @@ class OrdersController extends Controller
         $errorMessage = array();
 
         $orders = DB::table('orders')->orderBy('created_at', 'DESC')
-            ->where('customers_id', '!=', '')->paginate(10);
+            ->where('customers_id', '!=', '')->orderby('orders.date_purchased', 'DESC')->paginate(10);
 
         $index = 0;
         $total_price = array();
@@ -38,7 +38,7 @@ class OrdersController extends Controller
 
         foreach ($orders as $orders_data) {
             // $orders_products = DB::table('orders_products')->sum('final_price');
-           
+
             $prod_name = DB::table('orders_products')
             ->select('orders_products.*',DB::raw('sum(final_price) as final_price, orders_products.products_name'))
             ->where('orders_products.orders_id', '=', $orders_data->orders_id)->first();

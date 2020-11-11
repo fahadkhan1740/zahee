@@ -74,6 +74,7 @@
                   <tr class="d-flex">
                     <th class="col-12 col-md-2">@lang('website.Order ID')</th>
                     <th class="col-12 col-md-2">@lang('website.Order Date')</th>
+                    <th class="col-12 col-md-2">@lang('website.Product')</th>
                     <th class="col-12 col-md-2">@lang('website.Price')</th>
                     <th class="col-12 col-md-2" >@lang('website.Status')</th>
                     <th class="col-12 col-md-2" ></th>
@@ -87,7 +88,10 @@
                   <tr class="d-flex">
                     <td class="col-12 col-md-2">{{$orders->orders_id}}</td>
                     <td class="col-12 col-md-2">
-                      {{ date('d/m/Y', strtotime($orders->date_purchased))}}
+                      {{ date('d/m/Y H:i a', strtotime($orders->date_purchased))}}
+                    </td>
+                    <td class="col-12 col-md-2">
+                      {{ $orders->products_name}}
                     </td>
                     @php
                     $default_currency = DB::table('currencies')->where('is_default',1)->first();
@@ -101,9 +105,10 @@
                     }
                     @endphp
                     <td class="col-12 col-md-2">
-                      {{Session::get('symbol_left')}}{{$orders->order_price*$currency_value}}{{Session::get('symbol_right')}}
+                    @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{$orders->order_price*$currency_value}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif
                     </td>
                     <td class="col-12 col-md-2">
+                 
                         @if($orders->orders_status_id == '2')
                             <span class="badge badge-success">{{$orders->orders_status}}</span>
                             &nbsp;&nbsp;/&nbsp;&nbsp;
@@ -115,19 +120,29 @@
                             <button type="submit" class="badge badge-danger" style="text-transform:capitalize; cursor:pointer">{{$orders->orders_status}}) </button>
                             </form>
                         @else
+                        @php
+                            $future_date  = strtotime($orders->date_purchased);
+                            $futureDate = $future_date+(60*5);
+                            $formatDate = date("Y-m-d H:i:s", $futureDate);
+                            $currentDate = date("Y-m-d H:i:s");
+                        
+                          @endphp
                           @if($orders->orders_status_id == '3')
                             <span class="badge badge-danger">{{$orders->orders_status}} </span>
                           @elseif($orders->orders_status_id == '4')
-                            <span class="badge badge-danger">{{$orders->orders_status}} </span>                                                @else
+                            <span class="badge badge-danger">{{$orders->orders_status}} </span>                                               
+                          @else
                             <span class="badge badge-primary">{{$orders->orders_status}}</span>
+                           
+                            @if($currentDate < $formatDate)
                             &nbsp;&nbsp;/&nbsp;&nbsp;
-
-                            <form action="{{ URL::to('/updatestatus')}}" method="post" style="display: inline-block">
-                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                            <input type="hidden" name="orders_id" value="{{$orders->orders_id}}">
-                            <input type="hidden" name="orders_status_id" value="3">
-                            <button type="submit" class="badge badge-danger" style="text-transform:capitalize; cursor:pointer">@lang('website.cancel order') </button>
-                            </form>
+                                <form action="{{ URL::to('/updatestatus')}}" method="post" style="display: inline-block">
+                                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                <input type="hidden" name="orders_id" value="{{$orders->orders_id}}">
+                                <input type="hidden" name="orders_status_id" value="3">
+                                <button type="submit" class="badge badge-danger" style="text-transform:capitalize; cursor:pointer">@lang('website.cancel order') </button>
+                                </form>
+                            @endif
 
                             @endif
                         @endif

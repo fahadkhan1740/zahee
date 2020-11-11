@@ -21,8 +21,8 @@ class Order extends Model
   //place_order
 	public function place_order($request){
 
-		
-		
+
+
           $cart = new Cart();
 					$date_added								=	date('Y-m-d h:i:s');
 					$customers_id            				=   auth()->guard('customer')->user()->id;
@@ -39,7 +39,7 @@ class Order extends Model
 					$delivery_phone            				=   session('shipping_address')->delivery_phone;
 					$delivery_address_type          				=   session('shipping_address')->address_type;
 
-		
+
 					$country = DB::table('countries')->where('countries_id','=', session('shipping_address')->countries_id)->get();
 
 					$delivery_country            			=   $country[0]->countries_name;
@@ -53,17 +53,17 @@ class Order extends Model
 					$billing_phone            				=   session('billing_address')->billing_phone;
 					$billing_address_type            		=   session('billing_address')->billing_address_type;
 
-		
+
 
 					$country = DB::table('countries')->where('countries_id','=', session('billing_address')->billing_countries_id)->get();
 
 					$billing_country            			=   $country[0]->countries_name;
 
 					$payment_method            				=   $request->payment_method;
-				
+
 					$order_information 						=	array();
 
-				
+
 					$last_modified            			=   date('Y-m-d H:i:s');
 					$date_purchased            			=   date('Y-m-d H:i:s');
 
@@ -79,7 +79,7 @@ class Order extends Model
 
 					$shipping_cost            			=   !empty(session('shipping_detail')['shipping_price'])?session('shipping_detail')['shipping_price']:0;
 					$shipping_method            		=   !empty(session('shipping_detail')['mehtod_name'])?session('shipping_detail')['mehtod_name']:'Flat Rate';
-					
+
 					//$orders_date_finished            	=   $request->orders_date_finished;
 
 					if(!empty(session('order_comments'))){
@@ -127,19 +127,21 @@ class Order extends Model
 					} else {
 						$orders_status            			=   '0';
 						$payment_status='Processing';
-						$token= "7Fs7eBv21F5xAocdPvvJ-sCqEyNHq4cygJrQUFvFiWEexBUPs4AkeLQxH4pzsUrY3Rays7GVA6SojFCz2DMLXSJVqk8NG-plK-cZJetwWjgwLPub_9tQQohWLgJ0q2invJ5C5Imt2ket_-JAlBYLLcnqp_WmOfZkBEWuURsBVirpNQecvpedgeCx4VaFae4qWDI_uKRV1829KCBEH84u6LYUxh8W_BYqkzXJYt99OlHTXHegd91PLT-tawBwuIly46nwbAs5Nt7HFOozxkyPp8BW9URlQW1fE4R_40BXzEuVkzK3WAOdpR92IkV94K_rDZCPltGSvWXtqJbnCpUB6iUIn1V-Ki15FAwh_nsfSmt_NQZ3rQuvyQ9B3yLCQ1ZO_MGSYDYVO26dyXbElspKxQwuNRot9hi3FIbXylV3iN40-nCPH4YQzKjo5p_fuaKhvRh7H8oFjRXtPtLQQUIDxk-jMbOp7gXIsdz02DrCfQIihT4evZuWA6YShl6g8fnAqCy8qRBf_eLDnA9w-nBh4Bq53b1kdhnExz0CMyUjQ43UO3uhMkBomJTXbmfAAHP8dZZao6W8a34OktNQmPTbOHXrtxf6DS-oKOu3l79uX_ihbL8ELT40VjIW3MJeZ_-auCPOjpE3Ax4dzUkSDLCljitmzMagH2X8jN8-AYLl46KcfkBV";
-						
+						$token= "cxu2LdP0p0j5BGna0velN9DmzKJTrx3Ftc0ptV8FmvOgoDqvXivkxZ_oqbi_XM9k7jgl3SUriQyRE2uaLWdRumxDLKTn1iNglbQLrZyOkmkD6cjtpAsk1_ctrea_MeOQCMavsQEJ4EZHnP4HoRDOTVRGvYQueYZZvVjsaOLOubLkdovx6STu9imI1zf5OvuC9rB8p0PNIR90rQ0-ILLYbaDZBoQANGND10HdF7zM4qnYFF1wfZ_HgQipC5A7jdrzOoIoFBTCyMz4ZuPPPyXtb30IfNp47LucQKUfF1ySU7Wy_df0O73LVnyV8mpkzzonCJHSYPaum9HzbvY5pvCZxPYw39WGo8pOMPUgEugtaqepILwtGKbIJR3_T5Iimm_oyOoOJFOtTukb_-jGMTLMZWB3vpRI3C08itm7ealISVZb7M3OMPPXgcss9_gFvwYND0Q3zJRPmDASg5NxRlEDHWRnlwNKqcd6nW4JJddffaX8p-ezWB8qAlimoKTTBJCe5CnjT4vNjnWlJWscvk38VNIIslv4gYpC09OLWn4rDNeoUaGXi5kONdEQ0vQcRjENOPAavP7HXtW1-Vz83jMlU3lDOoZsdEKZReNYpvdFrGJ5c3aJB18eLiPX6mI4zxjHCZH25ixDCHzo-nmgs_VTrOL7Zz6K7w6fuu_eBK9P0BDr2fpS";
+
 						$data = array (
 							'PaymentMethodId' => $payment_method,
 							'CustomerName' => $billing_firstname.' '. $billing_lastname,
 							'DisplayCurrencyIso' => 'KWD',
 							'InvoiceValue' => (float)$order_price,
 							'CallBackUrl' => 'https://zaahee.shop/',
-							'ErrorUrl' => 'https://zaahee.shop/',							
-						);
+							'ErrorUrl' => 'https://zaahee.shop/',
+                        );
+
+
 
 						$basURL = "https://apitest.myfatoorah.com";
-						
+
 						$curl = curl_init();
 						curl_setopt_array($curl, array(
 						CURLOPT_URL => "$basURL/v2/ExecutePayment",
@@ -154,7 +156,6 @@ class Order extends Model
 
 						curl_close($curl);
 
-				
 					}
 
 					//check if order is verified
@@ -168,13 +169,13 @@ class Order extends Model
 												 'customers_country'  =>  $delivery_country,
 												 'customers_telephone' => $delivery_phone,
 												 'email'  => $email,
-												
+
 
 												 'delivery_name'  =>  $delivery_firstname.' '.$delivery_lastname,
 												 'delivery_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
-											
+
 												 'delivery_city' => $delivery_city,
-											
+
 												 'delivery_country'  => $delivery_country,
 
 												 'billing_name'  => $billing_firstname.' '.$billing_lastname,
@@ -183,7 +184,7 @@ class Order extends Model
 												 'billing_country'  =>  $billing_country,
 
 												 'payment_method'  =>  $payment_method,
-												
+
 												 'last_modified' => $last_modified,
 												 'date_purchased'  => $date_purchased,
 												 'order_price'  => $order_price,
@@ -337,13 +338,13 @@ class Order extends Model
 								 'customers_country'  =>  $delivery_country,
 								 'customers_telephone' => $delivery_phone,
 								 'email'  => $email,
-								
+
 
 								 'delivery_name'  =>  $delivery_firstname.' '.$delivery_lastname,
 								 'delivery_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
-							
+
 								 'delivery_city' => $delivery_city,
-							
+
 								 'delivery_country'  => $delivery_country,
 
 								 'billing_name'  => $billing_firstname.' '.$billing_lastname,
@@ -352,10 +353,6 @@ class Order extends Model
 								 'billing_country'  =>  $billing_country,
 
 								 'payment_method'  =>  $payment_method,
-								//  'cc_type' => $cc_type,
-								//  'cc_owner'  => $cc_owner,
-								//  'cc_number' =>$cc_number,
-								//  'cc_expires'  =>  $cc_expires,
 								 'last_modified' => $last_modified,
 								 'date_purchased'  => $date_purchased,
 								 'order_price'  => $order_price,
@@ -377,7 +374,8 @@ class Order extends Model
 								 'orders_status_id' => $orders_status,
 								 'date_added'  => $date_added,
 								 'customer_notified' =>'1',
-								 'comments'  =>  $comments
+                                 'comments'  =>  $comments,
+                                 'orders_status_id' => 1
 							]);
 
 
@@ -486,9 +484,6 @@ class Order extends Model
 						$ordersData['orders_status_history']    =	$orders_status_history;
 						$ordersData['subtotal']    				=	$subtotal;
 
-						//notification/email
-						// $myVar = new AlertController();
-						//$alertSetting = $myVar->orderAlert($ordersData);
 
 						if(session('step')=='4'){
 							session(['step' => array()]);
@@ -499,12 +494,12 @@ class Order extends Model
 
 						//change status of cart products
 						DB::table('customers_basket')->where('customers_id',auth()->guard('customer')->user()->id)->update(['is_order'=>'1']);
-						
-						// Curl Payment URL 
+
+						// Curl Payment URL
 						$json  = json_decode((string)$paymentExecuteResponse, true);
 						$payment_url = $json["Data"]["PaymentURL"];
 
-						header("Location: $payment_url"); 
+						header("Location: $payment_url");
 						exit();
 					}
 					else if($payment_status == "failed"){
@@ -521,49 +516,49 @@ class Order extends Model
 
 		return $product[0]->manufacturers_id;
 	}
-  public function orders($request){
-          $index = new Index();
-					$result = array();
+    public function orders($request){
+        $index = new Index();
+		$result = array();
 
-					$result['commonContent'] = $index->commonContent();
+		$result['commonContent'] = $index->commonContent();
 
-					//orders
-					$orders = DB::table('orders')->orderBy('date_purchased','DESC')->where('customers_id','=', auth()->guard('customer')->user()->id)->get();
-					$index = 0;
-					$total_price = array();
+		//orders
+		$orders = DB::table('orders')->LeftJoin('orders_products', 'orders_products.orders_id', '=', 'orders.orders_id')->orderBy('date_purchased','DESC')->where('customers_id','=', auth()->guard('customer')->user()->id)->get(['orders.*','orders_products.products_name']);
 
-					foreach($orders as $orders_data){
-						$orders_products = DB::table('orders_products')
-							->select('final_price', DB::raw('SUM(final_price) as total_price'))
-							->where('orders_id', '=' ,$orders_data->orders_id)
-							->get();
+		$index = 0;
+		$total_price = array();
 
-						$orders[$index]->total_price = $orders_products[0]->total_price;
+		foreach($orders as $orders_data){
+			$orders_products = DB::table('orders_products')
+				->select('final_price', DB::raw('SUM(final_price) as total_price'))
+				->where('orders_id', '=' ,$orders_data->orders_id)
+				->get();
 
-//                        DB::enableQueryLog();
-						$orders_status_history = DB::table('orders_status_history')
-							->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-							->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-							->select('orders_status_description.orders_status_name', 'orders_status.orders_status_id')
-							->where('orders_status_history.orders_id', '=', $orders_data->orders_id)->where('orders_status_description.language_id',session('language_id'))->orderby('orders_status_history.orders_status_history_id', 'DESC')->limit(1)->get();
-//                        dd(DB::getQueryLog());
+			$orders[$index]->total_price = $orders_products[0]->total_price;
 
-                        if(count($orders_status_history) > 0) {
-                            $orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
-                            $orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
-                        } else {
-                            $orders[$index]->orders_status_id = '';
-                            $orders[$index]->orders_status = '';
-                        }
-						$index++;
+		//    DB::enableQueryLog();
+			$orders_status_history = DB::table('orders_status_history')
+				->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
+				->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+				// ->LeftJoin('orders_products', 'orders_products.orders_id', '=', 'orders_status_history.orders_id')
+				->select('orders_status_description.orders_status_name', 'orders_status.orders_status_id')
+				->where('orders_status_history.orders_id', '=', $orders_data->orders_id)->where('orders_status_description.language_id',session('language_id'))->orderby('orders_status_history.orders_status_history_id', 'DESC')->limit(1)->get();
+		//    dd(DB::getQueryLog());
 
-					}
+			if(count($orders_status_history) > 0) {
+				$orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
+				$orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
+			} else {
+				$orders[$index]->orders_status_id = '';
+				$orders[$index]->orders_status = '';
+			}
+			$index++;
 
-
-					$result['orders'] = $orders;
-					return $result;
 		}
-
+		// dd($orders);
+		$result['orders'] = $orders;
+		return $result;
+	}
 	public function viewOrder($request,$id){
 			$index = new Index();
 
@@ -670,39 +665,39 @@ class Order extends Model
 
 		}
 
-  public function getOrders(){
-			$orders =  DB::select(DB::raw('SELECT orders_id FROM orders WHERE YEARWEEK(CURDATE()) BETWEEN YEARWEEK(date_purchased) AND YEARWEEK(date_purchased)'));
-	    return $orders;
-	}
+	public function getOrders(){
+				$orders =  DB::select(DB::raw('SELECT orders_id FROM orders WHERE YEARWEEK(CURDATE()) BETWEEN YEARWEEK(date_purchased) AND YEARWEEK(date_purchased)'));
+			return $orders;
+		}
 
-	public function allOrders(){
-		$allOrders =  DB::table('orders')->get();
-    return $allOrders;
-	}
+		public function allOrders(){
+			$allOrders =  DB::table('orders')->get();
+		return $allOrders;
+		}
 
-	public function mostOrders($orders_data){
-		$mostOrdered = DB::table('orders_products')
-						->select('orders_products.products_id')
-						->where('orders_id', $orders_data->orders_id)
+		public function mostOrders($orders_data){
+			$mostOrdered = DB::table('orders_products')
+							->select('orders_products.products_id')
+							->where('orders_id', $orders_data->orders_id)
+							->get();
+			return $mostOrdered;
+		}
+
+		public function countCompare(){
+			$count	= DB::table('compare')->where('customer_id',auth()->guard('customer')->user()->id)->count();
+		return $count;
+		}
+
+		public function getPages($slug){
+			$pages = DB::table('pages')
+						->leftJoin('pages_description','pages_description.page_id','=','pages.page_id')
+						->where([['pages.status','1'],['type',2],['pages_description.language_id',session('language_id')],['pages.slug',$slug]])
+						->orwhere([['pages.status','1'],['type',2],['pages_description.language_id',Session::get('language_id')],['pages.slug',$slug]])
 						->get();
-		return $mostOrdered;
-	}
+		return $pages;
+		}
 
-	public function countCompare(){
-		$count	= DB::table('compare')->where('customer_id',auth()->guard('customer')->user()->id)->count();
-    return $count;
-	}
-
-	public function getPages($slug){
-		$pages = DB::table('pages')
-					->leftJoin('pages_description','pages_description.page_id','=','pages.page_id')
-					->where([['pages.status','1'],['type',2],['pages_description.language_id',session('language_id')],['pages.slug',$slug]])
-					->orwhere([['pages.status','1'],['type',2],['pages_description.language_id',Session::get('language_id')],['pages.slug',$slug]])
-					->get();
-     return $pages;
-	}
-
-  public function payments_setting_for_brain_tree(){
+	public function payments_setting_for_brain_tree(){
 		$payments_setting = DB::table('payment_methods_detail')
 		->leftjoin('payment_description', 'payment_description.payment_methods_id', '=', 'payment_methods_detail.payment_methods_id')
 		->leftjoin('payment_methods', 'payment_methods.payment_methods_id', '=', 'payment_methods_detail.payment_methods_id')

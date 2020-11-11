@@ -105,7 +105,7 @@
                   <li><!-- start message -->
                     <a href="{{ URL::to("admin/editProduct")}}/{{ $lowInQunatity->products_id}}">
                       <div class="pull-left">
-                         <img src="{{asset('public').'/'.'/'.$lowInQunatity->products_image}}" class="img-circle" >
+                         <img src="{{asset($lowInQunatity->products_image)}}" class="img-circle" >
                       </div>
                       <h4 style="white-space: normal;">
                         {{ $lowInQunatity->products_name }}

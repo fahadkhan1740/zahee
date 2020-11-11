@@ -26,7 +26,7 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-xs-12">
-
+111
                                     <div class="modal-content">
 
                                         {!! Form::open(array('url' =>'admin/products/images/insertproductimage', 'name'=>'addImageFrom', 'id'=>'addImageFrom', 'method'=>'post', 'class' => 'form-horizontal', 'enctype'=>'multipart/form-data')) !!}
@@ -52,7 +52,7 @@
                                                                   <select class="image-picker show-html " name="image_id" id="select_img">
                                                                       <option value=""></option>
                                                                       @foreach($allimage as $key=>$image)
-                                                                        <option data-img-src="{{asset('public/'.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                        <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                       @endforeach
                                                                   </select>
                                                                   @endif

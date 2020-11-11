@@ -11,7 +11,7 @@
         <div  class="col-md-12">
             <figure>
                 <a href="{{ URL::to('/shop?load_products=1&type=trends&limit=15')}}">
-                 <img src="{{asset('public').'/'.$result['commonContent']['trend_image'][0]->path}}" alt="placeholder" />
+                 <img src="{{asset($result['commonContent']['trend_image'][0]->path)}}" alt="placeholder" />
                 </a>
             </figure>
         </div>
@@ -29,8 +29,6 @@
     </div>
   </div>
     <div class="product-slider b-product-slider">
-
-
       @foreach($result['special']['product_data'] as $key=>$products)
         @include('web.common.product-ref')
       @endforeach
@@ -40,7 +38,7 @@
 
     <div class="banner  banner-ads row">
         @foreach($result['commonContent']['homeBanners'] as $homeBanner)
-            @if($homeBanner->status && $homeBanner->languages_id === Session::get('language_id'))
+            @if($homeBanner->status && $homeBanner->languages_id === 1)
                 <div  class="col-12 col-md-4">
                        <figure style="background-image:url('<?php echo 'public/'.$homeBanner->path ?>')">
                        <a href="{{URL::to($homeBanner->banners_url)}}">
@@ -75,7 +73,7 @@
 
             <figure>
             <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
-                <img src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
+                <img src="{{asset($products->image_path)}}" alt="{{$products->products_name}}" />
                 </a>
             </figure>
             <div class="items-content">
@@ -172,7 +170,7 @@
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('24/7 Online Support')</h6>
-                    <p>Lorem ipsum is simply dummy</p>
+                    <p>Still not sure what you need? Contact with customer service and we will help you achieve maximized to choose your needs.</p>
                 </div>
             </div>
         </div>
@@ -183,7 +181,7 @@
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('Money Guarantee')</h6>
-                    <p>Lorem ipsum is simply dummy</p>
+                    <p>If you have already been billed by ZaaHee.shop, ZaaHee.shop will issue full or partial refunds. (According to the terms and conditions in ZaaHee.shop).</p>
                 </div>
             </div>
         </div>
@@ -194,7 +192,7 @@
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('website.Secure Payment')</h6>
-                    <p>Lorem ipsum is simply dummy</p>
+                    <p>We guarantee that every transaction carried out at zaahee.shop is 100% safe.</p>
                 </div>
             </div>
         </div>
@@ -205,7 +203,7 @@
                 </figure>
                 <div class="service-24-content">
                     <h6>@lang('website.Big Saving')</h6>
-                    <p>Lorem ipsum is simply dummy</p>
+                    <p>Buy more save more.</p>
                 </div>
             </div>
         </div>
@@ -227,7 +225,7 @@
         <div class="product-slider">
                 @foreach($result['featured']['product_data'] as $key=>$products)
                     <?php
-                    
+
                     $default_currency = DB::table('currencies')->where('is_default',1)->first();
                     if($default_currency->id == Session::get('currency_id')){
                         if(!empty($products->discount_price)){
@@ -259,7 +257,7 @@
                         <a href="javascript:void(0)" class="heart-icon whishlist" products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
                             <figure>
                                 <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
-                                    <img src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" />
+                                    <img src="{{asset($products->image_path)}}" alt="{{$products->products_name}}" />
                                 </a>
                             </figure>
                             <div class="items-content">
@@ -269,7 +267,7 @@
                                     <p>
                                      <!-- <span class="price "> -->
                                      @if(empty($products->discount_price))
-                                        <span class="price "> @if(Session::get('direction') == 'ltr') {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rlt'){{Session::get('symbol_right')}}  @endif</span>
+                                        <span class="price "> @if(Session::get('direction') == 'ltr') {{Session::get('symbol_left')}} @endif {{$orignal_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>
                                     <!-- </span> -->
                                         @else
                                         <span class="price new-price"> @if(Session::get('direction') == 'ltr')  {{Session::get('symbol_left')}} @endif  {{$discount_price+0}} @if(Session::get('direction') == 'rtl'){{Session::get('symbol_right')}}  @endif</span>

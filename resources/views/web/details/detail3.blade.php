@@ -23,13 +23,13 @@
               <div class="col-12 col-lg-6">
                 <div class="slider-wrapper">
                     <div class="slider-for-vertical">
-                      <a class="slider-for__item ex1 fancybox-button" href="{{asset('public').'/'.$result['detail']['product_data'][0]->image_path }}" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
-                        <img src="{{asset('public').'/'.$result['detail']['product_data'][0]->image_path }}" alt="Zoom Image" />
+                      <a class="slider-for__item ex1 fancybox-button" href="{{asset($result['detail']['product_data'][0]->image_path }}" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
+                        <img src="{{asset($result['detail']['product_data'][0]->image_path }}" alt="Zoom Image" />
                       </a>
                       @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                         @if($images->image_type == 'ACTUAL')
-                        <a class="slider-for__item ex1 fancybox-button" href="{{asset('public').'/'.$images->image_path }}" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
-                          <img src="{{asset('public').'/'.$images->image_path }}" alt="Zoom Image" />
+                        <a class="slider-for__item ex1 fancybox-button" href="{{asset($images->image_path }}" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
+                          <img src="{{asset($images->image_path }}" alt="Zoom Image" />
                         </a>
                         @endif
                       @endforeach
@@ -38,13 +38,13 @@
 
                     <div class="slider-nav-vertical">
                       <div class="slider-nav__item">
-                        <img src="{{asset('public').'/'.$result['detail']['product_data'][0]->image_path }}" alt="Zoom Image"/>
+                        <img src="{{asset($result['detail']['product_data'][0]->image_path }}" alt="Zoom Image"/>
                       </div>
 
                       @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                       @if($images->image_type == 'THUMBNAIL')
                       <div class="slider-nav__item">
-                        <img src="{{asset('public').'/'.$images->image_path }}" alt="Zoom Image"/>
+                        <img src="{{asset($images->image_path }}" alt="Zoom Image"/>
                       </div>
                       @endif
                       @endforeach

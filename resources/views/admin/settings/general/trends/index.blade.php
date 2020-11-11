@@ -60,7 +60,7 @@
                         <tr>
                             <td>{{ $trend->id }}</td>
                             <td>{{ $trend->trend_title }}</td>
-                            <td><img src="{{asset('public').'/'.$trend->path}}" alt="" width=" 100px"></td>
+                            <td><img src="{{asset($trend->path)}}" alt="" width=" 100px"></td>
                             <td>
                             <strong>{{ trans('labels.ExpiryDate') }}: </strong>@if(!empty($trend->expires_date)) {{ date('d M, Y', strtotime($trend->expires_date)) }}  @endif</td>
 

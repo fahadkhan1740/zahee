@@ -2116,5 +2116,6 @@ return [
 	'Unit Price' => 'Unit Price',
 	'Trend' => 'Trends',
 	'EditTrend' => 'EditTrend',
-	'ListingTrends' => 'ListingTrends'
+    'ListingTrends' => 'ListingTrends',
+    'ProductHomeDisplay' => 'Product Home Display'
 ];

@@ -41,19 +41,19 @@
                   <tbody>
                  @if(count($result['lowQunatity']) > 0)
                     @foreach ($result['lowQunatity'] as  $key=>$lowQunatityProducts)
-                  
+
                         <tr>
-                            <td>{{ $lowQunatityProducts->products_id }}</td>
-                            <td><img src="{{asset('public').'/'.'/'.$lowQunatityProducts->products_image}}" alt="" width=" 100px" height="100px"></td>
-                            <td>{{$lowQunatityProducts->categories_name}}</td>
+                            <td>{{ $lowQunatityProducts['products_id'] }}</td>
+                            <td><img src="{{asset('/'.$lowQunatityProducts['products_image']}}" alt="" width=" 100px" height="100px"></td>
+                            <td>{{$lowQunatityProducts['categories_name']}}</td>
                             <td width="45%">
-                                <strong>{{ $lowQunatityProducts->products_name }}</strong><br>
+                                <strong>{{ $lowQunatityProducts['products_name'] }}</strong><br>
                             </td>
                             <td>
-                                {{ $lowQunatityProducts->products_quantity }}
+                                {{ $lowQunatityProducts['products_quantity'] }}
                             </td>
                             <td>
-                                <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.View') }}" href="stockin?products_id={{ $lowQunatityProducts->products_id }}" class="badge bg-light-blue"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.View') }}" href="stockin?products_id={{ $lowQunatityProducts['products_id'] }}" class="badge bg-light-blue"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @endforeach

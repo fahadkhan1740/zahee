@@ -4,13 +4,13 @@
           <!-- The slideshow -->
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="img-fluid" src="{{asset('public').'/'.$result['detail']['product_data'][0]->image_path }}" alt="image">
+              <img class="img-fluid" src="{{asset($result['detail']['product_data'][0]->image_path }}" alt="image">
             </div>
             @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
               @if($images->image_type == 'ACTUAL')
             <div class="carousel-item">
 
-              <img class="img-fluid" src="{{asset('public').'/'.$images->image_path }}" alt="image">
+              <img class="img-fluid" src="{{asset($images->image_path }}" alt="image">
             </div>
             @endif
           @endforeach
@@ -102,7 +102,7 @@
                  </div>
                   @endforeach
                 @endif
-                
+
 
                   <div class="col-12 col-md-12 form-group" @if(!empty($result['detail']['product_data'][0]->flash_start_date) and $result['detail']['product_data'][0]->server_time < $result['detail']['product_data'][0]->flash_start_date ) style="display: none" @endif>
                     <label>Quantity</label>
@@ -169,9 +169,9 @@
                         @else
                         {{Session::get('symbol_left')}}{{$orignal_price+0}}{{Session::get('symbol_right')}}
                         @endif
-                        
+
                         @if($result['detail']['product_data'][0]->products_min_order>0)
-                      
+
                       @endif
                         </h6>
 

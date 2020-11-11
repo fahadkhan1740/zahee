@@ -21,11 +21,12 @@ class ManufacturerController extends Controller
 {
 
     //
-    public function __construct(Manufacturers $manufacturer,Languages $language,Images $images)
+    public function __construct(Manufacturers $manufacturer,Languages $language,Images $images, Setting $setting)
     {
       $this->manufacturers =$manufacturer;
       $this->language = $language;
       $this->images = $images;
+      $this->varseting = new SiteSettingController($setting);
     }
 
     public function display(){
@@ -36,9 +37,10 @@ class ManufacturerController extends Controller
     }
 
     public function add(Request $request){
-      $allimage = $this->images->getimages();
-      $title = array('pageTitle' => Lang::get("labels.AddManufacturer"));
-      return view("admin.manufacturers.add",$title)->with('allimage',$allimage);
+        $result['allimage'] = $this->images->getimages();
+        $result['languages'] = $this->varseting->getLanguages();
+        $title = array('pageTitle' => Lang::get("labels.AddManufacturer"));
+        return view("admin.manufacturers.add",$title)->with('result',$result);
     }
 
     public function insert(Request $request){
@@ -51,8 +53,9 @@ class ManufacturerController extends Controller
       $title = array('pageTitle' => Lang::get("labels.EditManufacturers"));
       $manufacturers_id = $request->id;
       $editManufacturer = $this->manufacturers->edit($manufacturers_id);
+      $result['languages'] = $this->varseting->getLanguages();
       $allimage = $this->images->getimages();
-      return view("admin.manufacturers.edit",$title)->with('editManufacturer', $editManufacturer)->with('allimage',$allimage);
+      return view("admin.manufacturers.edit",$title)->with('editManufacturer', $editManufacturer)->with('allimage',$allimage)->with('result', $result);
     }
 
 
@@ -64,7 +67,6 @@ class ManufacturerController extends Controller
             'oldImage' => 'required',
             'old_slug' => 'required',
             'slug' => 'required',
-            'name' => 'required',
             'manufacturers_url' => 'required',
 
         ]);

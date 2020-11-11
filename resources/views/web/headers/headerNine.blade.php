@@ -10,14 +10,14 @@
                     <div class="dropdown">
 
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                         <img src="{{asset('public').'/'.session('language_image')}}" width="17px" />
+                         <img src="{{asset(session('language_image')}}" width="17px" />
                           <span style="color:white">{{	session('language_name')}}</span>
                         </button>
                         <ul class="dropdown-menu">
                           @foreach($languages as $language)
                           <li  @if(session('locale')==$language->code) style="background:lightgrey;" @endif>
                             <button  onclick="myFunction1({{$language->languages_id}})" class="btn" style="background:none;" href="#">
-                              <img style="margin-left:10px; margin-right:10px;"src="{{asset('public').'/'.$language->image_path}}" width="17px" />
+                              <img style="margin-left:10px; margin-right:10px;"src="{{asset($language->image_path)}}" width="17px" />
                               <span>{{$language->name}}</span>
                             </button>
                           </li>
@@ -68,7 +68,7 @@
                               <?php
                               if(auth()->guard('customer')->check()){
                                if(auth()->guard('customer')->user()->avatar == null){ ?>
-                                <img class="img-fluid" src="{{asset('public/web/images/miscellaneous/avatar.jpg')}}">
+                                <img class="img-fluid" src="{{asset('web/images/miscellaneous/avatar.jpg')}}">
                               <?php }else{ ?>
                                 <img class="img-fluid" src="{{auth()->guard('customer')->user()->avatar}}">
                               <?php
@@ -106,7 +106,7 @@
               @endif
 
               @if($result['commonContent']['setting'][77]->value=='logo')
-              <img src="{{asset('public').'/'.$result['commonContent']['setting'][15]->value}}" alt="<?=stripslashes($result['commonContent']['setting'][79]->value)?>">
+              <img src="{{asset($result['commonContent']['setting'][15]->value}}" alt="<?=stripslashes($result['commonContent']['setting'][79]->value)?>">
               @endif
               </a>
                 </div>

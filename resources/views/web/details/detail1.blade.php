@@ -1,6 +1,6 @@
+
 <main id="scrollbar-body" data-scrollbar>
     <!-- banner wrap -->
-
     <section class="product-desc-wrap section">
         <div class="container">
             <div class="product-desc-top">
@@ -11,7 +11,7 @@
                                 @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                     @if($images->image_type == 'ACTUAL')
                                     <div class="items">
-                                        <img src="{{asset('public').'/'.$images->image_path }}" alt="Zoom Image" />
+                                        <img src="{{asset($images->image_path }}" alt="Zoom Image" />
                                     </div>
                                     @endif
                                 @endforeach
@@ -20,7 +20,7 @@
                                 @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                     @if($images->image_type == 'ACTUAL')
                                         <div class="items">
-                                            <img src="{{asset('public').'/'.$images->image_path }}" alt="Zoom Image"/>
+                                            <img src="{{asset($images->image_path }}" alt="Zoom Image"/>
                                         </div>
                                 @endif
                                 @endforeach
@@ -71,15 +71,38 @@
                                                 <li class=""><a href="{{ URL::to('/shop?category='.$result['category_slug'])}}">{{$result['category_name']}}</a></li>
                                             @endif
                                             <li class="active">{{$result['detail']['product_data'][0]->products_name}}</li>
-                                            
+
                                         </ul>
+                                        @if(!empty($result['detail']['product_data'][0]->flash_expires_date))
+                                        <div class="counter-container"></div>
+                                        @section('scripts')
+                                            <script>
+                                                var time = "<?=$result['detail']['product_data'][0]->flash_expires_date?>";
+                                                // alert(time);
+                                                var cd = new Countdown({
+                                                    cont: document.querySelector('.counter-container'),
+                                                    date: +time*1000,
+                                                    outputTranslation: {
+                                                        year: 'Years',
+                                                        day: 'Days',
+                                                        hour: 'Hours',
+                                                        minute: 'Minutes',
+                                                        second: 'Seconds',
+                                                    },
+                                                    endCallback: null,
+                                                    outputFormat: 'day|hour|minute|second',
+                                                });
+                                                cd.start();
+                                            </script>
+                                        @endsection
+                                        @endif
                                         <h4>{{$result['detail']['product_data'][0]->products_name}}</h4>
                                         <h6>{{$result['detail']['product_data'][0]->product_sub_title}}</h6>
                                        <p>
                                        @if($result['detail']['product_data'][0]->defaultStock == 0)
-                                            <span class="outstock"><i class="fas fa-times"></i>@lang('website.Out of Stock')</span>
+                                            <span class="outstock" style="color: #ce3d4b;font-size: 16px;font-weight: 500;"><i class="fas fa-times"></i> @lang('website.Out of Stock')</span>
                                             @else
-                                            <span class="instock"><i class="fas fa-check"></i>@lang('website.In stock')</span>
+                                            <span class="instock"><i class="fas fa-check"></i> @lang('website.In stock')</span>
                                             @endif
                                        </p>
 
@@ -100,7 +123,7 @@
                                              <div class="product-desc product-desc-color">
                                                 <div class="product-desc product-desc-size">
                                                     <label>
-                                                    {{ $attributes_data['option']['name'] }} 
+                                                    {{ $attributes_data['option']['name'] }}
                                                     <input type="hidden" name="{{ $attributes_data['option']['id'] }}" class="currentstock attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}" />
                                                     </label>
                                                 <div class="sizee__wrap custom___radio">
@@ -109,7 +132,7 @@
                                                     <input type="radio" {{$key}} attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = "{{ $values_data['price_prefix'] }}"  value_price ="{{ $values_data['price']+0 }}" name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity(`{{ $attributes_data['option']['id'] }}`)" class="currentstock attributeid_<?=$index++?>" attributeid = "{{$attributes_data['option']['id']}}" @if($key == 0) 'checked' @endif/>
                                                    @if($attributes_data['option']['name']  === 'Color' || $attributes_data['option']['name']  === 'اللون')
                                                     <span class="radio_bx" style=" background:{{ $values_data['value'] }}; "></span>
-                                                    @else 
+                                                    @else
                                                     <span class="radio_bx">{{ $values_data['value'] }}</span>
                                                     @endif
                                                     </label>
@@ -174,6 +197,16 @@
                                                         $discount_percentage = 0;
                                                         $discounted_price = 0;
                                                     }
+                                                } else if(!empty($result['detail']['product_data'][0]->flash_price)) {
+                                                    if(($orignal_price+0)>0){
+                                                        $discounted_price = $orignal_price-$flash_price;
+                                                        $discount_percentage = $discounted_price/$orignal_price*100;
+                                                        $discounted_price = $result['detail']['product_data'][0]->flash_price;
+
+                                                    }else{
+                                                        $discount_percentage = 0;
+                                                        $discounted_price = 0;
+                                                    }
                                                 }
                                                 else{
                                                     $discounted_price = $orignal_price;
@@ -195,7 +228,7 @@
                                                 @if(!in_array($result['detail']['product_data'][0]->products_id ,$result['cartArray']))
                                                     <button type="button" class="btn btn-border add-to-Cart" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Add to Cart')</button>
                                                     <a href="javascript:void(0)" class="btn btn-default buy-now" products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</a>
-                                                @else                                                     
+                                                @else
                                                     <a href="{{ URL::to('/viewcart')}}" class="btn btn-block btn-default" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Go to Cart')</a>
                                               @endif
                                             </div>
@@ -210,32 +243,32 @@
                                                            <li class="dropdown-item">
                                                                <a href="mailto:?subject=I ♥ this product on ZaaHee!&amp;body=Check out this amazing product {{$result['detail']['product_data'][0]->products_name}} in Zaahee Here is the link:  {{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}"
                                                                title="Share by Email">
-                                                                <img class="share-img" src="{{asset('public/web/images/cus/email.svg')}}"/>
+                                                                <img class="share-img" src="{{asset('web/images/cus/email.svg')}}"/>
                                                                </a>
                                                            </li>
                                                         <li class="dropdown-item">
                                                             <a href="#" onclick="share_fb(`{{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}`);return false;" rel="nofollow" share_url="{{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}" target="_blank">
-                                                            <img class="share-img" src="{{asset('public/web/images/cus/fb.svg')}}"/>
+                                                            <img class="share-img" src="{{asset('web/images/cus/fb.svg')}}"/>
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="https://t.me/share/url?url={{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}&text={{$result['detail']['product_data'][0]->products_name}}" target="_blank">
-                                                            <img class="share-img" src="{{asset('public/web/images/cus/telegram.svg')}}"/>
+                                                            <img class="share-img" src="{{asset('web/images/cus/telegram.svg')}}"/>
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="https://twitter.com/intent/tweet?url={{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}" target="_blank">
-                                                                <img class="share-img" src="{{asset('public/web/images/cus/twitter.svg')}}" />
+                                                                <img class="share-img" src="{{asset('web/images/cus/twitter.svg')}}" />
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="javascript:void(0)">
-                                                                <img class="share-img" src="{{asset('public/web/images/cus/whatsapp.svg')}}" />
+                                                                <img class="share-img" src="{{asset('web/images/cus/whatsapp.svg')}}" />
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="javascript:void(0)">
-                                                                <img class="share-img" src="{{asset('public/web/images/cus/instagram.svg')}}" />
+                                                                <img class="share-img" src="{{asset('web/images/cus/instagram.svg')}}" />
                                                             </a>
                                                         </li>
 
@@ -251,7 +284,7 @@
                     </div>
                 </div>
             </div>
-    
+
 
 
             <div class="description-detail-wrap">

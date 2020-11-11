@@ -29,7 +29,8 @@ class constantBanner extends Model
 
 		$banners = DB::table('constant_banners')
 		->join('languages','languages.languages_id','=','constant_banners.languages_id')
-		->leftJoin('image_categories','constant_banners.banners_image','=','image_categories.image_id')
+        ->leftJoin('image_categories','constant_banners.banners_image','=','image_categories.image_id')
+        ->where('constant_banners.languages_id', '=', 1)
 		->select('constant_banners.*','image_categories.path','languages.name as language_name')
 		->groupBy('constant_banners.banners_id')
 		->orderBy('constant_banners.banners_id','ASC')

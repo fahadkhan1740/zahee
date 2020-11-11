@@ -3,9 +3,6 @@
 
 <!-- checkout Content -->
 <section class="checkout-area">
-
-
-
  <div class="container">
    <div class="row">
      <div class="col-12 col-sm-12">
@@ -80,15 +77,15 @@
 
                      <div class="form-group">
                        <label for="exampleInputAddress1">@lang('website.Address')</label>
-                       <input type="text" required class="form-control field-validate" name="flat" id="flat" aria-describedby="addressHelp" placeholder="@lang('website.address_flat')">
+                       <input type="text" required class="form-control field-validate" name="flat" id="flat" aria-describedby="addressHelp"   value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->flat}}@endif" placeholder="@lang('website.address_flat')">
                          <br>
-                       <input type="text" required class="form-control field-validate" name="street" id="street" aria-describedby="addressHelp" placeholder="@lang('website.address_street')">
+                       <input type="text" required class="form-control field-validate" name="street" id="street" aria-describedby="addressHelp" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->street}}@endif" placeholder="@lang('website.address_street')">
                        <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your address')</span>
                      </div>
                      <div class="form-group">
                        <label for="exampleSelectCountry1">@lang('website.Country')</label>
                        <div class="select-control">
-                           <select required class="form-control field-validate" id="entry_country_id" onChange="getZones();" name="countries_id" aria-describedby="countryHelp">
+                           <select required class="form-control field-validate" id="entry_country_id"  name="countries_id" aria-describedby="countryHelp">
                              <option value="" selected>@lang('website.Select Country')</option>
                              @if(!empty($result['countries'])>0)
                                @foreach($result['countries'] as $countries)
@@ -106,7 +103,7 @@
                        </div>
                        <div class="form-group">
                          <label for="exampleInputNumber1">@lang('website.Phone Number')</label>
-                         <input required type="text" class="form-control" id="delivery_phone" aria-describedby="numberHelp" placeholder="Enter Your Phone Number" name="delivery_phone" value="@if(!empty(session('shipping_address'))>0){{session('shipping_address')->delivery_phone}}@endif">
+                         <input required type="text" class="form-control" id="delivery_phone" aria-describedby="numberHelp" placeholder="Enter Your Phone Number" name="delivery_phone" value="">
                          <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please enter your valid phone number')</span>
                        </div>
                        <div class="form-group">
@@ -159,7 +156,7 @@
                              </div>
                              <span class="help-block error-content" hidden>@lang('website.Please select your country')</span>
                            </div>
-                    
+
                            <div class="form-group">
                                <label for="exampleSelectCity1">@lang('website.City')</label>
                                <input type="text" class="form-control same_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) readonly @endif @else readonly @endif  id="billing_city" name="billing_city" value="@if(!empty(session('billing_address'))>0){{session('billing_address')->billing_city}}@endif" placeholder="Enter Your City">
@@ -181,7 +178,7 @@
                          </div>
                              <div class="form-group">
                                  <div class="form-check">
-                                     <input class="form-check-input" type="checkbox" id="same_billing_address" value="1" name="same_billing_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) checked @endif @else checked  @endif > @lang('website.Same shipping and billing address')>
+                                     <input class="form-check-input" type="checkbox" id="same_billing_address" value="1" name="same_billing_address" @if(!empty(session('billing_address'))>0) @if(session('billing_address')->same_billing_address==1) checked @endif @else checked  @endif > @lang('website.Same shipping and billing address')
 
                                      <small id="checkboxHelp" class="form-text text-muted"></small>
                                    </div>
@@ -254,7 +251,7 @@
                                                    <td class="col-12 col-md-2 item">
                                                        <input type="hidden" name="cart[]" value="{{$products->customers_basket_id}}">
                                                          <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="cart-thumb">
-                                                             <img class="img-fluid" src="{{asset('public').'/'.$products->image_path}}" alt="{{$products->products_name}}" alt="">
+                                                             <img class="img-fluid" src="{{asset($products->image_path)}}" alt="{{$products->products_name}}" alt="">
                                                          </a>
                                                    </td>
                                                    <td class="col-12 col-md-4 item-detail-left">
@@ -353,16 +350,16 @@
                                                                     <img src="{{$payment_methods->ImageUrl}}" alt="{{$payment_methods->PaymentMethodEn}}"/>
                                                                     </label>
                                                                   </li>
-                                                            
-                                                   
+
+
                                                        @endforeach
-                                                    
-                                                               
+
+
                                                                <!-- <input type="hidden" name="payment_method_id" value="0"> -->
                                                               <li>
                                                                 <input type="radio" name="payment_method" class="payment_method" value="0">
                                                                 <label>
-                                                              COD
+                                                              Cash On Delivery
                                                                 </label>
                                                               </li>
                                                    </ul>
@@ -372,9 +369,9 @@
                                            </div>
                                                </form>
                                            </div>
-                                           
+
                                        </div>
-          
+
                  </div>
                </div>
          </div>

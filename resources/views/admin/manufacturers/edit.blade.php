@@ -56,6 +56,27 @@
                                             {!! Form::hidden('oldImage',  $editManufacturer[0]->image , array('id'=>'oldImage')) !!}
 
 
+                                            @foreach($editManufacturer as $ed)
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Name') }}<span style="color:red;">*</span> @if($ed->languages_id == 1) (English) @elseif($ed->languages_id == 4) (Arabic) @endif</label>
+                                                <div class="col-sm-10 col-md-4">
+                                                    <input name="categoryName_<?=$ed->languages_id?>" class="form-control field-validate" value="{{$ed->name}}">
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+
+                                                    <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="editor<?=$ed->languages_id?>" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Description') }}<span style="color:red;">*</span></label>
+                                                <div class="col-sm-10 col-md-8">
+                                                    <textarea id="editor<?=$ed->languages_id?>" name="products_description_<?=$ed->languages_id?>" class="form-control" rows="5">{{stripslashes($ed->description)}}</textarea>
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                </div>
+                                            </div>
+                                            @endforeach
+
+
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.slug') }} </label>
                                                 <div class="col-sm-10 col-md-4">
@@ -66,14 +87,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Name') }}</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    {!! Form::text('name',  $editManufacturer[0]->name , array('class'=>'form-control field-validate', 'id'=>'name'), value(old('name'))) !!}
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.ManufacturerNameExample') }}</span>
-                                                    <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
-                                                </div>
-                                            </div>
 
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.ManufacturerURL') }}</label>
@@ -102,7 +115,7 @@
                                                                             <select class="image-picker show-html " name="image_id" id="select_img">
                                                                                 <option  value=""></option>
                                                                                 @foreach($allimage as $key=>$image)
-                                                                                    <option data-img-src="{{asset('public/'.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                                    <option data-img-src="{{asset(''.$image->path)}}"  class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                                 @endforeach
                                                                             </select>
                                                                         @endif
@@ -129,9 +142,9 @@
                                                             <br>
                                                             {!! Form::hidden('oldImage', $editManufacturer[0]->image, array('id'=>'oldImage')) !!}
                                                             @if(($editManufacturer[0]->path!== null))
-                                                                <img width="80px" src="{{asset('public/'.$editManufacturer[0]->path)}}" class="img-circle">
+                                                                <img width="80px" src="{{asset(''.$editManufacturer[0]->path)}}" class="img-circle">
                                                             @else
-                                                                <img width="80px" src="{{asset('public/'.$editManufacturer[0]->path) }}" class="img-circle">
+                                                                <img width="80px" src="{{asset(''.$editManufacturer[0]->path) }}" class="img-circle">
                                                             @endif
 
                                                         </div>
@@ -178,4 +191,17 @@
         </section>
         <!-- /.content -->
     </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(function() {
+        @foreach($result['languages'] as $languages)
+            CKEDITOR.replace('editor{{$languages->languages_id}}', {
+                language: '{{$languages->code}}'
+            });
+        @endforeach
+        $(".textarea").wysihtml5();
+
+    });
+</script>
 @endsection

@@ -23,10 +23,6 @@
                        <h4>{{auth()->guard('customer')->user()->first_name}} {{auth()->guard('customer')->user()->last_name}}<br>
                          <small>{{auth()->guard('customer')->user()->email}} </small></h4>
                      </div>
-{{--                     <div class="col-12 col-sm-8 col-md-6 detail">--}}
-{{--                       <p>E-mail:<span><a href="#">{{auth()->guard('customer')->user()->email}}</a></span></p>--}}
-
-{{--                     </div>--}}
                      </div>
                  </div>
 
@@ -134,29 +130,6 @@
                         </button>
                     </div>
                 @endif
-{{--                <div class="form-group row justify-content-center">--}}
-{{--                  <div class="col-12 media-main">--}}
-{{--                      <div class="media">--}}
-{{--                        @if(!empty(auth()->guard('customer')->user()->avatar))--}}
-{{--                            <input type="hidden" name="customers_old_picture" value="{{ auth()->guard('customer')->user()->avatar }}">--}}
-{{--                        @else--}}
-{{--                          <input type="hidden" name="customers_old_picture" value="">--}}
-{{--                        @endif--}}
-{{--                        <div class="media__pro">--}}
-{{--                          <img style="margin-bottom:-50px;" src="{{auth()->guard('customer')->user()->avatar}}" alt="avatar">--}}
-{{--                          </div>--}}
-{{--                          <div class="media-body">--}}
-{{--                            <div class="row">--}}
-{{--                              <div class="col-12 col-sm-4 col-md-6">--}}
-{{--                                 <input name="picture" id="userImage" type="file" class="inputFile" onChange="showPreview(this);" /><br>--}}
-{{--                              </div>--}}
-{{--                            </div>--}}
-{{--                          </div>--}}
-
-{{--                      </div>--}}
-{{--                  </div>--}}
-{{--                </div>--}}
-
                  <div class="form-group row">
                    <label for="firstName" class="col-sm-2 col-form-label">@lang('website.First Name')</label>
                    <div class="col-sm-10">
@@ -218,10 +191,24 @@
              <form name="updateMyPassword" class="" enctype="multipart/form-data" action="{{ URL::to('/updateMyPassword')}}" method="post">
                  @csrf
                  <div class="form-group row">
+                     <label for="new_password" class="col-sm-3 col-form-label">@lang('website.Old Password')</label>
+                     <div class="col-sm-6">
+                         <input name="old_password" type="password" class="form-control" id="old_password" placeholder="@lang('website.Old Password')">
+                         <span class="help-block error-content" hidden>@lang('website.Please enter your old password')</span>
+                     </div>
+                 </div>
+                 <div class="form-group row">
                      <label for="new_password" class="col-sm-3 col-form-label">@lang('website.New Password')</label>
                      <div class="col-sm-6">
                          <input name="new_password" type="password" class="form-control" id="new_password" placeholder="@lang('website.New Password')">
                          <span class="help-block error-content" hidden>@lang('website.Please enter your password and should be at least 6 characters long')</span>
+                     </div>
+                 </div>
+                 <div class="form-group row">
+                     <label for="new_password" class="col-sm-3 col-form-label">@lang('website.Confirm Password')</label>
+                     <div class="col-sm-6">
+                         <input name="confirm_password" type="password" class="form-control" id="confirm_password" placeholder="@lang('website.Confirm Password')">
+                         <span class="help-block error-content" hidden>@lang('website.Please confirm your password')</span>
                      </div>
                  </div>
                  <div class="button">
