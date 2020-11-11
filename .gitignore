@@ -21,3 +21,6 @@ composer.lock
 .idea/*
 .DS_Store
 .php_cs.cache
+
+/storage/framework/views/
+/storage/framework/sessions/

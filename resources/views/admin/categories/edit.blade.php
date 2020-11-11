@@ -92,7 +92,7 @@
                                                                 <select class="image-picker show-html " name="image_id" id="select_img">
                                                                     <option value=""></option>
                                                                     @foreach($allimage as $key=>$image)
-                                                                    <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                    <option data-img-src="{{asset($image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                     @endforeach
                                                                 </select>
                                                                 @endif
@@ -124,7 +124,7 @@
                                             <div class="col-sm-10 col-md-4">
                                               <span class="help-block " style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
                                               <br>
-                                              <img src="{{asset(''.$result['editSubCategory'][0]->imgpath)}}" alt="" width=" 100px">
+                                              <img src="{{asset($result['editSubCategory'][0]->imgpath)}}" alt="" width=" 100px">
                                             </div>
                                         </div>
 
@@ -146,7 +146,7 @@
                                                                 <select class="image-picker show-html " name="image_icone" id="select_img">
                                                                     <option value=""></option>
                                                                     @foreach($allimage as $key=>$image)
-                                                                    <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                    <option data-img-src="{{asset($image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                     @endforeach
                                                                 </select>
                                                                 @endif
@@ -180,7 +180,7 @@
                                             <div class="col-sm-10 col-md-4">
                                                 <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
                                                 <br>
-                                                <img src="{{asset(''.$result['editSubCategory'][0]->iconpath)}}" alt="" width=" 100px">
+                                                <img src="{{asset($result['editSubCategory'][0]->iconpath)}}" alt="" width=" 100px">
 
                                             </div>
                                         </div>

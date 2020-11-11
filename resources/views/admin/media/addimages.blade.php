@@ -84,7 +84,7 @@
                                         <p><a href="{{url('admin/media/deleteimage')}}/{{$image->id}}"
                                                 class="label label-danger">Delete</a></p>
                                     </div> -->
-                                    <img class="test_image" image_id="{{$image->id}}" src="{{asset(''.$image->path)}}" alt="...">
+                                    <img class="test_image" image_id="{{$image->id}}" src="{{asset($image->path)}}" alt="...">
                                 </div>
                             </div>
                             @endforeach

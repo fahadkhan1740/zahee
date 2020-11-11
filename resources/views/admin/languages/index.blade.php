@@ -90,7 +90,7 @@
                                                         </label>
                                                     </td>
                                                     <td>{{ $languages->name }}</td>
-                                                    <td><img src="{{asset(''.$languages->path)}}" width="25px" alt=""></td>
+                                                    <td><img src="{{asset($languages->path)}}" width="25px" alt=""></td>
                                                     <td>{{ $languages->code }}</td>
                                                     <td>{{ $languages->sort_order }}</td>
                                                     <td>

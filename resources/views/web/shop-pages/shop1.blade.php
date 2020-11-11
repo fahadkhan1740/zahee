@@ -10,7 +10,7 @@
                                    @if(property_exists("childs",json_encode($category))) href="#{{$category->slug}}"
                                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="men-cloth"
                                    @else  href="{{url('shop?category=').$category->slug}}" @endif>
-                                    <img class="img-fuild" src="{{asset(''.$category->image_path)}}">
+                                    <img class="img-fuild" src="{{asset($category->image_path)}}">
                                     {{$category->categories_name}}
                                     <span>
                       @if(property_exists("childs",json_encode($category)))

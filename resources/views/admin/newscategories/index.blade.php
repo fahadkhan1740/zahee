@@ -73,7 +73,7 @@
                                                 <tr>
                                                     <td>{{ $categories->id }}</td>
                                                     <td>{{ $categories->name }}</td>
-                                                    <td><img src="{{asset(''.$categories->path)}}" alt="" width=" 100px"></td>
+                                                    <td><img src="{{asset($categories->path)}}" alt="" width=" 100px"></td>
                                                     <td><strong>{{ trans('labels.AddedDate') }}: </strong> {{ $categories->date_added }}<br>
                                                         <strong>{{ trans('labels.ModifiedDate') }}: </strong>{{ $categories->last_modified }}  </td>
                                                     <td><a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.Edit') }}" href="{{url('admin/newscategories/edit')}}/{{ $categories->id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

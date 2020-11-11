@@ -56,7 +56,7 @@
                             <a href="#" class="heart-icon"><i class="fa fa-heart" aria-hidden="true"></i></a>
                             <a href="{{ URL::to('product-detail/'.$viewedProd->products_slug) }}">
                                 <figure>
-                                    <img src="{{asset(''.$viewedProd->image_path)}}" alt="b-product-1.png"/>
+                                    <img src="{{asset($viewedProd->image_path)}}" alt="b-product-1.png"/>
                                 </figure>
                                 <div class="items-content">
                                     <h6>{{$viewedProd->products_name}}</h6>
