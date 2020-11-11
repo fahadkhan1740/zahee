@@ -1,7 +1,9 @@
 <?php
+
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: *');
 header('Access-Control-Allow-Headers: *');
+
 use Illuminate\Http\Request;
 
 /*
@@ -20,8 +22,6 @@ Route::middleware('auth:api', 'cors')->get('/user', function (Request $request) 
 });
 
 
-
-
 /*
 	|--------------------------------------------------------------------------
 	| App Controller Routes
@@ -33,239 +33,237 @@ Route::middleware('auth:api', 'cors')->get('/user', function (Request $request) 
 */
 
 Route::group(['namespace' => 'App'], function () {
+    //Route::post('/uploadimage', 'AppSettingController@uploadimage');
 
-	//Route::post('/uploadimage', 'AppSettingController@uploadimage');
-	
-	Route::post('/getcategories', 'CategoriesController@getcategories');
+    Route::post('/getcategories', 'CategoriesController@getcategories');
 
-	//registration url
-	Route::post('/registerdevices', 'CustomersController@registerdevices');
+    //registration url
+    Route::post('/registerdevices', 'CustomersController@registerdevices');
 
-	//processregistration url
-	Route::post('/processregistration', 'CustomersController@processregistration');
+    //processregistration url
+    Route::post('/processregistration', 'CustomersController@processregistration');
 
-	//update customer info url
-	Route::post('/updatecustomerinfo', 'CustomersController@updatecustomerinfo');
-	Route::post('/updatepassword', 'CustomersController@updatepassword');
+    //update customer info url
+    Route::post('/updatecustomerinfo', 'CustomersController@updatecustomerinfo');
+    Route::post('/updatepassword', 'CustomersController@updatepassword');
 
-	// login url
-	Route::post('/processlogin', 'CustomersController@processlogin');
+    // login url
+    Route::post('/processlogin', 'CustomersController@processlogin');
 
-	//social login
-	Route::post('/facebookregistration', 'CustomersController@facebookregistration');
-	Route::post('/googleregistration', 'CustomersController@googleregistration');
+    //social login
+    Route::post('/facebookregistration', 'CustomersController@facebookregistration');
+    Route::post('/googleregistration', 'CustomersController@googleregistration');
 
-	//push notification setting
-	Route::post('/notify_me', 'CustomersController@notify_me');
+    //push notification setting
+    Route::post('/notify_me', 'CustomersController@notify_me');
 
-	// forgot password url
-	Route::post('/processforgotpassword', 'CustomersController@processforgotpassword');
+    // forgot password url
+    Route::post('/processforgotpassword', 'CustomersController@processforgotpassword');
 
-	/*
-	|--------------------------------------------------------------------------
-	| Location Controller Routes
-	|--------------------------------------------------------------------------
-	|
-	| This section contains countries shipping detail
-	| This section contains links of affiliated to address
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Location Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | This section contains countries shipping detail
+    | This section contains links of affiliated to address
+    |
+    */
 
-	//get country url
-	Route::post('/getcountries', 'LocationController@getcountries');
+    //get country url
+    Route::post('/getcountries', 'LocationController@getcountries');
 
-	//get zone url
-	Route::post('/getzones', 'LocationController@getzones');
+    //get zone url
+    Route::post('/getzones', 'LocationController@getzones');
 
-	//get all address url
-	Route::post('/getalladdress', 'LocationController@getalladdress');
+    //get all address url
+    Route::post('/getalladdress', 'LocationController@getalladdress');
 
-	//address url
-	Route::post('/addshippingaddress', 'LocationController@addshippingaddress');
+    //address url
+    Route::post('/addshippingaddress', 'LocationController@addshippingaddress');
 
-	//update address url
-	Route::post('/updateshippingaddress', 'LocationController@updateshippingaddress');
+    //update address url
+    Route::post('/updateshippingaddress', 'LocationController@updateshippingaddress');
 
-	//update default address url
-	Route::post('/updatedefaultaddress', 'LocationController@updatedefaultaddress');
+    //update default address url
+    Route::post('/updatedefaultaddress', 'LocationController@updatedefaultaddress');
 
-	//delete address url
-	Route::post('/deleteshippingaddress', 'LocationController@deleteshippingaddress');
+    //delete address url
+    Route::post('/deleteshippingaddress', 'LocationController@deleteshippingaddress');
 
-	/*
-	|--------------------------------------------------------------------------
-	| Product Controller Routes
-	|--------------------------------------------------------------------------
-	|
-	| This section contains product data
-	| Such as:
-	| top seller, Deals, Liked, categroy wise or category individually and detail of every product.
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Product Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | This section contains product data
+    | Such as:
+    | top seller, Deals, Liked, categroy wise or category individually and detail of every product.
+    */
 
 
-	//get categories
-	Route::post('/allcategories', 'MyProductController@allcategories');
+    //get categories
+    Route::post('/allcategories', 'MyProductController@allcategories');
 
-	//getAllProducts
-	Route::post('/getallproducts', 'MyProductController@getallproducts');
+    //getAllProducts
+    Route::post('/getallproducts', 'MyProductController@getallproducts');
 
-	//like products
-	Route::post('/likeproduct', 'MyProductController@likeproduct');
+    //like products
+    Route::post('/likeproduct', 'MyProductController@likeproduct');
 
-	//unlike products
-	Route::post('/unlikeproduct', 'MyProductController@unlikeproduct');
+    //unlike products
+    Route::post('/unlikeproduct', 'MyProductController@unlikeproduct');
 
-	//get filters
-	Route::post('/getfilters', 'MyProductController@getfilters');
+    //get filters
+    Route::post('/getfilters', 'MyProductController@getfilters');
 
-	//get getFilterproducts
-	Route::post('/getfilterproducts', 'MyProductController@getfilterproducts');
+    //get getFilterproducts
+    Route::post('/getfilterproducts', 'MyProductController@getfilterproducts');
 
-	Route::post('/getsearchdata', 'MyProductController@getsearchdata');
+    Route::post('/getsearchdata', 'MyProductController@getsearchdata');
 
-	//getquantity
-	Route::post('/getquantity', 'MyProductController@getquantity');
+    //getquantity
+    Route::post('/getquantity', 'MyProductController@getquantity');
 
 
-	/*
-	|--------------------------------------------------------------------------
-	| News Controller Routes
-	|--------------------------------------------------------------------------
-	|
-	| This section contains news data
-	| Such as:
-	| top news or category individually and detail of every news.
+    /*
+    |--------------------------------------------------------------------------
+    | News Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | This section contains news data
+    | Such as:
+    | top news or category individually and detail of every news.
 
-	*/
+    */
 
 
-	//get categories
-	Route::post('/allnewscategories', 'NewsController@allnewscategories');
+    //get categories
+    Route::post('/allnewscategories', 'NewsController@allnewscategories');
 
-	//getAllProducts
-	Route::post('/getallnews', 'NewsController@getallnews');
+    //getAllProducts
+    Route::post('/getallnews', 'NewsController@getallnews');
 
-	/*
-	|--------------------------------------------------------------------------
-	| Cart Controller Routes
-	|--------------------------------------------------------------------------
-	|
-	| This section contains customer orders
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Cart Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | This section contains customer orders
+    |
+    */
 
-	//hyperpaytoken
-	Route::post('/hyperpaytoken', 'OrderController@hyperpaytoken');
+    //hyperpaytoken
+    Route::post('/hyperpaytoken', 'OrderController@hyperpaytoken');
 
-	//hyperpaytoken
-	Route::get('/hyperpaypaymentstatus', 'OrderController@hyperpaypaymentstatus');
+    //hyperpaytoken
+    Route::get('/hyperpaypaymentstatus', 'OrderController@hyperpaypaymentstatus');
 
-	//paymentsuccess
-	Route::get('/paymentsuccess', 'OrderController@paymentsuccess');
+    //paymentsuccess
+    Route::get('/paymentsuccess', 'OrderController@paymentsuccess');
 
-	//paymenterror
-	Route::post('/paymenterror', 'OrderController@paymenterror');
+    //paymenterror
+    Route::post('/paymenterror', 'OrderController@paymenterror');
 
-	//generateBraintreeToken
-	Route::get('/generatebraintreetoken', 'OrderController@generatebraintreetoken');
+    //generateBraintreeToken
+    Route::get('/generatebraintreetoken', 'OrderController@generatebraintreetoken');
 
-	//generateBraintreeToken
-	Route::get('/instamojotoken', 'OrderController@instamojotoken');
+    //generateBraintreeToken
+    Route::get('/instamojotoken', 'OrderController@instamojotoken');
 
-	//add To order
-	Route::post('/addtoorder', 'OrderController@addtoorder');
+    //add To order
+    Route::post('/addtoorder', 'OrderController@addtoorder');
 
-	//updatestatus
-	Route::post('/updatestatus/', 'OrderController@updatestatus');
+    //updatestatus
+    Route::post('/updatestatus/', 'OrderController@updatestatus');
 
-	//get all orders
-	Route::post('/getorders', 'OrderController@getorders');
+    //get all orders
+    Route::post('/getorders', 'OrderController@getorders');
 
-	//get default payment method
-	Route::post('/getpaymentmethods', 'OrderController@getpaymentmethods');
+    //get default payment method
+    Route::post('/getpaymentmethods', 'OrderController@getpaymentmethods');
 
-	//get shipping / tax Rate
-	Route::post('/getrate', 'OrderController@getrate');
+    //get shipping / tax Rate
+    Route::post('/getrate', 'OrderController@getrate');
 
-	//get Coupon
-	Route::post('/getcoupon', 'OrderController@getcoupon');
+    //get Coupon
+    Route::post('/getcoupon', 'OrderController@getcoupon');
 
-	/*
-	|--------------------------------------------------------------------------
-	| Banner Controller Routes
-	|--------------------------------------------------------------------------
-	|
-	| This section contains banners, banner history
-	|
+    /*
+    |--------------------------------------------------------------------------
+    | Banner Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | This section contains banners, banner history
+    |
 
-	*/
+    */
 
-	//get banners
-	Route::get('/getbanners', 'BannersController@getbanners');
+    //get banners
+    Route::get('/getbanners', 'BannersController@getbanners');
 
-	//banners history
-	Route::post('/bannerhistory', 'BannersController@bannerhistory');
+    //banners history
+    Route::post('/bannerhistory', 'BannersController@bannerhistory');
 
-	/*
-	|--------------------------------------------------------------------------
-	| App setting Controller Routes
-	|--------------------------------------------------------------------------
-	|
-	| This section contains app  languages
-	|
+    /*
+    |--------------------------------------------------------------------------
+    | App setting Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | This section contains app  languages
+    |
 
-	*/
-	Route::get('/sitesetting', 'AppSettingController@sitesetting');
+    */
+    Route::get('/sitesetting', 'AppSettingController@sitesetting');
 
 
-	//old app label
-	Route::post('/applabels', 'AppSettingController@applabels');
+    //old app label
+    Route::post('/applabels', 'AppSettingController@applabels');
 
-	//new app label
-	Route::get('/applabels3', 'AppSettingController@applabels3');
-	Route::post('/contactus', 'AppSettingController@contactus');
-	Route::get('/getlanguages', 'AppSettingController@getlanguages');
+    //new app label
+    Route::get('/applabels3', 'AppSettingController@applabels3');
+    Route::post('/contactus', 'AppSettingController@contactus');
+    Route::get('/getlanguages', 'AppSettingController@getlanguages');
 
 
-	/*
-	|--------------------------------------------------------------------------
-	| Page Controller Routes
-	|--------------------------------------------------------------------------
-	|
-	| This section contains news data
-	| Such as:
-	| top Page individually and detail of every Page.
+    /*
+    |--------------------------------------------------------------------------
+    | Page Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | This section contains news data
+    | Such as:
+    | top Page individually and detail of every Page.
 
-	*/
+    */
 
-	//getAllPages
-	Route::post('/getallpages', 'PagesController@getallpages');
+    //getAllPages
+    Route::post('/getallpages', 'PagesController@getallpages');
 
 
-  /*
-	|--------------------------------------------------------------------------
-	| reviews Controller Routes
-	|--------------------------------------------------------------------------
- */
+    /*
+      |--------------------------------------------------------------------------
+      | reviews Controller Routes
+      |--------------------------------------------------------------------------
+   */
 
-   Route::post('/givereview', 'ReviewsController@givereview');
-   Route::post('/updatereview', 'ReviewsController@updatereview');
-   Route::get('/getreviews', 'ReviewsController@getreviews');
+    Route::post('/givereview', 'ReviewsController@givereview');
+    Route::post('/updatereview', 'ReviewsController@updatereview');
+    Route::get('/getreviews', 'ReviewsController@getreviews');
 
-  /*
-  |--------------------------------------------------------------------------
-  | current location Controller Routes
-  |--------------------------------------------------------------------------
-  */
+    /*
+    |--------------------------------------------------------------------------
+    | current location Controller Routes
+    |--------------------------------------------------------------------------
+    */
 
-  Route::get('/getlocation', 'AppSettingController@getlocation');
-  
-  /*
-  |--------------------------------------------------------------------------
-  | currency location Controller Routes
-  |--------------------------------------------------------------------------
-  */
+    Route::get('/getlocation', 'AppSettingController@getlocation');
 
-  Route::get('/getcurrencies', 'AppSettingController@getcurrencies');
+    /*
+    |--------------------------------------------------------------------------
+    | currency location Controller Routes
+    |--------------------------------------------------------------------------
+    */
 
+    Route::get('/getcurrencies', 'AppSettingController@getcurrencies');
 });

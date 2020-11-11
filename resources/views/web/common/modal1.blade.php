@@ -4,13 +4,13 @@
           <!-- The slideshow -->
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="img-fluid" src="{{asset($result['detail']['product_data'][0]->image_path }}" alt="image">
+              <img class="img-fluid" src="{{asset($result['detail']['product_data'][0]->image_path) }}" alt="image">
             </div>
             @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
               @if($images->image_type == 'ACTUAL')
             <div class="carousel-item">
 
-              <img class="img-fluid" src="{{asset($images->image_path }}" alt="image">
+              <img class="img-fluid" src="{{asset($images->image_path) }}" alt="image">
             </div>
             @endif
           @endforeach

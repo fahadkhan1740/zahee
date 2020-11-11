@@ -10,7 +10,7 @@
                                    <?php if(property_exists("childs",json_encode($category))): ?> href="#<?php echo e($category->slug); ?>"
                                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="men-cloth"
                                    <?php else: ?>  href="<?php echo e(url('shop?category=').$category->slug); ?>" <?php endif; ?>>
-                                    <img class="img-fuild" src="<?php echo e(asset(''.$category->image_path)); ?>">
+                                    <img class="img-fuild" src="<?php echo e(asset($category->image_path)); ?>">
                                     <?php echo e($category->categories_name); ?>
 
                                     <span>

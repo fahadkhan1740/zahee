@@ -59,7 +59,7 @@
 
                                                              @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                                           <div class="carousel-item  @if($key==0) active @endif">
-                                                            <img width="100%" class="first-slide"  src="{{asset($images->image_path }}" width="100%" alt="First slide">
+                                                            <img width="100%" class="first-slide"  src="{{asset($images->image_path) }}" width="100%" alt="First slide">
                                                             </a>
                                                           </div>
 
