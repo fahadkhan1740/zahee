@@ -1,1 +1,0 @@
-<?php /**PATH /Users/fkhan/Projects/freelance/zahee/resources/views/web/footers/mobile.blade.php ENDPATH**/ ?>

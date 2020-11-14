@@ -24,3 +24,4 @@ composer.lock
 
 /storage/framework/views/
 /storage/framework/sessions/
+/storage/logs
