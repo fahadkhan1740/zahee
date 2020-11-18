@@ -155,7 +155,6 @@ class ProductsController extends Controller
             'search' => $search,
             'page' => '',
             'filters' => $filters,
-            'limit' => $limit,
             'min_price' => $min_price,
             'max_price' => $max_price
         );
