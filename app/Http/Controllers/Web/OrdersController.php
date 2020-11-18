@@ -6,21 +6,15 @@ namespace App\Http\Controllers\Web;
 //validator is builtin class in laravel
 use Validator;
 
-use DB;
-
 //for password encryption or hash protected
 use Hash;
 
 //for authenitcate login data
 use Auth;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 //for requesting a value
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\Web\CartController;
-use App\Http\Controllers\Web\ShippingAddressController;
-use App\Http\Controllers\Web\AlertController;
 
 //for Carbon a value
 use Carbon;
@@ -34,14 +28,11 @@ use App\Models\Web\Shipping;
 use App\Models\Web\Cart;
 use App\Models\Web\Order;
 
-
 //email
 use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
-
-
     public function __construct(
         Index $index,
         Languages $languages,
@@ -81,32 +72,32 @@ class OrdersController extends Controller
         $result['cart'] = $this->cart->myCart($result);
         if (count($result['cart']) == 0) {
             return redirect("/");
-        } else {
-            //apply coupon
-            if (!empty(session('coupon')) and count(session('coupon')) > 0) {
-                $session_coupon_data = session('coupon');
-                session(['coupon' => array()]);
-                $response = array();
-                if (!empty($session_coupon_data)) {
-                    foreach ($session_coupon_data as $key => $session_coupon) {
-                        $response = $this->cart->common_apply_coupon($session_coupon->code);
-                    }
+        }
+        //apply coupon
+        if (!empty(session('coupon')) and count(session('coupon')) > 0) {
+            $session_coupon_data = session('coupon');
+            session(['coupon' => array()]);
+            $response = array();
+            if (!empty($session_coupon_data)) {
+                foreach ($session_coupon_data as $key => $session_coupon) {
+                    $response = $this->cart->common_apply_coupon($session_coupon->code);
                 }
             }
+        }
 
-            $result['commonContent'] = $this->index->commonContent();
+        $result['commonContent'] = $this->index->commonContent();
 
-            $address = array();
+        $address = array();
 
-            if (empty(session('step'))) {
-                session(['step' => '0']);
-            }
+        if (empty(session('step'))) {
+            session(['step' => '0']);
+        }
 
-            $address = $this->shipping->getDefaulthippingAddress();
+        $address = $this->shipping->getDefaulthippingAddress();
 
-            if (!is_null($address)) {
-                $address = $address;
-            } else {
+        if (!is_null($address)) {
+            $address = $address;
+        } else {
 //                $address = $this->shipping->getShippingAddress('');
 //                if (!empty($address)) {
 //                    $address = $address[0];
@@ -114,79 +105,77 @@ class OrdersController extends Controller
 //                } else {
 //                    $address = '';
 //                }
-                    $address = '';
+            $address = '';
+        }
+
+        // if(!empty(auth()->guard('customer')->user()->customers_default_address_id)) {
+        // 	$address_id = auth()->guard('customer')->user()->customers_default_address_id;
+        // 	$address = $this->shipping->getShippingAddress($address_id);
+        // 	if(!empty($address)){
+        // 		$address = $address[0];
+        // 		$address->delivery_phone=auth()->guard('customer')->user()->customers_telephone;
+        // 	}else{
+        // 		$address = '';
+        // 	}
+        // }
+
+        if (empty(session('shipping_address'))) {
+            session(['shipping_address' => $address]);
+        }
+
+        //shipping counties
+        if (!empty(session('shipping_address')->countries_id)) {
+            $countries_id = session('shipping_address')->countries_id;
+        } else {
+            $countries_id = '';
+        }
+
+        $result['countries'] = $this->shipping->countries();
+
+        //price
+        $price = 0;
+        if (count($result['cart']) > 0) {
+            foreach ($result['cart'] as $products) {
+                $price += $products->final_price * $products->customers_basket_quantity;
             }
+            session(['products_price' => $price]);
+        }
 
-            // if(!empty(auth()->guard('customer')->user()->customers_default_address_id)) {
-            // 	$address_id = auth()->guard('customer')->user()->customers_default_address_id;
-            // 	$address = $this->shipping->getShippingAddress($address_id);
-            // 	if(!empty($address)){
-            // 		$address = $address[0];
-            // 		$address->delivery_phone=auth()->guard('customer')->user()->customers_telephone;
-            // 	}else{
-            // 		$address = '';
-            // 	}
-            // }
+        try {
+            //shipping methods
+            $result['shipping_methods'] = $this->shipping_methods();
 
-            if (empty(session('shipping_address'))) {
-                session(['shipping_address' => $address]);
-            }
+            // Get Payment methods from Myfootarah
 
-            //shipping counties
-            if (!empty(session('shipping_address')->countries_id)) {
-                $countries_id = session('shipping_address')->countries_id;
-            } else {
-                $countries_id = '';
-            }
-
-            $result['countries'] = $this->shipping->countries();
-
-            //price
-            $price = 0;
-            if (count($result['cart']) > 0) {
-                foreach ($result['cart'] as $products) {
-                    $price += $products->final_price * $products->customers_basket_quantity;
-                }
-                session(['products_price' => $price]);
-            }
-
-            try {
-                //shipping methods
-                $result['shipping_methods'] = $this->shipping_methods();
-
-                // Get Payment methods from Myfootarah
-
-                $token = "cxu2LdP0p0j5BGna0velN9DmzKJTrx3Ftc0ptV8FmvOgoDqvXivkxZ_oqbi_XM9k7jgl3SUriQyRE2uaLWdRumxDLKTn1iNglbQLrZyOkmkD6cjtpAsk1_ctrea_MeOQCMavsQEJ4EZHnP4HoRDOTVRGvYQueYZZvVjsaOLOubLkdovx6STu9imI1zf5OvuC9rB8p0PNIR90rQ0-ILLYbaDZBoQANGND10HdF7zM4qnYFF1wfZ_HgQipC5A7jdrzOoIoFBTCyMz4ZuPPPyXtb30IfNp47LucQKUfF1ySU7Wy_df0O73LVnyV8mpkzzonCJHSYPaum9HzbvY5pvCZxPYw39WGo8pOMPUgEugtaqepILwtGKbIJR3_T5Iimm_oyOoOJFOtTukb_-jGMTLMZWB3vpRI3C08itm7ealISVZb7M3OMPPXgcss9_gFvwYND0Q3zJRPmDASg5NxRlEDHWRnlwNKqcd6nW4JJddffaX8p-ezWB8qAlimoKTTBJCe5CnjT4vNjnWlJWscvk38VNIIslv4gYpC09OLWn4rDNeoUaGXi5kONdEQ0vQcRjENOPAavP7HXtW1-Vz83jMlU3lDOoZsdEKZReNYpvdFrGJ5c3aJB18eLiPX6mI4zxjHCZH25ixDCHzo-nmgs_VTrOL7Zz6K7w6fuu_eBK9P0BDr2fpS";
-                $basURL = "https://apitest.myfatoorah.com";
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
+            $token = "cxu2LdP0p0j5BGna0velN9DmzKJTrx3Ftc0ptV8FmvOgoDqvXivkxZ_oqbi_XM9k7jgl3SUriQyRE2uaLWdRumxDLKTn1iNglbQLrZyOkmkD6cjtpAsk1_ctrea_MeOQCMavsQEJ4EZHnP4HoRDOTVRGvYQueYZZvVjsaOLOubLkdovx6STu9imI1zf5OvuC9rB8p0PNIR90rQ0-ILLYbaDZBoQANGND10HdF7zM4qnYFF1wfZ_HgQipC5A7jdrzOoIoFBTCyMz4ZuPPPyXtb30IfNp47LucQKUfF1ySU7Wy_df0O73LVnyV8mpkzzonCJHSYPaum9HzbvY5pvCZxPYw39WGo8pOMPUgEugtaqepILwtGKbIJR3_T5Iimm_oyOoOJFOtTukb_-jGMTLMZWB3vpRI3C08itm7ealISVZb7M3OMPPXgcss9_gFvwYND0Q3zJRPmDASg5NxRlEDHWRnlwNKqcd6nW4JJddffaX8p-ezWB8qAlimoKTTBJCe5CnjT4vNjnWlJWscvk38VNIIslv4gYpC09OLWn4rDNeoUaGXi5kONdEQ0vQcRjENOPAavP7HXtW1-Vz83jMlU3lDOoZsdEKZReNYpvdFrGJ5c3aJB18eLiPX6mI4zxjHCZH25ixDCHzo-nmgs_VTrOL7Zz6K7w6fuu_eBK9P0BDr2fpS";
+            $basURL = "https://apitest.myfatoorah.com";
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
                     CURLOPT_URL => "$basURL/v2/InitiatePayment",
                     CURLOPT_CUSTOMREQUEST => "POST",
                     CURLOPT_POSTFIELDS => "{\"InvoiceAmount\": $price,\"CurrencyIso\": \"KWD\"}",
                     CURLOPT_HTTPHEADER => array("Authorization: Bearer $token", "Content-Type: application/json"),
                 ));
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-                curl_close($curl);
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
 
-                $response = json_decode($response);
+            $response = json_decode($response);
 
-
-                if (isset($response->IsSuccess)) {
-                    $result['payment_methods'] = $response->Data->PaymentMethods;
-                } else {
-                    $result['payment_methods'] = [];
-                }
-            } catch (\Exception $e) {
-                $msg = $e->getMessage();
-
-                return redirect('general_error/'.$msg);
+            if (isset($response->IsSuccess)) {
+                $result['payment_methods'] = $response->Data->PaymentMethods;
+            } else {
+                $result['payment_methods'] = [];
             }
+        } catch (\Exception $e) {
+            $msg = $e->getMessage();
 
-            return view("web.checkout", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
+            return redirect('general_error/'.$msg);
         }
+
+        return view("web.checkout", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
     }
 
     //checkout
@@ -252,7 +241,6 @@ class OrdersController extends Controller
 
         return redirect()->back();
     }
-
 
     //checkout_billing_address
     public function checkout_billing_address(Request $request)
@@ -339,9 +327,8 @@ class OrdersController extends Controller
         $payment_status = $this->order->place_order($request);
         if ($payment_status == 'success') {
             return redirect('orders')->with('success', Lang::get("website.Payment has been processed successfully"));
-        } else {
-            return redirect()->back()->with('error', Lang::get("website.Error while placing order"));
         }
+        return redirect()->back()->with('error', Lang::get("website.Error while placing order"));
     }
 
     //orders
@@ -364,11 +351,9 @@ class OrdersController extends Controller
 
         if (@$result['res'] = "view-order") {
             return view("web.view-order", $title)->with(['result' => $result, 'final_theme' => $final_theme]);
-        } else {
-            return redirect('orders');
         }
+        return redirect('orders');
     }
-
 
     //calculate tax
     public function calculateTax($tax_zone_id)
@@ -377,14 +362,13 @@ class OrdersController extends Controller
         return $tax;
     }
 
-
     //shipping methods
     public function shipping_methods()
     {
         $result = array();
         if (!empty(session('shipping_address'))) {
             $countries_id = session('shipping_address')->countries_id;
-//			$toPostalCode = session('shipping_address')->postcode;
+            //			$toPostalCode = session('shipping_address')->postcode;
             $toCity = session('shipping_address')->city;
             $toAddress = 'gh';
             $countries = $this->order->getCountries($countries_id);
@@ -419,7 +403,6 @@ class OrdersController extends Controller
 
         $products_weight = $total_weight;
 
-
         //website path
         //$websiteURL =  "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
         $websiteURL = "https://".$_SERVER['SERVER_NAME'].'/';
@@ -434,7 +417,6 @@ class OrdersController extends Controller
             //dd($shipping_methods);
 
             $shippings_detail = $this->order->getShippingDetail($shipping_methods);
-
 
             if ($shipping_methods->methods_type_link == 'flateRate' and $shipping_methods->status == '1') {
                 $ups_shipping = $this->order->getUpsShippingRate();
@@ -463,42 +445,42 @@ class OrdersController extends Controller
         /**   BRAIN TREE **/
         //////////////////////
         $result = array();
-//		$payments_setting = $this->order->payments_setting_for_brain_tree();
-//		if($payments_setting['merchant_id']->environment=='0'){
-//			$braintree_enviroment = 'Test';
-//		}else{
-//			$braintree_enviroment = 'Live';
-//		}
+        //		$payments_setting = $this->order->payments_setting_for_brain_tree();
+        //		if($payments_setting['merchant_id']->environment=='0'){
+        //			$braintree_enviroment = 'Test';
+        //		}else{
+        //			$braintree_enviroment = 'Live';
+        //		}
 //
-//		$braintree = array(
-//			'environment' => $braintree_enviroment,
-//			'name' => $payments_setting['merchant_id']->name,
-//			'public_key' => $payments_setting['public_key']->value,
-//			'active' => $payments_setting['merchant_id']->status,
-//			'payment_method'=>$payments_setting['merchant_id']->payment_method,
-//			'payment_currency' => Session::get('currency_code'),
-//		);
+        //		$braintree = array(
+        //			'environment' => $braintree_enviroment,
+        //			'name' => $payments_setting['merchant_id']->name,
+        //			'public_key' => $payments_setting['public_key']->value,
+        //			'active' => $payments_setting['merchant_id']->status,
+        //			'payment_method'=>$payments_setting['merchant_id']->payment_method,
+        //			'payment_currency' => Session::get('currency_code'),
+        //		);
         /**  END BRAIN TREE **/
         //////////////////////
 
         /**   STRIPE**/
         //////////////////////
 
-//	  $payments_setting = $this->order->payments_setting_for_stripe();
-//		if($payments_setting['publishable_key']->environment=='0'){
-//			$stripe_enviroment = 'Test';
-//		}else{
-//			$stripe_enviroment = 'Live';
-//		}
+        //	  $payments_setting = $this->order->payments_setting_for_stripe();
+        //		if($payments_setting['publishable_key']->environment=='0'){
+        //			$stripe_enviroment = 'Test';
+        //		}else{
+        //			$stripe_enviroment = 'Live';
+        //		}
 //
-//		$stripe = array(
-//			'environment' => $stripe_enviroment,
-//			'name' => $payments_setting['publishable_key']->name,
-//			'public_key' => $payments_setting['publishable_key']->value,
-//			'active' => $payments_setting['publishable_key']->status,
-//			'payment_currency' => Session::get('currency_code'),
-//			'payment_method'=>$payments_setting['publishable_key']->payment_method
-//		);
+        //		$stripe = array(
+        //			'environment' => $stripe_enviroment,
+        //			'name' => $payments_setting['publishable_key']->name,
+        //			'public_key' => $payments_setting['publishable_key']->value,
+        //			'active' => $payments_setting['publishable_key']->status,
+        //			'payment_currency' => Session::get('currency_code'),
+        //			'payment_method'=>$payments_setting['publishable_key']->payment_method
+        //		);
 
         /**   END STRIPE**/
         //////////////////////
@@ -517,81 +499,80 @@ class OrdersController extends Controller
             'payment_method' => $payments_setting->payment_method
         );
 
-
         /**   END CASH ON DELIVERY**/
         /*************************/
 
         /**   PAYPAL**/
         /*************************/
-//		$payments_setting = $this->order->payments_setting_for_paypal();
+        //		$payments_setting = $this->order->payments_setting_for_paypal();
 //
-//		if($payments_setting['id']->environment=='0'){
-//			$paypal_enviroment = 'Test';
-//		}else{
-//			$paypal_enviroment = 'Live';
-//		}
+        //		if($payments_setting['id']->environment=='0'){
+        //			$paypal_enviroment = 'Test';
+        //		}else{
+        //			$paypal_enviroment = 'Live';
+        //		}
 //
-//		$paypal = array(
-//			'environment' => $paypal_enviroment,
-//			'name' => $payments_setting['id']->name,
-//			'public_key' => $payments_setting['id']->value,
-//			'active' => $payments_setting['id']->status,
-//			'payment_method'=>$payments_setting['id']->payment_method,
-//			'payment_currency' => Session::get('currency_code'),
+        //		$paypal = array(
+        //			'environment' => $paypal_enviroment,
+        //			'name' => $payments_setting['id']->name,
+        //			'public_key' => $payments_setting['id']->value,
+        //			'active' => $payments_setting['id']->status,
+        //			'payment_method'=>$payments_setting['id']->payment_method,
+        //			'payment_currency' => Session::get('currency_code'),
 //
-//		);
+        //		);
 
         /**   END PAYPAL**/
         /*************************/
 
         /**   INSTAMOJO**/
         /*************************/
-//		$payments_setting = $this->order->payments_setting_for_instamojo();
-//		if($payments_setting['auth_token']->environment=='0'){
-//			$instamojo_enviroment = 'Test';
-//		}else{
-//			$instamojo_enviroment = 'Live';
-//		}
+        //		$payments_setting = $this->order->payments_setting_for_instamojo();
+        //		if($payments_setting['auth_token']->environment=='0'){
+        //			$instamojo_enviroment = 'Test';
+        //		}else{
+        //			$instamojo_enviroment = 'Live';
+        //		}
 //
-//		$instamojo = array(
-//			'environment' => $instamojo_enviroment,
-//			'name' => $payments_setting['auth_token']->name,
-//			'public_key' => $payments_setting['api_key']->value,
-//			'active' => $payments_setting['api_key']->status,
-//			'payment_currency' => Session::get('currency_code'),
-//			'payment_method' => $payments_setting['api_key']->payment_method,
-//		);
+        //		$instamojo = array(
+        //			'environment' => $instamojo_enviroment,
+        //			'name' => $payments_setting['auth_token']->name,
+        //			'public_key' => $payments_setting['api_key']->value,
+        //			'active' => $payments_setting['api_key']->status,
+        //			'payment_currency' => Session::get('currency_code'),
+        //			'payment_method' => $payments_setting['api_key']->payment_method,
+        //		);
 
         /**   END INSTAMOJO**/
         /*************************/
 
         /**   END HYPERPAY**/
         /*************************/
-//		$payments_setting = $this->order->payments_setting_for_hyperpay();
-//		//dd($payments_setting);
-//		if($payments_setting['userid']->environment=='0'){
-//			$hyperpay_enviroment = 'Test';
-//		}else{
-//			$hyperpay_enviroment = 'Live';
-//		}
+        //		$payments_setting = $this->order->payments_setting_for_hyperpay();
+        //		//dd($payments_setting);
+        //		if($payments_setting['userid']->environment=='0'){
+        //			$hyperpay_enviroment = 'Test';
+        //		}else{
+        //			$hyperpay_enviroment = 'Live';
+        //		}
 //
-//		$hyperpay = array(
-//			'environment' => $hyperpay_enviroment,
-//			'name' => $payments_setting['userid']->name,
-//			'public_key' => $payments_setting['userid']->value,
-//			'active' => $payments_setting['userid']->status,
-//			'payment_currency' => Session::get('currency_code'),
-//			'payment_method' => $payments_setting['userid']->payment_method,
-//		);
+        //		$hyperpay = array(
+        //			'environment' => $hyperpay_enviroment,
+        //			'name' => $payments_setting['userid']->name,
+        //			'public_key' => $payments_setting['userid']->value,
+        //			'active' => $payments_setting['userid']->status,
+        //			'payment_currency' => Session::get('currency_code'),
+        //			'payment_method' => $payments_setting['userid']->payment_method,
+        //		);
         /**   END HYPERPAY**/
         /*************************/
 
-//		$result[0] = $braintree;
-//		$result[1] = $stripe;
+        //		$result[0] = $braintree;
+        //		$result[1] = $stripe;
         $result[2] = $cod;
-//		$result[3] = $paypal;
-//		$result[4] = $instamojo;
-//		$result[5] = $hyperpay;
+        //		$result[3] = $paypal;
+        //		$result[4] = $instamojo;
+        //		$result[5] = $hyperpay;
 
         return $result;
     }
@@ -627,11 +608,14 @@ class OrdersController extends Controller
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER,
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
             array(
                 "X-Api-Key:".$instamojo_api_key,
                 "X-Auth-Token:".$instamojo_auth_token
-            ));
+            )
+        );
         $payload = array(
             'purpose' => $siteName.' Payment',
             'amount' => $amount,
@@ -702,9 +686,8 @@ class OrdersController extends Controller
             $result['order_url'] = $order_url;
 
             return view("web.hyperpay", $title)->with('result', $result);
-        } else {
-            return redirect()->back()->with('error', $data->result->description);
         }
+        return redirect()->back()->with('error', $data->result->description);
     }
 
     //checkpayment
@@ -744,11 +727,10 @@ class OrdersController extends Controller
             session(['paymentResponseData' => $data]);
             session(['paymentResponse' => 'success']);
             return redirect('/checkout');
-        } else {
-            session(['paymentResponseData' => $data->result->description]);
-            session(['paymentResponse' => 'error']);
-            return redirect('/checkout');
         }
+        session(['paymentResponseData' => $data->result->description]);
+        session(['paymentResponse' => 'error']);
+        return redirect('/checkout');
     }
 
     //changeresponsestatus
@@ -769,12 +751,9 @@ class OrdersController extends Controller
             if (count($ordersCheck) > 0) {
                 $orders_history_id = $this->order->InsertOrdersCheck($request, $date_added, $comments);
                 return redirect()->back()->with('message', Lang::get("labels.OrderStatusChangedMessage"));
-            } else {
-                return redirect()->back()->with('error', Lang::get("labels.OrderStatusChangedMessage"));
             }
-        } else {
             return redirect()->back()->with('error', Lang::get("labels.OrderStatusChangedMessage"));
         }
+        return redirect()->back()->with('error', Lang::get("labels.OrderStatusChangedMessage"));
     }
-
 }
