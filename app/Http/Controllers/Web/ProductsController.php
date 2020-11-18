@@ -137,8 +137,8 @@ class ProductsController extends Controller
 
             $filters['options_count'] = count($options);
 
-            $filters['options'] = implode($options, ',');
-            $filters['option_value'] = implode($option_values, ',');
+            $filters['options'] = implode(',', $options);
+            $filters['option_value'] = implode(',', $option_values);
 
             $filters['filter_attribute']['options'] = $options;
             $filters['filter_attribute']['option_values'] = $option_values;
