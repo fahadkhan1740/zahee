@@ -1,10 +1,11 @@
-<footer>
+<footer @if(app()->getLocale() === 'ar') style="text-align: right" @endif>
     <div class="container">
         <div class="footer-top-wrap">
             <div class="row justify-content-between">
                 <div class="col-md-3">
                     <div class="footer-col footer-logo-wrap">
-                        <a href="#" class="footer-logo "><img src="https://zaahee.shop/public/web/images/cus/footer-logo.png" alt="logo.png" /></a>
+                        <a href="#" class="footer-logo "><img
+                                src="https://zaahee.shop/public/web/images/cus/footer-logo.png" alt="logo.png"/></a>
 
 
                         <div class="sm-icon-wrap">
@@ -18,9 +19,10 @@
                                 <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                                 <!--<li><a href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a></li> -->
                                 <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-				<li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/titok.png" alt="titok.png" /></a>
-                                    </li>
+                                <li>
+                                    <a href="#"><img src="https://zaahee.shop/public/web/images/cus/titok.png"
+                                                     alt="titok.png"/></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -36,35 +38,42 @@
                             <li><a href="{{ url('/page/delivery-terms') }}">@lang('website.Delivery Terms')</a></li>
                             <li><a href="{{ url('/page/How-to-Order') }}">@lang('website.How to Order')</a></li>
                             <li><a href="{{ url('/page/customer-service') }}">@lang('website.Customer Service')</a></li>
-                            <li><a href="{{ url('/page/refund-policy') }}">@lang('website.Exchange and Returns')</a></li>
+                            <li><a href="{{ url('/page/refund-policy') }}">@lang('website.Exchange and Returns')</a>
+                            </li>
                             <li><a href="{{ url('/page/privacy-policy') }}">@lang('website.Privacy Policy')</a></li>
                             <li><a href="{{ url('/page/term-services') }}">@lang('website.Terms & Conditions')</a></li>
                         </ul>
 
                         <div class="store-paymate-wrap">
                             <div class="store-wrap">
-                                <a href="#"><img src="https://zaahee.shop/public/web/images/cus/store-1.png" alt="store-1.png" /></a>
-                                </a>
-                                <a href="#"><img src="https://zaahee.shop/public/web/images/cus/store-2.png" alt="store-2.png" /></a>
+                                <a href="#"><img src="https://zaahee.shop/public/web/images/cus/store-1.png"
+                                                 alt="store-1.png"/></a>
+                                <a href="#"><img src="https://zaahee.shop/public/web/images/cus/store-2.png"
+                                                 alt="store-2.png"/></a>
                             </div>
                             <div class="payment-wrap">
                                 <h6>@lang('website.We Accept')</h6>
 
                                 <ul>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-1.png" alt="card-1.png" /></a>
+                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-1.png"
+                                                         alt="card-1.png"/></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-2.png" alt="card-2.png" /></a>
+                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-2.png"
+                                                         alt="card-2.png"/></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-3.png" alt="card-3.png" /></a>
+                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-3.png"
+                                                         alt="card-3.png"/></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-4.png" alt="card-4.png" /></a>
+                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-4.png"
+                                                         alt="card-4.png"/></a>
                                     </li>
- 				<li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/money-01.png" alt="money-01.png" /></a>
+                                    <li>
+                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/money-01.png"
+                                                         alt="money-01.png"/></a>
                                     </li>
                                 </ul>
                             </div>
@@ -73,15 +82,19 @@
                 </div>
 
 
-
                 <div class="col-md-3">
                     <div class="footer-col contact-info">
                         <h6>@lang('website.Contact Us')</h6>
                         <ul>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+11234567890" target="_blank">+1 123 - 456 - 7890</a></li>
-                            <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:hello@zaahee.com" target="_blank">hello@zaahee.com</a></li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+11234567890"
+                                                                                 target="_blank">+1 123 - 456 - 7890</a>
+                            </li>
+                            <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:hello@zaahee.com"
+                                                                                      target="_blank">hello@zaahee.com</a>
+                            </li>
                             <li><i class="fa fa-map-marker" aria-hidden="true"></i> 1234 Lake View Rd.
-                                Abc Hills, NY 12418</li>
+                                Abc Hills, NY 12418
+                            </li>
                         </ul>
                     </div>
                 </div>
