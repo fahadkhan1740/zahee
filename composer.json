@@ -24,7 +24,9 @@
         "orangehill/iseed": "^2.6",
         "razorpay/razorpay": "^2.5",
         "rehan/laravel-installer": "dev-master",
-        "spatie/db-dumper": "^2.14"
+        "spatie/db-dumper": "^2.14",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

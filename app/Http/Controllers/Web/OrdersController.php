@@ -107,13 +107,13 @@ class OrdersController extends Controller
             if (!is_null($address)) {
                 $address = $address;
             } else {
-                $address = $this->shipping->getShippingAddress('');
-                if (!empty($address)) {
-                    $address = $address[0];
-                    $address->delivery_phone = auth()->guard('customer')->user()->customers_telephone;
-                } else {
-                    $address = '';
-                }
+//                $address = $this->shipping->getShippingAddress('');
+//                if (!empty($address)) {
+//                    $address = $address[0];
+//                    $address->delivery_phone = auth()->guard('customer')->user()->customers_telephone;
+//                } else {
+//                    $address = '';
+//                }
                     $address = '';
             }
 
@@ -174,7 +174,7 @@ class OrdersController extends Controller
                 $response = json_decode($response);
 
 
-                if ($response->IsSuccess) {
+                if (isset($response->IsSuccess)) {
                     $result['payment_methods'] = $response->Data->PaymentMethods;
                 } else {
                     $result['payment_methods'] = [];
