@@ -275,14 +275,14 @@
                                     <div class="card-body">
                                         @foreach($result['orders'][0]->statusess as $key=>$statusess)
                                             @if(!empty($statusess->comments))
-{{--                                                @if(++$key==1)--}}
-{{--                                                    <h6>@lang('website.Order Comments')--}}
-{{--                                                        : {{ date('d/m/Y', strtotime($statusess->date_added))}}</h6>--}}
+                                                @if(++$key==1)
+                                                    <h6>@lang('website.Order Comments')
+                                                        : {{ date('d/m/Y', strtotime($statusess->date_added))}}</h6>
 
-{{--                                                @else--}}
-{{--                                                    <h6>@lang('website.Admin Comments')--}}
-{{--                                                        : {{ date('d/m/Y', strtotime($statusess->date_added))}}</h6>--}}
-{{--                                                @endif--}}
+                                                @else
+                                                    <h6>@lang('website.Admin Comments')
+                                                        : {{ date('d/m/Y', strtotime($statusess->date_added))}}</h6>
+                                                @endif
                                                 <p class="card-text">{{$statusess->comments}}</p>
                                             @endif
                                         @endforeach

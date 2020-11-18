@@ -673,6 +673,7 @@ class Order extends Model
                     ->select(
                         'orders_status_description.orders_status_name',
                         'orders_status.orders_status_id',
+                        'orders_status_history.date_added',
                         'orders_status_history.comments'
                     )
                     ->where(
