@@ -38,7 +38,7 @@
                             <li><a href="{{ url('/page/customer-service') }}">@lang('website.Customer Service')</a></li>
                             <li><a href="{{ url('/page/refund-policy') }}">@lang('website.Exchange and Returns')</a></li>
                             <li><a href="{{ url('/page/privacy-policy') }}">@lang('website.Privacy Policy')</a></li>
-                            <li><a href="{{ url('/page/term-services') }}">@lang('website.Terms & Condtions')</a></li>
+                            <li><a href="{{ url('/page/term-services') }}">@lang('website.Terms & Conditions')</a></li>
                         </ul>
 
                         <div class="store-paymate-wrap">

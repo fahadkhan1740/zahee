@@ -13,708 +13,704 @@ return [
     |
     */
 
-  'Hotline' => 'الشحن مجانا',
+    'Hotline' => 'الشحن مجانا',
 
-	'SPECIAL DEALS' => 'الشحن مجانا',
+    'SPECIAL DEALS' => 'الشحن مجانا',
 
-	'Call Us Now'  => 'الخط الساخن',
+    'Call Us Now' => 'الخط الساخن',
 
-	'bannerLabel1'=>'الشحن مجانا',
+    'bannerLabel1' => 'الشحن مجانا',
 
-	'bannerLabel1Text'=>'على طلب أكثر من 99 دولارا',
+    'bannerLabel1Text' => 'على طلب أكثر من 99 دولارا',
 
-	'bannerLabel2'=>'عودة الأموال',
+    'bannerLabel2' => 'عودة الأموال',
 
-	'bannerLabel2Text'=>'30 يوم عودة المال',
+    'bannerLabel2Text' => '30 يوم عودة المال',
 
-	'bannerLabel3'=>'دعم 24/7',
+    'bannerLabel3' => 'دعم 24/7',
 
-	'hotline'=>'الخط الساخن',
+    'hotline' => 'الخط الساخن',
 
-	'bannerLabel4'=>'الدفع الآمن',
+    'bannerLabel4' => 'الدفع الآمن',
 
-	'bannerLabel4Text'=>'حماية الدفع عبر الإنترنت',
+    'bannerLabel4Text' => 'حماية الدفع عبر الإنترنت',
 
-	'TopSales'=>'أعلى المبيعات',
+    'TopSales' => 'أعلى المبيعات',
 
-	'Special'=>'خاص',
+    'Special' => 'خاص',
 
-	'MostLiked'=>'الأكثر إعجابا',
+    'MostLiked' => 'الأكثر إعجابا',
 
-	'New'=>'الجديد',
+    'New' => 'الجديد',
 
-	'Likes'=>'الإعجابات',
+    'Likes' => 'الإعجابات',
 
-	'Welcome to our Store'=>'أهلأ بكم في متجرنا',
+    'Welcome to our Store' => 'أهلأ بكم في متجرنا',
 
-	'Orders'=>'أوامر',
+    'Orders' => 'أوامر',
 
-	'All Categories'=>'جميع الفئات',
+    'All Categories' => 'جميع الفئات',
 
-	'Search entire store here'=>'بحث مخزن كامل هنا',
+    'Search entire store here' => 'بحث مخزن كامل هنا',
 
-	'Profile'=>'الملف الشخصي',
+    'Profile' => 'الملف الشخصي',
 
-	''=>'الخروج',
+    '' => 'الخروج',
 
-	'Login/Register'=>'دخولتسجيل',
+    'Login/Register' => 'دخولتسجيل',
 
-	'item(s)'=>'العناصر',
+    'item(s)' => 'العناصر',
 
-	'Quantity'=>'كمية',
+    'Quantity' => 'كمية',
 
-	'Total Items'=>'مجموع العناصر',
+    'Total Items' => 'مجموع العناصر',
 
-	'Total Price'=>'السعر الكلي',
+    'Total Price' => 'السعر الكلي',
 
-	'View Cart'=>'عرض العربة',
+    'View Cart' => 'عرض العربة',
 
-	'Checkout'=>'الدفع',
+    'Checkout' => 'الدفع',
 
-	'Menu'=>'قائمة طعام',
+    'Menu' => 'قائمة طعام',
 
-	'My Cart'=>'عربتي',
+    'My Cart' => 'عربتي',
 
-	'footer text'=>'خدمة الجزر أبجد هوز. ومع ذلك، ليس هناك ما كان عليه سابقا. ومع ذلك، فإن وثيقة الهوية الوحيدة كبير والحنجرة وحتى المؤلف من البروتين. في أي كرة السلة سلطة يصبح قوس واحدة، والتخمير العزيز.',
+    'footer text' => 'خدمة الجزر أبجد هوز. ومع ذلك، ليس هناك ما كان عليه سابقا. ومع ذلك، فإن وثيقة الهوية الوحيدة كبير والحنجرة وحتى المؤلف من البروتين. في أي كرة السلة سلطة يصبح قوس واحدة، والتخمير العزيز.',
 
-	'Helpful Links'=>'روابط مفيدة',
+    'Helpful Links' => 'روابط مفيدة',
 
-	'Terms'=>'شروط',
+    'Terms' => 'شروط',
 
-	'Privacy'=>'الإجمالية',
+    'Privacy' => 'الإجمالية',
 
-	'Discount'=>'خصم',
+    'Discount' => 'خصم',
 
-	'FAQ' => 'التعليمات',
+    'FAQ' => 'التعليمات',
 
-	'About Us'=>'معلومات عنا',
+    'About Us' => 'معلومات عنا',
 
-	'Contact Us'=>'اتصل بنا',
+    'Contact Us' => 'اتصل بنا',
 
-	'Terms & Condtions'=>'البنود و الظروف',
+    'Terms & Conditions' => 'البنود و الظروف',
 
-	'Sitemap'=> 'خريطة الموقع',
+    'Sitemap' => 'خريطة الموقع',
 
-	'We Accept'=>'نحن نقبل',
+    'We Accept' => 'نحن نقبل',
 
-	'Delivery Terms'=>'شروط التوصيل',
+    'Delivery Terms' => 'شروط التوصيل',
 
-	'How to Order'=>'كيف تطلب',
+    'How to Order' => 'كيف تطلب',
 
-	'Exchange and Returns'=>'الصرف والعوائد',
+    'Exchange and Returns' => 'الصرف والعوائد',
 
-	'Customer Service' => 'خدمة العملاء',
+    'Customer Service' => 'خدمة العملاء',
 
-	'Connect with Us' => 'اتصل بنا',
+    'Connect with Us' => 'اتصل بنا',
 
-	'Wishlist'=>'الأماني',
+    'Wishlist' => 'الأماني',
 
-	'Shopping Cart'=>'عربة التسوق',
+    'Shopping Cart' => 'عربة التسوق',
 
-	'Privacy Policy'=>'سياسة الخصوصية',
+    'Privacy Policy' => 'سياسة الخصوصية',
 
-	'Phone'=>'هاتف',
+    'Phone' => 'هاتف',
 
-	'Email'=>'البريد الإلكتروني',
+    'Email' => 'البريد الإلكتروني',
 
-	'Copy Rights'=>'© '. date('Y',time()) . ' ZaaHee كل الحقوق محفوظة ',
+    'Copy Rights' => '© '.date('Y', time()).' ZaaHee كل الحقوق محفوظة ',
 
-	'From our News'=>'من أخبارنا',
+    'From our News' => 'من أخبارنا',
 
-	'View All News'=>'عرض جميع الأخبار',
+    'View All News' => 'عرض جميع الأخبار',
 
-	'Readmore'=>'اقرأ المزيد',
+    'Readmore' => 'اقرأ المزيد',
 
-	'Weekly'=>'أسبوعي',
+    'Weekly' => 'أسبوعي',
 
-	'banner saving text'=>'توفير ما يصل إلى 50٪ من جميع عناصر المتجر عبر الإنترنت هذا الأسبوع.',
+    'banner saving text' => 'توفير ما يصل إلى 50٪ من جميع عناصر المتجر عبر الإنترنت هذا الأسبوع.',
 
-	'Shop now'=>'تسوق الآن',
+    'Shop now' => 'تسوق الآن',
 
-	'Sale'=>'تخفيض السعر',
+    'Sale' => 'تخفيض السعر',
 
-	'Top Selling of the Week'=>'أعلى بيع لهذا الأسبوع',
+    'Top Selling of the Week' => 'أعلى بيع لهذا الأسبوع',
 
-	'View Detail'=>'عرض التفاصيل',
+    'View Detail' => 'عرض التفاصيل',
 
-	'Newest Products'=>'أحدث المنتجات',
+    'Newest Products' => 'أحدث المنتجات',
 
-	'View All'=>'عرض الكل',
+    'View All' => 'عرض الكل',
 
-	'items'=>'العناصر',
-	'item'=>'بند',
+    'items' => 'العناصر',
+    'item' => 'بند',
 
-	'SubTotal'=>'المجموع الفرعي',
+    'SubTotal' => 'المجموع الفرعي',
 
-	'Couponisappliedsuccessfully'=>'يتم تطبيق القسيمة بنجاح!',
+    'Couponisappliedsuccessfully' => 'يتم تطبيق القسيمة بنجاح!',
 
-	'You are not allowed to use this coupon'=>'لا يُسمح لك باستخدام هذه القسيمة.',
+    'You are not allowed to use this coupon' => 'لا يُسمح لك باستخدام هذه القسيمة.',
 
-	'This coupon has been reached to its maximum usage limit'=>'تم الوصول إلى هذه القسيمة إلى الحد الأقصى لاستخدامها.',
+    'This coupon has been reached to its maximum usage limit' => 'تم الوصول إلى هذه القسيمة إلى الحد الأقصى لاستخدامها.',
 
-	'coupon is used limit'=>'يتم استخدام القسيمة الحد',
+    'coupon is used limit' => 'يتم استخدام القسيمة الحد',
 
-	'Coupon amount limit is low than minimum price'=>'حد مبلغ الكوبون منخفض عن السعر الأدنى.',
+    'Coupon amount limit is low than minimum price' => 'حد مبلغ الكوبون منخفض عن السعر الأدنى.',
 
-	'Coupon amount limit is exceeded than maximum price'=>'يتم تجاوز حد مبلغ الكوبون عن الحد الأقصى للسعر.',
+    'Coupon amount limit is exceeded than maximum price' => 'يتم تجاوز حد مبلغ الكوبون عن الحد الأقصى للسعر.',
 
-	'Coupon cannot be applied this product is in sale'=>'لا يمكن تطبيق الكوبون هذا المنتج معروض للبيع.',
+    'Coupon cannot be applied this product is in sale' => 'لا يمكن تطبيق الكوبون هذا المنتج معروض للبيع.',
 
-	'Coupon amount is greater than total price'=>'كمية الكوبون أكبر من السعر الإجمالي.',
+    'Coupon amount is greater than total price' => 'كمية الكوبون أكبر من السعر الإجمالي.',
 
-	'Coupon amount is greater than product price'=>'كمية الكوبون أكبر من سعر المنتج.',
+    'Coupon amount is greater than product price' => 'كمية الكوبون أكبر من سعر المنتج.',
 
-	'Coupon does not exist'=>'الكوبون غير موجود أو رمز قسيمة غير صالح.',
+    'Coupon does not exist' => 'الكوبون غير موجود أو رمز قسيمة غير صالح.',
 
-	'Please enter a valid coupon code'=>'يرجى إدخال كود كوبون صالح',
+    'Please enter a valid coupon code' => 'يرجى إدخال كود كوبون صالح',
 
-	'Coupon is already applied'=>'الكوبون مطبق بالفعل',
+    'Coupon is already applied' => 'الكوبون مطبق بالفعل',
 
-	'Cart item has been deleted successfully'=>'تم حذف بند السلة بنجاح!',
+    'Cart item has been deleted successfully' => 'تم حذف بند السلة بنجاح!',
 
-	'Coupon has been removed successfully'=>'تمت إزالة الكوبون بنجاح!',
+    'Coupon has been removed successfully' => 'تمت إزالة الكوبون بنجاح!',
 
-	'Cart has been updated successfully'=>'تم تحديث سلة التسوق بنجاح!',
+    'Cart has been updated successfully' => 'تم تحديث سلة التسوق بنجاح!',
 
-	'Coupon can not be apllied to empty cart'=>'لا يمكن تطبيق القسيمة على عربة فارغة.',
+    'Coupon can not be apllied to empty cart' => 'لا يمكن تطبيق القسيمة على عربة فارغة.',
 
-	'cartEmptyText'=>'لا يوجد لديك عناصر في سلة التسوق الخاصة بك.<br>انقر <a href="shop">هنا</a> لمواصلة التسوق.',
+    'cartEmptyText' => 'لا يوجد لديك عناصر في سلة التسوق الخاصة بك.<br>انقر <a href="shop">هنا</a> لمواصلة التسوق.',
 
-	'Home'=>'الصفحة الرئيسية',
+    'Home' => 'الصفحة الرئيسية',
 
-	'Shopping cart'=>'عربة التسوق',
+    'Shopping cart' => 'عربة التسوق',
 
-	'Poducts'=>'منتجات',
+    'Products' => 'منتجات',
 
-	'Detail'=>'التفاصيل',
+    'Detail' => 'التفاصيل',
 
-	'Unit Price'=>'سعر الوحدة',
+    'Unit Price' => 'سعر الوحدة',
 
-	'Item Total'=>'إجمالي العنصر',
+    'Item Total' => 'إجمالي العنصر',
 
-	'Coupon Code'=>'رمز القسيمة',
+    'Coupon Code' => 'رمز القسيمة',
 
-	'Update Cart'=>'تحديث السلة',
+    'Update Cart' => 'تحديث السلة',
 
-	'Back To Shopping'=>'العودة إلى التسوق',
+    'Back To Shopping' => 'العودة إلى التسوق',
 
-	'Total'=>'عدد',
+    'Total' => 'عدد',
 
-	'Discount(Coupon)'=>'خصم (قسيمة)',
+    'Discount(Coupon)' => 'خصم (قسيمة)',
 
-	'Order Summary'=>'ملخص الطلب',
+    'Order Summary' => 'ملخص الطلب',
 
-	'Subtotal'=>'المجموع الفرعي',
+    'Subtotal' => 'المجموع الفرعي',
 
-	'Apply'=>'تطبيق',
+    'Apply' => 'تطبيق',
 
-	'Please enter your first name'=>'الرجاء إدخال اسمك الأول.',
+    'Please enter your first name' => 'الرجاء إدخال اسمك الأول.',
 
-	'Please enter your last name'=>'الرجاء إدخال اسمك الأخير',
+    'Please enter your last name' => 'الرجاء إدخال اسمك الأخير',
 
-	'Login'=>'دخول',
+    'Login' => 'دخول',
 
-	'Create An Account'=>'إنشاء حساب',
+    'Create An Account' => 'إنشاء حساب',
 
-	'Personal Information'=>'المعلومات الشخصية',
+    'Personal Information' => 'المعلومات الشخصية',
 
-	'Error'=>'خطأ',
+    'Error' => 'خطأ',
 
-	'Success'=>'النجاح',
+    'Success' => 'النجاح',
 
-	'First Name'=>'الاسم الأول',
+    'First Name' => 'الاسم الأول',
 
-	'Last Name'=>'اسم العائلة',
+    'Last Name' => 'اسم العائلة',
 
-	'Email Adrress'=>'البريد الإلكتروني عنوان',
+    'Email Adrress' => 'البريد الإلكتروني عنوان',
 
-	'Please enter your valid email address'=>' الرجاء إدخال عنوان بريدك الإلكتروني الصحيح.',
+    'Please enter your valid email address' => ' الرجاء إدخال عنوان بريدك الإلكتروني الصحيح.',
 
-	'Gender'=>'الجنس',
+    'Gender' => 'الجنس',
 
-	'Please select your gender'=>'يرجى تحديد جنسك.',
+    'Please select your gender' => 'يرجى تحديد جنسك.',
 
-	'Picture'=>'صورة',
+    'Picture' => 'صورة',
 
-	'Password'=>'كلمة السر',
+    'Password' => 'كلمة السر',
 
-	'Please enter your password'=>'الرجاء إدخال كلمة المرور الخاصة بك.',
+    'Please enter your password' => 'الرجاء إدخال كلمة المرور الخاصة بك.',
 
-	'Confirm Password'=>'تأكيد كلمة المرور',
+    'Confirm Password' => 'تأكيد كلمة المرور',
 
-	'Please re-enter your password'=>' يرجى إعادة إدخال كلمة المرور الخاصة بك. ',
+    'Please re-enter your password' => ' يرجى إعادة إدخال كلمة المرور الخاصة بك. ',
 
-	'Password does not match the confirm password'=>'كلمة المرور لا تتطابق مع كلمة مرور التأكيد.',
+    'Password does not match the confirm password' => 'كلمة المرور لا تتطابق مع كلمة مرور التأكيد.',
 
-	'Creating an account means you are okay with our'=>'إنشاء حساب يعني أنك بخير مع ',
+    'Creating an account means you are okay with our' => 'إنشاء حساب يعني أنك بخير مع ',
 
-	'Terms and Services'=>'الشروط والخدمات',
+    'Terms and Services' => 'الشروط والخدمات',
 
-	'Refund Policy'=>'سياسة الاسترداد',
+    'Refund Policy' => 'سياسة الاسترداد',
 
-	'Please accept our terms and conditions'=>'"يرجى قبول الشروط والأحكام',
+    'Please accept our terms and conditions' => '"يرجى قبول الشروط والأحكام',
 
-	'Sign Up'=>'التسجيل',
+    'Sign Up' => 'التسجيل',
 
-	'Lorem ipsum dolor sit amet, consectetur adipiscing elit'=>'أبجد هوز دولور الجلوس امات، إيليت.',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit' => 'أبجد هوز دولور الجلوس امات، إيليت.',
 
-	'Duis at nisl luctus, malesuada diam non, mattis odio'=>'لاعبي التزلج على الجليد البلوزات،  بقطر ليس هناك الكثير من الأجهزة.',
+    'Duis at nisl luctus, malesuada diam non, mattis odio' => 'لاعبي التزلج على الجليد البلوزات،  بقطر ليس هناك الكثير من الأجهزة.',
 
-	'Fusce porta neque at enim consequat, in vulputate tellus faucibus'=>'ولكن، أقول لكم، ولا Fusce بورتا الجلوس امات، hendrerit في vulputate إيليت faucibus.',
+    'Fusce porta neque at enim consequat, in vulputate tellus faucibus' => 'ولكن، أقول لكم، ولا Fusce بورتا الجلوس امات، hendrerit في vulputate إيليت faucibus.',
 
-	'Pellentesque suscipit tortor id dui accumsan varius'=>'أن درجة الحرارة الترويجي طبقة دوى الكازينو.',
+    'Pellentesque suscipit tortor id dui accumsan varius' => 'أن درجة الحرارة الترويجي طبقة دوى الكازينو.',
 
-	'Sed interdum purus imperdiet tortor imperdiet, et ultricies leo gravida'=>'لكن في بعض الأحيان الفلفل الحار التمويل التمويل الكلي وultricies الأسد حاملا.',
+    'Sed interdum purus imperdiet tortor imperdiet, et ultricies leo gravida' => 'لكن في بعض الأحيان الفلفل الحار التمويل التمويل الكلي وultricies الأسد حاملا.',
 
-	'Aliquam pharetra urna vel nulla egestas, non laoreet mauris mollis'=>'Aliquam URNA pharetra، أو حيث لا إنفاذ القانون، غير laoreet mauris موليس.',
+    'Aliquam pharetra urna vel nulla egestas, non laoreet mauris mollis' => 'Aliquam URNA pharetra، أو حيث لا إنفاذ القانون، غير laoreet mauris موليس.',
 
-	'Integer sed velit sit amet quam pharetra ullamcorper'=>'صحيح velit سد الجلوس quam امات ullamcorper pharetra.',
+    'Integer sed velit sit amet quam pharetra ullamcorper' => 'صحيح velit سد الجلوس quam امات ullamcorper pharetra.',
 
-	'Proin eget nulla accumsan, finibus lacus aliquam, tincidunt turpis'=>'tincidunt Phasellus، UT accumsan augue، نهايات aliquam lacus، أبجد ميلان ليو.',
+    'Proin eget nulla accumsan, finibus lacus aliquam, tincidunt turpis' => 'tincidunt Phasellus، UT accumsan augue، نهايات aliquam lacus، أبجد ميلان ليو.',
 
-	'Nam at orci tempor, mollis mi ornare, accumsan risus'=>'لكنه السريرية طويلة، لينة، يا طبقة اعتصام الضحك.',
+    'Nam at orci tempor, mollis mi ornare, accumsan risus' => 'لكنه السريرية طويلة، لينة، يا طبقة اعتصام الضحك.',
 
-	'Cras vel ante vel augue convallis posuere'=>'غدا قبل أو مجموعة بورتا.',
+    'Cras vel ante vel augue convallis posuere' => 'غدا قبل أو مجموعة بورتا.',
 
-	'Ut quis dolor accumsan, viverra neque nec, blandit leo'=>'بالنسبة لشخص ل، viverra neque غير المصنفة في موضع الألم المنحى، blandit تيمبوس ليو.',
+    'Ut quis dolor accumsan, viverra neque nec, blandit leo' => 'بالنسبة لشخص ل، viverra neque غير المصنفة في موضع الألم المنحى، blandit تيمبوس ليو.',
 
-	'Billing Address'=>'عنوان الفواتي',
+    'Billing Address' => 'عنوان الفواتي',
 
-	'Payment Methods'=>'طرق الدفع',
+    'Payment Methods' => 'طرق الدفع',
 
-	'Order Detail'=>'تفاصيل الطلب',
+    'Order Detail' => 'تفاصيل الطلب',
 
-	'Company'=>'الشركة',
+    'Company' => 'الشركة',
 
-	'Address'=>'العنوان',
+    'Address' => 'العنوان',
 
-	'Country'=>'البلد',
+    'Country' => 'البلد',
 
-	'State'=>'الدولة',
+    'State' => 'الدولة',
 
-	'City'=>'سيتي',
+    'City' => 'سيتي',
 
-	'Zip/Postal Code'=>'الرمز البريدي / الرمز البريدي',
+    'Zip/Postal Code' => 'الرمز البريدي / الرمز البريدي',
 
-	'Continue'=>'متابعة',
+    'Continue' => 'متابعة',
 
-	'Please enter your company name'=>'الرجاء إدخال اسم شركتك.',
+    'Please enter your company name' => 'الرجاء إدخال اسم شركتك.',
 
-	'Please enter your address'=>'الرجاء إدخال عنوانك.',
+    'Please enter your address' => 'الرجاء إدخال عنوانك.',
 
-	'Please select your country'=>' يرجى تحديد بلدك.',
+    'Please select your country' => ' يرجى تحديد بلدك.',
 
-	'Please select your state'=>'يرجى تحديد الولاية الخاصة بك.',
+    'Please select your state' => 'يرجى تحديد الولاية الخاصة بك.',
 
-	'Please enter your city'=>'الرجاء إدخال مدينتك.',
+    'Please enter your city' => 'الرجاء إدخال مدينتك.',
 
-	'Please enter your Zip/Postal Code'=>'الرجاء إدخال الرمز البريدي / الرمز البريدي الخاص بك.',
+    'Please enter your Zip/Postal Code' => 'الرجاء إدخال الرمز البريدي / الرمز البريدي الخاص بك.',
 
-	'Update'=>'تحديث',
+    'Update' => 'تحديث',
 
-	'Add Address'=>'إضافة عنوان',
+    'Add Address' => 'إضافة عنوان',
 
-	'Your address has been deteled successfully'=>'تم تفريغ عنوانك بنجاح!',
+    'Your address has been deleted successfully' => 'تم تفريغ عنوانك بنجاح!',
 
-	'Your address has been chnaged successfully'=>'لقد تم تشفير عنوانك بنجاح!',
+    'Your address has been chnaged successfully' => 'لقد تم تشفير عنوانك بنجاح!',
 
-	'Default'=>'افتراضي',
+    'Default' => 'افتراضي',
 
-	'Address Info'=>'معلومات العنوان',
+    'Address Info' => 'معلومات العنوان',
 
-	'Action'=>'العمل',
+    'Action' => 'العمل',
 
-	'Your address has been updated successfully'=>' تم تحديث عنوانك بنجاح!',
+    'Your address has been updated successfully' => ' تم تحديث عنوانك بنجاح!',
 
-	'Same shipping and billing address'=>'عنوان الشحن والدفع نفسه.',
+    'Same shipping and billing address' => 'عنوان الشحن والدفع نفسه.',
 
-	'Select Country'=>'اختر الدولة',
+    'Select Country' => 'اختر الدولة',
 
-	'Select State'=>'اختر ولايه',
+    'Select State' => 'اختر ولايه',
 
-	'Other'=>'أخرى',
+    'Other' => 'أخرى',
 
-	'Shipping Methods'=>'طرق الشحن',
+    'Shipping Methods' => 'طرق الشحن',
 
-	'Confirm Order'=>'تأكيد الطلب',
+    'Confirm Order' => 'تأكيد الطلب',
 
-	'Order Now'=>'اطلب الآن',
+    'Order Now' => 'اطلب الآن',
 
-	'Please select a preferred shipping method to use on this order'=>'يُرجى تحديد طريقة شحن مفضلة لاستخدامها في هذا الطلب.',
+    'Please select a preferred shipping method to use on this order' => 'يُرجى تحديد طريقة شحن مفضلة لاستخدامها في هذا الطلب.',
 
-	'My Orders'=>'طلبي',
+    'My Orders' => 'طلبي',
 
-	'No order is placed yet'=>'لم يتم تقديم أي طلب بعد.',
+    'No order is placed yet' => 'لم يتم تقديم أي طلب بعد.',
 
-	'Order ID'=>'معرف الطلب',
+    'Order ID' => 'معرف الطلب',
 
+    'Order Date' => 'تاريخ الطلب',
 
-	'Order Date'=>'تاريخ الطلب',
+    'Price' => ' الأسعار',
 
-	'Price'=>' الأسعار',
+    'View Order' => 'عرض الطلب',
 
-	'View Order'=>'عرض الطلب',
+    'Status' => 'الحالة',
 
-	'Status'=>'الحالة',
+    'Order information' => 'معلومات الطلب',
 
-	'Order information'=>'معلومات الطلب',
+    'Customer Detail' => 'تفاصيل العميل',
 
-	'Customer Detail'=>'تفاصيل العميل',
+    'Admin Comments' => 'تعليقات المشرف',
 
-	'Admin Comments'=>'تعليقات المشرف',
+    'Order Comments' => 'تعليقات الطلبات',
 
-	'Order Comments'=>'تعليقات الطلبات',
+    'Comments' => 'تعليقات',
 
-	'Comments'=>'تعليقات',
+    'Shipping Cost' => 'تكلفة الشحن',
 
-	'Shipping Cost'=>'تكلفة الشحن',
+    'Tax' => 'الضرائب',
 
-	'Tax'=>'الضرائب',
+    'Payment Method' => 'طريقة الدفع',
 
-	'Payment Method'=>'طريقة الدفع',
+    'Shipping Method' => 'طريقة الشحن',
 
-	'Shipping Method'=>'طريقة الشحن',
+    'Payment/Shipping Method' => 'طريقة الدفع / الشحن',
 
-	'Payment/Shipping Method'=>'طريقة الدفع / الشحن',
+    'Billing Detail' => 'تفاصيل الفواتير',
 
-	'Billing Detail'=>'تفاصيل الفواتير',
+    'Shipping Detail' => 'تفاصيل الشحن',
 
-	'Shipping Detail'=>'تفاصيل الشحن',
+    'Pay' => 'الدفع',
 
-	'Pay'=>'الدفع',
+    'Your location does not support this' => ' موقعك لا يدعم هذا',
 
-	'Your location does not support this'=>' موقعك لا يدعم هذا',
+    'Please select your shipping method' => 'الرجاء تحديد طريقة الشحن الخاصة بك.',
 
-	'Please select your shipping method'=>'الرجاء تحديد طريقة الشحن الخاصة بك.',
+    'Please select a prefered payment method to use on this order' => 'يرجى تحديد طريقة دفع مفضلة لاستخدامها في هذا الطلب',
 
-	'Please select a prefered payment method to use on this order'=>'يرجى تحديد طريقة دفع مفضلة لاستخدامها في هذا الطلب',
+    'Please select your payment method' => ' يرجى تحديد طريقة الدفع الخاصة بك.',
 
-	'Please select your payment method'=>' يرجى تحديد طريقة الدفع الخاصة بك.',
+    'BrainTree Payment' => 'BrainTree الدفع',
 
-	'BrainTree Payment'=>'BrainTree الدفع',
+    'Card number' => 'رقم البطاقة',
 
-	'Card number'=>'رقم البطاقة',
+    'Expiration' => 'انتهاء الصلاحية',
 
-	'Expiration'=>'انتهاء الصلاحية',
+    'CVC' => 'CVC',
 
-	'CVC'=>'CVC',
+    'Payment successful' => 'تم الدفع بنجاح',
 
-	'Payment successful'=>'تم الدفع بنجاح',
+    'Thanks You Your payment has been processed successfully' => 'شكرًا لك! تمت معالجة دفعتك بنجاح.',
 
-	'Thanks You Your payment has been processed successfully'=>'شكرًا لك! تمت معالجة دفعتك بنجاح.',
+    'Edit Cart' => 'تحرير سلة التسوق',
 
-	'Edit Cart'=>'تحرير سلة التسوق',
+    'Full Name' => 'الاسم الكامل',
 
-	'Full Name'=>'الاسم الكامل',
+    'Message' => 'رسالة',
 
-	'Message'=>'رسالة',
+    'Our Address' => 'عنواننا',
 
-	'Our Address'=>'عنواننا',
+    'contact us message' => 'شكرا على اتصالك بنا. سنتصل بك في غضون ثلاثة أيام عمل. ',
 
-	'contact us message'=>'شكرا على اتصالك بنا. سنتصل بك في غضون ثلاثة أيام عمل. ',
+    'Subject' => 'الموضوع',
 
-	'Subject'=>'الموضوع',
+    'Send' => 'إرسال',
 
-	'Send'=>'إرسال',
+    'News Detail' => 'تفاصيل الأخبار',
+    'Date' => 'التسجيل',
 
-	'News Detail'=>'تفاصيل الأخبار',
-	'Date'=>'التسجيل',
+    'News' => 'الأخبار',
 
-	'News'=>'الأخبار',
+    'All News' => 'كل الأخبار',
 
-	'All News'=>'كل الأخبار',
+    'Sort' => 'ترتيب',
 
-	'Sort'=>'ترتيب',
+    'Shop' => 'تسوق',
 
-	'Shop'=>'تسوق',
+    'Newest' => 'الأحدث',
 
-	'Newest'=>'الأحدث',
+    'Price: High To Low' => 'السعر: مرتفع إلى منخفض',
 
-	'Price: High To Low'=>'السعر: مرتفع إلى منخفض',
+    'Price: Low To High' => 'السعر: منخفض إلى مرتفع',
 
-	'Price: Low To High'=>'السعر: منخفض إلى مرتفع',
+    'Top Seller' => 'أفضل بائع',
 
-	'Top Seller'=>'أفضل بائع',
+    'Special Products' => 'منتجات خاصة',
 
-	'Special Products'=>'منتجات خاصة',
+    'Most Liked' => 'الأكثر ترقباً',
 
-	'Most Liked'=>'الأكثر ترقباً',
+    'Display' => 'عرض',
 
-	'Display'=>'عرض',
+    'Limit' => 'الحد',
 
-	'Limit'=>'الحد',
+    'No record found' => 'لم يتم العثور على أي سجل',
 
-	'No record found'=>'لم يتم العثور على أي سجل',
+    'All products are loaded.' => 'يتم تحميل جميع المنتجات.',
 
-	'All products are loaded.'=>'يتم تحميل جميع المنتجات.',
+    'All news are loaded' => ' يتم تحميل جميع الأخبار.',
 
-	'All news are loaded'=>' يتم تحميل جميع الأخبار.',
+    'Load More' => 'تحميل المزيد',
 
-	'Load More'=>'تحميل المزيد',
+    'Oldest' => 'الأقدم',
 
-	'Oldest'=>'الأقدم',
+    'News Categories' => 'فئات الأخبار',
 
-	'News Categories'=>'فئات الأخبار',
+    'A - Z' => 'أ - ي',
 
-	'A - Z'=>'أ - ي',
+    'Z - A' => 'ض - أ',
 
-	'Z - A'=>'ض - أ',
+    'Edit Address' => 'تحرير العنوان',
 
-	'Edit Address'=>'تحرير العنوان',
+    'All products are loaded' => ' يتم تحميل جميع المنتجات.',
 
-	'All products are loaded'=>' يتم تحميل جميع المنتجات.',
+    'Related Products' => 'منتجات ذات صلة ',
 
-	'Related Products'=>'منتجات ذات صلة ',
+    'Products Description' => 'وصف المنتجات',
 
-	'Products Description'=>'وصف المنتجات',
+    'Order(s)' => 'أوامر',
 
-	'Order(s)'=>'أوامر',
+    'Login Or Create An Account' => 'تسجيل الدخول أو إنشاء حساب',
 
-	'Login Or Create An Account'=>'تسجيل الدخول أو إنشاء حساب',
+    'New Customers' => 'عملاء جدد',
 
-	'New Customers'=>'عملاء جدد',
+    'login page text for customer' => 'من خلال إنشاء حساب في متجرنا ، ستتمكن من التنقل عبر عملية الدفع بشكل أسرع ، وتخزين عناوين شحن متعددة ، وعرض وتتبع طلباتك في حسابك وأكثر.',
 
-	'login page text for customer'=>'من خلال إنشاء حساب في متجرنا ، ستتمكن من التنقل عبر عملية الدفع بشكل أسرع ، وتخزين عناوين شحن متعددة ، وعرض وتتبع طلباتك في حسابك وأكثر.',
+    'Dont have account' => 'لا تملك حساب؟',
 
-	'Dont have account'=>'لا تملك حساب؟',
+    'or Sign in with' => 'أو تسجيل الدخول باستخدام',
 
-	'or Sign in with'=>'أو تسجيل الدخول باستخدام',
+    'Login with Facebook' => 'تسجيل الدخول باستخدام Facebook',
 
+    'Login with Google' => 'تسجيل الدخول باستخدام Google',
 
-	'Login with Facebook'=>'تسجيل الدخول باستخدام Facebook',
+    'Registered Customers' => 'العملاء المسجلين',
 
-	'Login with Google'=>'تسجيل الدخول باستخدام Google',
+    'If you have an account with us, please log in' => 'إذا كان لديك حساب معنا ، يرجى تسجيل الدخول',
 
-	'Registered Customers'=>'العملاء المسجلين',
+    'This field is required' => 'هذا الحقل مطلوب.',
 
-	'If you have an account with us, please log in'=>'إذا كان لديك حساب معنا ، يرجى تسجيل الدخول',
+    'Please enter your password and should be at least 6 characters long' => 'الرجاء إدخال كلمة المرور الخاصة بك ويجب أن يكون طولها 6 أحرف على الأقل',
 
-	'This field is required'=>'هذا الحقل مطلوب.',
+    'New Password' => 'كلمة المرور الجديدة',
 
-	'Please enter your password and should be at least 6 characters long'=>'الرجاء إدخال كلمة المرور الخاصة بك ويجب أن يكون طولها 6 أحرف على الأقل',
+    'Current Password' => 'كلمة المرور الحالية',
 
-	'New Password'=>'كلمة المرور الجديدة',
+    'Please enter current password' => ' الرجاء إدخال كلمة المرور الحالية. ',
 
-	'Current Password'=>'كلمة المرور الحالية',
+    'Please enter your valid phone number' => 'الرجاء إدخال رقم هاتفك الصحيح. ',
 
-	'Please enter current password'=>' الرجاء إدخال كلمة المرور الحالية. ',
+    'Phone Number' => 'رقم الهاتف',
 
-	'Please enter your valid phone number'=>'الرجاء إدخال رقم هاتفك الصحيح. ',
+    'Please enter your date of birth' => 'الرجاء إدخال تاريخ ميلادك.',
 
-	'Phone Number'=>'رقم الهاتف',
+    'Date of Birth' => 'تاريخ الميلاد',
 
-	'Please enter your date of birth'=>'الرجاء إدخال تاريخ ميلادك.',
+    'Female' => 'أنثى',
 
-	'Date of Birth'=>'تاريخ الميلاد',
+    'Male' => 'مالي',
 
-	'Female'=>'أنثى',
+    'Ecommerce' => 'التجارة الإلكترونية',
 
-	'Male'=>'مالي',
+    'Featured' => 'المميز',
 
-	'Ecommerce'=>'التجارة الإلكترونية',
+    'Filters' => 'شروط',
 
-	'Featured'=>'المميز',
+    'Reset' => 'إعادة تعيين',
 
-	'Filters'=>'شروط',
+    'Shipping Address' => 'عنوان الشحن',
 
-	'Reset'=>'إعادة تعيين',
+    'Returned all products' => 'تمت إعادة جميع المنتجات.',
 
-	'Shipping Address'=>'عنوان الشحن',
+    'Search results empty' => 'نتائج البحث فارغة.',
 
-	'Returned all products'=>'تمت إعادة جميع المنتجات.',
+    'Categories' => 'فئات',
 
-	'Search results empty'=>'نتائج البحث فارغة.',
+    'Product Detail' => 'تفاصيل المنتج',
 
-	'Categories'=>'فئات',
+    'Returned all filters successfully' => 'تمت إعادة جميع الفلاتر بنجاح.',
 
-	'Product Detail'=>'تفاصيل المنتج',
+    'Filter is empty for this category' => 'الفلتر فارغ لهذه الفئة.',
 
-	'Returned all filters successfully'=>'تمت إعادة جميع الفلاتر بنجاح.',
+    'Select Zone' => 'Select Zone',
 
-	'Filter is empty for this category'=>'الفلتر فارغ لهذه الفئة.',
+    'select Country' => 'اختر الدولة',
 
-	'Select Zone'=>'Select Zone',
+    'All Products' => 'جميع المنتجات',
 
-	'select Country'=>'اختر الدولة',
+    'Product is added' => ' المنتج مضاف!',
 
-	'All Products'=>'جميع المنتجات',
+    'Special products of the Week' => 'منتجات خاصة من الأسبوع',
 
-	'Product is added'=>' المنتج مضاف!',
+    'Forgot Password' => 'نسيت كلمة المرور',
 
-	'Special products of the Week'=>'منتجات خاصة من الأسبوع',
+    'Please Enter your email to recover your password' => 'الرجاء إدخال بريدك الإلكتروني لاسترداد كلمة المرور الخاصة بك.',
 
-	'Forgot Password'=>'نسيت كلمة المرور',
+    'Qty' => 'الكمية',
 
-	'Please Enter your email to recover your password'=>'الرجاء إدخال بريدك الإلكتروني لاسترداد كلمة المرور الخاصة بك.',
+    'You have no items in your shopping cart' => ' ليس لديك أي عناصر في سلة التسوق الخاصة بك.',
 
-	'Qty'=>'الكمية',
+    'Password has been sent to your email address' => ' تم إرسال كلمة المرور إلى عنوان بريدك الإلكتروني.',
 
-	'You have no items in your shopping cart'=>' ليس لديك أي عناصر في سلة التسوق الخاصة بك.',
+    'Email address does not exist' => ' عنوان البريد الإلكتروني غير موجود.',
 
-	'Password has been sent to your email address'=>' تم إرسال كلمة المرور إلى عنوان بريدك الإلكتروني.',
+    'Add to Cart' => 'إضافة إلى السلة',
 
-	'Email address does not exist'=>' عنوان البريد الإلكتروني غير موجود.',
+    'Added' => 'واضاف!',
 
-	'Add to Cart'=>'إضافة إلى السلة',
+    'Subscribe for Newsletter' => 'اشترك في النشرة الإخبارية',
 
-	'Added'=>'واضاف!',
+    'Your email address here' => 'عنوان بريدك الإلكتروني هنا ...',
 
-	'Subscribe for Newsletter'=>'اشترك في النشرة الإخبارية',
+    'Subscribe' => 'الاشتراك!',
 
-	'Your email address here'=>'عنوان بريدك الإلكتروني هنا ...',
+    'About Store' => 'حول متجر',
 
-	'Subscribe'=>'الاشتراك!',
+    'Our Services' => 'خدماتنا',
 
-	'About Store'=>'حول متجر',
+    'Information' => 'المعلومات',
 
-	'Our Services'=>'خدماتنا',
+    'Popular Categories' => 'الفئات الشعبية',
 
-	'Information'=>'المعلومات',
+    'Error while placing order' => 'خطأ أثناء تقديم الطلب. ',
 
-	'Popular Categories'=>'الفئات الشعبية',
+    'Payment has been processed successfully' => 'تمت معالجة الدفعة بنجاح!',
 
-	'Error while placing order'=>'خطأ أثناء تقديم الطلب. ',
+    'Your order has been placed' => 'تم وضع طلبك',
 
-	'Payment has been processed successfully'=>'تمت معالجة الدفعة بنجاح!',
+    'Email or password is incorrect' => 'البريد الإلكتروني أو كلمة المرور غير صحيحة!',
 
-	'Your order has been placed'=>'تم وضع طلبك',
+    'something is wrong' => 'هناك خطأ ما!',
 
-	'Email or password is incorrect'=>'البريد الإلكتروني أو كلمة المرور غير صحيحة!',
+    'Email already exist' => 'البريد الإلكتروني موجود بالفعل!',
 
-	'something is wrong'=>'هناك خطأ ما!',
+    'ApplyCoupon' => 'تطبيق القسيمة',
 
-	'Email already exist'=>'البريد الإلكتروني موجود بالفعل!',
+    'proceedToCheckout' => 'المتابعة إلى الخروج ',
 
+    'orderNotes' => 'ملاحظات الطلب',
 
-	'ApplyCoupon'=>'تطبيق القسيمة',
+    'Previous' => 'السابق',
+    'Next' => 'التالي',
 
-	'proceedToCheckout'=>'المتابعة إلى الخروج ',
+    'Out of Stock' => 'غير متوفر',
 
-	'orderNotes'=>'ملاحظات الطلب',
+    'In stock' => 'في الأوراق المالية',
 
-	'Previous'=>'السابق',
-	'Next'=>'التالي',
+    'Low in Stock' => 'منخفض في المخزون',
 
-	'Out of Stock'=>'غير متوفر',
+    'Edit' => 'تعديل',
 
-	'In stock'=>'في الأوراق المالية',
+    'Remove Item' => 'إزالة العنص',
 
-	'Low in Stock'=>'منخفض في المخزون',
+    'per page' => 'لكل صفحة ',
 
-	'Edit'=>'تعديل',
+    'orderNotesandSummary' => 'ملاحظات الطلب والملخص',
 
-	'Remove Item'=>'إزالة العنص',
+    'Signup' => 'الاشتراك',
 
-	'per page'=>'لكل صفحة ',
+    'myProfile' => 'ملفي الشخصي',
 
-	'orderNotesandSummary'=>'ملاحظات الطلب والملخص',
+    'orderID' => 'رقم معرف الطلب',
 
-	'Signup'=>'الاشتراك',
+    'orderStatus' => 'حالة الطلب',
 
-	'myProfile'=>'ملفي الشخصي',
+    'Please enter your name' => 'الرجاء إدخال اسمك.',
 
-	'orderID'=>'رقم معرف الطلب',
+    'Please enter your message' => 'الرجاء إدخال رسالتك.',
 
-	'orderStatus'=>'حالة الطلب',
+    'Prfile has been updated successfully' => 'تم تحديث الملف الشخصي بنجاح!',
 
-	'Please enter your name'=>'الرجاء إدخال اسمك.',
+    'Change Password' => 'تغيير كلمة المرور',
 
-	'Please enter your message'=>'الرجاء إدخال رسالتك.',
+    'infoPages' => 'صفحات المعلومات',
 
-	'Prfile has been updated successfully'=>'تم تحديث الملف الشخصي بنجاح!',
+    'homePages' => 'الصفحات الرئيسية',
 
-	'Change Password'=>'تغيير كلمة المرور',
+    'homePage1' => 'الصفحات الرئيسية 1',
+    'homePage2' => 'الصفحات الرئيسية 2',
+    'homePage3' => 'الصفحات الرئيسية 3',
+    'homePage4' => 'الصفحات الرئيسية 4',
+    'homePage5' => 'الصفحات الرئيسية 5',
 
-	'infoPages'=>'صفحات المعلومات',
+    'collection' => 'مجموعة',
 
-	'homePages'=>'الصفحات الرئيسية',
+    'hot' => 'ساخنة',
 
-	'homePage1'=>'الصفحات الرئيسية 1',
-	'homePage2'=>'الصفحات الرئيسية 2',
-	'homePage3'=>'الصفحات الرئيسية 3',
-	'homePage4'=>'الصفحات الرئيسية 4',
-	'homePage5'=>'الصفحات الرئيسية 5',
+    'new in Stores' => 'الجديد في المتاجر',
 
-	'collection'=>'مجموعة',
+    'categroies' => 'الاقسام',
 
-	'hot'=>'ساخنة',
+    'Call Us Free' => 'اتصل بنا مجانًا',
 
-	'new in Stores'=>'الجديد في المتاجر',
+    'Featured News' => 'الأخبار المميزة',
 
-	'categroies'=>'الاقسام',
+    'Upload Profile Photo' => 'تحميل صورة الملف الشخصي',
 
-	'Call Us Free'=>'اتصل بنا مجانًا',
+    'Choose...' => ' اختر ...',
 
-	'Featured News'=>'الأخبار المميزة',
+    'Showing' => 'رض 1–',
 
-	'Upload Profile Photo'=>'تحميل صورة الملف الشخصي',
+    'of' => 'من',
 
-	'Choose...'=>' اختر ...',
+    'results' => 'نتائج.',
 
-	'Showing'=>'رض 1–',
+    'Password has been updated successfully' => ' تم تحديث كلمة المرور بنجاح! ',
 
-	'of'=>'من',
+    'Record not found' => 'لم يتم العثور على السجل!',
+    'contact us title' => 'التجارة الإلكترونية اتصل بنا',
+    'Follow Us' => 'تابعنا',
 
-	'results'=>'نتائج.',
+    'Shipping addresses are not added yet' => 'لا تتم إضافة عناوين الشحن حتى الآن.',
 
-	'Password has been updated successfully'=>' تم تحديث كلمة المرور بنجاح! ',
+    'product is not added to your wish list' => ' المنتج لا يضاف إلى قائمة أمنياتك. ',
 
-	'Record not found'=>'لم يتم العثور على السجل!',
-	'contact us title'=>'التجارة الإلكترونية اتصل بنا',
-	'Follow Us'=>'تابعنا',
+    'Search result for' => 'نتيجة البحث عن',
 
-	'Shipping addresses are not added yet'=>'لا تتم إضافة عناوين الشحن حتى الآن.',
+    'item found' => 'تم العثور على عنصر',
+    'cancel' => 'إلغاء',
+    'Please write notes of your order' => 'يرجى كتابة ملاحظات من طلبك',
+    'Coupon Applied' => 'الكوبون التطبيقية',
 
-	'product is not added to your wish list'=>' المنتج لا يضاف إلى قائمة أمنياتك. ',
+    //new
+    'Welcome' => 'أهلا بك',
+    'Welcome Guest' => 'مرحبا بالضيف!',
+    'Worldwide Express Plus' => 'في جميع أنحاء العالم اكسبرس بلاس',
+    'Standard' => 'اساسي',
+    'Worldwide Expedited' => 'في جميع أنحاء العالم المعجل',
+    'Worldwide Express' => 'في جميع أنحاء العالم اكسبرس',
+    '2nd Day Air A.M.' => 'اليوم الثاني للطيران',
+    'Next Day Air Early A.M.' => 'اليوم التالي للطيران في وقت مبكر صباحا.',
+    'Next Day Air Saver' => 'اليوم التالي توفير الهواء',
+    '3 Day Select' => 'اختيار 3 أيام',
+    'Ground' => 'أرض',
+    '2nd Day Air' => 'اليوم الثاني للطيران',
+    'Next Day Air' => 'الهواء اليوم التالي',
+    'My Account' => 'حسابي',
+    'Info Pages' => 'صفحات المعلومات',
+    'Dummy Text' => 'لها أن جنوب أجزاء. ثم وفي اعتداء الجنوبي. تم الشرقي بمعارضة عدم, فقد أن حاول الآلاف إستعمل. مكن لعدم فهرست الخاطفة و, من تعديل لفرنسا الشهير عرض, أم مدينة السيطرة وصل. كان وقبل لعدم لم, جعل معزّزة والمانيا استطاعوا هو, مع بعض ألمانيا الأراضي. تحت وأزيز وفنلندا بـ, دأبوا أعلنت الإنذار، نفس تم.',
+    'Product is unliked' => 'المنتج غير مرغوب فيه.',
+    'Please login first to like this product' => 'الرجاء تسجيل الدخول أولاً لمثل هذا المنتج.',
+    'Product is liked' => 'المنتج هو يحب.',
+    'Product is disliked' => 'المنتج غير محبوب.',
 
-	'Search result for'=>'نتيجة البحث عن',
+    //new
+    'Welcome Guest!' => 'مرحبا بالضيف!',
 
-	'item found'=>'تم العثور على عنصر',
-	'cancel'=>'إلغاء',
-	'Please write notes of your order'=>'يرجى كتابة ملاحظات من طلبك',
-	'Coupon Applied'=>'الكوبون التطبيقية',
-
-	//new
-	'Welcome'=>'أهلا بك',
-	'Welcome Guest'=>'مرحبا بالضيف!',
-	'Worldwide Express Plus'=>'في جميع أنحاء العالم اكسبرس بلاس',
-	'Standard'=>'اساسي',
-	'Worldwide Expedited'=>'في جميع أنحاء العالم المعجل',
-	'Worldwide Express'=>'في جميع أنحاء العالم اكسبرس',
-	'2nd Day Air A.M.'=>'اليوم الثاني للطيران',
-	'Next Day Air Early A.M.'=>'اليوم التالي للطيران في وقت مبكر صباحا.',
-	'Next Day Air Saver'=>'اليوم التالي توفير الهواء',
-	'3 Day Select'=>'اختيار 3 أيام',
-	'Ground'=>'أرض',
-	'2nd Day Air'=>'اليوم الثاني للطيران',
-	'Next Day Air'=>'الهواء اليوم التالي',
-	'My Account'=>'حسابي',
-	'Info Pages'=>'صفحات المعلومات',
-	'Dummy Text'=>'لها أن جنوب أجزاء. ثم وفي اعتداء الجنوبي. تم الشرقي بمعارضة عدم, فقد أن حاول الآلاف إستعمل. مكن لعدم فهرست الخاطفة و, من تعديل لفرنسا الشهير عرض, أم مدينة السيطرة وصل. كان وقبل لعدم لم, جعل معزّزة والمانيا استطاعوا هو, مع بعض ألمانيا الأراضي. تحت وأزيز وفنلندا بـ, دأبوا أعلنت الإنذار، نفس تم.',
-	'Product is unliked'=>'المنتج غير مرغوب فيه.',
-	'Please login first to like this product'=>'الرجاء تسجيل الدخول أولاً لمثل هذا المنتج.',
-	'Product is liked'=>'المنتج هو يحب.',
-	'Product is disliked'=>'المنتج غير محبوب.',
-
-
-	//new
-	'Welcome Guest!'=>'مرحبا بالضيف!',
-
-	'Empty Site Name'=>'إفراغ اسم الموقع',
-	'Instamojo Payment'=>'انسٹاموجو دفع',
-	'External Link'=>'رابط خارجي',
-	'cancel order'=>'الغاء الطلب',
-	'cancelled'=>'ألغيت',
-	'Are you sure you want to cancel this order?'=>'هل أنت متأكد من أنك تريد إلغاء هذا الطلب؟',
-	'Flash Sale'=>'بيع مفاجئ',
-	'UP COMMING'=>'القادمة',
-	'Min Order Limit:'=>'الحد الأدنى للطلب:',
-	'Return'=>'إرجاع',
-	'Are you sure you want to return this order?'=>'هل أنت متأكد من أنك تريد إرجاع هذا الطلب؟',
-	'return order'=>'طلب المرتجعات',
-	'Avail free shpping on'=>'الاستفادة الشحن المجاني على',
+    'Empty Site Name' => 'إفراغ اسم الموقع',
+    'Instamojo Payment' => 'انسٹاموجو دفع',
+    'External Link' => 'رابط خارجي',
+    'cancel order' => 'الغاء الطلب',
+    'cancelled' => 'ألغيت',
+    'Are you sure you want to cancel this order?' => 'هل أنت متأكد من أنك تريد إلغاء هذا الطلب؟',
+    'Flash Sale' => 'بيع مفاجئ',
+    'UP COMMING' => 'القادمة',
+    'Min Order Limit:' => 'الحد الأدنى للطلب:',
+    'Return' => 'إرجاع',
+    'Are you sure you want to return this order?' => 'هل أنت متأكد من أنك تريد إرجاع هذا الطلب؟',
+    'return order' => 'طلب المرتجعات',
+    'Avail free shpping on' => 'الاستفادة الشحن المجاني على',
     'Pet Services' => 'خدمات الحيوانات الأليفة',
-    'Grocery'=> 'بقالة',
+    'Grocery' => 'بقالة',
     'Cosmetic & Perfumes' => 'مستحضرات التجميل والعطور',
     'Health Supplements' => 'المكملات الغذائية',
     'Protein & others' => 'البروتين وغيره',
@@ -734,38 +730,38 @@ return [
     'Big Saving' => 'توفير كبير',
     'What’s HOT' => 'ما الحار',
     'Buy Now' => 'اشتري الآن',
-	'Add from wishlist' => 'أضف من قائمة الرغبات',
-	'Oldest' => 'الأقدم - الأحدث',
-	'Trends' => 'اتجاهات',
-	'See All' => 'اظهار الكل',
-	'Shop Now!' => 'تسوق الآن!',
-	'Recently Viewed' => 'شوهدت مؤخرا',
-	'Company Information' => 'معلومات الشركة',
-	'Connect with Us' => 'اتصل بنا',
-	'Minimum order amount is 5.00 KWD.' => 'الحد الأدنى لمبلغ الطلب 5.00 د.ك',
-	'No Product has been added to your Cart' => 'لم يتم إضافة أي منتج إلى سلة التسوق الخاصة بك',
-	'Price Details' => 'تفاصيل السعر',
-	'Remove' => 'إزالة',
-	'View' => 'رأي',
-	'APPLY' =>'تطبيق',
-	'Delivery Charges' => 'رسوم التوصيل',
-	'My Cart' => 'عربة التسوق',
-	'Price' => 'السعر',
-	'Sub Total' => 'المجموع الفرعي',
-	'No Products in your Wishlist'  => 'لا توجد منتجات في قائمة الرغبات الخاصة بك',
-	'Old Password'  => 'كلمة المرور القديمة',
-	'Please enter your old password'  => 'الرجاء إدخال كلمة المرور القديمة الخاصة بك',
-	'Confirm Password'  => 'تأكيد كلمة المرور',
-	'Please confirm your password'  => 'يرجى التأكد من صحة كلمة المرور الخاصة بك',
-	'Confirm Password and New Password does not match' => 'تأكيد كلمة المرور وكلمة المرور الجديدة غير متطابقين',
-	'Password has been updated successfully' => 'تم تحديث كلمة المرور بنجاح',
+    'Add from wishlist' => 'أضف من قائمة الرغبات',
+    'Oldest' => 'الأقدم - الأحدث',
+    'Trends' => 'اتجاهات',
+    'See All' => 'اظهار الكل',
+    'Shop Now!' => 'تسوق الآن!',
+    'Recently Viewed' => 'شوهدت مؤخرا',
+    'Company Information' => 'معلومات الشركة',
+    'Connect with Us' => 'اتصل بنا',
+    'Minimum order amount is 5.00 KWD.' => 'الحد الأدنى لمبلغ الطلب 5.00 د.ك',
+    'No Product has been added to your Cart' => 'لم يتم إضافة أي منتج إلى سلة التسوق الخاصة بك',
+    'Price Details' => 'تفاصيل السعر',
+    'Remove' => 'إزالة',
+    'View' => 'رأي',
+    'APPLY' => 'تطبيق',
+    'Delivery Charges' => 'رسوم التوصيل',
+    'My Cart' => 'عربة التسوق',
+    'Price' => 'السعر',
+    'Sub Total' => 'المجموع الفرعي',
+    'No Products in your Wishlist' => 'لا توجد منتجات في قائمة الرغبات الخاصة بك',
+    'Old Password' => 'كلمة المرور القديمة',
+    'Please enter your old password' => 'الرجاء إدخال كلمة المرور القديمة الخاصة بك',
+    'Confirm Password' => 'تأكيد كلمة المرور',
+    'Please confirm your password' => 'يرجى التأكد من صحة كلمة المرور الخاصة بك',
+    'Confirm Password and New Password does not match' => 'تأكيد كلمة المرور وكلمة المرور الجديدة غير متطابقين',
+    'Password has been updated successfully' => 'تم تحديث كلمة المرور بنجاح',
     'Product' => 'المنتج',
     'Access Your Account Through Your Social Networks' => 'الوصول إلى حسابك من خلال الشبكات الاجتماعية الخاصة بك',
     'Google' => 'جوجل',
     'Facebook' => 'موقع التواصل الاجتماعي الفيسبوك',
     'NEW CUSTOMER' => 'عميل جديد',
     'Coupon Code' => 'رمز الكوبون',
-    'Logout'=>'تسجيل خروج',
+    'Logout' => 'تسجيل خروج',
     'Search' => 'بحث',
     'Yes' => 'نعم',
     'No' => 'لا',

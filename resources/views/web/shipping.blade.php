@@ -63,7 +63,7 @@
             </div>
             @if(!empty($result['action']) and $result['action']=='detele')
                   <div class="alert alert-success alert-dismissible" role="alert">
-                      @lang('website.Your address has been deteled successfully')
+                      @lang('website.Your address has been deleted successfully')
 
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   </div>

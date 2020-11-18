@@ -13,760 +13,715 @@ return [
     |
     */
     'Guest Checkout' => 'Guest Checkout',
-  'Ops! Product is available in stock But Not Active For Sale. Please contact to the admin' => 'Ops! Product is available in stock But Not Active For Sale. Please contact to the admin',
-  'Ops! you have already bought full stock. If you like this product and want more contact to the admin' => 'Ops! you have already bought full stock. If you like this product and want more contact to the admin',
-  'Ops! The amount you can add more is' => 'Ops! The amount you can add more is',
-  'If you do not want to apply this coupon just click cross button of this alert.' => 'If you do not want to apply this coupon just click cross button of this alert.',
-  'Your address has been deteled successfully' => 'Your address has been deteled successfully',
-  'Your address has been changed successfully' => 'Your address has been changed successfully',
-  'payment method' => 'payment method',
-  'DOWNLOAD OUR APPS' => 'DOWNLOAD OUR APPS',
-  'SUBSCRIBE NOW FOR THE LATEST NEWS AND GET 10% DISCOUNT ON SPECIAL ITEMS' => 'SUBSCRIBE NOW FOR THE LATEST NEWS AND GET 10% DISCOUNT ON SPECIAL ITEMS',
-  'Hotline' => 'Hot Line',
-  'Call Us Now' => 'Call Us Now',
-  'Product Is Ready To Comapre!' => 'Product Is Ready To Comapre!',
-  'Product Quantity Exceeding From Current Stock Please Enter A Valid Quantity!' => 'Product Quantity Exceeding From Current Stock Please Enter A Valid Quantity!',
-	'bannerLabel1'=>'Free Shipping',
-	'Compare' => 'Compare',
-	'Product Is Liked!' => 'Product is Liked',
-	'Please Login First!' => 'Please Login First',
-	'Product Is Liked!' => 'Product is Liked',
-  'Product Is DisLiked!' => 'Product is DisLiked!',
-  'Product added successfully!' => 'Product added successfully!',
-	'Choose Any Category' => 'Choose Category',
-	'bannerLabel1Text'=>'On order over $99',
+    'Ops! Product is available in stock But Not Active For Sale. Please contact to the admin' => 'Ops! Product is available in stock But Not Active For Sale. Please contact to the admin',
+    'Ops! you have already bought full stock. If you like this product and want more contact to the admin' => 'Ops! you have already bought full stock. If you like this product and want more contact to the admin',
+    'Ops! The amount you can add more is' => 'Ops! The amount you can add more is',
+    'If you do not want to apply this coupon just click cross button of this alert.' => 'If you do not want to apply this coupon just click cross button of this alert.',
+    'Your address has been changed successfully' => 'Your address has been changed successfully',
+    'payment method' => 'payment method',
+    'DOWNLOAD OUR APPS' => 'DOWNLOAD OUR APPS',
+    'SUBSCRIBE NOW FOR THE LATEST NEWS AND GET 10% DISCOUNT ON SPECIAL ITEMS' => 'SUBSCRIBE NOW FOR THE LATEST NEWS AND GET 10% DISCOUNT ON SPECIAL ITEMS',
+    'Hotline' => 'Hot Line',
+    'Call Us Now' => 'Call Us Now',
+    'Product Is Ready To Comapre!' => 'Product Is Ready To Comapre!',
+    'Product Quantity Exceeding From Current Stock Please Enter A Valid Quantity!' => 'Product Quantity Exceeding From Current Stock Please Enter A Valid Quantity!',
+    'bannerLabel1' => 'Free Shipping',
+    'Compare' => 'Compare',
+    'Product Is Liked!' => 'Product is Liked',
+    'Please Login First!' => 'Please Login First',
+    'Product Is DisLiked!' => 'Product is DisLiked!',
+    'Product added successfully!' => 'Product added successfully!',
+    'Choose Any Category' => 'Choose Category',
+    'bannerLabel1Text' => 'On order over $99',
 
-	'bannerLabel2'=>'Money Return',
+    'bannerLabel2' => 'Money Return',
 
-	'bannerLabel2Text'=>'30 Days money return',
+    'bannerLabel2Text' => '30 Days money return',
 
-	'bannerLabel3'=>'Support 24/7',
+    'bannerLabel3' => 'Support 24/7',
 
-	'hotline'=>'Hotline',
+    'hotline' => 'Hotline',
 
-	'bannerLabel4'=>'Safe Payment',
+    'bannerLabel4' => 'Safe Payment',
 
-	'bannerLabel4Text'=>'Protect online payment',
+    'bannerLabel4Text' => 'Protect online payment',
 
-	'TopSales'=>'Top Sales',
+    'TopSales' => 'Top Sales',
 
-	'Special'=>'Special',
+    'Special' => 'Special',
 
-	'MostLiked'=>'Most Liked',
+    'MostLiked' => 'Most Liked',
 
-	'New'=>'New',
+    'New' => 'New',
 
-	'Likes'=>'Likes',
+    'Likes' => 'Likes',
 
-	'Welcome to our Store'=>'Welcome to our Store',
+    'Welcome to our Store' => 'Welcome to our Store',
 
-	'Orders'=>'Orders',
+    'Orders' => 'Orders',
 
-	'All Categories'=>'All Categories',
+    'All Categories' => 'All Categories',
 
-	'Search entire store here'=>'Search entire store here',
+    'Search entire store here' => 'Search entire store here',
 
-	'Profile'=>'Profile',
+    'Profile' => 'Profile',
 
-	'Logout'=>'Logout',
+    'Logout' => 'Logout',
 
-  'View' => 'View',
+    'Login/Register' => 'Login/Register',
 
-  'Login/Register'=>'Login/Register',
+    'item(s)' => 'item(s)',
 
-	'item(s)'=>'item(s)',
+    'Total Items' => 'Total Items',
 
-	'Quantity'=>'Quantity',
+    'Total Price' => 'Total Price',
 
-	'Total Items'=>'Total Items',
+    'View Cart' => 'View Cart',
 
-	'Total Price'=>'Total Price',
+    'Menu' => 'Menu',
 
-	'View Cart'=>'View Cart',
+    'footer text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla eros. Sed dui magna, faucibus et enim vel, auctor dapibus ante. Nullam in sem ultrices, efficitur arcu quis, fermentum mi.',
 
-	'Checkout'=>'Checkout',
+    'RECENT POST' => 'RECENT POST',
 
-	'Menu'=>'Menu',
+    'Helpful Links' => 'Helpful Links',
 
-	'My Cart'=>'My Cart',
+    'Terms' => 'Terms',
 
-	'footer text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla eros. Sed dui magna, faucibus et enim vel, auctor dapibus ante. Nullam in sem ultrices, efficitur arcu quis, fermentum mi.',
+    'Privacy' => 'Privacy',
 
-  'RECENT POST' => 'RECENT POST',
+    'Discount' => 'Discount',
 
-  'Helpful Links'=>'Helpful Links',
+    'About Us' => 'About Us',
 
-	'Terms'=>'Terms',
+    'Contact Us' => 'Contact Us',
 
-	'Privacy'=>'Privacy',
+    'Terms & Conditions' => 'Terms & Conditions',
 
-	'Discount'=>'Discount',
+    'Sitemap' => 'Sitemap',
 
-	'About Us'=>'About Us',
+    'Wishlist' => 'Wishlist',
 
-	'Contact Us'=>'Contact Us',
+    'Shopping Cart' => 'Shopping Cart',
 
-	'Terms & Condtions'=>'Terms & Condtions',
+    'We Accept' => 'We Accept',
 
-	'Sitemap'=> 'Sitemap',
+    'Delivery Terms' => 'Delivery Terms',
 
-	'Wishlist'=>'Wishlist',
+    'How to Order' => 'How to Order',
 
-	'Shopping Cart'=>'Shopping Cart',
+    'Exchange and Returns' => 'Exchange and Returns',
 
-	'Privacy Policy'=>'Privacy Policy',
+    'Customer Service' => 'Customer Service',
 
-	'We Accept'=>'We Accept',
+    'Phone' => 'Phone',
 
-	'Delivery Terms'=>'Delivery Terms',
+    'Copy Rights' => '© '.date('Y', time()).' ZaaHee All Rights Reserved',
 
-	'How to Order'=>'How to Order',
+    'From our News' => 'From our News',
 
-	'Exchange and Returns'=>'Exchange and Returns',
+    'View All News' => 'View All News',
 
-	'Customer Service'=>'Customer Service',
+    'Weekly' => 'Weekly',
 
-	'Connect with Us' => 'Connect with Us',
+    'banner saving text' => 'Saving up to 50% off all online store items this week.',
 
-	'Phone'=>'Phone',
+    'Shop now' => 'Shop now',
 
-	'Email'=>'Email',
+    'Sale' => 'Sale',
 
-	'Copy Rights'=>'© '.date('Y',time()).' ZaaHee All Rights Reserved',
+    'Top Selling of the Week' => 'Top Selling of the Week',
 
-	'From our News'=>'From our News',
+    'View Detail' => 'View Detail',
 
-	'View All News'=>'View All News',
+    'Newest Products' => 'Newest Products',
 
-	'Readmore'=>'Readmore',
+    'View All' => 'View All',
 
-	'Weekly'=>'Weekly',
+    'items' => 'Item(s)',
+    'item' => 'Item',
 
-	'banner saving text'=>'Saving up to 50% off all online store items this week.',
+    'SubTotal' => 'Sub Total',
 
-	'Shop now'=>'Shop now',
+    'Couponisappliedsuccessfully' => 'Coupon is applied successfully!',
 
-	'Sale'=>'Sale',
+    'You are not allowed to use this coupon' => 'You are not allowed to use this coupon.',
 
-	'Top Selling of the Week'=>'Top Selling of the Week',
+    'This coupon has been reached to its maximum usage limit' => 'This coupon has been reached to its maximum usage limit.',
 
-	'View Detail'=>'View Detail',
+    'coupon is used limit' => 'Coupon is used limit',
 
-	'Newest Products'=>'Newest Products',
+    'Coupon amount limit is low than minimum price' => 'Coupon amount limit is low than minimum price.',
 
-	'View All'=>'View All',
+    'Coupon amount limit is exceeded than maximum price' => 'Coupon amount limit is exceeded than maximum price.',
 
-	'Special'=>'Special',
+    'Coupon cannot be applied this product is in sale' => 'Coupon cannot be applied this product is in sale.',
 
-	'items'=>'Item(s)',
-	'item'=>'Item',
+    'Coupon amount is greater than total price' => 'Coupon amount is greater than total price.',
 
-	'SubTotal'=>'Sub Total',
+    'Coupon amount is greater than product price' => 'Coupon amount is greater than product price.',
 
-	'Couponisappliedsuccessfully'=>'Coupon is applied successfully!',
+    'Coupon does not exist' => 'Coupon does not exist or invalid coupon code.',
 
-	'You are not allowed to use this coupon'=>'You are not allowed to use this coupon.',
+    'Please enter a valid coupon code' => 'Please enter a valid coupon code',
 
-	'This coupon has been reached to its maximum usage limit'=>'This coupon has been reached to its maximum usage limit.',
+    'Coupon is already applied' => 'Coupon is already applied',
 
-	'coupon is used limit'=>'Coupon is used limit',
+    'Cart item has been deleted successfully' => 'Cart item has been deleted successfully!',
 
-	'Coupon amount limit is low than minimum price'=>'Coupon amount limit is low than minimum price.',
+    'Coupon has been removed successfully' => 'Coupon has been removed successfully!',
 
-	'Coupon amount limit is exceeded than maximum price'=>'Coupon amount limit is exceeded than maximum price.',
+    'Cart has been updated successfully' => 'Cart has been updated successfully!',
 
-	'Coupon cannot be applied this product is in sale'=>'Coupon cannot be applied this product is in sale.',
+    'Coupon can not be apllied to empty cart' => 'Coupon can not be apllied to empty cart.',
 
-	'Coupon amount is greater than total price'=>'Coupon amount is greater than total price.',
+    'cartEmptyText' => 'You have no items in your shopping cart.<br>Click <a href="shop">here</a> to continue shopping.',
 
-	'Coupon amount is greater than product price'=>'Coupon amount is greater than product price.',
+    'Home' => 'Home',
 
-	'Coupon does not exist'=>'Coupon does not exist or invalid coupon code.',
+    'Products' => 'Products',
 
-	'Please enter a valid coupon code'=>'Please enter a valid coupon code',
+    'Detail' => 'Detail',
 
-	'Coupon is already applied'=>'Coupon is already applied',
+    'Unit Price' => 'Unit Price',
 
-	'Cart item has been deleted successfully'=>'Cart item has been deleted successfully!',
+    'Item Total' => 'Item Total',
 
-	'Coupon has been removed successfully'=>'Coupon has been removed successfully!',
+    'Special' => 'Special',
 
-	'Cart has been updated successfully'=>'Cart has been updated successfully!',
+    'Update Cart' => 'Update Cart',
 
-	'Coupon can not be apllied to empty cart'=>'Coupon can not be apllied to empty cart.',
+    'Back To Shopping' => 'Back To Shopping',
 
-	'cartEmptyText'=>'You have no items in your shopping cart.<br>Click <a href="shop">here</a> to continue shopping.',
+    'Total' => 'Total',
 
-	'Home'=>'Home',
+    'Discount(Coupon)' => 'Discount (Coupon)',
 
-	'Shopping cart'=>'Shopping cart',
+    'Order Summary' => 'Order Summary',
 
-	'Poducts'=>'Poducts',
+    'Subtotal' => 'Subtotal',
 
-	'Detail'=>'Detail',
+    'Please enter your first name' => 'Please enter your first name',
 
-	'Quantity'=>'Quantity',
+    'Please enter your last name' => 'Please enter your last name',
 
-	'Unit Price'=>'Unit Price',
+    'Login' => 'Login',
 
-	'Item Total'=>'Item Total',
+    'Create An Account' => 'Create an Account',
 
-	'Special'=>'Special',
+    'Personal Information' => 'Personal Information',
 
-	'Coupon Code'=>'Coupon Code',
+    'Error' => 'Error',
 
-	'Checkout'=>'Checkout',
+    'Success' => 'Success',
+    'Enter Your Email or Username' => 'Please Enter Your Email or Email',
 
-	'Update Cart'=>'Update Cart',
+    'First Name' => 'First Name',
 
-	'Back To Shopping'=>'Back To Shopping',
+    'Last Name' => 'Last Name',
 
-	'Total'=>'Total',
+    'Email Adrress' => 'Email Address',
 
-	'Discount(Coupon)'=>'Discount (Coupon)',
+    'Please enter your valid email address' => 'Please enter your valid email address',
 
-	'Order Summary'=>'Order Summary',
+    'Please select your gender' => 'Please select your gender',
 
-	'Subtotal'=>'Subtotal',
+    'Picture' => 'Picture',
 
-	'Apply'=>'Apply',
+    'Password' => 'Password',
 
-	'Please enter your first name'=>'Please enter your first name',
+    'Please enter your password' => 'Please enter your password',
 
-	'Please enter your last name'=>'Please enter your last name',
+    'Please re-enter your password' => 'Please re-enter your password.',
 
-	'Login'=>'Login',
+    'Password does not match the confirm password' => 'Password does not match the confirm password.',
 
-	'Create An Account'=>'Create an Account',
+    'Creating an account means you are okay with our' => 'Creating an account means you are okay with our',
 
-	'Personal Information'=>'Personal Information',
+    'Terms and Services' => 'Terms and Services',
 
-	'Error'=>'Error',
+    'Privacy Policy' => 'Privacy Policy',
+    'SPECIAL DEALS' => 'SPECIAL DEALS',
 
-	'Success'=>'Success',
-	'Enter Your Email or Username' => 'Please Enter Your Email or Email',
+    'Refund Policy' => 'Refund Policy',
 
-	'First Name'=>'First Name',
+    'Please accept our terms and conditions' => 'Please accept our terms and conditions',
 
-	'Last Name'=>'Last Name',
+    'Sign Up' => 'Sign Up',
 
-	'Email Adrress'=>'Email Address',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 
-	'Please enter your valid email address'=>'Please enter your valid email address',
+    'Duis at nisl luctus, malesuada diam non, mattis odio' => 'Duis at nisl luctus, malesuada diam non, mattis odio.',
 
-	'Gender'=>'Gender',
+    'Fusce porta neque at enim consequat, in vulputate tellus faucibus' => 'Fusce porta neque at enim consequat, in vulputate tellus faucibus.',
 
-	'Please select your gender'=>'Please select your gender',
+    'Pellentesque suscipit tortor id dui accumsan varius' => 'Pellentesque suscipit tortor id dui accumsan varius.',
 
-	'Picture'=>'Picture',
+    'Sed interdum purus imperdiet tortor imperdiet, et ultricies leo gravida' => 'Sed interdum purus imperdiet tortor imperdiet, et ultricies leo gravida.',
 
-	'Password'=>'Password',
+    'Aliquam pharetra urna vel nulla egestas, non laoreet mauris mollis' => 'Aliquam pharetra urna vel nulla egestas, non laoreet mauris mollis.',
 
-	'Please enter your password'=>'Please enter your password',
+    'Integer sed velit sit amet quam pharetra ullamcorper' => 'Integer sed velit sit amet quam pharetra ullamcorper.',
 
-	'Confirm Password'=>'Confirm Password',
+    'Proin eget nulla accumsan, finibus lacus aliquam, tincidunt turpis' => 'Proin eget nulla accumsan, finibus lacus aliquam, tincidunt turpis.',
 
-	'Please re-enter your password'=>'Please re-enter your password.',
+    'Nam at orci tempor, mollis mi ornare, accumsan risus' => 'Nam at orci tempor, mollis mi ornare, accumsan risus.',
 
-	'Password does not match the confirm password'=>'Password does not match the confirm password.',
+    'Cras vel ante vel augue convallis posuere' => 'Cras vel ante vel augue convallis posuere.',
 
-	'Creating an account means you are okay with our'=>'Creating an account means you are okay with our',
+    'Ut quis dolor accumsan, viverra neque nec, blandit leo' => 'Ut quis dolor accumsan, viverra neque nec, blandit leo.',
 
-	'Terms and Services'=>'Terms and Services',
+    'Checkout' => 'Checkout',
 
-	'Privacy Policy'=>'Privacy Policy',
-	'SPECIAL DEALS' => 'SPECIAL DEALS',
+    'Shopping cart' => 'Shopping cart',
 
-	'Refund Policy'=>'Refund Policy',
+    'Billing Address' => 'Billing Address',
 
-	'Please accept our terms and conditions'=>'Please accept our terms and conditions',
+    'Payment Methods' => 'Payment Methods',
 
-	'Sign Up'=>'Sign Up',
+    'Order Detail' => 'Order Detail',
 
-	'Lorem ipsum dolor sit amet, consectetur adipiscing elit'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    'Company' => 'Company',
 
-	'Duis at nisl luctus, malesuada diam non, mattis odio'=>'Duis at nisl luctus, malesuada diam non, mattis odio.',
+    'Address' => 'Address',
 
-	'Fusce porta neque at enim consequat, in vulputate tellus faucibus'=>'Fusce porta neque at enim consequat, in vulputate tellus faucibus.',
+    'Country' => 'Country',
 
-	'Pellentesque suscipit tortor id dui accumsan varius'=>'Pellentesque suscipit tortor id dui accumsan varius.',
+    'State' => 'State',
 
-	'Sed interdum purus imperdiet tortor imperdiet, et ultricies leo gravida'=>'Sed interdum purus imperdiet tortor imperdiet, et ultricies leo gravida.',
+    'City' => 'City',
 
-	'Aliquam pharetra urna vel nulla egestas, non laoreet mauris mollis'=>'Aliquam pharetra urna vel nulla egestas, non laoreet mauris mollis.',
+    'Zip/Postal Code' => 'Zip/Postal Code',
 
-	'Integer sed velit sit amet quam pharetra ullamcorper'=>'Integer sed velit sit amet quam pharetra ullamcorper.',
+    'Continue' => 'Continue',
 
-	'Proin eget nulla accumsan, finibus lacus aliquam, tincidunt turpis'=>'Proin eget nulla accumsan, finibus lacus aliquam, tincidunt turpis.',
+    'Please enter your company name' => 'Please enter your company name.',
 
-	'Nam at orci tempor, mollis mi ornare, accumsan risus'=>'Nam at orci tempor, mollis mi ornare, accumsan risus.',
+    'Please enter your address' => 'Please enter your address.',
 
-	'Cras vel ante vel augue convallis posuere'=>'Cras vel ante vel augue convallis posuere.',
+    'Please select your country' => 'Please select your country.',
 
-	'Ut quis dolor accumsan, viverra neque nec, blandit leo'=>'Ut quis dolor accumsan, viverra neque nec, blandit leo.',
+    'Please select your state' => 'Please select your state.',
 
-	'Checkout'=>'Checkout',
+    'Please enter your city' => 'Please enter your city.',
 
-	'Shopping cart'=>'Shopping cart',
+    'Please enter your Zip/Postal Code' => 'Please enter your Zip/Postal Code.',
 
-	'Billing Address'=>'Billing Address',
+    'Update' => 'Update',
 
+    'Add Address' => 'Add Address',
 
+    'Your address has been deleted successfully' => 'Your address has been deteled successfully!',
 
-	'Payment Methods'=>'Payment Methods',
+    'Your address has been chnaged successfully' => 'Your address has been chnaged successfully!',
 
-	'Order Detail'=>'Order Detail',
+    'Default' => 'Default',
 
-	'Company'=>'Company',
+    'Address Info' => 'Address Info',
 
-	'Address'=>'Address',
+    'Action' => 'Action',
 
-	'Country'=>'Country',
+    'Your address has been updated successfully' => 'Your address has been updated successfully!',
 
-	'State'=>'State',
+    'Same shipping and billing address' => 'Same shipping and billing address.',
 
-	'City'=>'City',
+    'Select Country' => 'Select Country',
 
-	'Zip/Postal Code'=>'Zip/Postal Code',
+    'Select State' => 'Select State',
 
-	'Continue'=>'Continue',
+    'Other' => 'Other',
 
-	'Please enter your company name'=>'Please enter your company name.',
+    'Shipping Methods' => 'Shipping Methods',
 
-	'Please enter your address'=>'Please enter your address.',
+    'Confirm Order' => 'Confirm Order',
 
-	'Please select your country'=>'Please select your country.',
+    'Order Now' => 'Order Now',
 
-	'Please select your state'=>'Please select your state.',
+    'Please select a prefered shipping method to use on this order' => 'Please select a prefered shipping method to use on this order.',
 
-	'Please enter your city'=>'Please enter your city.',
+    'My Orders' => 'My Orders',
 
-	'Please enter your Zip/Postal Code'=>'Please enter your Zip/Postal Code.',
+    'No order is placed yet' => 'No order is placed yet.',
 
-	'Update'=>'Update',
+    'Order ID' => 'Order ID',
 
-	'Add Address'=>'Add Address',
+    'Quantity' => 'Quantity',
 
-	'Your address has been deteled successfully'=>'Your address has been deteled successfully!',
+    'Order Date' => 'Order Date',
 
-	'Your address has been chnaged successfully'=>'Your address has been chnaged successfully!',
+    'View Order' => 'View Order',
 
-	'Default'=>'Default',
+    'Status' => 'Status',
 
-	'Address Info'=>'Address Info',
+    'Order information' => 'Order information',
 
-	'Action'=>'Action',
+    'Customer Detail' => 'Customer Detail',
 
-	'Your address has been updated successfully'=>'Your address has been updated successfully!',
+    'Admin Comments' => 'Admin Comments',
 
-	'Same shipping and billing address'=>'Same shipping and billing address.',
+    'Order Comments' => 'Order Comments',
 
-	'Select Country'=>'Select Country',
+    'Comments' => 'Comments',
 
-	'Select State'=>'Select State',
+    'Shipping Cost' => 'Shipping Cost',
 
-	'Other'=>'Other',
+    'Tax' => 'Tax',
 
-	'Shipping Methods'=>'Shipping Methods',
+    'Payment Method' => 'Payment Method',
 
-	'Confirm Order'=>'Confirm Order',
+    'Shipping Method' => 'Shipping Method',
 
-	'Order Now'=>'Order Now',
+    'Payment/Shipping Method' => 'Payment/Shipping Method',
 
-	'Please select a prefered shipping method to use on this order'=>'Please select a prefered shipping method to use on this order.',
+    'Billing Detail' => 'Billing Detail',
 
-	'My Orders'=>'My Orders',
+    'Shipping Detail' => 'Shipping Detail',
 
-	'No order is placed yet'=>'No order is placed yet.',
+    'Pay' => 'Pay',
 
-	'Order ID'=>'Order ID',
+    'Your location does not support this' => 'Your location does not support ',
 
-	'Quantity'=>'Quantity',
+    'Please select your shipping method' => 'Please select your shipping method.',
 
-	'Order Date'=>'Order Date',
+    'Please select a prefered payment method to use on this order' => 'Please select a prefered payment method to use on this order.',
 
-	'Price'=>'Price',
+    'Please select your payment method' => 'Please select your payment method.',
 
-	'View Order'=>'View Order',
+    'BrainTree Payment' => 'BrainTree Payment',
 
-	'Status'=>'Status',
+    'Card number' => 'Card number',
 
-	'Order information'=>'Order information',
+    'Expiration' => 'Expiration',
 
-	'Please select a prefered shipping method to use on this order'=>'Please select a prefered shipping method to use on this order.',
+    'CVC' => 'CVC',
 
-	'Customer Detail'=>'Customer Detail',
+    'Payment successful' => 'Payment successful',
 
-	'Admin Comments'=>'Admin Comments',
+    'Thanks You Your payment has been processed successfully' => 'Thanks You! Your payment has been processed successfully.',
 
-	'Order Comments'=>'Order Comments',
+    'Edit Cart' => 'Edit Cart',
 
-	'Comments'=>'Comments',
+    'Full Name' => 'Full Name',
 
-	'Shipping Cost'=>'Shipping Cost',
+    'Email' => 'Email',
 
-	'Tax'=>'Tax',
+    'Message' => 'Message',
 
-	'Payment Method'=>'Payment Method',
+    'Our Address' => 'Our Address',
 
-	'Shipping Method'=>'Shipping Method',
+    'contact us message' => 'Thank you for contact us. We will contact with you within three business days.',
 
-	'Payment/Shipping Method'=>'Payment/Shipping Method',
+    'Subject' => 'Subject',
 
-	'Billing Detail'=>'Billing Detail',
+    'Send' => 'Send',
 
-	'Shipping Detail'=>'Shipping Detail',
+    'News Detail' => 'News Detail',
+    'Date' => 'Date',
 
-	'Pay'=>'Pay',
+    'News' => 'News',
 
-	'Your location does not support this'=>'Your location does not support ',
+    'All News' => 'All News',
 
-	'Please select your shipping method'=>'Please select your shipping method.',
+    'Sort' => 'Sort',
 
-	'Please select a prefered payment method to use on this order'=>'Please select a prefered payment method to use on this order.',
+    'Shop' => 'Shop',
 
-	'Please select your payment method'=>'Please select your payment method.',
+    'Newest' => 'Newest - Oldest',
 
-	'BrainTree Payment'=>'BrainTree Payment',
+    'Price: High To Low' => 'Price: High To Low',
 
-	'Card number'=>'Card number',
+    'Price: Low To High' => 'Price: Low To High',
 
-	'Expiration'=>'Expiration',
+    'Top Seller' => 'Top Seller',
 
-	'CVC'=>'CVC',
+    'Special Products' => 'Special Products',
 
-	'Payment successful'=>'Payment successful',
+    'Most Liked' => 'Most Liked',
 
-	'Thanks You Your payment has been processed successfully'=>'Thanks You! Your payment has been processed successfully.',
+    'Display' => 'Display',
 
-	'Edit Cart'=>'Edit Cart',
+    'Limit' => 'Limit',
 
-	'Full Name'=>'Full Name',
+    'No record found' => 'No record found!',
 
-	'Email'=>'Email',
+    'All products are loaded.' => 'All products are loaded.',
 
-	'Message'=>'Message',
+    'All news are loaded' => 'All news are loaded.',
 
-	'Our Address'=>'Our Address',
+    'Load More' => 'Load More',
 
-	'contact us message'=>'Thank you for contact us. We will contact with you within three business days.',
+    'News Categories' => 'News Categories',
 
-	'Subject'=>'Subject',
+    'A - Z' => 'A - Z',
 
-	'Send'=>'Send',
+    'Z - A' => 'Z - A',
 
-	'News Detail'=>'News Detail',
-	'Date'=>'Date',
+    'Edit Address' => 'Edit Address',
 
-	'News'=>'News',
+    'Add Address' => 'Add Address',
 
-	'All News'=>'All News',
+    'All products are loaded' => 'All products are loaded.',
 
-	'Sort'=>'Sort',
+    'Related Products' => 'Related Products',
 
-	'Shop'=>'Shop',
+    'Products Description' => 'Products Description',
 
-	'Newest'=>'Newest - Oldest',
+    'Order(s)' => 'Order(s)',
 
-	'Price: High To Low'=>'Price: High To Low',
+    'Login Or Create An Account' => 'Login Or Create an Account',
 
-	'Price: Low To High'=>'Price: Low To High',
+    'New Customers' => 'New Customers',
 
-	'Top Seller'=>'Top Seller',
+    'login page text for customer' => 'By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.',
 
-	'Special Products'=>'Special Products',
+    'Dont have account' => 'Don\'t have account?',
 
-	'Most Liked'=>'Most Liked',
+    'or Sign in with' => 'or Sign in with',
 
-	'Display'=>'Display',
+    'Login with Facebook' => 'Login with Facebook',
 
-	'Limit'=>'Limit',
+    'Login with Google' => 'Login with Google',
 
-	'No record found'=>'No record found!',
+    'Registered Customers' => 'Registered Customers',
 
-	'All products are loaded.'=>'All products are loaded.',
+    'If you have an account with us, please log in' => 'If you have an account with us, please log in',
 
-	'All news are loaded'=>'All news are loaded.',
+    'This field is required' => 'This field is required.',
 
-	'Load More'=>'Load More',
+    'Please enter your password and should be at least 6 characters long' => 'Please enter your password and should be at least 6 characters long.',
 
-	'Oldest'=>'Oldest',
+    'New Password' => 'New Password',
 
-	'News Categories'=>'News Categories',
+    'Current Password' => 'Current Password',
 
-	'A - Z'=>'A - Z',
+    'Please enter current password' => 'Please enter current password.',
 
-	'Z - A'=>'Z - A',
+    'Please enter your valid phone number' => 'Please enter your valid phone number.',
 
-	'Edit Address'=>'Edit Address',
+    'Phone Number' => 'Phone Number',
 
-	'Add Address'=>'Add Address',
+    'Please enter your date of birth' => 'Please enter your date of birth.',
 
-	'All products are loaded'=>'All products are loaded.',
+    'Date of Birth' => 'Date of Birth',
 
-	'Related Products'=>'Related Products',
+    'Female' => 'Female',
 
-	'Products Description'=>'Products Description',
+    'Male' => 'Male',
 
-	'Order(s)'=>'Order(s)',
+    'Gender' => 'Gender',
 
-	'Login Or Create An Account'=>'Login Or Create an Account',
+    'Ecommerce' => 'Ecommerce',
 
-	'New Customers'=>'New Customers',
+    'Featured' => 'Featured',
 
-	'login page text for customer'=>'By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.',
+    'Filters' => 'Filters',
 
-	'Dont have account'=>'Don\'t have account?',
+    'Apply' => 'Apply',
 
-	'or Sign in with'=>'or Sign in with',
+    'Reset' => 'Reset',
 
-	'Login with Facebook'=>'Login with Facebook',
+    'Subscribe' => 'Subscribe!',
 
-	'Login with Google'=>'Login with Google',
+    'Shipping Address' => 'Shipping Address',
 
-	'Registered Customers'=>'Registered Customers',
+    'Returned all products' => 'Returned all products.',
 
-	'If you have an account with us, please log in'=>'If you have an account with us, please log in',
+    'Search results empty' => 'Search results empty.',
 
-	'This field is required'=>'This field is required.',
+    'Categories' => 'Categories',
 
-	'Forgot Password'=>'Forgot Password?',
+    'Product Detail' => 'Product Detail',
 
-	'Please enter your password and should be at least 6 characters long'=>'Please enter your password and should be at least 6 characters long.',
+    'Returned all filters successfully' => 'Returned all filters successfully.',
 
-	'New Password'=>'New Password',
+    'Filter is empty for this category' => 'Filter is empty for this category.',
 
-	'Current Password'=>'Current Password',
+    'Select Zone' => 'Select Zone',
 
-	'Please enter current password'=>'Please enter current password.',
+    'select Country' => 'Select Country',
 
-	'Please enter your valid phone number'=>'Please enter your valid phone number.',
+    'All Products' => 'All Products',
 
-	'Phone Number'=>'Phone Number',
+    'Product is added' => 'Product is added!',
 
-	'Please enter your date of birth'=>'Please enter your date of birth.',
+    'Special Products of the Week' => 'Special Products of the Week',
 
-	'Date of Birth'=>'Date of Birth',
+    'Forgot Password' => 'Forgot Password',
 
-	'Female'=>'Female',
+    'Please Enter your email to recover your password' => 'Please Enter your email to recover your password.',
 
-	'Male'=>'Male',
+    'Qty' => 'Qty',
 
-	'Gender'=>'Gender',
+    'You have no items in your shopping cart' => 'You have no items in your shopping cart.',
 
-	'Ecommerce'=>'Ecommerce',
+    'Password has been sent to your email address' => 'Password has been sent to your email address.',
 
-	'Featured'=>'Featured',
+    'Email address does not exist' => 'Email address does not exist.',
 
-	'Filters'=>'Filters',
+    'Add to Cart' => 'Add to Cart',
 
-	'Apply'=>'Apply',
+    'Added' => 'Added!',
 
-	'Reset'=>'Reset',
+    'Subscribe for Newsletter' => 'Subscribe for Newsletter',
 
-	'Subscribe'=>'Subscribe!',
+    'Your email address here' => 'Your email address here...',
 
-	'Shipping Address'=>'Shipping Address',
+    'Subscribe' => 'Subscribe!',
 
-	'Returned all products'=>'Returned all products.',
+    'About Store' => 'About Store',
 
-	'Search results empty'=>'Search results empty.',
+    'Our Services' => 'Our Services',
 
-	'Categories'=>'Categories',
+    'Information' => 'Information',
 
-	'Product Detail'=>'Product Detail',
+    'Popular Categories' => 'Popular Categories',
 
-	'Returned all filters successfully'=>'Returned all filters successfully.',
+    'Error while placing order' => 'Error while placing order.',
 
-	'Filter is empty for this category'=>'Filter is empty for this category.',
+    'Payment has been processed successfully' => 'Payment has been processed successfully!',
 
-	'Select Zone'=>'Select Zone',
+    'Your order has been placed' => 'Your order has been placed',
 
-	'select Country'=>'Select Country',
+    'Email or password is incorrect' => 'Email or password is incorrect!',
 
-	'All Products'=>'All Products',
+    'something is wrong' => 'something is wrong!',
 
-	'Product is added'=>'Product is added!',
+    'Email already exist' => 'Email already exist!',
 
-	'Special Products of the Week'=>'Special Products of the Week',
+    'ApplyCoupon' => 'Apply Coupon',
 
-	'Forgot Password'=>'Forgot Password',
+    'proceedToCheckout' => 'Proceed To Checkout',
 
-	'Please Enter your email to recover your password'=>'Please Enter your email to recover your password.',
+    'orderNotes' => 'Order Notes',
 
-	'Qty'=>'Qty',
+    'Previous' => 'Previous',
+    'Next' => 'Next',
 
-	'You have no items in your shopping cart'=>'You have no items in your shopping cart.',
+    'Out of Stock' => 'Out of Stock',
 
-	'Password has been sent to your email address'=>'Password has been sent to your email address.',
+    'In stock' => 'In stock',
 
-	'Email address does not exist'=>'Email address does not exist.',
+    'Low in Stock' => 'Low in Stock',
 
-	'Add to Cart'=>'Add to Cart',
+    'Edit' => 'Edit',
 
-	'Added'=>'Added!',
+    'Remove Item' => 'Remove Item',
 
-	'Subscribe for Newsletter'=>'Subscribe for Newsletter',
+    'per page' => 'per page',
 
-	'Your email address here'=>'Your email address here...',
+    'orderNotesandSummary' => 'Order Notes & Summary',
 
-	'Subscribe'=>'Subscribe!',
+    'Signup' => 'Signup',
 
-	'About Store'=>'About Store',
+    'myProfile' => 'My Profile',
 
-	'Our Services'=>'Our Services',
+    'orderID' => 'Order ID #',
 
-	'Information'=>'Information',
+    'orderStatus' => 'Order Status',
 
-	'Popular Categories'=>'Popular Categories',
+    'Please enter your name' => 'Please enter your name.',
 
-	'Error while placing order'=>'Error while placing order.',
+    'Please enter your message' => 'Please enter your message.',
 
-	'Payment has been processed successfully'=>'Payment has been processed successfully!',
+    'Profile has been updated successfully' => 'Profile has been updated successfully!',
 
-	'Your order has been placed'=>'Your order has been placed',
+    'Change Password' => 'Change Password',
 
-	'Email or password is incorrect'=>'Email or password is incorrect!',
+    'infoPages' => 'Info Pages',
 
-	'something is wrong'=>'something is wrong!',
+    'homePages' => 'Home Pages',
 
-	'Email already exist'=>'Email already exist!',
+    'homePage1' => 'Home Page 1',
+    'homePage2' => 'Home Page 2',
+    'homePage3' => 'Home Page 3',
+    'homePage4' => 'Home Page 4',
+    'homePage5' => 'Home Page 5',
 
+    'collection' => 'Collection',
 
-	'ApplyCoupon'=>'Apply Coupon',
+    'hot' => 'Hot',
 
-	'proceedToCheckout'=>'Proceed To Checkout',
+    'new in Stores' => 'New in Stores',
 
-	'orderNotes'=>'Order Notes',
+    'categroies' => 'Categroies',
 
-	'Previous'=>'Previous',
-	'Next'=>'Next',
+    'Call Us Free' => 'Call Us Free',
 
-	'Out of Stock'=>'Out of Stock',
+    'Featured News' => 'Featured News',
 
-	'In stock'=>'In stock',
+    'Upload Profile Photo' => 'Upload Profile Photo',
 
-	'Low in Stock'=>'Low in Stock',
+    'Choose...' => 'Choose...',
 
-	'Edit'=>'Edit',
+    'Showing' => 'Showing',
 
-	'Remove Item'=>'Remove Item',
+    'of' => 'of',
 
-	'per page'=>'per page',
+    'results' => 'results.',
 
-	'orderNotesandSummary'=>'Order Notes & Summary',
+    'Password has been updated successfully' => 'Password has been updated successfully!',
 
-	'Signup'=>'Signup',
+    'Record not found' => 'Record not found!',
+    'contact us title' => 'Ecommerce Contact Us',
+    'Follow Us' => 'Follow Us',
 
-	'myProfile'=>'My Profile',
+    'Shipping addresses are not added yet' => 'Shipping addresses are not added yet.',
 
-	'orderID'=>'Order ID #',
+    'product is not added to your wish list' => 'Product is not added to your wishlist.',
 
-	'orderStatus'=>'Order Status',
+    'Search result for' => 'Search result for',
 
-	'Please enter your name'=>'Please enter your name.',
+    'item found' => 'item found.',
+    'cancel' => 'cancel',
 
-	'Please enter your message'=>'Please enter your message.',
+    'Please write notes of your order' => 'Please write notes of your order',
+    'Coupon Applied' => 'Coupon Applied',
 
-	'Profile has been updated successfully'=>'Profile has been updated successfully!',
+    //new
+    'Welcome' => 'Welcome',
+    'Welcome Guest!' => 'Welcome Guest!',
+    'Worldwide Express Plus' => 'Worldwide Express Plus',
+    'Standard' => 'Standard',
+    'Worldwide Expedited' => 'Worldwide Expedited',
+    'Worldwide Express' => 'Worldwide Express',
+    '2nd Day Air A.M.' => '2nd Day Air A.M.',
+    'Next Day Air Early A.M.' => 'Next Day Air Early A.M.',
+    'Next Day Air Saver' => 'Next Day Air Saver',
+    '3 Day Select' => '3 Day Select',
+    'Ground' => 'Ground',
+    '2nd Day Air' => '2nd Day Air',
+    'Next Day Air' => 'Next Day Air',
+    'My Account' => 'My Account',
+    'Info Pages' => 'Info Pages',
+    'Dummy Text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum velit est, et semper massa pulvinar ut. Aliquam sagittis augue at lobortis hendrerit. Vestibulum sit amet posuere quam. Vivamus consectetur tortor eu sollicitudin ullamcorper. Sed dignissim scelerisque enim, sit amet fermentum velit imperdiet eu. Phasellus varius tincidunt nibh, sed ornare felis porttitor quis.',
 
-	'Change Password'=>'Change Password',
-
-	'infoPages'=>'Info Pages',
-
-	'homePages'=>'Home Pages',
-
-	'homePage1'=>'Home Page 1',
-	'homePage2'=>'Home Page 2',
-	'homePage3'=>'Home Page 3',
-	'homePage4'=>'Home Page 4',
-	'homePage5'=>'Home Page 5',
-
-	'collection'=>'Collection',
-
-	'hot'=>'Hot',
-
-	'new in Stores'=>'New in Stores',
-
-	'categroies'=>'Categroies',
-
-	'Call Us Free'=>'Call Us Free',
-
-	'Featured News'=>'Featured News',
-
-	'Upload Profile Photo'=>'Upload Profile Photo',
-
-	'Choose...'=>'Choose...',
-
-	'Showing'=>'Showing',
-
-	'of'=>'of',
-
-	'results'=>'results.',
-
-	'Password has been updated successfully'=>'Password has been updated successfully!',
-
-	'Record not found'=>'Record not found!',
-	'contact us title'=>'Ecommerce Contact Us',
-	'Follow Us'=>'Follow Us',
-
-	'Shipping addresses are not added yet'=>'Shipping addresses are not added yet.',
-
-	'product is not added to your wish list'=>'Product is not added to your wishlist.',
-
-	'Search result for'=>'Search result for',
-
-	'item found'=>'item found.',
-	'cancel'=>'cancel',
-
-	'Please write notes of your order'=>'Please write notes of your order',
-	'Coupon Applied'=>'Coupon Applied',
-
-	//new
-	'Welcome'=>'Welcome',
-	'Welcome Guest!'=>'Welcome Guest!',
-	'Worldwide Express Plus'=>'Worldwide Express Plus',
-	'Standard'=>'Standard',
-	'Worldwide Expedited'=>'Worldwide Expedited',
-	'Worldwide Express'=>'Worldwide Express',
-	'2nd Day Air A.M.'=>'2nd Day Air A.M.',
-	'Next Day Air Early A.M.'=>'Next Day Air Early A.M.',
-	'Next Day Air Saver'=>'Next Day Air Saver',
-	'3 Day Select'=>'3 Day Select',
-	'Ground'=>'Ground',
-	'2nd Day Air'=>'2nd Day Air',
-	'Next Day Air'=>'Next Day Air',
-	'My Account'=>'My Account',
-	'Info Pages'=>'Info Pages',
-	'Dummy Text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum velit est, et semper massa pulvinar ut. Aliquam sagittis augue at lobortis hendrerit. Vestibulum sit amet posuere quam. Vivamus consectetur tortor eu sollicitudin ullamcorper. Sed dignissim scelerisque enim, sit amet fermentum velit imperdiet eu. Phasellus varius tincidunt nibh, sed ornare felis porttitor quis.',
-
-	'Product is unliked'=>'Product is unliked.',
-	'Please login first to like this product'=>'Please login first to like this product.',
-	'Product is liked'=>'Product is liked.',
-	'Product is disliked'=>'Product is disliked.',
-	'Password has been updated successfully'=>'Password has been updated successfully.',
-	'Empty Site Name'=>'Empty Site Name',
-	'Instamojo Payment'=>'Instamojo Payment',
-	'External Link'=>'External Link',
-	'Flash Sale'=>'Flash Sale',
-	'cancel order'=>'Cancel Order',
-	'cancelled'=>'Cancelled',
-	'Are you sure you want to cancel this order?'=>'Are you sure you want to cancel this order?',
-	'Flash Sale'=>'Flash Sale',
-	'UP COMMING'=>'UP COMMING',
-	'Min Order Limit:'=>'Min Order Limit:',
-	'Return'=>'Return',
-	'Are you sure you want to return this order?'=>'Are you sure you want to return this order?',
-	'return order'=>'Return Order',
-	'Avail free shpping on'=>'Avail free shpping on',
-	'Coupon does not belongs to this product'=>'Coupon does not belongs to this product.',
-	'You have successfully subscribed.'=>'You have successfully subscribed.',
-	'You have already subscribed.'=>'You have already subscribed.',
-	'Some problem occurred, please try again.'=>'Some problem occurred, please try again.',
-	'Please enter your email address'=>'Please enter your email address.',
-	'If you do note want to apply this coupon just click cross button of this alert.'=>'If you do note want to apply this coupon just click cross button of this alert.',
+    'Product is unliked' => 'Product is unliked.',
+    'Please login first to like this product' => 'Please login first to like this product.',
+    'Product is liked' => 'Product is liked.',
+    'Product is disliked' => 'Product is disliked.',
+    'Password has been updated successfully' => 'Password has been updated successfully.',
+    'Empty Site Name' => 'Empty Site Name',
+    'Instamojo Payment' => 'Instamojo Payment',
+    'External Link' => 'External Link',
+    'Flash Sale' => 'Flash Sale',
+    'cancel order' => 'Cancel Order',
+    'cancelled' => 'Cancelled',
+    'Are you sure you want to cancel this order?' => 'Are you sure you want to cancel this order?',
+    'Flash Sale' => 'Flash Sale',
+    'UP COMMING' => 'UP COMMING',
+    'Min Order Limit:' => 'Min Order Limit:',
+    'Return' => 'Return',
+    'Are you sure you want to return this order?' => 'Are you sure you want to return this order?',
+    'return order' => 'Return Order',
+    'Avail free shpping on' => 'Avail free shpping on',
+    'Coupon does not belongs to this product' => 'Coupon does not belongs to this product.',
+    'You have successfully subscribed.' => 'You have successfully subscribed.',
+    'You have already subscribed.' => 'You have already subscribed.',
+    'Some problem occurred, please try again.' => 'Some problem occurred, please try again.',
+    'Please enter your email address' => 'Please enter your email address.',
+    'If you do note want to apply this coupon just click cross button of this alert.' => 'If you do note want to apply this coupon just click cross button of this alert.',
     'Pet Services' => 'Pet Services',
-    'Grocery'=> 'Grocery',
+    'Grocery' => 'Grocery',
     'Cosmetic & Perfumes' => 'Cosmetic & Perfumes',
     'Health Supplements' => 'Health Supplements',
     'Protein & others' => 'Protein & others',
@@ -787,31 +742,31 @@ return [
     'What’s HOT' => 'What’s HOT',
     'Buy Now' => 'Buy Now',
     'Add from wishlist' => 'Add from wishlist',
-	'Oldest' => 'Oldest - Newest',
-	'Trends' => 'Trends',
-	'See All' => 'See All',
-	'Shop Now!' => 'Shop Now!',
-	'FAQ' => 'FAQ',
-	'Recently Viewed' => 'Recently Viewed',
-	'Company Information' => 'Company Information',
-	'Connect with Us' => 'Connect with Us',
-	'Minimum order amount is 5.00 KWD.' => 'Minimum order amount is 5.00 KWD.',
-	'No Product has been added to your Cart' => 'No Product has been added to your Cart',
-	'Price Details' => 'Price Details',
-	'Remove' => 'Remove',
-	'View' => 'View',
-	'APPLY' =>'APPLY',
-	'Delivery Charges' => 'Delivery Charges',
-	'My Cart' => 'My Cart',
-	'Price' => 'Price',
-	'Sub Total' => 'Sub Total',
-	'No Products in your Wishlist'  => 'No Products in your Wishlist',
-	'Old Password'  => 'Old Password',
-	'Please enter your old password'  => 'Please enter your old password',
-	'Confirm Password'  => 'Confirm Password',
-	'Please confirm your password'  => 'Please confirm your password',
-	'Confirm Password and New Password does not match' => 'Confirm Password and New Password does not match',
-	'Password has been updated successfully' => 'Password has been updated successfully',
+    'Oldest' => 'Oldest - Newest',
+    'Trends' => 'Trends',
+    'See All' => 'See All',
+    'Shop Now!' => 'Shop Now!',
+    'FAQ' => 'FAQ',
+    'Recently Viewed' => 'Recently Viewed',
+    'Company Information' => 'Company Information',
+    'Connect with Us' => 'Connect with Us',
+    'Minimum order amount is 5.00 KWD.' => 'Minimum order amount is 5.00 KWD.',
+    'No Product has been added to your Cart' => 'No Product has been added to your Cart',
+    'Price Details' => 'Price Details',
+    'Remove' => 'Remove',
+    'View' => 'View',
+    'APPLY' => 'APPLY',
+    'Delivery Charges' => 'Delivery Charges',
+    'My Cart' => 'My Cart',
+    'Price' => 'Price',
+    'Sub Total' => 'Sub Total',
+    'No Products in your Wishlist' => 'No Products in your Wishlist',
+    'Old Password' => 'Old Password',
+    'Please enter your old password' => 'Please enter your old password',
+    'Confirm Password' => 'Confirm Password',
+    'Please confirm your password' => 'Please confirm your password',
+    'Confirm Password and New Password does not match' => 'Confirm Password and New Password does not match',
+    'Password has been updated successfully' => 'Password has been updated successfully',
     'Product' => 'Product',
     'Access Your Account Through Your Social Networks' => 'Access Your Account Through Your Social Networks',
     'Google' => 'Google',
