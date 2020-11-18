@@ -302,6 +302,7 @@
 
         //commeents
         jQuery(document).on('focusout', '#order_comments', function (e) {
+            console.log('order comments clicked');
             jQuery('#loader').css('display', 'flex');
             var comments = jQuery('#order_comments').val();
             jQuery.ajax({

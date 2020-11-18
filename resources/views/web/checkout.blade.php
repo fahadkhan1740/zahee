@@ -436,41 +436,43 @@
 
                                     ?>
                                 </form>
-                                <div class="col-12 col-sm-12 mb-3">
-                                    <div class="row">
-                                        <div class="heading" style="width:100%; padding:0;">
-                                            <h2>@lang('website.orderNotesandSummary')</h2>
-                                            <hr>
+                                <form name="shipping_mehtods" method="post" id="payment_mehtods_form"
+                                      enctype="multipart/form-data" action="{{ URL::to('/place_order')}}">
+                                    <div class="col-12 col-sm-12 mb-3">
+                                        <div class="row">
+                                            <div class="heading" style="width:100%; padding:0;">
+                                                <h2>@lang('website.orderNotesandSummary')</h2>
+                                                <hr>
+                                            </div>
+                                            <div class="form-group" style="width:100%; padding:0;">
+                                                <label
+                                                    for="exampleFormControlTextarea1">@lang('website.Please write notes of your order')</label>
+                                                <textarea name="comments" class="form-control" id="order_comments"
+                                                          rows="3">@if(!empty(session('order_comments'))){{session('order_comments')}}@endif</textarea>
+                                            </div>
                                         </div>
-                                        <div class="form-group" style="width:100%; padding:0;">
-                                            <label
-                                                for="exampleFormControlTextarea1">@lang('website.Please write notes of your order')</label>
-                                            <textarea name="comments" class="form-control" id="order_comments"
-                                                      rows="3">@if(!empty(session('order_comments'))){{session('order_comments')}}@endif</textarea>
-                                        </div>
+
                                     </div>
-
-                                </div>
-                                <div class="col-12 col-sm-12 mb-3">
-                                    <div class="row">
-                                        <div class="heading" style="width:100%; padding:0;">
-                                            <h2>@lang('website.Payment Methods')</h2>
-                                            <hr>
-                                        </div>
-
-                                        <div class="form-group" style="width:100%; padding:0;">
-                                            <p class="title">@lang('website.Please select a prefered payment method to use on this order')</p>
-
-                                            <div class="alert alert-danger error_payment" style="display:none"
-                                                 role="alert">
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                </button>
-                                                @lang('website.Please select your payment method')
+                                    <div class="col-12 col-sm-12 mb-3">
+                                        <div class="row">
+                                            <div class="heading" style="width:100%; padding:0;">
+                                                <h2>@lang('website.Payment Methods')</h2>
+                                                <hr>
                                             </div>
 
-                                            <form name="shipping_mehtods" method="post" id="payment_mehtods_form"
-                                                  enctype="multipart/form-data" action="{{ URL::to('/place_order')}}">
+                                            <div class="form-group" style="width:100%; padding:0;">
+                                                <p class="title">@lang('website.Please select a prefered payment method to use on this order')</p>
+
+                                                <div class="alert alert-danger error_payment" style="display:none"
+                                                     role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close"><span
+                                                            aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    @lang('website.Please select your payment method')
+                                                </div>
+
+
                                                 <input type="hidden" name="_token" id="csrf-token"
                                                        value="{{ Session::token() }}"/>
                                                 <ul class="list"
@@ -492,7 +494,8 @@
 
                                                 <!-- <input type="hidden" name="payment_method_id" value="0"> -->
                                                     <li>
-                                                        <input type="radio" name="payment_method" class="payment_method"
+                                                        <input type="radio" name="payment_method"
+                                                               class="payment_method"
                                                                value="0">
                                                         <label>
                                                             Cash On Delivery
@@ -504,12 +507,12 @@
                                                     <button id="pay_button"
                                                             class="btn btn-default payment_btns">@lang('website.Order Now')</button>
                                                 </div>
-                                            </form>
+                                            </div>
+
                                         </div>
 
                                     </div>
-
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -570,12 +573,29 @@
             </div>
         </div>
     </section>
+
+@endsection
 @section('scripts')
     <script>
         // jQuery(document).on('click', '#cash_on_delivery_button', function(e){
         // 	jQuery("#update_cart_form").submit();
         // });
-    </script>
-@endsection
 
+        jQuery(document).on('focusout', '#order_comments', function (e) {
+            console.log('order comments clicked');
+            jQuery('#loader').css('display', 'flex');
+            var comments = jQuery('#order_comments').val();
+            jQuery.ajax({
+                headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+                url: '{{ URL::to("/commentsOrder")}}',
+                type: "POST",
+                data: '&comments=' + comments,
+                async: false,
+                success: function (res) {
+                    jQuery('#loader').hide();
+                },
+            });
+        });
+
+    </script>
 @endsection

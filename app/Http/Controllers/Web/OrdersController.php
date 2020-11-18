@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 //use Mail;
 //validator is builtin class in laravel
+use Illuminate\Support\Facades\Cache;
 use Validator;
 
 //for password encryption or hash protected
@@ -151,11 +152,11 @@ class OrdersController extends Controller
             $basURL = "https://apitest.myfatoorah.com";
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                    CURLOPT_URL => "$basURL/v2/InitiatePayment",
-                    CURLOPT_CUSTOMREQUEST => "POST",
-                    CURLOPT_POSTFIELDS => "{\"InvoiceAmount\": $price,\"CurrencyIso\": \"KWD\"}",
-                    CURLOPT_HTTPHEADER => array("Authorization: Bearer $token", "Content-Type: application/json"),
-                ));
+                CURLOPT_URL => "$basURL/v2/InitiatePayment",
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "{\"InvoiceAmount\": $price,\"CurrencyIso\": \"KWD\"}",
+                CURLOPT_HTTPHEADER => array("Authorization: Bearer $token", "Content-Type: application/json"),
+            ));
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
             $response = curl_exec($curl);
@@ -580,6 +581,10 @@ class OrdersController extends Controller
     public function commentsOrder(Request $request)
     {
         session(['order_comments' => $request->comments]);
+
+        info(session()->getId());
+
+        Cache::put('order_comments_'.session()->getId(), $request->comments, 30);
     }
 
     public function payIinstamojo(Request $request)

@@ -74,11 +74,14 @@ class Order extends Model
 
         //$orders_date_finished            	=   $request->orders_date_finished;
 
-        if (!empty(session('order_comments'))) {
-            $comments = session('order_comments');
-        } else {
-            $comments = '';
-        }
+//        info(session('order_comments'));
+//        if (!empty(session('order_comments'))) {
+//            $comments = session('order_comments');
+//        } else {
+//        }
+
+        info($request->input('comments'));
+        $comments = $request->input('comments');
 
         $web_setting = DB::table('settings')->get();
         $currency = $web_setting[19]->value;
@@ -338,53 +341,53 @@ class Order extends Model
         if ($payment_status == 'Processing') {
             $orders_id = DB::table('orders')->insertGetId(
                 [
-                        'customers_id' => $customers_id,
-                        'customers_name' => $delivery_firstname.' '.$delivery_lastname,
-                        'customers_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
-                        'customers_city' => $delivery_city,
-                        'customers_country' => $delivery_country,
-                        'customers_telephone' => $delivery_phone,
-                        'email' => $email,
+                    'customers_id' => $customers_id,
+                    'customers_name' => $delivery_firstname.' '.$delivery_lastname,
+                    'customers_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
+                    'customers_city' => $delivery_city,
+                    'customers_country' => $delivery_country,
+                    'customers_telephone' => $delivery_phone,
+                    'email' => $email,
 
-                        'delivery_name' => $delivery_firstname.' '.$delivery_lastname,
-                        'delivery_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
+                    'delivery_name' => $delivery_firstname.' '.$delivery_lastname,
+                    'delivery_street_address' => $delivery_street_address.' ,'.$delivery_flat_address,
 
-                        'delivery_city' => $delivery_city,
+                    'delivery_city' => $delivery_city,
 
-                        'delivery_country' => $delivery_country,
+                    'delivery_country' => $delivery_country,
 
-                        'billing_name' => $billing_firstname.' '.$billing_lastname,
-                        'billing_street_address' => $billing_street_address.' ,'.$billing_flat_address,
-                        'billing_city' => $billing_city,
-                        'billing_country' => $billing_country,
+                    'billing_name' => $billing_firstname.' '.$billing_lastname,
+                    'billing_street_address' => $billing_street_address.' ,'.$billing_flat_address,
+                    'billing_city' => $billing_city,
+                    'billing_country' => $billing_country,
 
-                        'payment_method' => $payment_method,
-                        'last_modified' => $last_modified,
-                        'date_purchased' => $date_purchased,
-                        'order_price' => $order_price,
-                        'shipping_cost' => $shipping_cost,
-                        'shipping_method' => $shipping_method,
-                        'currency' => $currency,
-                        'order_information' => json_encode($order_information),
-                        'coupon_code' => $code,
-                        'coupon_amount' => $coupon_amount,
-                        'total_tax' => $total_tax,
-                        'ordered_source' => '1',
-                        'delivery_phone' => $delivery_phone,
-                        'billing_phone' => $billing_phone,
-                    ]
+                    'payment_method' => $payment_method,
+                    'last_modified' => $last_modified,
+                    'date_purchased' => $date_purchased,
+                    'order_price' => $order_price,
+                    'shipping_cost' => $shipping_cost,
+                    'shipping_method' => $shipping_method,
+                    'currency' => $currency,
+                    'order_information' => json_encode($order_information),
+                    'coupon_code' => $code,
+                    'coupon_amount' => $coupon_amount,
+                    'total_tax' => $total_tax,
+                    'ordered_source' => '1',
+                    'delivery_phone' => $delivery_phone,
+                    'billing_phone' => $billing_phone,
+                ]
             );
 
             //orders status history
             $orders_history_id = DB::table('orders_status_history')->insertGetId(
                 [
-                        'orders_id' => $orders_id,
-                        'orders_status_id' => $orders_status,
-                        'date_added' => $date_added,
-                        'customer_notified' => '1',
-                        'comments' => $comments,
-                        'orders_status_id' => 1
-                    ]
+                    'orders_id' => $orders_id,
+                    'orders_status_id' => $orders_status,
+                    'date_added' => $date_added,
+                    'customer_notified' => '1',
+                    'comments' => $comments,
+                    'orders_status_id' => 1
+                ]
             );
 
             $cart = $cart->myCart(array());
@@ -393,25 +396,25 @@ class Order extends Model
                 //get products info
                 $orders_products_id = DB::table('orders_products')->insertGetId(
                     [
-                            'orders_id' => $orders_id,
-                            'products_id' => $products->products_id,
-                            'products_name' => $products->products_name,
-                            'products_price' => $products->price,
-                            'final_price' => $products->final_price * $products->customers_basket_quantity,
-                            'products_tax' => $products_tax,
-                            'products_quantity' => $products->customers_basket_quantity,
-                        ]
+                        'orders_id' => $orders_id,
+                        'products_id' => $products->products_id,
+                        'products_name' => $products->products_name,
+                        'products_price' => $products->price,
+                        'final_price' => $products->final_price * $products->customers_basket_quantity,
+                        'products_tax' => $products_tax,
+                        'products_quantity' => $products->customers_basket_quantity,
+                    ]
                 );
 
                 $inventory_ref_id = DB::table('inventory')->insertGetId([
-                        'products_id' => $products->products_id,
-                        'reference_code' => '',
-                        'stock' => $products->customers_basket_quantity,
-                        'admin_id' => 0,
-                        'added_date' => time(),
-                        'purchase_price' => 0,
-                        'stock_type' => 'out',
-                    ]);
+                    'products_id' => $products->products_id,
+                    'reference_code' => '',
+                    'stock' => $products->customers_basket_quantity,
+                    'admin_id' => 0,
+                    'added_date' => time(),
+                    'purchase_price' => 0,
+                    'stock_type' => 'out',
+                ]);
 
                 DB::table('customers_basket')->where(
                     'products_id',
@@ -422,22 +425,22 @@ class Order extends Model
                     foreach ($products->attributes as $attribute) {
                         DB::table('orders_products_attributes')->insert(
                             [
-                                    'orders_id' => $orders_id,
+                                'orders_id' => $orders_id,
 
-                                    'products_id' => $products->products_id,
-                                    'orders_products_id' => $orders_products_id,
-                                    'products_options' => $attribute->attribute_name,
-                                    'products_options_values' => $attribute->attribute_value,
-                                    'options_values_price' => $attribute->values_price,
-                                    'price_prefix' => $attribute->prefix
-                                ]
+                                'products_id' => $products->products_id,
+                                'orders_products_id' => $orders_products_id,
+                                'products_options' => $attribute->attribute_name,
+                                'products_options_values' => $attribute->attribute_value,
+                                'options_values_price' => $attribute->values_price,
+                                'price_prefix' => $attribute->prefix
+                            ]
                         );
 
                         DB::table('inventory_detail')->insert([
-                                'inventory_ref_id' => $inventory_ref_id,
-                                'products_id' => $products->products_id,
-                                'attribute_id' => $attribute->products_attributes_id,
-                            ]);
+                            'inventory_ref_id' => $inventory_ref_id,
+                            'products_id' => $products->products_id,
+                            'attribute_id' => $attribute->products_attributes_id,
+                        ]);
                     }
                 }
             }
@@ -446,37 +449,37 @@ class Order extends Model
 
             //send order email to user
             $order = DB::table('orders')
-                    ->LeftJoin('orders_status_history', 'orders_status_history.orders_id', '=', 'orders.orders_id')
-                    ->LeftJoin(
-                        'orders_status',
-                        'orders_status.orders_status_id',
-                        '=',
-                        'orders_status_history.orders_status_id'
-                    )
-                    ->where('orders.orders_id', '=', $orders_id)->orderby(
-                        'orders_status_history.date_added',
-                        'DESC'
-                    )->get();
+                ->LeftJoin('orders_status_history', 'orders_status_history.orders_id', '=', 'orders.orders_id')
+                ->LeftJoin(
+                    'orders_status',
+                    'orders_status.orders_status_id',
+                    '=',
+                    'orders_status_history.orders_status_id'
+                )
+                ->where('orders.orders_id', '=', $orders_id)->orderby(
+                    'orders_status_history.date_added',
+                    'DESC'
+                )->get();
 
             //foreach
             foreach ($order as $data) {
                 $orders_id = $data->orders_id;
 
                 $orders_products = DB::table('orders_products')
-                        ->join('products', 'products.products_id', '=', 'orders_products.products_id')
-                        ->select('orders_products.*', 'products.products_image as image')
-                        ->where('orders_products.orders_id', '=', $orders_id)->get();
+                    ->join('products', 'products.products_id', '=', 'orders_products.products_id')
+                    ->select('orders_products.*', 'products.products_image as image')
+                    ->where('orders_products.orders_id', '=', $orders_id)->get();
                 $i = 0;
                 $total_price = 0;
                 $product = array();
                 $subtotal = 0;
                 foreach ($orders_products as $orders_products_data) {
                     $product_attribute = DB::table('orders_products_attributes')
-                            ->where([
-                                ['orders_products_id', '=', $orders_products_data->orders_products_id],
-                                ['orders_id', '=', $orders_products_data->orders_id],
-                            ])
-                            ->get();
+                        ->where([
+                            ['orders_products_id', '=', $orders_products_data->orders_products_id],
+                            ['orders_id', '=', $orders_products_data->orders_id],
+                        ])
+                        ->get();
 
                     $orders_products_data->attribute = $product_attribute;
                     $product[$i] = $orders_products_data;
@@ -491,14 +494,14 @@ class Order extends Model
             }
 
             $orders_status_history = DB::table('orders_status_history')
-                    ->LeftJoin(
-                        'orders_status',
-                        'orders_status.orders_status_id',
-                        '=',
-                        'orders_status_history.orders_status_id'
-                    )
-                    ->orderBy('orders_status_history.date_added', 'desc')
-                    ->where('orders_id', '=', $orders_id)->get();
+                ->LeftJoin(
+                    'orders_status',
+                    'orders_status.orders_status_id',
+                    '=',
+                    'orders_status_history.orders_status_id'
+                )
+                ->orderBy('orders_status_history.date_added', 'desc')
+                ->where('orders_id', '=', $orders_id)->get();
 
             $orders_status = DB::table('orders_status')->get();
 
@@ -556,10 +559,10 @@ class Order extends Model
             '=',
             'orders.orders_id'
         )->orderBy('date_purchased', 'DESC')->where(
-                'customers_id',
-                '=',
-                auth()->guard('customer')->user()->id
-            )->get(['orders.*', 'orders_products.products_name']);
+            'customers_id',
+            '=',
+            auth()->guard('customer')->user()->id
+        )->get(['orders.*', 'orders_products.products_name']);
 
         $index = 0;
         $total_price = array();
@@ -593,12 +596,12 @@ class Order extends Model
                     '=',
                     $orders_data->orders_id
                 )->where(
-                        'orders_status_description.language_id',
-                        session('language_id')
-                    )->orderby(
-                        'orders_status_history.orders_status_history_id',
-                        'DESC'
-                    )->limit(1)->get();
+                    'orders_status_description.language_id',
+                    session('language_id')
+                )->orderby(
+                    'orders_status_history.orders_status_history_id',
+                    'DESC'
+                )->limit(1)->get();
             //    dd(DB::getQueryLog());
 
             if (count($orders_status_history) > 0) {
@@ -667,18 +670,22 @@ class Order extends Model
                         '=',
                         'orders_status.orders_status_id'
                     )
-                    ->select('orders_status_description.orders_status_name', 'orders_status.orders_status_id')
+                    ->select(
+                        'orders_status_description.orders_status_name',
+                        'orders_status.orders_status_id',
+                        'orders_status_history.comments'
+                    )
                     ->where(
                         'orders_status_history.orders_id',
                         '=',
                         $orders_data->orders_id
                     )->where(
-                            'orders_status_description.language_id',
-                            session('language_id')
-                        )->orderby(
-                            'orders_status_history.orders_status_history_id',
-                            'DESC'
-                        )->limit(1)->get();
+                        'orders_status_description.language_id',
+                        session('language_id')
+                    )->orderby(
+                        'orders_status_history.orders_status_history_id',
+                        'DESC'
+                    )->limit(1)->get();
 
                 $orders[$index]->statusess = $orders_status_history;
                 $orders[$index]->products = $products_array;
