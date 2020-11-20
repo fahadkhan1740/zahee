@@ -16,7 +16,7 @@ class CreateManufacturersTable extends Migration {
 		{
 			$table->increments('manufacturers_id');
 			$table->string('manufacturer_name', 191);
-			$table->text('manufacturer_image', 65535);
+			$table->text('manufacturer_image');
 			$table->string('manufacturers_slug', 191);
 			$table->string('date_added', 191)->nullable();
 			$table->string('last_modified', 191)->nullable();
