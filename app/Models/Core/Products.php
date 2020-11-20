@@ -2,24 +2,17 @@
 
 namespace App\Models\Core;
 
-use App\Models\Core\Setting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Models\Core\Images;
-use App\Models\Core\Languages;
-use App\Models\Core\Manufacturers;
-use App\Models\Core\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AdminControllers\SiteSettingController;
 use App\Http\Controllers\AdminControllers\AlertController;
-use Illuminate\Support\Facades\Lang;
 use Carbon\Carbon;
 use Kyslik\ColumnSortable\Sortable;
 
 class Products extends Model
 {
-
     use Sortable;
 
     public $sortable = ['products_id', 'updated_at'];
@@ -53,17 +46,30 @@ class Products extends Model
                     });
             });
 
-
         $data->leftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
             ->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
-            ->leftJoin('categories_description', 'categories.categories_id', '=', 'categories_description.categories_id');
+            ->leftJoin(
+                'categories_description',
+                'categories.categories_id',
+                '=',
+                'categories_description.categories_id'
+            );
 
-
-        $data->select('products.*', 'products_description.*', 'specials.specials_id', 'manufacturers.*',
-            'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price',
-            'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified',
-            'specials.expires_date', 'image_categories.path as path', 'products.updated_at as productupdate', 'categories_description.categories_id',
-            'categories_description.categories_name')
+        $data->select(
+            'products.*',
+            'products_description.*',
+            'specials.specials_id',
+            'manufacturers.*',
+            'specials.products_id as special_products_id',
+            'specials.specials_new_products_price as specials_products_price',
+            'specials.specials_date_added as specials_date_added',
+            'specials.specials_last_modified as specials_last_modified',
+            'specials.expires_date',
+            'image_categories.path as path',
+            'products.updated_at as productupdate',
+            'categories_description.categories_id',
+            'categories_description.categories_name'
+        )
             ->where('products_description.language_id', '=', $language_id)
             ->where('categories_description.language_id', '=', $language_id);
 
@@ -76,14 +82,12 @@ class Products extends Model
             $data->where('products_to_categories.categories_id', '=', $_REQUEST['categories_id']);
 
             if (isset($_REQUEST['product']) and !empty($_REQUEST['product'])) {
-                $data->where('products_name', 'like', '%' . $_REQUEST['product'] . '%');
+                $data->where('products_name', 'like', '%'.$_REQUEST['product'].'%');
             }
 
             $products = $data->orderBy('products.products_id', 'DESC')
                 ->where('categories_status', '1')->paginate($commonsetting['pagination']);
-
         } else {
-
             if (!empty(session('categories_id'))) {
                 $cat_array = explode(',', session('categories_id'));
                 $data->whereIn('products_to_categories.categories_id', $cat_array);
@@ -131,12 +135,30 @@ class Products extends Model
 
         $data->leftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
             ->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
-            ->leftJoin('categories_description', 'categories.categories_id', '=', 'categories_description.categories_id');
+            ->leftJoin(
+                'categories_description',
+                'categories.categories_id',
+                '=',
+                'categories_description.categories_id'
+            );
 
         //  }
 
-        $data->select('products.*', 'products_description.*', 'specials.specials_id', 'manufacturers.*', 'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price', 'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified', 'specials.expires_date', 'image_categories.path as path',
-            'products.updated_at as productupdate', 'categories_description.categories_id', 'categories_description.categories_name')
+        $data->select(
+            'products.*',
+            'products_description.*',
+            'specials.specials_id',
+            'manufacturers.*',
+            'specials.products_id as special_products_id',
+            'specials.specials_new_products_price as specials_products_price',
+            'specials.specials_date_added as specials_date_added',
+            'specials.specials_last_modified as specials_last_modified',
+            'specials.expires_date',
+            'image_categories.path as path',
+            'products.updated_at as productupdate',
+            'categories_description.categories_id',
+            'categories_description.categories_name'
+        )
             ->where('products_description.language_id', '=', $language_id)
             ->where('categories_description.language_id', '=', $language_id);
 
@@ -149,13 +171,11 @@ class Products extends Model
             $data->where('products_to_categories.categories_id', '=', $_REQUEST['categories_id']);
 
             if (isset($_REQUEST['product']) and !empty($_REQUEST['product'])) {
-                $data->where('products_name', 'like', '%' . $_REQUEST['product'] . '%');
+                $data->where('products_name', 'like', '%'.$_REQUEST['product'].'%');
             }
 
             $products = $data->orderBy('products.products_id', 'DESC')->paginate($commonsetting['pagination']);
-
         } else {
-
             if (!empty(session('categories_id'))) {
                 $cat_array = explode(',', session('categories_id'));
                 $data->whereIn('products_to_categories.categories_id', $cat_array);
@@ -191,7 +211,6 @@ class Products extends Model
             $tax_Class_id = $request->tax_class_id;
         }
 
-
         $products_id = DB::table('products')->insertGetId([
             'products_image' => $uploadImage,
             'manufacturers_id' => $request->manufacturers_id,
@@ -216,13 +235,13 @@ class Products extends Model
 
         $slug_flag = false;
         foreach ($languages as $languages_data) {
-            $products_name = 'products_name_' . $languages_data->languages_id;
-            $products_url = 'products_url_' . $languages_data->languages_id;
-            $products_description = 'products_description_' . $languages_data->languages_id;
-            $product_sub_title = 'product_sub_title_' . $languages_data->languages_id;
+            $products_name = 'products_name_'.$languages_data->languages_id;
+            $products_url = 'products_url_'.$languages_data->languages_id;
+            $products_description = 'products_description_'.$languages_data->languages_id;
+            $product_sub_title = 'product_sub_title_'.$languages_data->languages_id;
             //left banner
-            $products_left_banner = 'products_left_banner_' . $languages_data->languages_id;
-            $products_left_banner_start_date = 'products_left_banner_start_date_' . $languages_data->languages_id;
+            $products_left_banner = 'products_left_banner_'.$languages_data->languages_id;
+            $products_left_banner_start_date = 'products_left_banner_start_date_'.$languages_data->languages_id;
             if (!empty($request->$products_left_banner_start_date)) {
                 $leftStartDate = str_replace('/', '-', $request->$products_left_banner_start_date);
                 $leftStartDateFormat = strtotime($leftStartDate);
@@ -230,7 +249,7 @@ class Products extends Model
                 $leftStartDateFormat = null;
             }
             //expire date
-            $products_left_banner_expire_date = 'products_left_banner_expire_date_' . $languages_data->languages_id;
+            $products_left_banner_expire_date = 'products_left_banner_expire_date_'.$languages_data->languages_id;
             if (!empty($request->$products_left_banner_expire_date)) {
                 $leftExpiretDate = str_replace('/', '-', $request->$products_left_banner_expire_date);
                 $leftExpireDateFormat = strtotime($leftExpiretDate);
@@ -238,8 +257,8 @@ class Products extends Model
                 $leftExpireDateFormat = null;
             }
             //right banner
-            $products_right_banner = 'products_right_banner_' . $languages_data->languages_id;
-            $products_right_banner_start_date = 'products_right_banner_start_date_' . $languages_data->languages_id;
+            $products_right_banner = 'products_right_banner_'.$languages_data->languages_id;
+            $products_right_banner_start_date = 'products_right_banner_start_date_'.$languages_data->languages_id;
             if (!empty($request->$products_right_banner_start_date)) {
                 $rightStartDate = str_replace('/', '-', $request->$products_right_banner_start_date);
                 $rightStartDateFormat = strtotime($rightStartDate);
@@ -247,7 +266,7 @@ class Products extends Model
                 $rightStartDateFormat = null;
             }
             //expire date
-            $products_right_banner_expire_date = 'products_right_banner_expire_date_' . $languages_data->languages_id;
+            $products_right_banner_expire_date = 'products_right_banner_expire_date_'.$languages_data->languages_id;
             if (!empty($request->$products_right_banner_expire_date)) {
                 $rightExpiretDate = str_replace('/', '-', $request->$products_right_banner_expire_date);
                 $rightExpireDateFormat = strtotime($rightExpiretDate);
@@ -264,7 +283,7 @@ class Products extends Model
                     if ($slug_count == 0) {
                         $currentSlug = $myVarsetting->slugify($slug);
                     } else {
-                        $currentSlug = $myVarsetting->slugify($old_slug . '-' . $slug_count);
+                        $currentSlug = $myVarsetting->slugify($old_slug.'-'.$slug_count);
                     }
                     $slug = $currentSlug;
                     $checkSlug = DB::table('products')->where('products_slug', $currentSlug)->get();
@@ -312,11 +331,11 @@ class Products extends Model
         if ($request->isFlash == 'yes') {
             $startdate = $request->flash_start_date;
             $starttime = $request->flash_start_time;
-            $start_date = str_replace('/', '-', $startdate . ' ' . $starttime);
+            $start_date = str_replace('/', '-', $startdate.' '.$starttime);
             $flash_start_date = strtotime($start_date);
             $expiredate = $request->flash_expires_date;
             $expiretime = $request->flash_end_time;
-            $expire_date = str_replace('/', '-', $expiredate . ' ' . $expiretime);
+            $expire_date = str_replace('/', '-', $expiredate.' '.$expiretime);
             $flash_expires_date = strtotime($expire_date);
             DB::table('flash_sale')->insert([
                 'products_id' => $products_id,
@@ -345,7 +364,6 @@ class Products extends Model
                     'expires_date' => $expiryDateFormate,
                     'status' => $request->status,
                 ]);
-
         }
         foreach ($request->categories as $categories) {
             DB::table('products_to_categories')
@@ -355,8 +373,17 @@ class Products extends Model
                 ]);
         }
         $options = DB::table('products_options')
-            ->join('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')
+            ->join(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->select(
+                'products_options.products_options_id',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id'
+            )
             ->where('products_options_descriptions.language_id', $language_id)
             ->get();
 
@@ -367,8 +394,16 @@ class Products extends Model
         }
 
         $options_value = DB::table('products_options_values')
-            ->join('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->join(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_options_values.products_options_values_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->get();
         if (!empty($options_value) and count($options_value) > 0) {
@@ -399,9 +434,21 @@ class Products extends Model
 
         //get function from ManufacturerController controller
         $getManufacturers = DB::table('manufacturers')
-            ->leftJoin('manufacturers_info', 'manufacturers_info.manufacturers_id', '=', 'manufacturers.manufacturers_id')
-            ->select('manufacturers.manufacturers_id as id', 'manufacturers.manufacturer_image as image', 'manufacturers.manufacturer_name as name', 'manufacturers_info.manufacturers_url as url', 'manufacturers_info.url_clicked', 'manufacturers_info.date_last_click as clik_date')
-            ->where('manufacturers_info.languages_id', $language_id)->where('manufacturers.is_active','=',1)->get();
+            ->leftJoin(
+                'manufacturers_info',
+                'manufacturers_info.manufacturers_id',
+                '=',
+                'manufacturers.manufacturers_id'
+            )
+            ->select(
+                'manufacturers.manufacturers_id as id',
+                'manufacturers.manufacturer_image as image',
+                'manufacturers.manufacturer_name as name',
+                'manufacturers_info.manufacturers_url as url',
+                'manufacturers_info.url_clicked',
+                'manufacturers_info.date_last_click as clik_date'
+            )
+            ->where('manufacturers_info.languages_id', $language_id)->where('manufacturers.is_active', '=', 1)->get();
         $result['manufacturer'] = $getManufacturers;
         $product = DB::table('products')
             ->LeftJoin('image_categories', function ($join) {
@@ -411,7 +458,6 @@ class Products extends Model
                             ->where('image_categories.image_type', '!=', 'THUMBNAIL')
                             ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                     });
-
             })
             ->where('products.products_id', '=', $products_id)
             ->get();
@@ -421,31 +467,30 @@ class Products extends Model
         foreach ($result['languages'] as $languages_data) {
             $description = DB::table('products_description')
                 ->LeftJoin('image_categories as imgleftbannert', function ($join) {
-
                     $join->on('imgleftbannert.image_id', '=', 'products_description.products_left_banner')
                         ->where(function ($query) {
                             $query->where('imgleftbannert.image_type', '=', 'THUMBNAIL')
                                 ->where('imgleftbannert.image_type', '!=', 'THUMBNAIL')
                                 ->orWhere('imgleftbannert.image_type', '=', 'ACTUAL');
                         });
-
                 })
                 ->LeftJoin('image_categories as imgrightbannert', function ($join) {
-
                     $join->on('imgrightbannert.image_id', '=', 'products_description.products_right_banner')
                         ->where(function ($query) {
                             $query->where('imgrightbannert.image_type', '=', 'THUMBNAIL')
                                 ->where('imgrightbannert.image_type', '!=', 'THUMBNAIL')
                                 ->orWhere('imgrightbannert.image_type', '=', 'ACTUAL');
                         });
-
                 })
                 ->where([
                     ['language_id', '=', $languages_data->languages_id],
                     ['products_id', '=', $products_id],
 
-                ])->select('products_description.*', 'imgrightbannert.path as imgright', 'imgleftbannert.path as imgleft')->get();
-
+                ])->select(
+                    'products_description.*',
+                    'imgrightbannert.path as imgright',
+                    'imgleftbannert.path as imgleft'
+                )->get();
 
             if (count($description) > 0) {
                 $description_data[$languages_data->languages_id]['products_name'] = $description[0]->products_name;
@@ -462,7 +507,6 @@ class Products extends Model
                 $description_data[$languages_data->languages_id]['languages_id'] = $languages_data->languages_id;
                 $description_data[$languages_data->languages_id]['imgright'] = $description[0]->imgright;
                 $description_data[$languages_data->languages_id]['imgleft'] = $description[0]->imgleft;
-
             } else {
                 $description_data[$languages_data->languages_id]['products_name'] = '';
                 $description_data[$languages_data->languages_id]['products_url'] = '';
@@ -478,15 +522,18 @@ class Products extends Model
                 $description_data[$languages_data->languages_id]['languages_id'] = $languages_data->languages_id;
                 $description_data[$languages_data->languages_id]['imgright'] = '';
                 $description_data[$languages_data->languages_id]['imgleft'] = '';
-
             }
-
         }
         $result['description'] = $description_data;
         $result['product'] = $product;
         $categories = DB::table('products_to_categories')
             ->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
-            ->leftJoin('categories_description', 'categories_description.categories_id', '=', 'categories.categories_id')
+            ->leftJoin(
+                'categories_description',
+                'categories_description.categories_id',
+                '=',
+                'categories.categories_id'
+            )
             ->where('products_id', '=', $products_id)->where('categories_description.language_id', '=', $language_id)
             ->where('categories_status', '1')
             ->get();
@@ -497,19 +544,31 @@ class Products extends Model
         }
 
         $result['categories_array'] = $categories_array;
-        $getSpecialProduct = DB::table('specials')->where('products_id', $products_id)->orderby('specials_id', 'desc')->limit(1)->get();
+        $getSpecialProduct = DB::table('specials')->where('products_id', $products_id)->orderby(
+            'specials_id',
+            'desc'
+        )->limit(1)->get();
         if (count($getSpecialProduct) > 0) {
             $specialProduct = $getSpecialProduct;
         } else {
-            $specialProduct[0] = (object)array('specials_id' => '', 'products_id' => '', 'specials_new_products_price' => '', 'status' => '', 'expires_date' => '');
+            $specialProduct[0] = (object) array(
+                'specials_id' => '', 'products_id' => '', 'specials_new_products_price' => '', 'status' => '',
+                'expires_date' => ''
+            );
         }
         $result['specialProduct'] = $specialProduct;
 
-        $getflashProduct = DB::table('flash_sale')->where('products_id', $products_id)->orderby('flash_sale_id', 'desc')->limit(1)->get();
+        $getflashProduct = DB::table('flash_sale')->where('products_id', $products_id)->orderby(
+            'flash_sale_id',
+            'desc'
+        )->limit(1)->get();
         if (count($getflashProduct) > 0) {
             $flashProduct = $getflashProduct;
         } else {
-            $flashProduct[0] = (object)array('products_id' => '', 'flash_sale_products_price' => '', 'flash_status' => '', 'flash_start_date' => '', 'flash_expires_date' => '');
+            $flashProduct[0] = (object) array(
+                'products_id' => '', 'flash_sale_products_price' => '', 'flash_status' => '', 'flash_start_date' => '',
+                'flash_expires_date' => ''
+            );
         }
         $result['flashProduct'] = $flashProduct;
 
@@ -536,10 +595,14 @@ class Products extends Model
                 if ($slug_count == 0) {
                     $currentSlug = $myVarsetting->slugify($request->slug);
                 } else {
-                    $currentSlug = $myVarsetting->slugify($request->slug . '-' . $slug_count);
+                    $currentSlug = $myVarsetting->slugify($request->slug.'-'.$slug_count);
                 }
                 $slug = $currentSlug;
-                $checkSlug = DB::table('products')->where('products_slug', $currentSlug)->where('products_id', '!=', $products_id)->get();
+                $checkSlug = DB::table('products')->where('products_slug', $currentSlug)->where(
+                    'products_id',
+                    '!=',
+                    $products_id
+                )->get();
                 $slug_count++;
             } while (count($checkSlug) > 0);
         } else {
@@ -572,13 +635,13 @@ class Products extends Model
             'home_display' => $request->home_display
         ]);
         foreach ($languages as $languages_data) {
-            $products_name = 'products_name_' . $languages_data->languages_id;
-            $products_url = 'products_url_' . $languages_data->languages_id;
-            $products_description = 'products_description_' . $languages_data->languages_id;
-            $product_sub_title = 'product_sub_title_' . $languages_data->languages_id;
+            $products_name = 'products_name_'.$languages_data->languages_id;
+            $products_url = 'products_url_'.$languages_data->languages_id;
+            $products_description = 'products_description_'.$languages_data->languages_id;
+            $product_sub_title = 'product_sub_title_'.$languages_data->languages_id;
             //left banner
-            $products_left_banner = 'products_left_banner_' . $languages_data->languages_id;
-            $products_left_banner_start_date = 'products_left_banner_start_date_' . $languages_data->languages_id;
+            $products_left_banner = 'products_left_banner_'.$languages_data->languages_id;
+            $products_left_banner_start_date = 'products_left_banner_start_date_'.$languages_data->languages_id;
             if (!empty($request->$products_left_banner_start_date)) {
                 $leftStartDate = str_replace('/', '-', $request->$products_left_banner_start_date);
                 $leftStartDateFormat = strtotime($leftStartDate);
@@ -586,7 +649,7 @@ class Products extends Model
                 $leftStartDateFormat = '';
             }
             //expire date
-            $products_left_banner_expire_date = 'products_left_banner_expire_date_' . $languages_data->languages_id;
+            $products_left_banner_expire_date = 'products_left_banner_expire_date_'.$languages_data->languages_id;
             if (!empty($request->$products_left_banner_expire_date)) {
                 $leftExpiretDate = str_replace('/', '-', $request->$products_left_banner_expire_date);
                 $leftExpireDateFormat = strtotime($leftExpiretDate);
@@ -594,8 +657,8 @@ class Products extends Model
                 $leftExpireDateFormat = '';
             }
             //right banner
-            $products_right_banner = 'products_right_banner_' . $languages_data->languages_id;
-            $products_right_banner_start_date = 'products_right_banner_start_date_' . $languages_data->languages_id;
+            $products_right_banner = 'products_right_banner_'.$languages_data->languages_id;
+            $products_right_banner_start_date = 'products_right_banner_start_date_'.$languages_data->languages_id;
             if (!empty($request->$products_right_banner_start_date)) {
                 $rightStartDate = str_replace('/', '-', $request->$products_right_banner_start_date);
                 $rightStartDateFormat = strtotime($rightStartDate);
@@ -603,15 +666,15 @@ class Products extends Model
                 $rightStartDateFormat = '';
             }
             //expire date
-            $products_right_banner_expire_date = 'products_right_banner_expire_date_' . $languages_data->languages_id;
+            $products_right_banner_expire_date = 'products_right_banner_expire_date_'.$languages_data->languages_id;
             if (!empty($request->$products_right_banner_expire_date)) {
                 $rightExpiretDate = str_replace('/', '-', $request->$products_right_banner_expire_date);
                 $rightExpireDateFormat = strtotime($rightExpiretDate);
             } else {
                 $rightExpireDateFormat = '';
             }
-            $old_left_banner = 'old_left_banner_' . $languages_data->languages_id;
-            $old_right_banner = 'old_right_banner_' . $languages_data->languages_id;
+            $old_left_banner = 'old_left_banner_'.$languages_data->languages_id;
+            $old_right_banner = 'old_right_banner_'.$languages_data->languages_id;
             if ($request->$products_left_banner !== null) {
                 $leftBanner = $request->$products_left_banner;
             } else {
@@ -622,7 +685,11 @@ class Products extends Model
             } else {
                 $rightBanner = $request->$old_right_banner;
             }
-            $checkExist = DB::table('products_description')->where('products_id', '=', $products_id)->where('language_id', '=', $languages_data->languages_id)->get();
+            $checkExist = DB::table('products_description')->where(
+                'products_id',
+                '=',
+                $products_id
+            )->where('language_id', '=', $languages_data->languages_id)->get();
             if (count($checkExist) > 0) {
                 $req_products_name = $request->$products_name;
                 $req_products_url = $request->$products_url;
@@ -689,8 +756,10 @@ class Products extends Model
                 'expires_date' => $expiryDateFormate,
                 'status' => $request->status,
             ]);
-        } else if ($request->isSpecial == 'no') {
-            DB::table('specials')->where('products_id', '=', $products_id)->delete();
+        } else {
+            if ($request->isSpecial == 'no') {
+                DB::table('specials')->where('products_id', '=', $products_id)->delete();
+            }
         }
 
         //flash sale product
@@ -701,11 +770,11 @@ class Products extends Model
             ]);
             $startdate = $request->flash_start_date;
             $starttime = $request->flash_start_time;
-            $start_date = str_replace('/', '-', $startdate . ' ' . $starttime);
+            $start_date = str_replace('/', '-', $startdate.' '.$starttime);
             $flash_start_date = strtotime($start_date);
             $expiredate = $request->flash_expires_date;
             $expiretime = $request->flash_end_time;
-            $expire_date = str_replace('/', '-', $expiredate . ' ' . $expiretime);
+            $expire_date = str_replace('/', '-', $expiredate.' '.$expiretime);
             $flash_expires_date = strtotime($expire_date);
             DB::table('flash_sale')->insert([
                 'products_id' => $products_id,
@@ -715,17 +784,39 @@ class Products extends Model
                 'flash_expires_date' => $flash_expires_date,
                 'flash_status' => $request->flash_status
             ]);
-        } else if ($request->isSpecial == 'no') {
-            DB::table('flash_sale')->where('products_id', '=', $products_id)->delete();
+        } else {
+            if ($request->isSpecial == 'no') {
+                DB::table('flash_sale')->where('products_id', '=', $products_id)->delete();
+            }
         }
         $options = DB::table('products_options')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')->where('products_options_descriptions.language_id', '1')->get();
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->select(
+                'products_options.products_options_id',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id'
+            )->where(
+                    'products_options_descriptions.language_id',
+                    '1'
+                )->get();
 
         $result['options'] = $options;
         $options_value = DB::table('products_options_values')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_options_values.products_options_values_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->get();
         $result['options_value'] = $options_value;
@@ -762,24 +853,22 @@ class Products extends Model
         $product = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
             ->leftJoin('manufacturers', 'manufacturers.manufacturers_id', '=', 'products.manufacturers_id')
-            ->leftJoin('manufacturers_info', 'manufacturers.manufacturers_id', '=', 'manufacturers_info.manufacturers_id')
+            ->leftJoin(
+                'manufacturers_info',
+                'manufacturers.manufacturers_id',
+                '=',
+                'manufacturers_info.manufacturers_id'
+            )
             ->LeftJoin('specials', function ($join) {
-
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
-
             })
             ->select('products.products_id', 'products_description.products_name', 'products.products_type')
             ->where('products_description.language_id', '=', $language_id);
 
-
         if ($products_id != null) {
-
             $product->where('products.products_id', '=', $products_id);
-
         } else {
-
             $product->orderBy('products.products_id', 'DESC');
-
         }
 
         $product = $product->get();
@@ -794,9 +883,11 @@ class Products extends Model
         $max_level = 0;
         $purchase_price = 0;
         if ($result['products'][0]->products_type != 1) {
-
             $currentStocks = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->get();
-            $purchase_price = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->sum('purchase_price');
+            $purchase_price = DB::table('inventory')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->sum('purchase_price');
 
             if (count($currentStocks) > 0) {
                 foreach ($currentStocks as $currentStock) {
@@ -804,12 +895,14 @@ class Products extends Model
                 }
             }
 
-            $manageLevel = DB::table('manage_min_max')->where('products_id', $result['products'][0]->products_id)->get();
+            $manageLevel = DB::table('manage_min_max')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->get();
             if (count($manageLevel) > 0) {
                 $min_level = $manageLevel[0]->min_level;
                 $max_level = $manageLevel[0]->max_level;
             }
-
         }
 
         $result['purchase_price'] = $purchase_price;
@@ -822,13 +915,21 @@ class Products extends Model
             $index2 = 0;
             foreach ($products_attribute as $attribute_data) {
                 $option_name = DB::table('products_options')
-                    ->join('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-                    ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')
+                    ->join(
+                        'products_options_descriptions',
+                        'products_options_descriptions.products_options_id',
+                        '=',
+                        'products_options.products_options_id'
+                    )
+                    ->select(
+                        'products_options.products_options_id',
+                        'products_options_descriptions.options_name as products_options_name',
+                        'products_options_descriptions.language_id'
+                    )
                     ->where('products_options_descriptions.language_id', $language_id)
                     ->where('products_options.products_options_id', $attribute_data->options_id)
                     ->get();
                 if (count($option_name) > 0) {
-
                     $temp = array();
                     $temp_option['id'] = $attribute_data->options_id;
                     $temp_option['name'] = $option_name[0]->products_options_name;
@@ -840,14 +941,30 @@ class Products extends Model
                         ->get();
                     foreach ($attributes_value_query as $products_option_value) {
                         $option_value = DB::table('products_options_values')
-                            ->join('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-                            ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+                            ->join(
+                                'products_options_values_descriptions',
+                                'products_options_values_descriptions.products_options_values_id',
+                                '=',
+                                'products_options_values.products_options_values_id'
+                            )
+                            ->select(
+                                'products_options_values.products_options_values_id',
+                                'products_options_values_descriptions.options_values_name as products_options_values_name'
+                            )
                             ->where('products_options_values_descriptions.language_id', '=', $language_id)
-                            ->where('products_options_values.products_options_values_id', '=', $products_option_value->options_values_id)
+                            ->where(
+                                'products_options_values.products_options_values_id',
+                                '=',
+                                $products_option_value->options_values_id
+                            )
                             ->get();
                         if (count($option_value) > 0) {
                             $attributes = DB::table('products_attributes')
-                                ->where([['products_id', '=', $products_id], ['options_id', '=', $attribute_data->options_id], ['options_values_id', '=', $products_option_value->options_values_id]])
+                                ->where([
+                                    ['products_id', '=', $products_id],
+                                    ['options_id', '=', $attribute_data->options_id],
+                                    ['options_values_id', '=', $products_option_value->options_values_id]
+                                ])
                                 ->get();
                             $temp_i['products_attributes_id'] = $attributes[0]->products_attributes_id;
                             $temp_i['id'] = $products_option_value->options_values_id;
@@ -856,20 +973,15 @@ class Products extends Model
                             $temp_i['price_prefix'] = $products_option_value->price_prefix;
                             array_push($temp, $temp_i);
                         }
-
                     }
 
                     $attr[$index2]['values'] = $temp;
                     $result['attributes'] = $attr;
                     $index2++;
-
                 }
             }
-
         } else {
-
             $result['attributes'] = array();
-
         }
         return $result;
     }
@@ -888,11 +1000,27 @@ class Products extends Model
         $product = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
             ->leftJoin('manufacturers', 'manufacturers.manufacturers_id', '=', 'products.manufacturers_id')
-            ->leftJoin('manufacturers_info', 'manufacturers.manufacturers_id', '=', 'manufacturers_info.manufacturers_id')
+            ->leftJoin(
+                'manufacturers_info',
+                'manufacturers.manufacturers_id',
+                '=',
+                'manufacturers_info.manufacturers_id'
+            )
             ->LeftJoin('specials', function ($join) {
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
             })
-            ->select('products.*', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url', 'specials.specials_id', 'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price', 'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified', 'specials.expires_date')
+            ->select(
+                'products.*',
+                'products_description.*',
+                'manufacturers.*',
+                'manufacturers_info.manufacturers_url',
+                'specials.specials_id',
+                'specials.products_id as special_products_id',
+                'specials.specials_new_products_price as specials_products_price',
+                'specials.specials_date_added as specials_date_added',
+                'specials.specials_last_modified as specials_last_modified',
+                'specials.expires_date'
+            )
             ->where('products_description.language_id', '=', $language_id);
 
         if ($products_id != null) {
@@ -913,17 +1041,24 @@ class Products extends Model
         $max_level = 0;
         $purchase_price = 0;
         if ($result['products'][0]->products_type != 1) {
-
-            $stocksin = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->where('stock_type', 'in')->sum('stock');
-            $stockOut = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->where('stock_type', 'out')->sum('stock');
+            $stocksin = DB::table('inventory')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->where('stock_type', 'in')->sum('stock');
+            $stockOut = DB::table('inventory')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->where('stock_type', 'out')->sum('stock');
             $stocks = $stocksin - $stockOut;
 
-            $manageLevel = DB::table('manage_min_max')->where('products_id', $result['products'][0]->products_id)->get();
+            $manageLevel = DB::table('manage_min_max')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->get();
             if (count($manageLevel) > 0) {
                 $min_level = $manageLevel[0]->min_level;
                 $max_level = $manageLevel[0]->max_level;
             }
-
         }
 
         $result['purchase_price'] = $purchase_price;
@@ -936,13 +1071,21 @@ class Products extends Model
             $index2 = 0;
             foreach ($products_attribute as $attribute_data) {
                 $option_name = DB::table('products_options')
-                    ->join('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-                    ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')
+                    ->join(
+                        'products_options_descriptions',
+                        'products_options_descriptions.products_options_id',
+                        '=',
+                        'products_options.products_options_id'
+                    )
+                    ->select(
+                        'products_options.products_options_id',
+                        'products_options_descriptions.options_name as products_options_name',
+                        'products_options_descriptions.language_id'
+                    )
                     ->where('products_options_descriptions.language_id', $language_id)
                     ->where('products_options.products_options_id', $attribute_data->options_id)
                     ->get();
                 if (count($option_name) > 0) {
-
                     $temp = array();
                     $temp_option['id'] = $attribute_data->options_id;
                     $temp_option['name'] = $option_name[0]->products_options_name;
@@ -954,14 +1097,30 @@ class Products extends Model
                         ->get();
                     foreach ($attributes_value_query as $products_option_value) {
                         $option_value = DB::table('products_options_values')
-                            ->join('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-                            ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+                            ->join(
+                                'products_options_values_descriptions',
+                                'products_options_values_descriptions.products_options_values_id',
+                                '=',
+                                'products_options_values.products_options_values_id'
+                            )
+                            ->select(
+                                'products_options_values.products_options_values_id',
+                                'products_options_values_descriptions.options_values_name as products_options_values_name'
+                            )
                             ->where('products_options_values_descriptions.language_id', '=', $language_id)
-                            ->where('products_options_values.products_options_values_id', '=', $products_option_value->options_values_id)
+                            ->where(
+                                'products_options_values.products_options_values_id',
+                                '=',
+                                $products_option_value->options_values_id
+                            )
                             ->get();
                         if (count($option_value) > 0) {
                             $attributes = DB::table('products_attributes')
-                                ->where([['products_id', '=', $products_id], ['options_id', '=', $attribute_data->options_id], ['options_values_id', '=', $products_option_value->options_values_id]])
+                                ->where([
+                                    ['products_id', '=', $products_id],
+                                    ['options_id', '=', $attribute_data->options_id],
+                                    ['options_values_id', '=', $products_option_value->options_values_id]
+                                ])
                                 ->get();
                             $temp_i['products_attributes_id'] = $attributes[0]->products_attributes_id;
                             $temp_i['id'] = $products_option_value->options_values_id;
@@ -970,25 +1129,21 @@ class Products extends Model
                             $temp_i['price_prefix'] = $products_option_value->price_prefix;
                             array_push($temp, $temp_i);
                         }
-
                     }
 
                     $attr[$index2]['values'] = $temp;
                     $result['attributes'] = $attr;
                     $index2++;
-
                 }
             }
-
         } else {
-
             $result['attributes'] = array();
-
         }
         return $result;
     }
 
-    public function deleteStock($id, $stock) {
+    public function deleteStock($id, $stock)
+    {
         $setting = new Setting();
         $myVarsetting = new SiteSettingController($setting);
         $myVaralter = new AlertController($setting);
@@ -1012,22 +1167,19 @@ class Products extends Model
 
         $data = DB::table('inventory')->insertGetId($insertArray);
 
-        if($data) {
+        if ($data) {
             $result = array(
                 'status' => 1,
                 'stock' => 0
             );
-        }  else {
+        } else {
             $result = array(
                 'status' => 0,
                 'stock' => ''
             );
         }
 
-
-
         return $result;
-
     }
 
     public function ajax_min_max($id)
@@ -1044,24 +1196,33 @@ class Products extends Model
         $product = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
             ->leftJoin('manufacturers', 'manufacturers.manufacturers_id', '=', 'products.manufacturers_id')
-            ->leftJoin('manufacturers_info', 'manufacturers.manufacturers_id', '=', 'manufacturers_info.manufacturers_id')
+            ->leftJoin(
+                'manufacturers_info',
+                'manufacturers.manufacturers_id',
+                '=',
+                'manufacturers_info.manufacturers_id'
+            )
             ->LeftJoin('specials', function ($join) {
-
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
-
             })
-            ->select('products.*', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url', 'specials.specials_id', 'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price', 'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified', 'specials.expires_date')
+            ->select(
+                'products.*',
+                'products_description.*',
+                'manufacturers.*',
+                'manufacturers_info.manufacturers_url',
+                'specials.specials_id',
+                'specials.products_id as special_products_id',
+                'specials.specials_new_products_price as specials_products_price',
+                'specials.specials_date_added as specials_date_added',
+                'specials.specials_last_modified as specials_last_modified',
+                'specials.expires_date'
+            )
             ->where('products_description.language_id', '=', $language_id);
 
-
         if ($products_id != null) {
-
             $product->where('products.products_id', '=', $products_id);
-
         } else {
-
             $product->orderBy('products.products_id', 'DESC');
-
         }
 
         $product = $product->get();
@@ -1074,20 +1235,30 @@ class Products extends Model
         $stocks = 0;
         $min_level = 0;
         $max_level = 0;
-        $purchase_price = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->sum('purchase_price');
+        $purchase_price = DB::table('inventory')->where(
+            'products_id',
+            $result['products'][0]->products_id
+        )->sum('purchase_price');
 
         if ($result['products'][0]->products_type != 1) {
-
-            $stocksin = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->where('stock_type', 'in')->sum('stock');
-            $stockOut = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->where('stock_type', 'out')->sum('stock');
+            $stocksin = DB::table('inventory')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->where('stock_type', 'in')->sum('stock');
+            $stockOut = DB::table('inventory')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->where('stock_type', 'out')->sum('stock');
             $stocks = $stocksin - $stockOut;
 
-            $manageLevel = DB::table('manage_min_max')->where('products_id', $result['products'][0]->products_id)->get();
+            $manageLevel = DB::table('manage_min_max')->where(
+                'products_id',
+                $result['products'][0]->products_id
+            )->get();
             if (count($manageLevel) > 0) {
                 $min_level = $manageLevel[0]->min_level;
                 $max_level = $manageLevel[0]->max_level;
             }
-
         }
 
         $result['purchase_price'] = $purchase_price;
@@ -1100,13 +1271,21 @@ class Products extends Model
             $index2 = 0;
             foreach ($products_attribute as $attribute_data) {
                 $option_name = DB::table('products_options')
-                    ->join('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-                    ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')
+                    ->join(
+                        'products_options_descriptions',
+                        'products_options_descriptions.products_options_id',
+                        '=',
+                        'products_options.products_options_id'
+                    )
+                    ->select(
+                        'products_options.products_options_id',
+                        'products_options_descriptions.options_name as products_options_name',
+                        'products_options_descriptions.language_id'
+                    )
                     ->where('products_options_descriptions.language_id', $language_id)
                     ->where('products_options.products_options_id', $attribute_data->options_id)
                     ->get();
                 if (count($option_name) > 0) {
-
                     $temp = array();
                     $temp_option['id'] = $attribute_data->options_id;
                     $temp_option['name'] = $option_name[0]->products_options_name;
@@ -1118,14 +1297,30 @@ class Products extends Model
                         ->get();
                     foreach ($attributes_value_query as $products_option_value) {
                         $option_value = DB::table('products_options_values')
-                            ->join('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-                            ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+                            ->join(
+                                'products_options_values_descriptions',
+                                'products_options_values_descriptions.products_options_values_id',
+                                '=',
+                                'products_options_values.products_options_values_id'
+                            )
+                            ->select(
+                                'products_options_values.products_options_values_id',
+                                'products_options_values_descriptions.options_values_name as products_options_values_name'
+                            )
                             ->where('products_options_values_descriptions.language_id', '=', $language_id)
-                            ->where('products_options_values.products_options_values_id', '=', $products_option_value->options_values_id)
+                            ->where(
+                                'products_options_values.products_options_values_id',
+                                '=',
+                                $products_option_value->options_values_id
+                            )
                             ->get();
                         if (count($option_value) > 0) {
                             $attributes = DB::table('products_attributes')
-                                ->where([['products_id', '=', $products_id], ['options_id', '=', $attribute_data->options_id], ['options_values_id', '=', $products_option_value->options_values_id]])
+                                ->where([
+                                    ['products_id', '=', $products_id],
+                                    ['options_id', '=', $attribute_data->options_id],
+                                    ['options_values_id', '=', $products_option_value->options_values_id]
+                                ])
                                 ->get();
                             $temp_i['products_attributes_id'] = $attributes[0]->products_attributes_id;
                             $temp_i['id'] = $products_option_value->options_values_id;
@@ -1134,20 +1329,15 @@ class Products extends Model
                             $temp_i['price_prefix'] = $products_option_value->price_prefix;
                             array_push($temp, $temp_i);
                         }
-
                     }
 
                     $attr[$index2]['values'] = $temp;
                     $result['attributes'] = $attr;
                     $index2++;
-
                 }
             }
-
         } else {
-
             $result['attributes'] = array();
-
         }
         return $result;
     }
@@ -1165,13 +1355,20 @@ class Products extends Model
         $product = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
             ->leftJoin('manufacturers', 'manufacturers.manufacturers_id', '=', 'products.manufacturers_id')
-            ->leftJoin('manufacturers_info', 'manufacturers.manufacturers_id', '=', 'manufacturers_info.manufacturers_id')
+            ->leftJoin(
+                'manufacturers_info',
+                'manufacturers.manufacturers_id',
+                '=',
+                'manufacturers_info.manufacturers_id'
+            )
             ->LeftJoin('specials', function ($join) {
-
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
-
             })
-            ->select('products.products_id', 'products_description.products_name', 'products.products_type')->where('products_description.language_id', '=', $language_id);
+            ->select(
+                'products.products_id',
+                'products_description.products_name',
+                'products.products_type'
+            )->where('products_description.language_id', '=', $language_id);
 
         $product = $product->get();
         $result['products'] = $product;
@@ -1187,9 +1384,14 @@ class Products extends Model
         if (count($product) > 0) {
             $products_id = $result['products'][0]->products_id;
             if ($result['products'][0]->products_type != 1) {
-
-                $currentStocks = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->get();
-                $purchase_price = DB::table('inventory')->where('products_id', $result['products'][0]->products_id)->sum('purchase_price');
+                $currentStocks = DB::table('inventory')->where(
+                    'products_id',
+                    $result['products'][0]->products_id
+                )->get();
+                $purchase_price = DB::table('inventory')->where(
+                    'products_id',
+                    $result['products'][0]->products_id
+                )->sum('purchase_price');
 
                 if (count($currentStocks) > 0) {
                     foreach ($currentStocks as $currentStock) {
@@ -1197,12 +1399,14 @@ class Products extends Model
                     }
                 }
 
-                $manageLevel = DB::table('manage_min_max')->where('products_id', $result['products'][0]->products_id)->get();
+                $manageLevel = DB::table('manage_min_max')->where(
+                    'products_id',
+                    $result['products'][0]->products_id
+                )->get();
                 if (count($manageLevel) > 0) {
                     $min_level = $manageLevel[0]->min_level;
                     $max_level = $manageLevel[0]->max_level;
                 }
-
             }
 
             $result['purchase_price'] = $purchase_price;
@@ -1217,13 +1421,21 @@ class Products extends Model
                 $index2 = 0;
                 foreach ($products_attribute as $attribute_data) {
                     $option_name = DB::table('products_options')
-                        ->join('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-                        ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')
+                        ->join(
+                            'products_options_descriptions',
+                            'products_options_descriptions.products_options_id',
+                            '=',
+                            'products_options.products_options_id'
+                        )
+                        ->select(
+                            'products_options.products_options_id',
+                            'products_options_descriptions.options_name as products_options_name',
+                            'products_options_descriptions.language_id'
+                        )
                         ->where('products_options_descriptions.language_id', $language_id)
                         ->where('products_options.products_options_id', $attribute_data->options_id)
                         ->get();
                     if (count($option_name) > 0) {
-
                         $temp = array();
                         $temp_option['id'] = $attribute_data->options_id;
                         $temp_option['name'] = $option_name[0]->products_options_name;
@@ -1235,14 +1447,30 @@ class Products extends Model
                             ->get();
                         foreach ($attributes_value_query as $products_option_value) {
                             $option_value = DB::table('products_options_values')
-                                ->join('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-                                ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+                                ->join(
+                                    'products_options_values_descriptions',
+                                    'products_options_values_descriptions.products_options_values_id',
+                                    '=',
+                                    'products_options_values.products_options_values_id'
+                                )
+                                ->select(
+                                    'products_options_values.products_options_values_id',
+                                    'products_options_values_descriptions.options_values_name as products_options_values_name'
+                                )
                                 ->where('products_options_values_descriptions.language_id', '=', $language_id)
-                                ->where('products_options_values.products_options_values_id', '=', $products_option_value->options_values_id)
+                                ->where(
+                                    'products_options_values.products_options_values_id',
+                                    '=',
+                                    $products_option_value->options_values_id
+                                )
                                 ->get();
                             if (count($option_value) > 0) {
                                 $attributes = DB::table('products_attributes')
-                                    ->where([['products_id', '=', $products_id], ['options_id', '=', $attribute_data->options_id], ['options_values_id', '=', $products_option_value->options_values_id]])
+                                    ->where([
+                                        ['products_id', '=', $products_id],
+                                        ['options_id', '=', $attribute_data->options_id],
+                                        ['options_values_id', '=', $products_option_value->options_values_id]
+                                    ])
                                     ->get();
                                 $temp_i['products_attributes_id'] = $attributes[0]->products_attributes_id;
                                 $temp_i['id'] = $products_option_value->options_values_id;
@@ -1251,20 +1479,16 @@ class Products extends Model
                                 $temp_i['price_prefix'] = $products_option_value->price_prefix;
                                 array_push($temp, $temp_i);
                             }
-
                         }
 
                         $attr[$index2]['values'] = $temp;
                         $result['attributes'] = $attr;
                         $index2++;
-
                     }
                 }
-
             } else {
                 $result['attributes'] = array();
             }
-
         } else {
             $result['attributes'] = array();
         }
@@ -1272,7 +1496,8 @@ class Products extends Model
         return $result;
     }
 
-    public function productList() {
+    public function productList()
+    {
         $setting = new Setting();
         $myVarsetting = new SiteSettingController($setting);
         $myVaralter = new AlertController($setting);
@@ -1283,7 +1508,10 @@ class Products extends Model
         $result['currency'] = $myVarsetting->getSetting();
         $product = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
-            ->select('products.products_id', 'products_description.products_name')->where('products_description.language_id', '=', $language_id);
+            ->select(
+                'products.products_id',
+                'products_description.products_name'
+            )->where('products_description.language_id', '=', $language_id);
         $product = $product->get();
         $result['products'] = $product;
     }
@@ -1295,24 +1523,33 @@ class Products extends Model
         $product = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
             ->leftJoin('manufacturers', 'manufacturers.manufacturers_id', '=', 'products.manufacturers_id')
-            ->leftJoin('manufacturers_info', 'manufacturers.manufacturers_id', '=', 'manufacturers_info.manufacturers_id')
+            ->leftJoin(
+                'manufacturers_info',
+                'manufacturers.manufacturers_id',
+                '=',
+                'manufacturers_info.manufacturers_id'
+            )
             ->LeftJoin('specials', function ($join) {
-
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
-
             })
-            ->select('products.*', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url', 'specials.specials_id', 'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price', 'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified', 'specials.expires_date')
+            ->select(
+                'products.*',
+                'products_description.*',
+                'manufacturers.*',
+                'manufacturers_info.manufacturers_url',
+                'specials.specials_id',
+                'specials.products_id as special_products_id',
+                'specials.specials_new_products_price as specials_products_price',
+                'specials.specials_date_added as specials_date_added',
+                'specials.specials_last_modified as specials_last_modified',
+                'specials.expires_date'
+            )
             ->where('products_description.language_id', '=', $language_id);
 
-
         if ($products_id != null) {
-
             $product->where('products.products_id', '=', $products_id);
-
         } else {
-
             $product->orderBy('products.products_id', 'DESC');
-
         }
 
         $product = $product->get();
@@ -1339,22 +1576,36 @@ class Products extends Model
                 }
             }
         }
-
     }
 
     public function addminmax($request)
     {
-
         $products_id = $request->products_id;
         $language_id = 1;
         $product = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
             ->leftJoin('manufacturers', 'manufacturers.manufacturers_id', '=', 'products.manufacturers_id')
-            ->leftJoin('manufacturers_info', 'manufacturers.manufacturers_id', '=', 'manufacturers_info.manufacturers_id')
+            ->leftJoin(
+                'manufacturers_info',
+                'manufacturers.manufacturers_id',
+                '=',
+                'manufacturers_info.manufacturers_id'
+            )
             ->LeftJoin('specials', function ($join) {
                 $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1');
             })
-            ->select('products.*', 'products_description.*', 'manufacturers.*', 'manufacturers_info.manufacturers_url', 'specials.specials_id', 'specials.products_id as special_products_id', 'specials.specials_new_products_price as specials_products_price', 'specials.specials_date_added as specials_date_added', 'specials.specials_last_modified as specials_last_modified', 'specials.expires_date')
+            ->select(
+                'products.*',
+                'products_description.*',
+                'manufacturers.*',
+                'manufacturers_info.manufacturers_url',
+                'specials.specials_id',
+                'specials.products_id as special_products_id',
+                'specials.specials_new_products_price as specials_products_price',
+                'specials.specials_date_added as specials_date_added',
+                'specials.specials_last_modified as specials_last_modified',
+                'specials.expires_date'
+            )
             ->where('products_description.language_id', '=', $language_id);
         if ($products_id != null) {
             $product->where('products.products_id', '=', $products_id);
@@ -1387,7 +1638,6 @@ class Products extends Model
                 'inventory_ref_id' => $inventory_ref_id,
             ]);
         }
-
     }
 
     public function displayProductImages($request)
@@ -1402,7 +1652,6 @@ class Products extends Model
                             ->where('image_categories.image_type', '!=', 'THUMBNAIL')
                             ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                     });
-
             })
             ->where('products_id', '=', $products_id)
             ->select('products_images.*', 'image_categories.path')
@@ -1454,17 +1703,14 @@ class Products extends Model
 
     public function editProductImages($id)
     {
-
         $products_images = DB::table('products_images')
             ->LeftJoin('image_categories', function ($join) {
-
                 $join->on('image_categories.image_id', '=', 'products_images.image')
                     ->where(function ($query) {
                         $query->where('image_categories.image_type', '=', 'THUMBNAIL')
                             ->where('image_categories.image_type', '!=', 'THUMBNAIL')
                             ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                     });
-
             })
             ->where('products_images.id', '=', $id)
             ->select('products_images.*', 'image_categories.path')
@@ -1478,7 +1724,6 @@ class Products extends Model
         $setting = new Setting();
         $myVarsetting = new SiteSettingController($setting);
         $myVaralter = new AlertController($setting);
-
 
         if ($request->image_id !== null) {
             $uploadImage = $request->image_id;
@@ -1494,14 +1739,12 @@ class Products extends Model
             ]);
         $products_images = DB::table('products_images')
             ->LeftJoin('image_categories', function ($join) {
-
                 $join->on('image_categories.image_id', '=', 'products_images.image')
                     ->where(function ($query) {
                         $query->where('image_categories.image_type', '=', 'THUMBNAIL')
                             ->where('image_categories.image_type', '!=', 'THUMBNAIL')
                             ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                     });
-
             })
             ->where('products_id', '=', $request->products_id)
             ->select('products_images.*', 'image_categories.path')
@@ -1531,7 +1774,12 @@ class Products extends Model
         $myVaralter = new AlertController($setting);
         $result['languages'] = $myVarsetting->getLanguages();
         $options = DB::table('products_options')
-            ->leftjoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
+            ->leftjoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->get();
         $result['options'] = $options;
@@ -1541,10 +1789,29 @@ class Products extends Model
         $result['data'] = array('products_id' => $products_id);
         $products_attributes = DB::table('products_attributes')
             ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-            ->join('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_attributes.options_id')
-            ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-            ->join('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_attributes.options_values_id')
-            ->select('products_attributes.*', 'products_options_descriptions.options_name', 'products_options_values_descriptions.options_values_name')
+            ->join(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_attributes.options_id'
+            )
+            ->join(
+                'products_options_values',
+                'products_options_values.products_options_values_id',
+                '=',
+                'products_attributes.options_values_id'
+            )
+            ->join(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_attributes.options_values_id'
+            )
+            ->select(
+                'products_attributes.*',
+                'products_options_descriptions.options_name',
+                'products_options_values_descriptions.options_values_name'
+            )
             ->where('products_attributes.products_id', '=', $products_id)
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
@@ -1577,11 +1844,36 @@ class Products extends Model
                     'is_default' => $request->is_default
                 ]);
                 $products_attributes = DB::table('products_attributes')
-                    ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-                    ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-                    ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-                    ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-                    ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+                    ->join(
+                        'products_options',
+                        'products_options.products_options_id',
+                        '=',
+                        'products_attributes.options_id'
+                    )
+                    ->leftJoin(
+                        'products_options_descriptions',
+                        'products_options_descriptions.products_options_id',
+                        '=',
+                        'products_options.products_options_id'
+                    )
+                    ->join(
+                        'products_options_values',
+                        'products_options_values.products_options_values_id',
+                        '=',
+                        'products_attributes.options_values_id'
+                    )
+                    ->leftJoin(
+                        'products_options_values_descriptions',
+                        'products_options_values_descriptions.products_options_values_id',
+                        '=',
+                        'products_options_values.products_options_values_id'
+                    )
+                    ->select(
+                        'products_attributes.*',
+                        'products_options_descriptions.options_name as products_options_name',
+                        'products_options_descriptions.language_id',
+                        'products_options_values_descriptions.options_values_name as products_options_values_name'
+                    )
                     ->where('products_options_descriptions.language_id', '=', $language_id)
                     ->where('products_options_values_descriptions.language_id', '=', $language_id)
                     ->where('products_attributes.products_id', '=', $request->products_id)
@@ -1608,25 +1900,65 @@ class Products extends Model
         $language_id = 1;
         $options_id = $request->options_id;
         $options = DB::table('products_options')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->select(
+                'products_options.products_options_id',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->get();
         $result['options'] = $options;
         $options_value = DB::table('products_options_values')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_options_values.products_options_values_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_options_values.products_options_id', '=', $options_id)
             ->get();
         $result['options_value'] = $options_value;
-        $result['data'] = array('products_id' => $request->products_id, 'products_attributes_id' => $products_attributes_id, 'language_id' => $language_id);
+        $result['data'] = array(
+            'products_id' => $request->products_id, 'products_attributes_id' => $products_attributes_id,
+            'language_id' => $language_id
+        );
         $products_attributes = DB::table('products_attributes')
             ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->join(
+                'products_options_values',
+                'products_options_values.products_options_values_id',
+                '=',
+                'products_attributes.options_values_id'
+            )
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_attributes.*',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_attributes.products_attributes_id', '=', $products_attributes_id)
@@ -1648,16 +1980,45 @@ class Products extends Model
                 'options_values_id' => $request->products_options_values_id,
                 'products_id' => $request->products_id
             ])->get();
-            $productsattri = DB::table('products_attributes')->where('products_attributes_id', '=', $request->products_attributes_id)->update([
+            $productsattri = DB::table('products_attributes')->where(
+                'products_attributes_id',
+                '=',
+                $request->products_attributes_id
+            )->update([
                 'options_id' => $request->products_options_id,
                 'options_values_id' => $request->products_options_values_id,
             ]);
             $products_attributes = DB::table('products_attributes')
-                ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-                ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-                ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-                ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-                ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+                ->join(
+                    'products_options',
+                    'products_options.products_options_id',
+                    '=',
+                    'products_attributes.options_id'
+                )
+                ->leftJoin(
+                    'products_options_descriptions',
+                    'products_options_descriptions.products_options_id',
+                    '=',
+                    'products_options.products_options_id'
+                )
+                ->join(
+                    'products_options_values',
+                    'products_options_values.products_options_values_id',
+                    '=',
+                    'products_attributes.options_values_id'
+                )
+                ->leftJoin(
+                    'products_options_values_descriptions',
+                    'products_options_values_descriptions.products_options_values_id',
+                    '=',
+                    'products_options_values.products_options_values_id'
+                )
+                ->select(
+                    'products_attributes.*',
+                    'products_options_descriptions.options_name as products_options_name',
+                    'products_options_descriptions.language_id',
+                    'products_options_values_descriptions.options_values_name as products_options_values_name'
+                )
                 ->where('products_options_descriptions.language_id', '=', $language_id)
                 ->where('products_options_values_descriptions.language_id', '=', $language_id)
                 ->where('products_attributes.products_id', '=', $request->products_id)
@@ -1683,10 +2044,30 @@ class Products extends Model
         ])->delete();
         $products_attributes = DB::table('products_attributes')
             ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->join(
+                'products_options_values',
+                'products_options_values.products_options_values_id',
+                '=',
+                'products_attributes.options_values_id'
+            )
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_attributes.*',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_attributes.products_id', '=', $request->products_id)
@@ -1721,11 +2102,36 @@ class Products extends Model
                     'is_default' => $request->is_default
                 ]);
                 $products_attributes = DB::table('products_attributes')
-                    ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-                    ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-                    ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-                    ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-                    ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+                    ->join(
+                        'products_options',
+                        'products_options.products_options_id',
+                        '=',
+                        'products_attributes.options_id'
+                    )
+                    ->leftJoin(
+                        'products_options_descriptions',
+                        'products_options_descriptions.products_options_id',
+                        '=',
+                        'products_options.products_options_id'
+                    )
+                    ->join(
+                        'products_options_values',
+                        'products_options_values.products_options_values_id',
+                        '=',
+                        'products_attributes.options_values_id'
+                    )
+                    ->leftJoin(
+                        'products_options_values_descriptions',
+                        'products_options_values_descriptions.products_options_values_id',
+                        '=',
+                        'products_options_values.products_options_values_id'
+                    )
+                    ->select(
+                        'products_attributes.*',
+                        'products_options_descriptions.options_name as products_options_name',
+                        'products_options_descriptions.language_id',
+                        'products_options_values_descriptions.options_values_name as products_options_values_name'
+                    )
                     ->where('products_options_descriptions.language_id', '=', $language_id)
                     ->where('products_options_values_descriptions.language_id', '=', $language_id)
                     ->where('products_attributes.products_id', '=', $request->products_id)
@@ -1757,25 +2163,65 @@ class Products extends Model
         $language_id = 1;
         $options_id = $request->options_id;
         $options = DB::table('products_options')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->select(
+                'products_options.products_options_id',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->get();
         $result['options'] = $options;
         $options_value = DB::table('products_options_values')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_options_values.products_options_values_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_options_values.products_options_id', '=', $options_id)
             ->get();
         $result['options_value'] = $options_value;
-        $result['data'] = array('products_id' => $request->products_id, 'products_attributes_id' => $products_attributes_id, 'language_id' => $language_id);
+        $result['data'] = array(
+            'products_id' => $request->products_id, 'products_attributes_id' => $products_attributes_id,
+            'language_id' => $language_id
+        );
         $products_attributes = DB::table('products_attributes')
             ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->join(
+                'products_options_values',
+                'products_options_values.products_options_values_id',
+                '=',
+                'products_attributes.options_values_id'
+            )
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_attributes.*',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_attributes.products_attributes_id', '=', $products_attributes_id)
@@ -1796,7 +2242,11 @@ class Products extends Model
             'options_values_id' => $request->products_options_values_id,
             'products_id' => $request->products_id
         ])->get();
-        DB::table('products_attributes')->where('products_attributes_id', '=', $request->products_attributes_id)->update([
+        DB::table('products_attributes')->where(
+            'products_attributes_id',
+            '=',
+            $request->products_attributes_id
+        )->update([
             'options_id' => $request->products_options_id,
             'options_values_id' => $request->products_options_values_id,
             'options_values_price' => $request->options_values_price,
@@ -1804,10 +2254,30 @@ class Products extends Model
         ]);
         $products_attributes = DB::table('products_attributes')
             ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->join(
+                'products_options_values',
+                'products_options_values.products_options_values_id',
+                '=',
+                'products_attributes.options_values_id'
+            )
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_attributes.*',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_attributes.products_id', '=', $request->products_id)
@@ -1829,10 +2299,30 @@ class Products extends Model
         ])->delete();
         $products_attributes = DB::table('products_attributes')
             ->join('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-            ->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')
-            ->join('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-            ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
-            ->select('products_attributes.*', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id', 'products_options_values_descriptions.options_values_name as products_options_values_name')
+            ->leftJoin(
+                'products_options_descriptions',
+                'products_options_descriptions.products_options_id',
+                '=',
+                'products_options.products_options_id'
+            )
+            ->join(
+                'products_options_values',
+                'products_options_values.products_options_values_id',
+                '=',
+                'products_attributes.options_values_id'
+            )
+            ->leftJoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
+            ->select(
+                'products_attributes.*',
+                'products_options_descriptions.options_name as products_options_name',
+                'products_options_descriptions.language_id',
+                'products_options_values_descriptions.options_values_name as products_options_values_name'
+            )
             ->where('products_options_descriptions.language_id', '=', $language_id)
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_attributes.products_id', '=', $request->products_id)
@@ -1847,7 +2337,12 @@ class Products extends Model
     {
         $language_id = 1;
         $value = DB::table('products_options_values')
-            ->leftjoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
+            ->leftjoin(
+                'products_options_values_descriptions',
+                'products_options_values_descriptions.products_options_values_id',
+                '=',
+                'products_options_values.products_options_values_id'
+            )
             ->select('products_options_values_descriptions.*')
             ->where('products_options_values_descriptions.language_id', '=', $language_id)
             ->where('products_options_values.products_options_id', '=', $request->option_id)
@@ -1872,7 +2367,11 @@ class Products extends Model
         $stockIn = 0;
         $purchasePrice = 0;
         foreach ($inventory as $inventory) {
-            $totalAttribute = DB::table('inventory_detail')->where('inventory_detail.inventory_ref_id', '=', $inventory->inventory_ref_id)->get();
+            $totalAttribute = DB::table('inventory_detail')->where(
+                'inventory_detail.inventory_ref_id',
+                '=',
+                $inventory->inventory_ref_id
+            )->get();
             $totalAttributes = count($totalAttribute);
 
             if ($postAttributes > $totalAttributes) {
@@ -1881,19 +2380,26 @@ class Products extends Model
                 $count = $totalAttributes;
             }
 
-            $individualStock = DB::table('inventory')->leftjoin('inventory_detail', 'inventory_detail.inventory_ref_id', '=', 'inventory.inventory_ref_id')
+            $individualStock = DB::table('inventory')->leftjoin(
+                'inventory_detail',
+                'inventory_detail.inventory_ref_id',
+                '=',
+                'inventory.inventory_ref_id'
+            )
                 ->selectRaw('inventory.*')
                 ->whereIn('inventory_detail.attribute_id', [$attributeid])
-                ->where(DB::raw('(select count(*) from `inventory_detail` where `inventory_detail`.`attribute_id` in (' . $attributeid . ') and `inventory_ref_id`= "' . $inventory->inventory_ref_id . '")'), '=', $count)
+                ->where(
+                    DB::raw('(select count(*) from `inventory_detail` where `inventory_detail`.`attribute_id` in ('.$attributeid.') and `inventory_ref_id`= "'.$inventory->inventory_ref_id.'")'),
+                    '=',
+                    $count
+                )
                 ->where('inventory.inventory_ref_id', '=', $inventory->inventory_ref_id)
                 ->get();
 
             if (count($individualStock) > 0) {
-
                 $inventory_ref_id = $individualStock[0]->inventory_ref_id;
                 $stockIn += $individualStock[0]->stock;
                 $purchasePrice += $individualStock[0]->purchase_price;
-
             }
         }
 
@@ -1901,9 +2407,23 @@ class Products extends Model
         $options_values = array();
         foreach ($attributes as $attribute) {
             $productsAttributes = DB::table('products_attributes')
-                ->leftJoin('products_options', 'products_options.products_options_id', '=', 'products_attributes.options_id')
-                ->leftJoin('products_options_values', 'products_options_values.products_options_values_id', '=', 'products_attributes.options_values_id')
-                ->select('products_attributes.*', 'products_options.products_options_name as options_name', 'products_options_values.products_options_values_name as options_values')
+                ->leftJoin(
+                    'products_options',
+                    'products_options.products_options_id',
+                    '=',
+                    'products_attributes.options_id'
+                )
+                ->leftJoin(
+                    'products_options_values',
+                    'products_options_values.products_options_values_id',
+                    '=',
+                    'products_attributes.options_values_id'
+                )
+                ->select(
+                    'products_attributes.*',
+                    'products_options.products_options_name as options_name',
+                    'products_options_values.products_options_values_name as options_values'
+                )
                 ->where('products_attributes_id', $attribute)->get();
             $options_names[] = $productsAttributes[0]->options_name;
             $options_values[] = $productsAttributes[0]->options_values;
@@ -1911,19 +2431,23 @@ class Products extends Model
 
         $options_names_count = count($options_names);
         $options_names = implode("','", $options_names);
-        $options_names = "'" . $options_names . "'";
-        $options_values = "'" . implode("','", $options_values) . "'";
+        $options_names = "'".$options_names."'";
+        $options_values = "'".implode("','", $options_values)."'";
         $orders_products = DB::table('orders_products')->where('products_id', $products_id)->get();
         $stockOut = 0;
         foreach ($orders_products as $orders_product) {
-            $totalAttribute = DB::table('orders_products_attributes')->where('orders_products_id', '=', $orders_product->orders_products_id)->get();
+            $totalAttribute = DB::table('orders_products_attributes')->where(
+                'orders_products_id',
+                '=',
+                $orders_product->orders_products_id
+            )->get();
             $totalAttributes = count($totalAttribute);
             if ($postAttributes > $totalAttributes) {
                 $count = $postAttributes;
             } elseif ($postAttributes < $totalAttributes or $postAttributes == $totalAttributes) {
                 $count = $totalAttributes;
             }
-            $products = DB::select("select orders_products.* from `orders_products` left join `orders_products_attributes` on `orders_products_attributes`.`orders_products_id` = `orders_products`.`orders_products_id` where `orders_products`.`products_id`='" . $products_id . "' and `orders_products_attributes`.`products_options` in (" . $options_names . ") and `orders_products_attributes`.`products_options_values` in (" . $options_values . ") and (select count(*) from `orders_products_attributes` where `orders_products_attributes`.`products_id` = '" . $products_id . "' and `orders_products_attributes`.`products_options` in (" . $options_names . ") and `orders_products_attributes`.`products_options_values` in (" . $options_values . ") and `orders_products_attributes`.`orders_products_id`= '" . $orders_product->orders_products_id . "') = " . $count . " and `orders_products`.`orders_products_id` = '" . $orders_product->orders_products_id . "' group by `orders_products_attributes`.`orders_products_id`");
+            $products = DB::select("select orders_products.* from `orders_products` left join `orders_products_attributes` on `orders_products_attributes`.`orders_products_id` = `orders_products`.`orders_products_id` where `orders_products`.`products_id`='".$products_id."' and `orders_products_attributes`.`products_options` in (".$options_names.") and `orders_products_attributes`.`products_options_values` in (".$options_values.") and (select count(*) from `orders_products_attributes` where `orders_products_attributes`.`products_id` = '".$products_id."' and `orders_products_attributes`.`products_options` in (".$options_names.") and `orders_products_attributes`.`products_options_values` in (".$options_values.") and `orders_products_attributes`.`orders_products_id`= '".$orders_product->orders_products_id."') = ".$count." and `orders_products`.`orders_products_id` = '".$orders_product->orders_products_id."' group by `orders_products_attributes`.`orders_products_id`");
             if (count($products) > 0) {
                 $stockOut += $products[0]->products_quantity;
             }
@@ -1935,8 +2459,9 @@ class Products extends Model
 
         if (!empty($inventory_ref_id)) {
             $inventory_ref_id = $inventory_ref_id;
-            $minMax = DB::table('manage_min_max')->where([['inventory_ref_id', $inventory_ref_id], ['products_id', $products_id]])->get();
-
+            $minMax = DB::table('manage_min_max')->where([
+                ['inventory_ref_id', $inventory_ref_id], ['products_id', $products_id]
+            ])->get();
         } else {
             $minMax = '';
         }
@@ -1945,6 +2470,5 @@ class Products extends Model
         $result['products_id'] = $products_id;
         $result['minMax'] = $minMax;
         return $result;
-
     }
 }
