@@ -18,13 +18,13 @@ class CreateProductsDescriptionTable extends Migration {
 			$table->integer('products_id');
 			$table->integer('language_id')->default(1);
 			$table->string('products_name', 64)->default('')->index('products_name');
-			$table->text('products_description', 65535)->nullable();
+			$table->text('products_description')->nullable();
 			$table->string('products_url', 191)->nullable();
 			$table->integer('products_viewed')->nullable()->default(0);
-			$table->text('products_left_banner', 65535)->nullable();
+			$table->text('products_left_banner')->nullable();
 			$table->integer('products_left_banner_start_date')->nullable();
 			$table->integer('products_left_banner_expire_date')->nullable();
-			$table->text('products_right_banner', 65535)->nullable();
+			$table->text('products_right_banner')->nullable();
 			$table->integer('products_right_banner_start_date')->nullable();
 			$table->integer('products_right_banner_expire_date')->nullable();
 		});
