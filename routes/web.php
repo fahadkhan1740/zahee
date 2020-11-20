@@ -3,6 +3,8 @@
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/maintance','Web\IndexController@maintance');
 
 Route::group(['namespace' => 'Web','middleware' => ['installer']], function () {
@@ -55,6 +57,7 @@ Route::group(['namespace' => 'Web'], function () {
 		Route::get('/shop', 'ProductsController@shop');
 		Route::post('/shop', 'ProductsController@shop');
 		Route::get('/product-detail/{slug}', 'ProductsController@productDetail');
+		Route::post('/product-review/{productId}', 'ProductsController@storeReview')->name('product.review.store');
 		Route::post('/filterProducts', 'ProductsController@filterProducts');
 		Route::post('/getquantity', 'ProductsController@getquantity');
 

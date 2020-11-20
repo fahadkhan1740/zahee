@@ -29,6 +29,12 @@ use App\Models\Web\Currency;
 
 class ProductsController extends Controller
 {
+    public $index;
+    public $languages;
+    public $products;
+    public $currencies;
+    public $theme;
+
     public function __construct(
         Index $index,
         Languages $languages,
@@ -481,6 +487,13 @@ class ProductsController extends Controller
         $result['product_review'] = $reviews;
 //         dd($result);
         return view("web.detail", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
+    }
+
+    public function storeReview($productId)
+    {
+        $this->products->storeReview($productId, request()->all());
+
+        return back();
     }
 
     //filters

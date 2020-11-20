@@ -775,6 +775,7 @@ return [
     'Yes' => 'Yes',
     'No' => 'No',
     'Default address' => 'Default address',
+    'ratings' => 'Ratings',
     'write_review' => 'Write a Review',
     'reviews' => 'Reviews'
 ];

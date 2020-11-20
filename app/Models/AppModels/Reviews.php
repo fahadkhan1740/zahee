@@ -3,24 +3,11 @@
 namespace App\Models\AppModels;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Controllers\Admin\AdminSiteSettingController;
-use App\Http\Controllers\Admin\AdminCategoriesController;
-use App\Http\Controllers\Admin\AdminProductsController;
 use App\Http\Controllers\App\AppSettingController;
-use App\Http\Controllers\App\AlertController;
 use DB;
-use Lang;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Validator;
-use Mail;
-use DateTime;
-use Auth;
-use Carbon;
-
 
 class Reviews extends Model
 {
-
     public static function givereview($request)
     {
         $consumer_data = array();
@@ -89,7 +76,6 @@ class Reviews extends Model
         return $userResponse;
     }
 
-
     public static function updatereview($request)
     {
         $consumer_data = array();
@@ -157,7 +143,6 @@ class Reviews extends Model
         return $userResponse;
     }
 
-
     public static function getreviews($request)
     {
         $consumer_data = array();
@@ -179,9 +164,16 @@ class Reviews extends Model
             $reviews = DB::table('reviews')
                 ->join('reviews_description', 'reviews_description.reviews_id', '=', 'reviews.reviews_id')
                 ->join('users', 'users.id', '=', 'reviews.customers_id')
-                ->select('reviews.reviews_id', 'reviews.products_id', 'reviews.reviews_rating as rating',
-                    'reviews.created_at', 'reviews_description.reviews_text as comments', 'users.first_name',
-                    'users.last_name', 'users.email')
+                ->select(
+                    'reviews.reviews_id',
+                    'reviews.products_id',
+                    'reviews.reviews_rating as rating',
+                    'reviews.created_at',
+                    'reviews_description.reviews_text as comments',
+                    'users.first_name',
+                    'users.last_name',
+                    'users.email'
+                )
                 ->where('reviews.products_id', $products_id)
                 ->where('reviews.reviews_status', 1)
                 ->where('reviews_description.languages_id', $languages_id)->get();
@@ -200,6 +192,4 @@ class Reviews extends Model
 
         return $userResponse;
     }
-
-
 }

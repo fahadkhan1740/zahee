@@ -369,9 +369,37 @@
                                             <p class="grey">{{ $result['product_review']['review_count'] }} {{ __('website.reviews') }}</p>
                                         </div>
                                     </div>
-                                    <div class="right__box">
-                                        <a href="#" class="edit__btn">{{ __('website.write_review') }}</a>
-                                    </div>
+
+                                    @if(auth()->guard('customer')->check())
+                                        <div class="right__box col-md-6">
+                                            <form
+                                                action="{{ route('product.review.store', $result['detail']['product_data'][0]->products_id) }}"
+                                                method="POST">
+                                                @csrf
+                                                {{ __('website.ratings') }}
+                                                <div class="form-group">
+                                                    <select class="form-control" name="product_review_rating" required>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                                <textarea
+                                                    class="form-control"
+                                                    name="product_review_text"
+                                                    cols="20"
+                                                    rows="5"
+                                                    placeholder="Enter your review here"
+                                                    style="margin-bottom: 1rem;"
+                                                    required
+                                                ></textarea>
+                                                <button type="submit"
+                                                        class="edit__btn">{{ __('website.write_review') }}</button>
+                                            </form>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 @forelse($result['product_review']['reviewData'] as $review)

@@ -3,7 +3,7 @@
 namespace App\Models\Web;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Session;
 use Illuminate\Support\Facades\Lang;
 
@@ -1397,5 +1397,30 @@ class Products extends Model
             'review_count' => $reviewCount,
             'reviewData' => $reviewList
         );
+    }
+
+    public function storeReview($productId, $review)
+    {
+        $customer = auth()->guard('customer')->user();
+
+        $languages_id = Languages::query()->where('code', app()->getLocale())->first()->languages_id;
+
+        $reviews_id = DB::table('reviews')->insertGetId([
+            'products_id' => $productId,
+            'customers_id' => $customer->id,
+            'customers_name' => $customer->first_name.' '.$customer->last_name,
+            'reviews_rating' => $review['product_review_rating'],
+            'created_at' => date('Y-m-d H:i:s'),
+            'reviews_status' => 1,
+            'reviews_read' => 0
+        ]);
+
+        DB::table('reviews_description')->insertGetId([
+            'reviews_text' => $review['product_review_text'],
+            'language_id' => $languages_id,
+            'review_id' => $reviews_id
+        ]);
+
+        return true;
     }
 }

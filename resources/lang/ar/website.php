@@ -766,6 +766,7 @@ return [
     'Yes' => 'نعم',
     'No' => 'لا',
     'Default address' => 'Default address',
+    'ratings' => 'التقييمات',
     'write_review' => 'أكتب مراجعة',
     'reviews' => 'المراجعات'
 ];
