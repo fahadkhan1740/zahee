@@ -180,13 +180,23 @@
                                                 @lang('website.Minimum order amount is 5.00 KWD.')'
                                             </div>
                                         @endif
-                                        <a href="{{ URL::to('/shop')}}"
-                                           class="btn btn-default">@lang('website.Back To Shopping')</a>
-                                        <a href="{{ URL::to('/wishlist')}}"
-                                           class="btn btn-default">@lang('website.Add from wishlist')</a>
-                                        <a href="@if($total < 5 ) javascript:void(0); @else {{ URL::to('/checkout')}} @endif"
-                                           class="btn btn-default"
-                                           @if($total < 5 ) disabled @endif >@lang('website.proceedToCheckout')</a>
+                                        @if(app()->getLocale() === 'en')
+                                            <a href="{{ URL::to('/shop')}}"
+                                               class="btn btn-default pull-left">@lang('website.Back To Shopping')</a>
+                                            <a href="{{ URL::to('/wishlist')}}"
+                                               class="btn btn-default pull-left">@lang('website.Add from wishlist')</a>
+                                            <a href="@if($total < 5 ) javascript:void(0); @else {{ URL::to('/checkout')}} @endif"
+                                               class="btn btn-default"
+                                               @if($total < 5 ) disabled @endif >@lang('website.proceedToCheckout')</a>
+                                        @else
+                                            <a href="@if($total < 5 ) javascript:void(0); @else {{ URL::to('/checkout')}} @endif"
+                                               class="btn btn-default pull-left"
+                                               @if($total < 5 ) disabled @endif >@lang('website.proceedToCheckout')</a>
+                                            <a href="{{ URL::to('/wishlist')}}"
+                                               class="btn btn-default pull-right">@lang('website.Add from wishlist')</a>
+                                            <a href="{{ URL::to('/shop')}}"
+                                               class="btn btn-default pull-right">@lang('website.Back To Shopping')</a>
+                                        @endif
                                     </div>
                                 @else
                                     <div class="cart-item">
