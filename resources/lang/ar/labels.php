@@ -188,6 +188,7 @@ return [
 	'pageSlugWithDashesText' => 'Please enter page slug with dashes.',
 	'PageName' => 'Page Name',
 	'Description' => 'Description',
+    'NeedHelp' => 'Need Help',
 	'Error' => 'Error',
 	'PageSlug' => 'Page Slug',
 
@@ -291,7 +292,8 @@ return [
 	'ProductName' => 'Product Name',
 	'EnterProductNameIn' => 'Enter Product Name In',
 	'EnterProductDetailIn' => 'Enter product description in',
-	'SelectTaxClass' => 'Select Tax Class',
+    'EnterProductHelp' => 'Enter product need help content',
+    'SelectTaxClass' => 'Select Tax Class',
 	'ChooseTaxClassForProductText' => 'Choose tax class in which this product belongs. You can add them from Tax / Location link.',
 	'SelectProductTaxClass' => 'Please select product tax class.',
 	'ProductsPrice' => 'Products Price',

@@ -497,6 +497,7 @@ class Products extends Model
                 $description_data[$languages_data->languages_id]['product_sub_title'] = $description[0]->product_sub_title;
                 $description_data[$languages_data->languages_id]['products_url'] = $description[0]->products_url;
                 $description_data[$languages_data->languages_id]['products_description'] = $description[0]->products_description;
+                $description_data[$languages_data->languages_id]['products_help'] = $description[0]->products_help;
                 $description_data[$languages_data->languages_id]['products_left_banner'] = $description[0]->products_left_banner;
                 $description_data[$languages_data->languages_id]['products_left_banner_start_date'] = $description[0]->products_left_banner_start_date;
                 $description_data[$languages_data->languages_id]['products_left_banner_expire_date'] = $description[0]->products_left_banner_expire_date;
@@ -512,6 +513,7 @@ class Products extends Model
                 $description_data[$languages_data->languages_id]['products_url'] = '';
                 $description_data[$languages_data->languages_id]['product_sub_title'] = '';
                 $description_data[$languages_data->languages_id]['products_description'] = '';
+                $description_data[$languages_data->languages_id]['products_help'] = '';
                 $description_data[$languages_data->languages_id]['products_left_banner'] = '';
                 $description_data[$languages_data->languages_id]['products_left_banner_start_date'] = '';
                 $description_data[$languages_data->languages_id]['products_left_banner_expire_date'] = '';

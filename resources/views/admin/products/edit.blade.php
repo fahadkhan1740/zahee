@@ -734,6 +734,24 @@
                                                                         </div>
                                                                     </div>
 
+                                                                    <div class="form-group">
+                                                                        <label for="name"
+                                                                               class="col-sm-2 col-md-3 control-label">{{ trans('labels.NeedHelp') }}
+                                                                            ({{ $description_data['language_name'] }}
+                                                                            )</label>
+                                                                        <div class="col-sm-10 col-md-8">
+                                                                    <textarea
+                                                                        id="editor<?=$description_data['languages_id']?>"
+                                                                        name="products_help_<?=$description_data['languages_id']?>"
+                                                                        class="form-control"
+                                                                        rows="5">{{stripslashes($description_data['products_help'])}}</textarea>
+
+                                                                            <span class="help-block"
+                                                                                  style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                                        {{ trans('labels.EnterProductDetailIn') }} {{ $description_data['language_name'] }}</span>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             @endforeach
                                                         </div>

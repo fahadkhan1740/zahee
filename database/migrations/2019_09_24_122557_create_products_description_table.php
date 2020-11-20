@@ -19,6 +19,7 @@ class CreateProductsDescriptionTable extends Migration {
 			$table->integer('language_id')->default(1);
 			$table->string('products_name', 64)->default('')->index('products_name');
 			$table->text('products_description')->nullable();
+			$table->text('products_help')->nullable();
 			$table->string('products_url', 191)->nullable();
 			$table->integer('products_viewed')->nullable()->default(0);
 			$table->text('products_left_banner')->nullable();
