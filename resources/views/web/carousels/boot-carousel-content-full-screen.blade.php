@@ -14,7 +14,7 @@
                                echo 'carousel-item';
                            } ?>">
                             <figure class="figure-banner"
-                                    style="background-image: url('<?php echo 'public/'.$slide->path; ?>');"></figure>
+                                    style="background-image: url('<?php echo $slide->path; ?>');"></figure>
                         </a>
                     @endforeach
                 </div>
