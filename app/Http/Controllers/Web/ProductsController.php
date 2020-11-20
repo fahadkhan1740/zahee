@@ -219,9 +219,9 @@ class ProductsController extends Controller
                 '=',
                 'categories.categories_id'
             )->where(
-                    'categories_slug',
-                    $request->category
-                )->where('language_id', Session::get('language_id'))->get();
+                'categories_slug',
+                $request->category
+            )->where('language_id', Session::get('language_id'))->get();
 
             $categories_id = $category[0]->categories_id;
         } else {
@@ -479,7 +479,7 @@ class ProductsController extends Controller
         //liked products
         $result['liked_products'] = $this->products->likedProducts();
         $result['product_review'] = $reviews;
-        // dd($result);
+//         dd($result);
         return view("web.detail", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
     }
 

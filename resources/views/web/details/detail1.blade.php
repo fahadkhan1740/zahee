@@ -369,7 +369,7 @@
                                         <div class="rating__star">
                                             <h3>5.0</h3>
                                             <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png"/>
-                                            <p class="grey">18 reviews</p>
+                                            <p class="grey">{{ $result['product_review']['review_count'] }} reviews</p>
                                         </div>
                                     </div>
                                     <div class="right__box">
@@ -377,29 +377,30 @@
                                     </div>
                                 </div>
 
-                                <div class="rating__comment">
-                                    <div class="list">
-                                        <figure
-                                            style="background-image:url('https://via.placeholder.com/100');"></figure>
-                                        <div class="comment">
-                                            <div class="author">
-                                                <h6>Author Name</h6>
-                                                <p class="grey">1 Review</p>
+                                @forelse($result['product_review']['reviewData'] as $review)
+                                    <div class="rating__comment">
+                                        <div class="list">
+                                            <figure
+                                                style="background-image:url('https://via.placeholder.com/100');"></figure>
+                                            <div class="comment">
+                                                <div class="author">
+                                                    <h6>{{ $review->customers_name }}</h6>
+                                                    <p class="grey">1 Review</p>
 
-                                                <div class="rating__star">
-                                                    <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png"/>
-                                                    <p>18 reviews</p>
+                                                    <div class="rating__star">
+                                                        <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png"/>
+                                                        <p>{{ $review->reviews_rating }}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="comment_content">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                    industry. Lorem Ipsum has been the industry's standard dummy text
-                                                    ever since the 1500s</p>
+                                                <div class="comment_content">
+                                                    <p>{{ $review->reviews_text }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    @empty
+                                @endforelse
 
                             </div>
                         </div>
