@@ -765,5 +765,7 @@ return [
     'Search' => 'بحث',
     'Yes' => 'نعم',
     'No' => 'لا',
-    'Default address' => 'Default address'
+    'Default address' => 'Default address',
+    'write_review' => 'أكتب مراجعة',
+    'reviews' => 'المراجعات'
 ];

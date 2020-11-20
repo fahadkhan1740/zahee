@@ -363,17 +363,14 @@
                             <div class="rating__wrap">
                                 <div class="rating__top__block">
                                     <div class="left__box">
-                                        <!-- <h2>Product Title </h2>
-                                        <p class="grey">Address</p> -->
-
                                         <div class="rating__star">
                                             <h3>5.0</h3>
                                             <img src="https://i.ibb.co/VvShnPk/star.png" alt="star.png"/>
-                                            <p class="grey">{{ $result['product_review']['review_count'] }} reviews</p>
+                                            <p class="grey">{{ $result['product_review']['review_count'] }} {{ __('website.reviews') }}</p>
                                         </div>
                                     </div>
                                     <div class="right__box">
-                                        <a href="#" class="edit__btn">Write a Review</a>
+                                        <a href="#" class="edit__btn">{{ __('website.write_review') }}</a>
                                     </div>
                                 </div>
 

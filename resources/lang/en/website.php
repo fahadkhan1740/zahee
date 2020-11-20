@@ -566,8 +566,6 @@ return [
 
     'Your email address here' => 'Your email address here...',
 
-    'Subscribe' => 'Subscribe!',
-
     'About Store' => 'About Store',
 
     'Our Services' => 'Our Services',
@@ -776,5 +774,7 @@ return [
     'Search' => 'Search',
     'Yes' => 'Yes',
     'No' => 'No',
-    'Default address' => 'Default address'
+    'Default address' => 'Default address',
+    'write_review' => 'Write a Review',
+    'reviews' => 'Reviews'
 ];
