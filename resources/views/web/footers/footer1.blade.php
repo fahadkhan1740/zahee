@@ -8,7 +8,7 @@
                                 src="https://zaahee.shop/public/web/images/cus/footer-logo.png" alt="logo.png"/></a>
 
 
-                        <div class="sm-icon-wrap">
+                        <div class="sm-icon-wrap @if(app()->getLocale() === 'ar') pull-right @endif">
                             <h6>@lang('website.Connect with Us')</h6>
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -86,13 +86,17 @@
                     <div class="footer-col contact-info">
                         <h6>@lang('website.Contact Us')</h6>
                         <ul>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+11234567890"
-                                                                                 target="_blank">+1 123 - 456 - 7890</a>
+                            <li>
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <a href="tel:+11234567890" target="_blank">+1 123 - 456 - 7890</a>
                             </li>
-                            <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:hello@zaahee.com"
-                                                                                      target="_blank">hello@zaahee.com</a>
+                            <li>
+                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                <a href="mailto:hello@zaahee.com" target="_blank">hello@zaahee.com</a>
                             </li>
-                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> 1234 Lake View Rd.
+                            <li>
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                1234 Lake View Rd.
                                 Abc Hills, NY 12418
                             </li>
                         </ul>
