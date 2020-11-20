@@ -405,7 +405,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-help" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <?=stripslashes($result['detail']['product_data'][0]->products_description)?>
+                            <?=stripslashes($result['detail']['product_data'][0]->products_help)?>
                         </div>
                     </div>
                 </div>
