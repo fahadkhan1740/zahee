@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
-    $exitCode = Artisan::call('config:clear');
-    // $exitCode = Artisan::call('config:cache');
 });
 
 Route::get('/phpinfo', function () {
@@ -57,17 +55,26 @@ Route::group(['middleware' => ['installer']], function () {
         //constant banners
         Route::get('/constantbanners', 'AdminConstantController@constantBanners')->middleware('website_routes');
         Route::get('/addconstantbanner', 'AdminConstantController@addconstantBanner')->middleware('website_routes');
-        Route::post('/addNewConstantBanner',
-            'AdminConstantController@addNewconstantBanner')->middleware('website_routes');
-        Route::get('/editconstantbanner/{id}',
-            'AdminConstantController@editconstantbanner')->middleware('website_routes');
-        Route::post('/updateconstantBanner',
-            'AdminConstantController@updateconstantBanner')->middleware('website_routes');
-        Route::post('/deleteconstantBanner/',
-            'AdminConstantController@deleteconstantBanner')->middleware('website_routes');
+        Route::post(
+            '/addNewConstantBanner',
+            'AdminConstantController@addNewconstantBanner'
+        )->middleware('website_routes');
+        Route::get(
+            '/editconstantbanner/{id}',
+            'AdminConstantController@editconstantbanner'
+        )->middleware('website_routes');
+        Route::post(
+            '/updateconstantBanner',
+            'AdminConstantController@updateconstantBanner'
+        )->middleware('website_routes');
+        Route::post(
+            '/deleteconstantBanner/',
+            'AdminConstantController@deleteconstantBanner'
+        )->middleware('website_routes');
     });
 
-    Route::group(['prefix' => 'admin/languages', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/languages', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/display', 'LanguageController@display')->middleware('view_language');
             Route::post('/default', 'LanguageController@default')->middleware('edit_language');
@@ -77,7 +84,8 @@ Route::group(['middleware' => ['installer']], function () {
             Route::post('/update', 'LanguageController@update')->middleware('edit_language');
             Route::post('/delete', 'LanguageController@delete')->middleware('delete_language');
             Route::get('/filter', 'LanguageController@filter')->middleware('view_language');
-        });
+        }
+    );
 
     Route::group(['prefix' => 'admin/media', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
         Route::get('/display', 'MediaController@display')->middleware('view_media');
@@ -103,7 +111,8 @@ Route::group(['middleware' => ['installer']], function () {
         Route::post('/setting/fetchlanguages', 'LanguageController@fetchlanguages')->middleware('view_language');
     });
 
-    Route::group(['prefix' => 'admin/manufacturers', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/manufacturers', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/display', 'ManufacturerController@display')->middleware('view_manufacturer');
             Route::get('/add', 'ManufacturerController@add')->middleware('add_manufacturer');
@@ -112,9 +121,11 @@ Route::group(['middleware' => ['installer']], function () {
             Route::post('/update', 'ManufacturerController@update')->middleware('edit_manufacturer');
             Route::post('/delete', 'ManufacturerController@delete')->middleware('delete_manufacturer');
             Route::get('/filter', 'ManufacturerController@filter')->middleware('view_manufacturer');
-        });
+        }
+    );
 
-    Route::group(['prefix' => 'admin/newscategories', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/newscategories', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/display', 'NewsCategoriesController@display')->middleware('view_news');
             Route::get('/add', 'NewsCategoriesController@add')->middleware('add_news');
@@ -123,7 +134,8 @@ Route::group(['middleware' => ['installer']], function () {
             Route::post('/update', 'NewsCategoriesController@update')->middleware('edit_news');
             Route::post('/delete', 'NewsCategoriesController@delete')->middleware('delete_news');
             Route::get('/filter', 'NewsCategoriesController@filter')->middleware('view_news');
-        });
+        }
+    );
 
     Route::group(['prefix' => 'admin/news', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
         Route::get('/display', 'NewsController@display')->middleware('view_news');
@@ -135,18 +147,21 @@ Route::group(['middleware' => ['installer']], function () {
         Route::get('/filter', 'NewsController@filter')->middleware('view_news');
     });
 
-    Route::group(['prefix' => 'admin/categories', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/categories', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
-            Route::get('/display', 'CategoriesController@display')->middleware('view_categories');;
-            Route::get('/add', 'CategoriesController@add')->middleware('add_categories');;
-            Route::post('/add', 'CategoriesController@insert')->middleware('add_categories');;
-            Route::get('/edit/{id}', 'CategoriesController@edit')->middleware('edit_categories');;
-            Route::post('/update', 'CategoriesController@update')->middleware('edit_categories');;
-            Route::post('/delete', 'CategoriesController@delete')->middleware('delete_categories');;
-            Route::get('/filter', 'CategoriesController@filter')->middleware('view_categories');;
-        });
+            Route::get('/display', 'CategoriesController@display')->middleware('view_categories');
+            Route::get('/add', 'CategoriesController@add')->middleware('add_categories');
+            Route::post('/add', 'CategoriesController@insert')->middleware('add_categories');
+            Route::get('/edit/{id}', 'CategoriesController@edit')->middleware('edit_categories');
+            Route::post('/update', 'CategoriesController@update')->middleware('edit_categories');
+            Route::post('/delete', 'CategoriesController@delete')->middleware('delete_categories');
+            Route::get('/filter', 'CategoriesController@filter')->middleware('view_categories');
+        }
+    );
 
-    Route::group(['prefix' => 'admin/currencies', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/currencies', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/display', 'CurrencyController@display')->middleware('view_general_setting');
             Route::get('/add', 'CurrencyController@add')->middleware('edit_general_setting');
@@ -155,9 +170,11 @@ Route::group(['middleware' => ['installer']], function () {
             Route::get('/edit/warning/{id}', 'CurrencyController@warningedit')->middleware('edit_general_setting');
             Route::post('/update', 'CurrencyController@update')->middleware('edit_general_setting');
             Route::post('/delete', 'CurrencyController@delete')->middleware('edit_general_setting');
-        });
+        }
+    );
 
-    Route::group(['prefix' => 'admin/products', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/products', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/display', 'ProductController@display')->middleware('view_product');
             Route::get('/add', 'ProductController@add')->middleware('add_product');
@@ -182,8 +199,10 @@ Route::group(['middleware' => ['installer']], function () {
                 Route::post('/insertproductimage', 'ProductController@insertProductImages')->middleware('add_product');
                 Route::get('/editproductimage/{id}', 'ProductController@editProductImages')->middleware('edit_product');
                 Route::post('/updateproductimage', 'ProductController@updateproductimage')->middleware('edit_product');
-                Route::post('/deleteproductimagemodal',
-                    'ProductController@deleteproductimagemodal')->middleware('edit_product');
+                Route::post(
+                    '/deleteproductimagemodal',
+                    'ProductController@deleteproductimagemodal'
+                )->middleware('edit_product');
                 Route::post('/deleteproductimage', 'ProductController@deleteproductimage')->middleware('edit_product');
             });
             Route::group(['prefix' => 'attach/attribute'], function () {
@@ -192,25 +211,33 @@ Route::group(['middleware' => ['installer']], function () {
                     Route::post('/', 'ProductController@addnewdefaultattribute')->middleware('view_product');
                     Route::post('/edit', 'ProductController@editdefaultattribute')->middleware('edit_product');
                     Route::post('/update', 'ProductController@updatedefaultattribute')->middleware('edit_product');
-                    Route::post('/deletedefaultattributemodal',
-                        'ProductController@deletedefaultattributemodal')->middleware('edit_product');
+                    Route::post(
+                        '/deletedefaultattributemodal',
+                        'ProductController@deletedefaultattributemodal'
+                    )->middleware('edit_product');
                     Route::post('/delete', 'ProductController@deletedefaultattribute')->middleware('edit_product');
                     Route::group(['prefix' => '/options'], function () {
                         Route::post('/add', 'ProductController@showoptions')->middleware('view_product');
                         Route::post('/edit', 'ProductController@editoptionform')->middleware('edit_product');
                         Route::post('/update', 'ProductController@updateoption')->middleware('edit_product');
-                        Route::post('/showdeletemodal',
-                            'ProductController@showdeletemodal')->middleware('edit_product');
+                        Route::post(
+                            '/showdeletemodal',
+                            'ProductController@showdeletemodal'
+                        )->middleware('edit_product');
                         Route::post('/delete', 'ProductController@deleteoption')->middleware('edit_product');
-                        Route::post('/getOptionsValue',
-                            'ProductController@getOptionsValue')->middleware('edit_product');
+                        Route::post(
+                            '/getOptionsValue',
+                            'ProductController@getOptionsValue'
+                        )->middleware('edit_product');
                         Route::post('/currentstock', 'ProductController@currentstock')->middleware('view_product');
                     });
                 });
             });
-        });
+        }
+    );
 
-    Route::group(['prefix' => 'admin/products/attributes', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/products/attributes', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/display', 'ProductAttributesController@display')->middleware('view_product');
             Route::get('/add', 'ProductAttributesController@add')->middleware('view_product');
@@ -220,22 +247,33 @@ Route::group(['middleware' => ['installer']], function () {
             Route::post('/delete', 'ProductAttributesController@delete')->middleware('view_product');
 
             Route::group(['prefix' => 'options/values'], function () {
-                Route::get('/display/{id}',
-                    'ProductAttributesController@displayoptionsvalues')->middleware('view_product');
+                Route::get(
+                    '/display/{id}',
+                    'ProductAttributesController@displayoptionsvalues'
+                )->middleware('view_product');
                 Route::post('/insert', 'ProductAttributesController@insertoptionsvalues')->middleware('edit_product');
                 Route::get('/edit/{id}', 'ProductAttributesController@editoptionsvalues')->middleware('edit_product');
                 Route::post('/update', 'ProductAttributesController@updateoptionsvalues')->middleware('edit_product');
                 Route::post('/delete', 'ProductAttributesController@deleteoptionsvalues')->middleware('edit_product');
-                Route::post('/addattributevalue',
-                    'ProductAttributesController@addattributevalue')->middleware('edit_product');
-                Route::post('/updateattributevalue',
-                    'ProductAttributesController@updateattributevalue')->middleware('edit_product');
-                Route::post('/checkattributeassociate',
-                    'ProductAttributesController@checkattributeassociate')->middleware('edit_product');
-                Route::post('/checkvalueassociate',
-                    'ProductAttributesController@checkvalueassociate')->middleware('edit_product');
+                Route::post(
+                    '/addattributevalue',
+                    'ProductAttributesController@addattributevalue'
+                )->middleware('edit_product');
+                Route::post(
+                    '/updateattributevalue',
+                    'ProductAttributesController@updateattributevalue'
+                )->middleware('edit_product');
+                Route::post(
+                    '/checkattributeassociate',
+                    'ProductAttributesController@checkattributeassociate'
+                )->middleware('edit_product');
+                Route::post(
+                    '/checkvalueassociate',
+                    'ProductAttributesController@checkvalueassociate'
+                )->middleware('edit_product');
             });
-        });
+        }
+    );
 
     Route::group(['prefix' => 'admin/admin', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
         Route::get('/profile', 'AdminController@profile');
@@ -247,8 +285,9 @@ Route::group(['middleware' => ['installer']], function () {
         Route::get('/display', 'ProductController@reviews')->middleware('view_reviews');
         Route::get('/edit/{id}/{status}', 'ProductController@editreviews')->middleware('edit_reviews');
     });
-//customers
-    Route::group(['prefix' => 'admin/customers', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    //customers
+    Route::group(
+        ['prefix' => 'admin/customers', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/display', 'CustomersController@display')->middleware('view_customer');
             Route::get('/add', 'CustomersController@add')->middleware('add_customer');
@@ -263,9 +302,11 @@ Route::group(['middleware' => ['installer']], function () {
             Route::post('/editaddress', 'CustomersController@editaddress')->middleware('edit_customer');
             Route::post('/updateaddress', 'CustomersController@updateaddress')->middleware('edit_customer');
             Route::post('/deleteAddress', 'CustomersController@deleteAddress')->middleware('edit_customer');
-        });
+        }
+    );
 
-    Route::group(['prefix' => 'admin/countries', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/countries', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/filter', 'CountriesController@filter')->middleware('view_tax');
             Route::get('/display', 'CountriesController@index')->middleware('view_tax');
@@ -274,7 +315,8 @@ Route::group(['middleware' => ['installer']], function () {
             Route::get('/edit/{id}', 'CountriesController@edit')->middleware('edit_tax');
             Route::post('/update', 'CountriesController@update')->middleware('edit_tax');
             Route::post('/delete', 'CountriesController@delete')->middleware('delete_tax');
-        });
+        }
+    );
 
     Route::group(['prefix' => 'admin/zones', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
         Route::get('/display', 'ZonesController@index')->middleware('view_tax');
@@ -308,32 +350,42 @@ Route::group(['middleware' => ['installer']], function () {
         });
     });
 
-    Route::group(['prefix' => 'admin/shippingmethods', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/shippingmethods', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             //shipping setting
             Route::get('/display', 'ShippingMethodsController@display')->middleware('view_shipping');
             Route::get('/upsShipping', 'ShippingMethodsController@upsShipping')->middleware('view_shipping');
-            Route::post('/updateupsshipping',
-                'ShippingMethodsController@updateupsshipping')->middleware('edit_shipping');
+            Route::post(
+                '/updateupsshipping',
+                'ShippingMethodsController@updateupsshipping'
+            )->middleware('edit_shipping');
             Route::get('/flateRate', 'ShippingMethodsController@flateRate')->middleware('view_shipping');
             Route::post('/updateflaterate', 'ShippingMethodsController@updateflaterate')->middleware('edit_shipping');
-            Route::post('/defaultShippingMethod',
-                'ShippingMethodsController@defaultShippingMethod')->middleware('edit_shipping');
+            Route::post(
+                '/defaultShippingMethod',
+                'ShippingMethodsController@defaultShippingMethod'
+            )->middleware('edit_shipping');
             Route::get('/detail/{table_name}', 'ShippingMethodsController@detail')->middleware('edit_shipping');
             Route::post('/update', 'ShippingMethodsController@update')->middleware('edit_shipping');
 
             Route::get('/shppingbyweight', 'ShippingByWeightController@shppingbyweight')->middleware('view_shipping');
-            Route::post('/updateShppingWeightPrice',
-                'ShippingByWeightController@updateShppingWeightPrice')->middleware('edit_shipping');
-        });
+            Route::post(
+                '/updateShppingWeightPrice',
+                'ShippingByWeightController@updateShppingWeightPrice'
+            )->middleware('edit_shipping');
+        }
+    );
 
-    Route::group(['prefix' => 'admin/paymentmethods', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/paymentmethods', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/index', 'PaymentMethodsController@index')->middleware('view_payment');
             Route::get('/display/{id}', 'PaymentMethodsController@display')->middleware('view_payment');
             Route::post('/update', 'PaymentMethodsController@update')->middleware('edit_payment');
             Route::post('/active', 'PaymentMethodsController@active')->middleware('edit_payment');
-        });
+        }
+    );
 
     Route::group(['prefix' => 'admin/coupons', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
         Route::get('/display', 'CouponsController@display')->middleware('view_coupon');
@@ -350,10 +402,14 @@ Route::group(['middleware' => ['installer']], function () {
         Route::post('/notifyUser/', 'NotificationController@notifyUser')->middleware('edit_notification');
         Route::get('/notifications/', 'NotificationController@notifications')->middleware('view_notification');
         Route::post('/sendNotifications/', 'NotificationController@sendNotifications')->middleware('edit_notification');
-        Route::post('/customerNotification/',
-            'NotificationController@customerNotification')->middleware('view_notification');
-        Route::post('/singleUserNotification/',
-            'NotificationController@singleUserNotification')->middleware('edit_notification');
+        Route::post(
+            '/customerNotification/',
+            'NotificationController@customerNotification'
+        )->middleware('view_notification');
+        Route::post(
+            '/singleUserNotification/',
+            'NotificationController@singleUserNotification'
+        )->middleware('edit_notification');
         Route::post('/deletedevice/', 'NotificationController@deletedevice')->middleware('view_notification');
     });
 
@@ -363,10 +419,14 @@ Route::group(['middleware' => ['installer']], function () {
         Route::post('/notifyUser/', 'NotificationController@notifyUser')->middleware('edit_notification');
         Route::get('/notifications/', 'NotificationController@notifications')->middleware('view_notification');
         Route::post('/sendNotifications/', 'NotificationController@sendNotifications')->middleware('edit_notification');
-        Route::post('/customerNotification/',
-            'NotificationController@customerNotification')->middleware('view_notification');
-        Route::post('/singleUserNotification/',
-            'NotificationController@singleUserNotification')->middleware('edit_notification');
+        Route::post(
+            '/customerNotification/',
+            'NotificationController@customerNotification'
+        )->middleware('view_notification');
+        Route::post(
+            '/singleUserNotification/',
+            'NotificationController@singleUserNotification'
+        )->middleware('edit_notification');
         Route::post('/deletedevice/', 'NotificationController@deletedevice')->middleware('view_notification');
     });
 
@@ -402,7 +462,7 @@ Route::group(['middleware' => ['installer']], function () {
         Route::get('/lowinstock', 'ReportsController@lowinstock')->middleware('report');
         Route::get('/stockin', 'ReportsController@stockin')->middleware('report');
         Route::post('/productSaleReport', 'ReportsController@productSaleReport')->middleware('report');
-////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
         //////////////     APP ROUTES
         ////////////////////////////////////////////////////////////////////////////////////
         //app pages controller
@@ -414,26 +474,42 @@ Route::group(['middleware' => ['installer']], function () {
         Route::get('/pageStatus', 'PagesController@pageStatus')->middleware('edit_app_setting', 'application_routes');
         Route::get('/filterpages', 'PagesController@filterpages')->middleware('view_app_setting', 'application_routes');
         //manageAppLabel
-        Route::get('/listingAppLabels', 'AppLabelsController@listingAppLabels')->middleware('view_app_setting',
-            'application_routes');
+        Route::get('/listingAppLabels', 'AppLabelsController@listingAppLabels')->middleware(
+            'view_app_setting',
+            'application_routes'
+        );
         Route::get('/addappkey', 'AppLabelsController@addappkey')->middleware('edit_app_setting', 'application_routes');
-        Route::post('/addNewAppLabel', 'AppLabelsController@addNewAppLabel')->middleware('edit_app_setting',
-            'application_routes');
-        Route::get('/editAppLabel/{id}', 'AppLabelsController@editAppLabel')->middleware('edit_app_setting',
-            'application_routes');
-        Route::post('/updateAppLabel/', 'AppLabelsController@updateAppLabel')->middleware('edit_app_setting',
-            'application_routes');
-        Route::get('/applabel', 'AppLabelsController@manageAppLabel')->middleware('view_app_setting',
-            'application_routes');
+        Route::post('/addNewAppLabel', 'AppLabelsController@addNewAppLabel')->middleware(
+            'edit_app_setting',
+            'application_routes'
+        );
+        Route::get('/editAppLabel/{id}', 'AppLabelsController@editAppLabel')->middleware(
+            'edit_app_setting',
+            'application_routes'
+        );
+        Route::post('/updateAppLabel/', 'AppLabelsController@updateAppLabel')->middleware(
+            'edit_app_setting',
+            'application_routes'
+        );
+        Route::get('/applabel', 'AppLabelsController@manageAppLabel')->middleware(
+            'view_app_setting',
+            'application_routes'
+        );
 
-        Route::get('/admobSettings', 'SiteSettingController@admobSettings')->middleware('view_app_setting',
-            'application_routes');
-        Route::get('/applicationapi', 'SiteSettingController@applicationApi')->middleware('view_app_setting',
-            'application_routes');
-        Route::get('/appsettings', 'SiteSettingController@appSettings')->middleware('view_app_setting',
-            'application_routes');
+        Route::get('/admobSettings', 'SiteSettingController@admobSettings')->middleware(
+            'view_app_setting',
+            'application_routes'
+        );
+        Route::get('/applicationapi', 'SiteSettingController@applicationApi')->middleware(
+            'view_app_setting',
+            'application_routes'
+        );
+        Route::get('/appsettings', 'SiteSettingController@appSettings')->middleware(
+            'view_app_setting',
+            'application_routes'
+        );
 
-////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
         //////////////     SITE ROUTES
         ////////////////////////////////////////////////////////////////////////////////////
 
@@ -447,32 +523,46 @@ Route::group(['middleware' => ['installer']], function () {
         //site pages controller
         Route::get('/webpages', 'PagesController@webpages')->middleware('view_web_setting', 'website_routes');
         Route::get('/addwebpage', 'PagesController@addwebpage')->middleware('edit_web_setting', 'website_routes');
-        Route::post('/addnewwebpage', 'PagesController@addnewwebpage')->middleware('edit_web_setting',
-            'website_routes');
-        Route::get('/editwebpage/{id}', 'PagesController@editwebpage')->middleware('edit_web_setting',
-            'website_routes');
-        Route::post('/updatewebpage', 'PagesController@updatewebpage')->middleware('edit_web_setting',
-            'website_routes');
+        Route::post('/addnewwebpage', 'PagesController@addnewwebpage')->middleware(
+            'edit_web_setting',
+            'website_routes'
+        );
+        Route::get('/editwebpage/{id}', 'PagesController@editwebpage')->middleware(
+            'edit_web_setting',
+            'website_routes'
+        );
+        Route::post('/updatewebpage', 'PagesController@updatewebpage')->middleware(
+            'edit_web_setting',
+            'website_routes'
+        );
         Route::get('/pageWebStatus', 'PagesController@pageWebStatus')->middleware('view_web_setting', 'website_routes');
 
         Route::get('/webthemes', 'SiteSettingController@webThemes')->middleware('view_web_setting', 'website_routes');
-        Route::get('/themeSettings', 'SiteSettingController@themeSettings')->middleware('edit_web_setting',
-            'website_routes');
+        Route::get('/themeSettings', 'SiteSettingController@themeSettings')->middleware(
+            'edit_web_setting',
+            'website_routes'
+        );
 
         Route::get('/seo', 'SiteSettingController@seo')->middleware('view_web_setting', 'website_routes');
-        Route::get('/customstyle', 'SiteSettingController@customstyle')->middleware('view_web_setting',
-            'website_routes');
-        Route::post('/updateWebTheme', 'SiteSettingController@updateWebTheme')->middleware('edit_web_setting',
-            'website_routes');
-        Route::get('/websettings', 'SiteSettingController@webSettings')->middleware('view_web_setting',
-            'website_routes');
+        Route::get('/customstyle', 'SiteSettingController@customstyle')->middleware(
+            'view_web_setting',
+            'website_routes'
+        );
+        Route::post('/updateWebTheme', 'SiteSettingController@updateWebTheme')->middleware(
+            'edit_web_setting',
+            'website_routes'
+        );
+        Route::get('/websettings', 'SiteSettingController@webSettings')->middleware(
+            'view_web_setting',
+            'website_routes'
+        );
 
-/////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////
         //////////////     GENERAL ROUTES
         ////////////////////////////////////////////////////////////////////////////////////
 
-//units
+        //units
         Route::get('/units', 'SiteSettingController@units')->middleware('view_general_setting');
         Route::get('/addunit', 'SiteSettingController@addunit')->middleware('edit_general_setting');
         Route::post('/addnewunit', 'SiteSettingController@addnewunit')->middleware('edit_general_setting');
@@ -482,14 +572,22 @@ Route::group(['middleware' => ['installer']], function () {
 
         Route::get('/orderstatus', 'SiteSettingController@orderstatus')->middleware('view_general_setting');
         Route::get('/addorderstatus', 'SiteSettingController@addorderstatus')->middleware('edit_general_setting');
-        Route::post('/addNewOrderStatus',
-            'SiteSettingController@addNewOrderStatus')->middleware('edit_general_setting');
-        Route::get('/editorderstatus/{id}',
-            'SiteSettingController@editorderstatus')->middleware('edit_general_setting');
-        Route::post('/updateOrderStatus',
-            'SiteSettingController@updateOrderStatus')->middleware('edit_general_setting');
-        Route::post('/deleteOrderStatus',
-            'SiteSettingController@deleteOrderStatus')->middleware('edit_general_setting');
+        Route::post(
+            '/addNewOrderStatus',
+            'SiteSettingController@addNewOrderStatus'
+        )->middleware('edit_general_setting');
+        Route::get(
+            '/editorderstatus/{id}',
+            'SiteSettingController@editorderstatus'
+        )->middleware('edit_general_setting');
+        Route::post(
+            '/updateOrderStatus',
+            'SiteSettingController@updateOrderStatus'
+        )->middleware('edit_general_setting');
+        Route::post(
+            '/deleteOrderStatus',
+            'SiteSettingController@deleteOrderStatus'
+        )->middleware('edit_general_setting');
 
         Route::get('/trends', 'SiteSettingController@trends')->middleware('view_general_setting');
         Route::get('/editTrends/{id}', 'SiteSettingController@editTrends')->middleware('edit_general_setting');
@@ -525,7 +623,8 @@ Route::group(['middleware' => ['installer']], function () {
         Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     });
 
-    Route::group(['prefix' => 'admin/managements', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
+    Route::group(
+        ['prefix' => 'admin/managements', 'middleware' => 'auth', 'namespace' => 'AdminControllers'],
         function () {
             Route::get('/merge', 'ManagementsController@merge')->middleware('edit_management');
             Route::get('/backup', 'ManagementsController@backup')->middleware('edit_management');
@@ -536,5 +635,6 @@ Route::group(['middleware' => ['installer']], function () {
             Route::get('/updater', 'ManagementsController@updater')->middleware('edit_management');
             Route::post('/checkpassword', 'ManagementsController@checkpassword')->middleware('edit_management');
             Route::post('/updatercontent', 'ManagementsController@updatercontent')->middleware('edit_management');
-        });
+        }
+    );
 });
