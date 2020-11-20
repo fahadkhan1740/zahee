@@ -640,6 +640,7 @@ class Products extends Model
             $products_name = 'products_name_'.$languages_data->languages_id;
             $products_url = 'products_url_'.$languages_data->languages_id;
             $products_description = 'products_description_'.$languages_data->languages_id;
+            $products_help = 'products_help_'.$languages_data->languages_id;
             $product_sub_title = 'product_sub_title_'.$languages_data->languages_id;
             //left banner
             $products_left_banner = 'products_left_banner_'.$languages_data->languages_id;
@@ -696,6 +697,7 @@ class Products extends Model
                 $req_products_name = $request->$products_name;
                 $req_products_url = $request->$products_url;
                 $req_products_description = $request->$products_description;
+                $req_products_help = $request->$products_help;
                 $req_product_sub_title = $request->$product_sub_title;
 
                 DB::table('products_description')->where('products_id', '=', $products_id)
@@ -709,7 +711,8 @@ class Products extends Model
                         'products_left_banner_expire_date' => $leftExpireDateFormat,
                         'products_right_banner_start_date' => $rightStartDateFormat,
                         'products_right_banner_expire_date' => $rightExpireDateFormat,
-                        'products_description' => addslashes($req_products_description)
+                        'products_description' => addslashes($req_products_description),
+                        'products_help' => addslashes($req_products_help)
 
                     ]);
             } else {
@@ -729,7 +732,9 @@ class Products extends Model
                     'products_left_banner_expire_date' => $leftExpireDateFormat,
                     'products_right_banner_start_date' => $rightStartDateFormat,
                     'products_right_banner_expire_date' => $rightExpireDateFormat,
-                    'products_description' => addslashes($req_products_description)
+                    'products_description' => addslashes($req_products_description),
+                    'products_help' => addslashes($req_products_help)
+
                 ]);
             }
         }
@@ -758,10 +763,8 @@ class Products extends Model
                 'expires_date' => $expiryDateFormate,
                 'status' => $request->status,
             ]);
-        } else {
-            if ($request->isSpecial == 'no') {
-                DB::table('specials')->where('products_id', '=', $products_id)->delete();
-            }
+        } elseif ($request->isSpecial == 'no') {
+            DB::table('specials')->where('products_id', '=', $products_id)->delete();
         }
 
         //flash sale product
