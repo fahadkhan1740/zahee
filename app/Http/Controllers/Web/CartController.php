@@ -1,16 +1,15 @@
 <?php
+
 namespace App\Http\Controllers\Web;
+
 //use Mail;
 //validator is builtin class in laravel
 use Validator;
 
-use DB;
 //for password encryption or hash protected
 use Hash;
 
 //for authenitcate login data
-use Auth;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 //for requesting a value
 use Illuminate\Http\Request;
@@ -27,257 +26,251 @@ use Lang;
 
 class CartController extends Controller
 {
+    public function __construct(
+        Index $index,
+        Products $products,
+        Cart $cart,
+        Shipping_method $Shipping_method
+    ) {
+        $this->index = $index;
+        $this->products = $products;
+        $this->cart = $cart;
+        $this->Shipping_method = $Shipping_method;
+        $this->theme = new ThemeController();
+    }
 
-	public function __construct(
-		                  Index $index,
-											Products $products,
-											Cart $cart,
-											Shipping_method $Shipping_method
-											)
-	{
-		$this->index = $index;
-		$this->products = $products;
-		$this->cart = $cart;
-		$this->Shipping_method = $Shipping_method;
-		$this->theme = new ThemeController();
+    //myCart
+    public function viewcart(Request $request)
+    {
+        $title = array('pageTitle' => Lang::get("website.View Cart"));
+        $result = array();
+        $data = array();
+        $result['commonContent'] = $this->index->commonContent();
+        $final_theme = $this->theme->theme();
 
-	}
+        $result['cart'] = $this->cart->myCart($data);
 
-	//myCart
-	public function viewcart(Request $request){
+        //apply coupon
+        if (session('coupon')) {
+            $session_coupon_data = session('coupon');
+            session(['coupon' => array()]);
+            $response = array();
+            if (!empty($session_coupon_data)) {
+                foreach ($session_coupon_data as $key => $session_coupon) {
+                    $response = $this->cart->common_apply_coupon($session_coupon->code);
+                }
+            }
+        }
 
-		$title = array('pageTitle' => Lang::get("website.View Cart"));
-		$result = array();
-		$data = array();
-		$result['commonContent'] = $this->index->commonContent();
-		$final_theme = $this->theme->theme();
+        // Get Shipping price  Data
+        $flate_rate = $this->Shipping_method->flateRate();
+        // dd($flate_rate['flate_rate']);
+        session([
+            'shipping_detail' => array(
+                'shipping_price' => $flate_rate->flate_rate,
+                'mehtod_name' => 'Flat Rate'
+            )
+        ]);
 
-		$result['cart'] = $this->cart->myCart($data);
+        return view("web.carts.viewcart", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
+    }
 
-		//apply coupon
-		if(session('coupon')){
-			$session_coupon_data = session('coupon');
-			session(['coupon' => array()]);
-			$response = array();
-			if(!empty($session_coupon_data)){
-				foreach($session_coupon_data as $key=>$session_coupon){
-						$response = $this->cart->common_apply_coupon($session_coupon->code);
-				}
-			}
-		}
+    public function editcart(Request $request, $id, $slug)
+    {
+        $title = array('pageTitle' => Lang::get('website.Product Detail'));
+        $result = array();
+        $result['commonContent'] = $this->index->commonContent();
+        $final_theme = $this->theme->theme();
+        //min_price
+        if (!empty($request->min_price)) {
+            $min_price = $request->min_price;
+        } else {
+            $min_price = '';
+        }
 
-		// Get Shipping price  Data 
-		$flate_rate= $this->Shipping_method->flateRate();
-		// dd($flate_rate['flate_rate']);
-		session(['shipping_detail' => array(
-			'shipping_price' => $flate_rate->flate_rate,
-			'mehtod_name' => 'Flat Rate'
-		)]);
+        //max_price
+        if (!empty($request->max_price)) {
+            $max_price = $request->max_price;
+        } else {
+            $max_price = '';
+        }
 
-		return view("web.carts.viewcart", ['title' => $title,'final_theme' => $final_theme])->with('result', $result);
-	}
+        if (!empty($request->limit)) {
+            $limit = $request->limit;
+        } else {
+            $limit = 15;
+        }
 
-	public function editcart(Request $request,$id,$slug){
+        $products = $this->products->getProductsBySlug($slug);
 
+        //category
+        $category = $this->products->getCategoryByParent($products[0]->products_id);
 
-				$title 			= 	array('pageTitle' => Lang::get('website.Product Detail'));
-				$result 		= 	array();
-				$result['commonContent'] = $this->index->commonContent();
-				$final_theme = $this->theme->theme();
-				//min_price
-				if(!empty($request->min_price)){
-					$min_price = $request->min_price;
-				}else{
-					$min_price = '';
-				}
+        if (!empty($category)) {
+            $category_slug = $category[0]->categories_slug;
+            $category_name = $category[0]->categories_name;
+        } else {
+            $category_slug = '';
+            $category_name = '';
+        }
+        $sub_category = $this->products->getSubCategoryByParent($products[0]->products_id);
 
-				//max_price
-				if(!empty($request->max_price)){
-					$max_price = $request->max_price;
-				}else{
-					$max_price = '';
-				}
+        if (!empty($sub_category) and count($sub_category) > 0) {
+            $sub_category_name = $sub_category[0]->categories_name;
+            $sub_category_slug = $sub_category[0]->categories_slug;
+        } else {
+            $sub_category_name = '';
+            $sub_category_slug = '';
+        }
 
-				if(!empty($request->limit)){
-					$limit = $request->limit;
-				}else{
-					$limit = 15;
-				}
+        $result['category_name'] = $category_name;
+        $result['category_slug'] = $category_slug;
+        $result['sub_category_name'] = $sub_category_name;
+        $result['sub_category_slug'] = $sub_category_slug;
 
-				$products = $this->products->getProductsBySlug($slug);
+        $isFlash = $this->products->getFlashSale($products[0]->products_id);
 
-				//category
-				$category = $this->products->getCategoryByParent($products[0]->products_id);
+        if (!empty($isFlash) and count($isFlash) > 0) {
+            $type = "flashsale";
+        } else {
+            $type = "";
+        }
 
+        $data = array(
+            'page_number' => '0', 'type' => $type, 'products_id' => $products[0]->products_id, 'limit' => $limit,
+            'min_price' => $min_price, 'max_price' => $max_price
+        );
+        $detail = $this->products->products($data);
+        $result['detail'] = $detail;
 
-				if(!empty($category)){
-					$category_slug = $category[0]->categories_slug;
-					$category_name = $category[0]->categories_name;
-				}else{
-					$category_slug = '';
-					$category_name = '';
-				}
-				$sub_category = $this->products->getSubCategoryByParent($products[0]->products_id);
+        $i = 0;
+        foreach ($result['detail']['product_data'][0]->categories as $postCategory) {
+            if ($i == 0) {
+                $postCategoryId = $postCategory->categories_id;
+                $i++;
+            }
+        }
 
-				if(!empty($sub_category) and count($sub_category)>0){
-					$sub_category_name = $sub_category[0]->categories_name;
-					$sub_category_slug = $sub_category[0]->categories_slug;
-				}else{
-					$sub_category_name = '';
-					$sub_category_slug = '';
-				}
+        $data = array(
+            'page_number' => '0', 'type' => '', 'categories_id' => $postCategoryId, 'limit' => $limit,
+            'min_price' => $min_price, 'max_price' => $max_price
+        );
+        $simliar_products = $this->products->products($data);
+        $result['simliar_products'] = $simliar_products;
 
-				$result['category_name'] = $category_name;
-				$result['category_slug'] = $category_slug;
-				$result['sub_category_name'] = $sub_category_name;
-				$result['sub_category_slug'] = $sub_category_slug;
+        $cart = '';
+        $result['cartArray'] = $this->products->cartIdArray($cart);
 
-				$isFlash = $this->products->getFlashSale($products[0]->products_id);
+        //liked products
+        $result['liked_products'] = $this->products->likedProducts();
 
+        $result['cart'] = $this->cart->myCart($id);
 
-				if(!empty($isFlash) and count($isFlash)>0){
-					$type = "flashsale";
-				}else{
-					$type = "";
-				}
+        return view("web.detail", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
+    }
 
-				$data = array('page_number'=>'0', 'type'=>$type, 'products_id'=>$products[0]->products_id, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
-				$detail = $this->products->products($data);
-				$result['detail'] = $detail;
+    //deleteCart
+    public function deleteCart(Request $request)
+    {
+        $check = $this->cart->deleteCart($request);
+        //apply coupon
+        if (!empty(session('coupon')) and count(session('coupon')) > 0) {
+            $session_coupon_data = session('coupon');
+            session(['coupon' => array()]);
+            if (count($session_coupon_data) == '2') {
+                $response = array();
+                if (!empty($session_coupon_data)) {
+                    foreach ($session_coupon_data as $key => $session_coupon) {
+                        $response = $this->cart->common_apply_coupon($session_coupon->code);
+                    }
+                }
+            }
+        }
 
-				$i = 0;
-				foreach($result['detail']['product_data'][0]->categories as $postCategory){
-					if($i==0){
-						$postCategoryId = $postCategory->categories_id;
-						$i++;
-					}
-				}
-
-				$data = array('page_number'=>'0', 'type'=>'', 'categories_id'=>$postCategoryId, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
-				$simliar_products = $this->products->products($data);
-				$result['simliar_products'] = $simliar_products;
-
-				$cart = '';
-				$result['cartArray'] = $this->products->cartIdArray($cart);
-
-				//liked products
-				$result['liked_products'] = $this->products->likedProducts();
-
-	     	$result['cart'] = $this->cart->myCart($id);
-
-		return view("web.detail", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
-
-	}
-
-	//deleteCart
-	public function deleteCart(Request $request){
-
-   $check = $this->cart->deleteCart($request);
-		//apply coupon
-		if(!empty(session('coupon')) and count(session('coupon'))>0){
-			$session_coupon_data = session('coupon');
-			session(['coupon' => array()]);
-			if(count($session_coupon_data)=='2'){
-				$response = array();
-				if(!empty($session_coupon_data)){
-					foreach($session_coupon_data as $key=>$session_coupon){
-							$response = $this->cart->common_apply_coupon($session_coupon->code);
-					}
-				}
-			}
-		}
-
-		if(!empty($request->type) and $request->type=='header cart'){
-			$result['commonContent'] = $this->index->commonContent();
+        if (!empty($request->type) and $request->type == 'header cart') {
+            $result['commonContent'] = $this->index->commonContent();
             $message = Lang::get("website.Cart item has been deleted successfully");
             return view("web.headers.cartButtons.cartButton")->with('result', $result);
+        }
+        $message = Lang::get("website.Cart item has been deleted successfully");
+        return redirect()->back()->with('message', $message);
+    }
 
-		}else{
-            $message = Lang::get("website.Cart item has been deleted successfully");
-				return redirect()->back()->with('message', $message);
+    //getCart
+    public function cartIdArray($request)
+    {
+        $this->cart->cartIdArray($request);
+    }
 
-		}
-	}
-
-
-	//getCart
-	public function cartIdArray($request){
-      $this->cart->cartIdArray($request);
-	}
-
-	//updatesinglecart
-	public function updatesinglecart(Request $request){
+    //updatesinglecart
+    public function updatesinglecart(Request $request)
+    {
         $result = $this->cart->updatesinglecart($request);
-		return view("web.headers.cartButtons.cartButton")->with('result', $result);
-	}
+        return view("web.headers.cartButtons.cartButton")->with('result', $result);
+    }
 
+    //addToCart
+    public function addToCart(Request $request)
+    {
+        $result = $this->cart->addToCart($request);
+        if (!empty($result['status']) && $result['status'] == 'exceed') {
+            return $result;
+        }
+        return view("web.headers.cartButtons.cartButton")->with('result', $result);
+    }
 
+    //updateCart
+    public function updateCart(Request $request)
+    {
+        if (empty(session('customers_id'))) {
+            $customers_id = '';
+        } else {
+            $customers_id = session('customers_id');
+        }
+        $session_id = Session::getId();
+        foreach ($request->cart as $key => $customers_basket_id) {
+            $this->cart->updateRecord($customers_basket_id, $customers_id, $session_id, $request->quantity[$key]);
+        }
 
-	//addToCart
-	public function addToCart(Request $request){
-		$result = $this->cart->addToCart($request);
-		if(!empty($result['status']) && $result['status'] == 'exceed'){
-			return $result;
-		}
-		return view("web.headers.cartButtons.cartButton")->with('result', $result);
-	}
-	//updateCart
-	public function updateCart(Request $request){
+        $message = Lang::get("website.Cart has been updated successfully");
+        return redirect()->back()->with('message', $message);
+    }
 
-		if(empty(session('customers_id'))){
-			$customers_id					=	'';
-		}else{
-			$customers_id					=	session('customers_id');
-		}
-		$session_id							=	Session::getId();
-		foreach($request->cart as $key=>$customers_basket_id){
-       $this->cart->updateRecord($customers_basket_id,$customers_id,$session_id,$request->quantity[$key]);
-		}
+    //apply_coupon
+    public function apply_coupon(Request $request)
+    {
+        $result = array();
+        $coupon_code = $request->coupon_code;
 
-		$message = Lang::get("website.Cart has been updated successfully");
-		return redirect()->back()->with('message', $message);
+        $carts = $this->cart->myCart(array());
+        if (count($carts) > 0) {
+            $response = $this->cart->common_apply_coupon($coupon_code);
+        } else {
+            $response = array(
+                'success' => '0', 'message' => Lang::get("website.Coupon can not be apllied to empty cart")
+            );
+        }
+        print_r(json_encode($response));
+    }
 
-	}
+    //removeCoupon
+    public function removeCoupon(Request $request)
+    {
+        $coupons_id = $request->id;
 
+        $session_coupon_data = session('coupon');
+        session(['coupon' => array()]);
+        session(['coupon_discount' => 0]);
+        $response = array();
+        if (!empty($session_coupon_data)) {
+            foreach ($session_coupon_data as $key => $session_coupon) {
+                if ($session_coupon->coupans_id != $coupons_id) {
+                    $response = $this->cart->common_apply_coupon($session_coupon->code);
+                }
+            }
+        }
 
-
-
-	//apply_coupon
-	public function apply_coupon(Request $request){
-
-		$result = array();
-		$coupon_code = $request->coupon_code;
-
-
-		$carts = $this->cart->myCart(array());
-		if(count($carts)>0){
-			$response = $this->cart->common_apply_coupon($coupon_code);
-		}else{
-			$response = array('success'=>'0', 'message'=>Lang::get("website.Coupon can not be apllied to empty cart"));
-		}
-			print_r(json_encode($response));
-	}
-
-
-	//removeCoupon
-	public function removeCoupon(Request $request){
-		$coupons_id = $request->id;
-
-		$session_coupon_data = session('coupon');
-		session(['coupon' => array()]);
-		session(['coupon_discount' => 0]);
-		$response = array();
-		if(!empty($session_coupon_data)){
-			foreach($session_coupon_data as $key=>$session_coupon){
-				if($session_coupon->coupans_id != $coupons_id){
-					$response = $this->cart->common_apply_coupon($session_coupon->code);
-				}
-			}
-		}
-
-		$message = Lang::get("website.Coupon has been removed successfully");
-		return redirect()->back()->with('message', $message);
-
-	}
-
+        $message = Lang::get("website.Coupon has been removed successfully");
+        return redirect()->back()->with('message', $message);
+    }
 }
