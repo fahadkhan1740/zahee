@@ -3,12 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
-use Config;
-use App;
-use DB;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
-class language
+class Language
 {
     /**
      * Handle an incoming request.

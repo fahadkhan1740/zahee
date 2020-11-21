@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
             'bindings',
         ],
 
-		'vendor' => [
+        'vendor' => [
             'throttle:60,1',
             'bindings',
         ],
@@ -56,10 +56,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-      'web_installed' => \App\Http\Middleware\web_installed::class,
-      'env' => \App\Http\Middleware\env::class,
-      'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
-      'Customer' => \App\Http\Middleware\RedirectIfNotCustomer::class,
+        'web_installed' => \App\Http\Middleware\web_installed::class,
+        'env' => \App\Http\Middleware\env::class,
+        'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
+        'Customer' => \App\Http\Middleware\RedirectIfNotCustomer::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -127,10 +127,10 @@ class Kernel extends HttpKernel
         'report' => \App\Http\Middleware\report\report::class,
         'dashboard' => \App\Http\Middleware\dashboard\dashboard::class,
         'manage_role' => \App\Http\Middleware\manage_role\manage_role::class,
-        'view_vendor' => \App\Http\Middleware\vendors\view_vendor::class,
-        'edit_vendor' => \App\Http\Middleware\vendors\edit_vendor::class,
-        'delete_vendor' => \App\Http\Middleware\vendors\delete_vendor::class,
-        'add_vendor' => \App\Http\Middleware\vendors\add_vendor::class,
+        'viewVendor' => \App\Http\Middleware\Vendors\ViewVendor::class,
+        'edit_vendor' => \App\Http\Middleware\Vendors\EditVendor::class,
+        'delete_vendor' => \App\Http\Middleware\Vendors\DeleteVendor::class,
+        'add_vendor' => \App\Http\Middleware\Vendors\AddVendor::class,
         'cors' => \App\Http\Middleware\CORS::class,
         'edit_management' => \App\Http\Middleware\management\edit_management::class,
         'application_routes' => \App\Http\Middleware\app_setting\application_routes::class,
