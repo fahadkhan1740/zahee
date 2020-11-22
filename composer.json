@@ -23,7 +23,6 @@
         "madnest/madzipper": "^1.0",
         "orangehill/iseed": "^2.6",
         "razorpay/razorpay": "^2.5",
-        "rehan/laravel-installer": "dev-master",
         "spatie/db-dumper": "^2.14",
         "ext-curl": "*",
         "ext-json": "*"
@@ -62,12 +61,7 @@
         }
     },
     "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./packages/rehantariq/laravel-installer/"
-        }
-    ],
+    "repositories": [],
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
