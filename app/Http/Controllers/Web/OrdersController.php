@@ -99,26 +99,26 @@ class OrdersController extends Controller
         if (!is_null($address)) {
             $address = $address;
         } else {
-//                $address = $this->shipping->getShippingAddress('');
-//                if (!empty($address)) {
-//                    $address = $address[0];
-//                    $address->delivery_phone = auth()->guard('customer')->user()->customers_telephone;
-//                } else {
-//                    $address = '';
-//                }
+        /*        $address = $this->shipping->getShippingAddress('');
+                if (!empty($address)) {
+                    $address = $address[0];
+                    $address->delivery_phone = auth()->guard('customer')->user()->customers_telephone;
+                } else {
+                    $address = '';
+                }*/
             $address = '';
         }
 
-        // if(!empty(auth()->guard('customer')->user()->customers_default_address_id)) {
-        // 	$address_id = auth()->guard('customer')->user()->customers_default_address_id;
-        // 	$address = $this->shipping->getShippingAddress($address_id);
-        // 	if(!empty($address)){
-        // 		$address = $address[0];
-        // 		$address->delivery_phone=auth()->guard('customer')->user()->customers_telephone;
-        // 	}else{
-        // 		$address = '';
-        // 	}
-        // }
+        /* if(!empty(auth()->guard('customer')->user()->customers_default_address_id)) {
+         	$address_id = auth()->guard('customer')->user()->customers_default_address_id;
+         	$address = $this->shipping->getShippingAddress($address_id);
+         	if(!empty($address)){
+         		$address = $address[0];
+         		$address->delivery_phone=auth()->guard('customer')->user()->customers_telephone;
+         	}else{
+         		$address = '';
+         	}
+         }*/
 
         if (empty(session('shipping_address'))) {
             session(['shipping_address' => $address]);
