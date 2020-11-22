@@ -181,7 +181,7 @@
         </section>
         <!-- /.content -->
     </div>
-    <script src="{!! asset('admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
+    <script src="{!! asset('public/admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
     <script type="text/javascript">
         $(function () {
 

@@ -51,7 +51,7 @@
 
 <!---- onesignal ------>
 @if($result['setting'][54]->value=='onesignal')
-    <link rel="manifest" href="{!! asset('onesignal/manifest.json') !!}"/>
+    <link rel="manifest" href="{!! asset('public/onesignal/manifest.json') !!}"/>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
         var OneSignal = window.OneSignal || [];
