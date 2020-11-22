@@ -42,7 +42,7 @@
         @foreach($result['commonContent']['homeBanners'] as $homeBanner)
             @if($homeBanner->status && $homeBanner->languages_id === 1)
                 <div class="col-12 col-md-4">
-                    <figure style="background-image:url('<?php echo $homeBanner->path ?>')">
+                    <figure style="background-image:url({{ 'public/'.$homeBanner->path }})">
                         <a href="{{URL::to($homeBanner->banners_url)}}">
                         </a>
                     </figure>
