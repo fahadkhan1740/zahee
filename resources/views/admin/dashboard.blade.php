@@ -269,7 +269,7 @@
                                             @foreach ($result['customers']  as $customer)
                                                     @if($i<=21)
                                                         <li>
-                                                            <img src="{{asset('images/user.png')}}">
+                                                            <img src="{{asset('public/images/user.png')}}">
                                                             <a class="users-list-name" href="{{ url('admin/customers/edit/') }}/{{ $customer->id }}">{{ $customer->first_name }} {{ $customer->last_name }}</a>
                                                             <span class="users-list-date">{{$customer->created_at}}</span>
                                                         </li>

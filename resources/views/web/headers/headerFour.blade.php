@@ -22,7 +22,7 @@
                           <?php
                           if(auth()->guard('customer')->check()){
                            if(auth()->guard('customer')->user()->avatar == null){ ?>
-                            <img class="img-fluid" src="{{asset('web/images/miscellaneous/avatar.jpg')}}">
+                            <img class="img-fluid" src="{{asset('public/web/images/miscellaneous/avatar.jpg')}}">
                           <?php }else{ ?>
                             <img class="img-fluid" src="{{auth()->guard('customer')->user()->avatar}}">
                           <?php

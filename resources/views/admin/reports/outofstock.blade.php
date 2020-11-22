@@ -41,7 +41,7 @@
                     	@foreach ($result['products'] as  $key=>$outOfStockData)
                             <tr>
                                 <td>{{ $outOfStockData->products_id }}</td>
-                                <td><img src="{{asset('/'.$outOfStockData->path)}}" alt="" width=" 100px" height="100px"></td>
+                                <td><img src="{{asset('public//'.$outOfStockData->path)}}" alt="" width=" 100px" height="100px"></td>
                                 <td width="45%">
                                     <strong>{{ $outOfStockData->products_name }}</strong><br>
                                 </td>

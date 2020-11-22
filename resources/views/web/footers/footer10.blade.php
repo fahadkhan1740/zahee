@@ -6,7 +6,7 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-12">
-                        <img class="img-fluid" src="{{asset('web/images/brands/brands-content.jpg')}}">
+                        <img class="img-fluid" src="{{asset('public/web/images/brands/brands-content.jpg')}}">
                         </div>
                     </div>
                   </div>
@@ -96,7 +96,7 @@
                           </ul>
                         </div>
                         <div class="footer-image mt-4">
-                            <a href="#"><img class="img-fluid" src="{{asset('web/images/miscellaneous/payments.png')}}"></a>
+                            <a href="#"><img class="img-fluid" src="{{asset('public/web/images/miscellaneous/payments.png')}}"></a>
                         </div>
                       </div>
                     </div>

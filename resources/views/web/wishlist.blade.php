@@ -171,7 +171,7 @@
 					<div class="col-12 media-main">
 					<div class="cart-item-col cart-item-center">
                                                 <figure>
-                                                    <img src="{{asset('web/images/cus/wishlist.png')}}" alt="empty-cart" style="width:15%">
+                                                    <img src="{{asset('public/web/images/cus/wishlist.png')}}" alt="empty-cart" style="width:15%">
                                                     <figcaption>No Products in your Wishlist</figcaption>
                                                 </figure>
 

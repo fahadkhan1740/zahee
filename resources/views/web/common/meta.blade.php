@@ -25,20 +25,20 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-<link rel="stylesheet" href="{{asset('web/css').'/'.$result['setting'][81]->value}}.css">
-<link rel="stylesheet" href="{{asset('web/css/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{asset('web/css/owl.theme.default.min.css') }}">
+<link rel="stylesheet" href="{{asset('public/web/css').'/'.$result['setting'][81]->value}}.css">
+<link rel="stylesheet" href="{{asset('public/web/css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{asset('public/web/css/owl.theme.default.min.css') }}">
 
-<link rel="stylesheet" href="{{asset('web/css/slick.css') }}">
-<link rel="stylesheet" href="{{asset('web/css/slick-theme.css') }}">
+<link rel="stylesheet" href="{{asset('public/web/css/slick.css') }}">
+<link rel="stylesheet" href="{{asset('public/web/css/slick-theme.css') }}">
 
-<link rel="stylesheet" type="text/css" href="{{asset('web/css/stripe.css') }}" data-rel-css=""/>
-<link rel="stylesheet" href="{{asset('web/api/fancybox/source/jquery.fancybox.css')}}" media="all"/>
-<link rel="stylesheet" href="{{asset('web/css/responsive.css') }}">
-<link rel="stylesheet" href="{{asset('web/css/rtl.css')}}">
-<link rel="stylesheet" href="{{asset('web/css/main.css')}}">
-<link rel="stylesheet" href="{{asset('web/css/custom.css')}}">
-<link rel="stylesheet" href="{{asset('web/css/countDown.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('public/web/css/stripe.css') }}" data-rel-css=""/>
+<link rel="stylesheet" href="{{asset('public/web/api/fancybox/source/jquery.fancybox.css')}}" media="all"/>
+<link rel="stylesheet" href="{{asset('public/web/css/responsive.css') }}">
+<link rel="stylesheet" href="{{asset('public/web/css/rtl.css')}}">
+<link rel="stylesheet" href="{{asset('public/web/css/main.css')}}">
+<link rel="stylesheet" href="{{asset('public/web/css/custom.css')}}">
+<link rel="stylesheet" href="{{asset('public/web/css/countDown.min.css')}}">
 <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 

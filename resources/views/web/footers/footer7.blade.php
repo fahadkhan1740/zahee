@@ -42,7 +42,7 @@
                 </div>
                 <div class="socials">
                     <h5>@lang('payment method')</h5>
-                    <img class="img-fluid" src="{{asset('web/images/miscellaneous/payments.png')}}">
+                    <img class="img-fluid" src="{{asset('public/web/images/miscellaneous/payments.png')}}">
                 </div>
               </div>
         </div>
@@ -54,8 +54,8 @@
                     <div class="col-12 col-lg-4">
                         <h5>@lang('DOWNLOAD OUR APPS')</h5>
                         <div class="apps-download">
-                            <a href="{{$result['commonContent']['setting'][109]->value}}"><img class="img-fluid" src="{{asset('web/images/miscellaneous/google-play-btn.png')}}"></a>
-                            <a href="{{$result['commonContent']['setting'][110]->value}}"><img class="img-fluid" src="{{asset('web/images/miscellaneous/app-store-btn.png')}}"></a>
+                            <a href="{{$result['commonContent']['setting'][109]->value}}"><img class="img-fluid" src="{{asset('public/web/images/miscellaneous/google-play-btn.png')}}"></a>
+                            <a href="{{$result['commonContent']['setting'][110]->value}}"><img class="img-fluid" src="{{asset('public/web/images/miscellaneous/app-store-btn.png')}}"></a>
                         </div>
 
                       </div>
