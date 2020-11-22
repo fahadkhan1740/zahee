@@ -59,7 +59,7 @@
 
 								<div class="media">
 									<div class="media__pro">
-										<img class="img-fluid" src="{{asset($products->image_path)}}" alt="{{$products->products_name}}">
+										<img class="img-fluid" src="{{asset('public/'.$products->image_path)}}" alt="{{$products->products_name}}">
 											<?php
 													$default_currency = DB::table('currencies')->where('is_default',1)->first();
 													if($default_currency->id == Session::get('currency_id')){

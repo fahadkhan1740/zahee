@@ -61,7 +61,7 @@
                                                                       <select class="image-picker show-html " name="image_id" id="select_img">
                                                                           <option value=""></option>
                                                                           @foreach($allimage as $key=>$image)
-                                                                            <option data-img-src="{{asset($image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                            <option data-img-src="{{asset('public/'.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                           @endforeach
                                                                       </select>
                                                                       @endif
@@ -97,7 +97,7 @@
 
                                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
 
-                                                        <img src="{{asset($products_images[0]->path)}}" alt="" width=" 100px">
+                                                        <img src="{{asset('public/'.$products_images[0]->path)}}" alt="" width=" 100px">
                                                     </div>
                                                 </div>
 

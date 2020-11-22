@@ -19,9 +19,9 @@
                         </div>
                         <a class="product-img" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
                             <!-- <figure> -->
-                            <img src="{{asset($products->image_path)}}" alt="{{$products->products_name}}"/>
+                            <img src="{{asset('public/'.$products->image_path)}}" alt="{{$products->products_name}}"/>
                             <!-- </figure> -->
-                        <!-- <img class="img-fluid" src="{{asset($products->image_path)}}" alt="{{$products->products_name}}"> -->
+                        <!-- <img class="img-fluid" src="{{asset('public/'.$products->image_path)}}" alt="{{$products->products_name}}"> -->
                         </a>
                     </div>
                     @section('scripts')

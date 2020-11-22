@@ -4,7 +4,7 @@
               <div class="product">
                 <article>
 
-                	<div class="thumb"><img class="img-fluid" src="{{asset($products->products_image)}}" alt="{{$products->products_name}}"></div>
+                	<div class="thumb"><img class="img-fluid" src="{{asset('public/'.$products->products_image)}}" alt="{{$products->products_name}}"></div>
                   <?php
 						$current_date = date("Y-m-d", strtotime("now"));
 						$string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));

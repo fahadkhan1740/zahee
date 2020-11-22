@@ -345,7 +345,7 @@
                                                                                     <option value=""></option>
                                                                                     @foreach($allimage as $key=>$image)
                                                                                         <option
-                                                                                            data-img-src="{{asset($image->path)}}"
+                                                                                            data-img-src="{{asset('public/'.$image->path)}}"
                                                                                             class="imagedetail"
                                                                                             data-img-alt="{{$key}}"
                                                                                             value="{{$image->id}}"> {{$image->id}} </option>
@@ -395,7 +395,7 @@
                                                                class="col-sm-2 col-md-3 control-label"></label>
                                                         <div class="col-sm-10 col-md-4">
                                                             {!! Form::hidden('oldImage', $result['product'][0]->products_image , array('id'=>'oldImage', 'class'=>'field-validate ')) !!}
-                                                            <img src="{{asset($result['product'][0]->path)}}" alt=""
+                                                            <img src="{{asset('public/'.$result['product'][0]->path)}}" alt=""
                                                                  width=" 100px">
                                                         </div>
                                                     </div>

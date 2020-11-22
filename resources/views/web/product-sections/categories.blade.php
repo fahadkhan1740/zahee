@@ -19,7 +19,7 @@
                       <article>
                         <div class="module">
                           <div class="cat-thumb">
-                              <img class="img-fluid" src="{{asset($categories_data->path)}}" alt="{{$categories_data->name}}">
+                              <img class="img-fluid" src="{{asset('public/'.$categories_data->path)}}" alt="{{$categories_data->name}}">
                           </div>
                           <a href="{{ URL::to('/shop?category='.$categories_data->slug)}}" class="cat-title">
                             {{$categories_data->name}}

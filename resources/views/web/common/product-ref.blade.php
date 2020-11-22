@@ -3,7 +3,7 @@
         <a href="javascript:void(0)" class="heart-icon whishlist" products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
 
             <figure>
-            <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"> <img src="{{asset($products->image_path)}}" alt="{{$products->products_name}}" /></a>
+            <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"> <img src="{{asset('public/'.$products->image_path)}}" alt="{{$products->products_name}}" /></a>
             </figure>
             <div class="items-content">
                 <h6><a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"> {{$products->products_name}}</a></h6>

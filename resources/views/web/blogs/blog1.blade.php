@@ -12,7 +12,7 @@
   						 <div class="col-12 col-sm-12 col-md-6">
   								 <div class="blog">
   									 <div class="blog-thumbnail">
-  										 <img class="img-thumbnail" src="{{asset($news_data->image_path)}}" width="100%">
+  										 <img class="img-thumbnail" src="{{asset('public/'.$news_data->image_path)}}" width="100%">
   										 @if($news_data->is_feature==1)
   										 <div class="badge badge-primary"><span>@lang('website.Featured')</span></div>
   										 @endif
@@ -41,7 +41,7 @@
   					 </div>
   					  @foreach($result['commonContent']['featuredNews']['news_data'] as $key=>$news_data)
   					 <div class="media">
-  							 <img src="{{asset($news_data->image_path)}}" alt="John Doe" class=" mt-1" style="width:68px;height:68px;">
+  							 <img src="{{asset('public/'.$news_data->image_path)}}" alt="John Doe" class=" mt-1" style="width:68px;height:68px;">
   							 <div class="media-body">
                   <a href="{{ URL::to('/news-detail/'.$news_data->news_slug)}}">
   								 <h4>{{$news_data->news_name}}</h4>

@@ -9,7 +9,7 @@
                @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                   @if($homeBanners->type==6)
               <figure class="banner-image ">
-                <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset($homeBanners->path)}}" alt="Banner Image"></a>
+                <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public/'.$homeBanners->path)}}" alt="Banner Image"></a>
               </figure>
               @endif
              @endforeach
@@ -20,7 +20,7 @@
                    @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                       @if($homeBanners->type==8)
                   <figure class="banner-image ">
-                    <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset($homeBanners->path)}}" alt="Banner Image"></a>
+                    <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public/'.$homeBanners->path)}}" alt="Banner Image"></a>
                   </figure>
                   @endif
                  @endforeach
@@ -31,7 +31,7 @@
                    @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                       @if($homeBanners->type==9)
                   <figure class="banner-image ">
-                    <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset($homeBanners->path)}}" alt="Banner Image"></a>
+                    <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public/'.$homeBanners->path)}}" alt="Banner Image"></a>
                   </figure>
                   @endif
                  @endforeach
@@ -44,7 +44,7 @@
                @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                   @if($homeBanners->type==7)
               <figure class="banner-image banner-column-5">
-                <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset($homeBanners->path)}}" alt="Banner Image"></a>
+                <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('public/'.$homeBanners->path)}}" alt="Banner Image"></a>
               </figure>
               @endif
              @endforeach

@@ -360,7 +360,7 @@
                                                            value="{{$products->customers_basket_id}}">
                                                     <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}"
                                                        class="cart-thumb">
-                                                        <img class="img-fluid" src="{{asset($products->image_path)}}"
+                                                        <img class="img-fluid" src="{{asset('public/'.$products->image_path)}}"
                                                              alt="{{$products->products_name}}" alt="">
                                                     </a>
                                                 </td>
