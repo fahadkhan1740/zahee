@@ -60,7 +60,7 @@
                         <tr>
                             <td>{{ $sliders->sliders_id }}</td>
                             <td>{{ $sliders->sliders_title }}</td>
-                            <td><img src="{{asset('public/'.$sliders->path)}}" alt="" width=" 100px"></td>
+                            <td><img src="{{asset(''.$sliders->path)}}" alt="" width=" 100px"></td>
                             <td><strong>{{ trans('labels.AddedDate') }}: </strong> {{ date('d M, Y', strtotime($sliders->date_added)) }}<br>
                             <strong>{{ trans('labels.ModifiedDate') }}: </strong>@if(!empty($sliders->date_status_change)) {{ date('d M, Y', strtotime($sliders->date_status_change)) }}  @endif<br>
                             <strong>{{ trans('labels.ExpiryDate') }}: </strong>@if(!empty($sliders->expires_date)) {{ date('d M, Y', strtotime($sliders->expires_date)) }}  @endif</td>

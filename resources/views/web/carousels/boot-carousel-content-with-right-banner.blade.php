@@ -8,15 +8,15 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <figure class="figure-banner" style="background-image: url('public/web/images/cus/banner-slide-1.jpg');"></figure>
+                <figure class="figure-banner" style="background-image: url('web/images/cus/banner-slide-1.jpg');"></figure>
               </div>
 
               <div class="carousel-item ">
-                <figure class="figure-banner" style="background-image: url('public/web/images/cus/banner-slide-1.jpg');"></figure>
+                <figure class="figure-banner" style="background-image: url('web/images/cus/banner-slide-1.jpg');"></figure>
               </div>
 
               <div class="carousel-item ">
-                <figure class="figure-banner" style="background-image: url('public/web/images/cus/banner-slide-1.jpg');"></figure>
+                <figure class="figure-banner" style="background-image: url('web/images/cus/banner-slide-1.jpg');"></figure>
               </div>
             </div>
 

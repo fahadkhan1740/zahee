@@ -73,7 +73,7 @@
     <nav class="navbar navbar-expand-md">
         <div class="container">
             <div class="logo-wrap">
-                <a href="{{ URL::to('/')}}" class="site-logo"><img src="{{asset('public/web/images/cus/logo.png')}}" alt="logo1.png" /></a>
+                <a href="{{ URL::to('/')}}" class="site-logo"><img src="{{asset('web/images/cus/logo.png')}}" alt="logo1.png" /></a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

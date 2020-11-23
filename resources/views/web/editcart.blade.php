@@ -59,7 +59,7 @@
 
                                                              @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                                           <div class="carousel-item  @if($key==0) active @endif">
-                                                            <img width="100%" class="first-slide"  src="{{asset('public/'.$images->image_path) }}" width="100%" alt="First slide">
+                                                            <img width="100%" class="first-slide"  src="{{asset(''.$images->image_path) }}" width="100%" alt="First slide">
                                                             </a>
                                                           </div>
 
@@ -285,7 +285,7 @@
                                       <div class="icon" data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i></div>
                                       <a href="compare.html" class="icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
                                     </div>
-                                  <img class="img-fluid" src="{{asset('public/'.$products->image_path)}}" alt="{{$products->products_name}}">
+                                  <img class="img-fluid" src="{{asset(''.$products->image_path)}}" alt="{{$products->products_name}}">
                                </div>
                                <?php
                                    if(!empty($products->discount_price)){

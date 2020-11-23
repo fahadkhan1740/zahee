@@ -12,7 +12,7 @@
         <div class="col-md-12">
             <figure>
                 <a href="{{ URL::to('/shop?load_products=1&type=trends&limit=15')}}">
-                    <img src="{{asset('public/'.$result['commonContent']['trend_image'][0]->path)}}" alt="placeholder"/>
+                    <img src="{{asset(''.$result['commonContent']['trend_image'][0]->path)}}" alt="placeholder"/>
                 </a>
             </figure>
         </div>
@@ -77,7 +77,7 @@
 
                         <figure>
                             <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
-                                <img src="{{asset('public/'.$products->image_path)}}" alt="{{$products->products_name}}"/>
+                                <img src="{{asset(''.$products->image_path)}}" alt="{{$products->products_name}}"/>
                             </a>
                         </figure>
                         <div class="items-content">
@@ -278,7 +278,7 @@
                            products_id="{{$products->products_id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
                         <figure>
                             <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}">
-                                <img src="{{asset('public/'.$products->image_path)}}" alt="{{$products->products_name}}"/>
+                                <img src="{{asset(''.$products->image_path)}}" alt="{{$products->products_name}}"/>
                             </a>
                         </figure>
                         <div class="items-content">

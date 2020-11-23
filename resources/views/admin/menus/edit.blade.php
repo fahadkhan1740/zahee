@@ -190,7 +190,7 @@
         </section>
         <!-- /.content -->
     </div>
-    <script src="{!! asset('public/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
+    <script src="{!! asset('plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
     <script type="text/javascript">
         $(function () {
 

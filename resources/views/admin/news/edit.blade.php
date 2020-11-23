@@ -116,7 +116,7 @@
                                                                     <select class="image-picker show-html " name="image_id" id="select_img">
                                                                         <option value=""></option>
                                                                         @foreach($allimage as $key=>$image)
-                                                                        <option data-img-src="{{asset('public/'.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                        <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                         @endforeach
                                                                     </select>
                                                                     @endif
@@ -148,7 +148,7 @@
                                                 <div class="col-sm-10 col-md-4">
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
                                                     {!! Form::hidden('oldImage',  $result['news'][0]->news_image , array('id'=>'oldImage')) !!}
-                                                    <img src="{{asset('public/'.$result['news'][0]->path)}}" alt="" width=" 100px">
+                                                    <img src="{{asset(''.$result['news'][0]->path)}}" alt="" width=" 100px">
                                                 </div>
                                             </div>
 
@@ -202,7 +202,7 @@
         </section>
         <!-- /.content -->
     </div>
-    <script src="{!! asset('public/admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
+    <script src="{!! asset('admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
     <script type="text/javascript">
         $(function () {
 

@@ -10,7 +10,7 @@
                                 @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                     @if($images->image_type == 'ACTUAL')
                                         <div class="items">
-                                            <img src="{{asset('public/'.$images->image_path) }}" alt="Zoom Image"/>
+                                            <img src="{{asset(''.$images->image_path) }}" alt="Zoom Image"/>
                                         </div>
                                     @endif
                                 @endforeach
@@ -19,7 +19,7 @@
                                 @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                                     @if($images->image_type == 'ACTUAL')
                                         <div class="items">
-                                            <img src="{{asset('public/'.$images->image_path) }}" alt="Zoom Image"/>
+                                            <img src="{{asset(''.$images->image_path) }}" alt="Zoom Image"/>
                                         </div>
                                     @endif
                                 @endforeach
@@ -292,7 +292,7 @@
                                                             <a href="mailto:?subject=I ♥ this product on ZaaHee!&amp;body=Check out this amazing product {{$result['detail']['product_data'][0]->products_name}} in Zaahee Here is the link:  {{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}"
                                                                title="Share by Email">
                                                                 <img class="share-img"
-                                                                     src="{{asset('public/web/images/cus/email.svg')}}"/>
+                                                                     src="{{asset('web/images/cus/email.svg')}}"/>
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
@@ -302,33 +302,33 @@
                                                                share_url="{{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}"
                                                                target="_blank">
                                                                 <img class="share-img"
-                                                                     src="{{asset('public/web/images/cus/fb.svg')}}"/>
+                                                                     src="{{asset('web/images/cus/fb.svg')}}"/>
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="https://t.me/share/url?url={{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}&text={{$result['detail']['product_data'][0]->products_name}}"
                                                                target="_blank">
                                                                 <img class="share-img"
-                                                                     src="{{asset('public/web/images/cus/telegram.svg')}}"/>
+                                                                     src="{{asset('web/images/cus/telegram.svg')}}"/>
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="https://twitter.com/intent/tweet?url={{URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}"
                                                                target="_blank">
                                                                 <img class="share-img"
-                                                                     src="{{asset('public/web/images/cus/twitter.svg')}}"/>
+                                                                     src="{{asset('web/images/cus/twitter.svg')}}"/>
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="javascript:void(0)">
                                                                 <img class="share-img"
-                                                                     src="{{asset('public/web/images/cus/whatsapp.svg')}}"/>
+                                                                     src="{{asset('web/images/cus/whatsapp.svg')}}"/>
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <a href="javascript:void(0)">
                                                                 <img class="share-img"
-                                                                     src="{{asset('public/web/images/cus/instagram.svg')}}"/>
+                                                                     src="{{asset('web/images/cus/instagram.svg')}}"/>
                                                             </a>
                                                         </li>
 

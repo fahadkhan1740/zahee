@@ -100,7 +100,7 @@
                                                                     <select class="image-picker show-html " name="image_id" id="select_img">
                                                                         <option value=""></option>
                                                                         @foreach($allimage as $key=>$image)
-                                                                          <option data-img-src="{{asset('public/'.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
+                                                                          <option data-img-src="{{asset(''.$image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
                                                                         @endforeach
                                                                     </select>
                                                                     @endif
@@ -181,7 +181,7 @@
         </section>
         <!-- /.content -->
     </div>
-    <script src="{!! asset('public/admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
+    <script src="{!! asset('admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
     <script type="text/javascript">
         $(function () {
 

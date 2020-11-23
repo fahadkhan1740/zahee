@@ -46,7 +46,7 @@
 
                                                 <tr>
                                                     <td>{{ $lowQunatityProducts['products_id'] }}</td>
-                                                    <td><img src="{{asset('public//'.$lowQunatityProducts['products_image'])}}"
+                                                    <td><img src="{{asset('/'.$lowQunatityProducts['products_image'])}}"
                                                              alt="" width=" 100px" height="100px"></td>
                                                     <td>{{$lowQunatityProducts['categories_name']}}</td>
                                                     <td width="45%">

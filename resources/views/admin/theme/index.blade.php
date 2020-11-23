@@ -107,8 +107,8 @@
                                                 </select>
                                                 <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.cart') }}</span>
                                                 <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
-                                                <img id="cart_image1" style="display: none" width="350px;" src="{{asset('public/images/prototypes/cart1.png')}}" />
-                                                <img id="cart_image2"  style="display: none" width="350px;" src="{{asset('public/images/prototypes/cart2.png')}}" />
+                                                <img id="cart_image1" style="display: none" width="350px;" src="{{asset('images/prototypes/cart1.png')}}" />
+                                                <img id="cart_image2"  style="display: none" width="350px;" src="{{asset('images/prototypes/cart2.png')}}" />
 
                                             </div>
                                         </div>
@@ -147,12 +147,12 @@
                                                 </select>
                                                 <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.detail') }}</span>
                                                 <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
-                                                <img id="detail_image1" style="display: none" width="350px;" src="{{asset('public/images/prototypes/detail1.png')}}" />
-                                                <img id="detail_image2" style="display: none" width="350px;" src="{{asset('public/images/prototypes/detail2.png')}}" />
-                                                <img id="detail_image3" style="display: none" width="350px;" src="{{asset('public/images/prototypes/detail3.png')}}" />
-                                                <img id="detail_image4" style="display: none" width="350px;" src="{{asset('public/images/prototypes/detail4.png')}}" />
-                                                <img id="detail_image5" style="display: none" width="350px;" src="{{asset('public/images/prototypes/detail5.png')}}" />
-                                                <img id="detail_image6" style="display: none" width="350px;" src="{{asset('public/images/prototypes/detail6.png')}}" />
+                                                <img id="detail_image1" style="display: none" width="350px;" src="{{asset('images/prototypes/detail1.png')}}" />
+                                                <img id="detail_image2" style="display: none" width="350px;" src="{{asset('images/prototypes/detail2.png')}}" />
+                                                <img id="detail_image3" style="display: none" width="350px;" src="{{asset('images/prototypes/detail3.png')}}" />
+                                                <img id="detail_image4" style="display: none" width="350px;" src="{{asset('images/prototypes/detail4.png')}}" />
+                                                <img id="detail_image5" style="display: none" width="350px;" src="{{asset('images/prototypes/detail5.png')}}" />
+                                                <img id="detail_image6" style="display: none" width="350px;" src="{{asset('images/prototypes/detail6.png')}}" />
 
                                             </div>
                                         </div>
@@ -172,11 +172,11 @@
                                                 </select>
                                                 <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.shop') }}</span>
                                                 <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
-                                                <img id="shop_image1" style="display: none" width="350px;" src="{{asset('public/images/prototypes/shop1.png')}}" />
-                                                <img id="shop_image2" style="display: none" width="350px;" src="{{asset('public/images/prototypes/shop2.png')}}" />
-                                                <img id="shop_image3" style="display: none" width="350px;" src="{{asset('public/images/prototypes/shop3.png')}}" />
-                                                <img id="shop_image4" style="display: none" width="350px;" src="{{asset('public/images/prototypes/shop4.png')}}" />
-                                                <img id="shop_image5" style="display: none" width="350px;" src="{{asset('public/images/prototypes/shop5.png')}}" />
+                                                <img id="shop_image1" style="display: none" width="350px;" src="{{asset('images/prototypes/shop1.png')}}" />
+                                                <img id="shop_image2" style="display: none" width="350px;" src="{{asset('images/prototypes/shop2.png')}}" />
+                                                <img id="shop_image3" style="display: none" width="350px;" src="{{asset('images/prototypes/shop3.png')}}" />
+                                                <img id="shop_image4" style="display: none" width="350px;" src="{{asset('images/prototypes/shop4.png')}}" />
+                                                <img id="shop_image5" style="display: none" width="350px;" src="{{asset('images/prototypes/shop5.png')}}" />
 
                                             </div>
                                         </div>
@@ -196,8 +196,8 @@
                                                 </select>
                                                 <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.contact') }}</span>
                                                 <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
-                                                <img id="contact_image1" style="display: none" width="350px;" src="{{asset('public/images/prototypes/contact1.png')}}" />
-                                                <img id="contact_image2"  style="display: none" width="350px;" src="{{asset('public/images/prototypes/contact2.png')}}" />
+                                                <img id="contact_image1" style="display: none" width="350px;" src="{{asset('images/prototypes/contact1.png')}}" />
+                                                <img id="contact_image2"  style="display: none" width="350px;" src="{{asset('images/prototypes/contact2.png')}}" />
                                             </div>
                                         </div>
                                         @endif
@@ -281,5 +281,5 @@
         <!-- /.row -->
     </section>
 </div>
-<script src="{{asset('public/js/app.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
 @endsection

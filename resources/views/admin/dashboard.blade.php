@@ -269,7 +269,7 @@
                                             @foreach ($result['customers']  as $customer)
                                                     @if($i<=21)
                                                         <li>
-                                                            <img src="{{asset('public/images/user.png')}}">
+                                                            <img src="{{asset('images/user.png')}}">
                                                             <a class="users-list-name" href="{{ url('admin/customers/edit/') }}/{{ $customer->id }}">{{ $customer->first_name }} {{ $customer->last_name }}</a>
                                                             <span class="users-list-date">{{$customer->created_at}}</span>
                                                         </li>
@@ -445,7 +445,7 @@
                                 @foreach($result['recentProducts'] as $recentProducts)
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="{{asset('public/'.$recentProducts->products_image)}}" alt="" width=" 100px" height="100px">
+                                            <img src="{{asset(''.$recentProducts->products_image)}}" alt="" width=" 100px" height="100px">
                                         </div>
                                         <div class="product-info">
                                             <a href="{{ URL::to('admin/products/edit') }}/{{ $recentProducts->products_id }}" class="product-title">{{ $recentProducts->products_name }}
@@ -470,7 +470,7 @@
         </section>
         <!-- /.content -->
     </div>
-    {{--<script src="{!! asset('public/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>--}}
+    {{--<script src="{!! asset('plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>--}}
 
-    {{--<script src="{!! asset('public/dist/js/pages/dashboard2.js') !!}"></script>--}}
+    {{--<script src="{!! asset('dist/js/pages/dashboard2.js') !!}"></script>--}}
 @endsection

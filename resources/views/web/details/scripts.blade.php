@@ -12,11 +12,11 @@ if($default_currency->id == Session::get('currency_id')){
 <!-- Include js plugin -->
 <!-- Include js plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-<script type="text/javascript" src="{{asset('public/web/js/popper.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/popper.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="{{asset('public/web/js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('public/web/js/countDown.min.js')}}"></script>
+<script src="{{asset('web/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('web/js/countDown.min.js')}}"></script>
 
 
 
@@ -25,11 +25,11 @@ if($default_currency->id == Session::get('currency_id')){
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 
-<script src="{{asset('public/web/js/slick.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('public/web/api/fancybox/source/jquery.fancybox.js')}}"></script>
-<script type="text/javascript" src="{{asset('public/web/js/aos.js')}}"></script>
-<script type="text/javascript" src="{{asset('public/web/js/slick.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('public/web/js/custom.js')}}"></script>
+<script src="{{asset('web/js/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/api/fancybox/source/jquery.fancybox.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/aos.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/js/custom.js')}}"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -882,11 +882,11 @@ function share_fb(url) {
 
 
 @if(session('direction') == 'rtl')
-<script src="{{asset('public/web/js/rtl_scripts.js')}}"></script>
+<script src="{{asset('web/js/rtl_scripts.js')}}"></script>
 @else
-<script src="{{asset('public/web/js/scripts.js')}}"></script>
+<script src="{{asset('web/js/scripts.js')}}"></script>
 @endif
-<!-- <script src="{{asset('public/web/js/setup.js')}}"></script> -->
+<!-- <script src="{{asset('web/js/setup.js')}}"></script> -->
 
 <script>
 

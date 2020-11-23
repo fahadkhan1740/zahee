@@ -9,7 +9,7 @@
                             <div class="col-12 col-md-4">
                                 <figure class="banner-image ">
                                     <a href="{{ $homeBanners->banners_url}}"><img class="img-fluid"
-                                                                                  src="{{asset('public/'.$homeBanners->path)}}"
+                                                                                  src="{{asset(''.$homeBanners->path)}}"
                                                                                   alt="Banner Image"></a>
                                 </figure>
                             </div>

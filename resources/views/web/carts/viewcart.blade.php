@@ -202,7 +202,7 @@
                                     <div class="cart-item">
                                         <div class="cart-item-col cart-item-center">
                                             <figure>
-                                                <img src="{{asset('public/web/images/cus/empty-cart.png')}}" alt="empty-cart"
+                                                <img src="{{asset('web/images/cus/empty-cart.png')}}" alt="empty-cart"
                                                      style="width:15%">
                                                 <figcaption>@lang('website.No Product has been added to your Cart')</figcaption>
                                             </figure>

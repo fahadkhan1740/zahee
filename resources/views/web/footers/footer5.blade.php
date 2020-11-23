@@ -15,7 +15,7 @@
                   <div class="col-6 pr-0">
                     <a href="{{ URL::to('/news-detail/'.$news_data->news_slug)}}">
                     <div class="media ">
-                      <img src="{{asset('public/'.$news_data->image_path)}}" alt="Woman holding brown and pink floral leather bag" class="margin-d2" style="width:60px;">
+                      <img src="{{asset(''.$news_data->image_path)}}" alt="Woman holding brown and pink floral leather bag" class="margin-d2" style="width:60px;">
                       <div class="media-body">
                         <h2>{{$news_data->news_name}}</h2>
                         <small>@php echo \Carbon\Carbon::createFromTimeStamp(strtotime($news_data->created_at))->diffForHumans(); @endphp</small>

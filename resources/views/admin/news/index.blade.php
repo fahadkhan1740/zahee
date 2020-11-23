@@ -80,7 +80,7 @@
 
                                                 <tr>
                                                     <td>{{ $new->news_id }}</td>
-                                                    <td><img src="{{asset('public/'.$new->path)}}" alt="" width=" 100px" height="100px"></td>
+                                                    <td><img src="{{asset(''.$new->path)}}" alt="" width=" 100px" height="100px"></td>
                                                     <td>
                                                         <strong>{{ $new->news_name }}</strong>
                                                     </td>
