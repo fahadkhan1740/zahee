@@ -5,7 +5,7 @@
                 <div class="col-md-3">
                     <div class="footer-col footer-logo-wrap">
                         <a href="#" class="footer-logo "><img
-                                src="https://zaahee.shop/public/web/images/cus/footer-logo.png" alt="logo.png"/></a>
+                                src="https://zaahee.shop/web/images/cus/footer-logo.png" alt="logo.png"/></a>
 
 
                         <div class="sm-icon-wrap @if(app()->getLocale() === 'ar') pull-right @endif">
@@ -20,7 +20,7 @@
                                 <!--<li><a href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a></li> -->
                                 <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                 <li>
-                                    <a href="#"><img src="https://zaahee.shop/public/web/images/cus/titok.png"
+                                    <a href="#"><img src="https://zaahee.shop/web/images/cus/titok.png"
                                                      alt="titok.png"/></a>
                                 </li>
                             </ul>
@@ -46,9 +46,9 @@
 
                         <div class="store-paymate-wrap">
                             <div class="store-wrap">
-                                <a href="#"><img src="https://zaahee.shop/public/web/images/cus/store-1.png"
+                                <a href="#"><img src="https://zaahee.shop/web/images/cus/store-1.png"
                                                  alt="store-1.png"/></a>
-                                <a href="#"><img src="https://zaahee.shop/public/web/images/cus/store-2.png"
+                                <a href="#"><img src="https://zaahee.shop/web/images/cus/store-2.png"
                                                  alt="store-2.png"/></a>
                             </div>
                             <div class="payment-wrap">
@@ -56,23 +56,23 @@
 
                                 <ul>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-1.png"
+                                        <a href="#"><img src="https://zaahee.shop/web/images/cus/card-1.png"
                                                          alt="card-1.png"/></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-2.png"
+                                        <a href="#"><img src="https://zaahee.shop/web/images/cus/card-2.png"
                                                          alt="card-2.png"/></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-3.png"
+                                        <a href="#"><img src="https://zaahee.shop/web/images/cus/card-3.png"
                                                          alt="card-3.png"/></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/card-4.png"
+                                        <a href="#"><img src="https://zaahee.shop/web/images/cus/card-4.png"
                                                          alt="card-4.png"/></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="https://zaahee.shop/public/web/images/cus/money-01.png"
+                                        <a href="#"><img src="https://zaahee.shop/web/images/cus/money-01.png"
                                                          alt="money-01.png"/></a>
                                     </li>
                                 </ul>

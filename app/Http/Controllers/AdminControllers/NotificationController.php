@@ -159,7 +159,7 @@ class NotificationController extends Controller
 
                 // dd($imageDetail[0]->path);
 
-                $websiteURL =  "https://" . $_SERVER['SERVER_NAME'] .'/public/'. $imageDetail[0]->path;
+                $websiteURL =  "https://" . $_SERVER['SERVER_NAME'] .'/'. $imageDetail[0]->path;
             }else{
                 $websiteURL = '';
             }

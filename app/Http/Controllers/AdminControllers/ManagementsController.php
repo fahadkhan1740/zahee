@@ -172,7 +172,7 @@ class ManagementsController extends Controller
         return redirect()->back()->with('error', Lang::get('labels.The file you are trying to upload is not a .zip file. Please try again.'));
       }
 
-      //$target_path = "C:/www/working/laravel/version/public/".$filename;  // change this to the correct site path
+      //$target_path = "C:/www/working/laravel/version/".$filename;  // change this to the correct site path
       $target_path = $source;
       if(move_uploaded_file($source, $target_path)) {
         $zip = new ZipArchive();
@@ -264,7 +264,7 @@ class ManagementsController extends Controller
         return redirect()->back()->with('error', Lang::get('labels.The file you are trying to upload is not a .zip file. Please try again.'));
       }
 
-      //$target_path = "C:/www/working/laravel/version/public/".$filename;  // change this to the correct site path
+      //$target_path = "C:/www/working/laravel/version/".$filename;  // change this to the correct site path
       $target_path = $source;
       if(move_uploaded_file($source, $target_path)) {
         $zip = new ZipArchive();
@@ -408,7 +408,7 @@ class ManagementsController extends Controller
       return redirect()->back()->with('error', Lang::get('labels.The file you are trying to upload is not a .zip file. Please try again.'));
     }
 
-    //$target_path = "C:/www/working/laravel/version/public/".$filename;  // change this to the correct site path
+    //$target_path = "C:/www/working/laravel/version/".$filename;  // change this to the correct site path
     $target_path = $source;
     if(move_uploaded_file($source, $target_path)) {
       $zip = new ZipArchive();
