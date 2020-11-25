@@ -1,19 +1,16 @@
 <?php
+
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Models\Core\Customers;
 use App\Models\Core\Images;
 use App\Models\Core\Setting;
-use App\Models\Core\Languages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Exception;
-use Kyslik\ColumnSortable\Sortable;
 
 class CustomersController extends Controller
 {
@@ -33,10 +30,13 @@ class CustomersController extends Controller
 
         $result = array();
         $index = 0;
-        foreach($customers as $customers_data){
+        foreach ($customers as $customers_data) {
             array_push($result, $customers_data);
 
-            $devices = DB::table('devices')->where('user_id','=',$customers_data->id)->orderBy('created_at','DESC')->take(1)->get();
+            $devices = DB::table('devices')->where('user_id', '=', $customers_data->id)->orderBy(
+                'created_at',
+                'DESC'
+            )->take(1)->get();
             $result[$index]->devices = $devices;
             $index++;
         }
@@ -63,9 +63,8 @@ class CustomersController extends Controller
         $customerData['countries'] = $this->Customers->countries();
         $customerData['message'] = $message;
         $customerData['errorMessage'] = $errorMessage;
-        return view("admin.customers.add", $title)->with('customers', $customerData)->with('allimage',$allimage);
+        return view("admin.customers.add", $title)->with('customers', $customerData)->with('allimage', $allimage);
     }
-
 
     //add addcustomers data and redirect to address
     public function insert(Request $request)
@@ -93,22 +92,23 @@ class CustomersController extends Controller
             'isActive' => 'required',
         ]);
 
-
-        if (count($existEmail)> 0 ) {
+        if (count($existEmail) > 0) {
             $messages = Lang::get("labels.Email address already exist");
             return Redirect::back()->withErrors($messages)->withInput($request->all());
-        } else {
-            $customers_id = $this->Customers->insert($request);
-            return redirect('admin/customers/address/display/' . $customers_id)->with('update', 'Customer has been created successfully!');
         }
+        $customers_id = $this->Customers->insert($request);
+        return redirect('admin/customers/address/display/'.$customers_id)->with(
+            'update',
+            'Customer has been created successfully!'
+        );
     }
 
-    public function diplayaddress(Request $request){
-
+    public function diplayaddress(Request $request)
+    {
         $title = array('pageTitle' => Lang::get("labels.AddAddress"));
 
-        $language_id   				=   $request->language_id;
-        $id            				=   $request->id;
+        $language_id = $request->language_id;
+        $id = $request->id;
 
         $customerData = array();
         $message = array();
@@ -123,158 +123,167 @@ class CustomersController extends Controller
         $customerData['countries'] = $countries;
         $customerData['user_id'] = $id;
 
-        return view("admin.customers.address.index",$title)->with('data', $customerData);
+        return view("admin.customers.address.index", $title)->with('data', $customerData);
     }
-
 
     //add Customer address
-    public function addcustomeraddress(Request $request){
-      $customer_addresses = $this->Customers->addcustomeraddress($request);
-      return $customer_addresses;
+    public function addcustomeraddress(Request $request)
+    {
+        $customer_addresses = $this->Customers->addcustomeraddress($request);
+        return $customer_addresses;
     }
 
-    public function editaddress(Request $request){
+    public function editaddress(Request $request)
+    {
+        $user_id = $request->user_id;
+        $address_book_id = $request->address_book_id;
 
-      $user_id                 =   $request->user_id;
-      $address_book_id         =   $request->address_book_id;
+        $customer_addresses = $this->Customers->addressBook($address_book_id);
+        $countries = $this->Customers->countries();
+        ;
+        $customers = $this->Customers->checkdefualtaddress($address_book_id);
 
-      $customer_addresses = $this->Customers->addressBook($address_book_id);
-      $countries = $this->Customers->countries();;
-      $customers = $this->Customers->checkdefualtaddress($address_book_id);
+        $customerData['user_id'] = $user_id;
+        $customerData['customer_addresses'] = $customer_addresses;
+        $customerData['countries'] = $countries;
+        $customerData['customers'] = $customers;
 
-      $customerData['user_id'] = $user_id;
-      $customerData['customer_addresses'] = $customer_addresses;
-      $customerData['countries'] = $countries;
-      $customerData['customers'] = $customers;
-
-      return view("admin/customers/address/editaddress")->with('data', $customerData);
+        return view("admin/customers/address/editaddress")->with('data', $customerData);
     }
 
     //update Customers address
-    public function updateaddress(Request $request){
-      $customer_addresses = $this->Customers->updateaddress($request);
-      return ($customer_addresses);
+    public function updateaddress(Request $request)
+    {
+        $customer_addresses = $this->Customers->updateaddress($request);
+        return ($customer_addresses);
     }
 
-    public function deleteAddress(Request $request){
-      $customer_addresses = $this->Customers->deleteAddresses($request);
-      return redirect()->back()->withErrors([Lang::get("labels.Delete Address Text")]);
+    public function deleteAddress(Request $request)
+    {
+        $customer_addresses = $this->Customers->deleteAddresses($request);
+        return redirect()->back()->withErrors([Lang::get("labels.Delete Address Text")]);
     }
 
     //editcustomers data and redirect to address
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
+        $images = new Images;
+        $allimage = $images->getimages();
+        $title = array('pageTitle' => Lang::get("labels.EditCustomer"));
+        $language_id = '1';
+        $id = $request->id;
 
-      $images           = new Images;
-      $allimage         = $images->getimages();
-      $title            = array('pageTitle' => Lang::get("labels.EditCustomer"));
-      $language_id      =   '1';
-      $id               =   $request->id;
+        $customerData = array();
+        $message = array();
+        $errorMessage = array();
+        $customers = $this->Customers->edit($id);
 
-      $customerData = array();
-      $message = array();
-      $errorMessage = array();
-      $customers = $this->Customers->edit($id);
+        $customerData['message'] = $message;
+        $customerData['errorMessage'] = $errorMessage;
+        $customerData['countries'] = $this->Customers->countries();
+        $customerData['customers'] = $customers;
 
-      $customerData['message'] = $message;
-      $customerData['errorMessage'] = $errorMessage;
-      $customerData['countries'] = $this->Customers->countries();
-      $customerData['customers'] = $customers;
-
-      return view("admin.customers.edit",$title)->with('data', $customerData)->with('allimage', $allimage);
+        return view("admin.customers.edit", $title)->with('data', $customerData)->with('allimage', $allimage);
     }
 
     //add addcustomers data and redirect to address
-    public function update(Request $request){
-        $language_id  =   '1';
-        $user_id				  =	$request->customers_id;
+    public function update(Request $request)
+    {
+        $language_id = '1';
+        $user_id = $request->customers_id;
 
         $customerData = array();
         $message = array();
         $errorMessage = array();
 
         //get function from other controller
-        if($request->image_id!==null){
+        if ($request->image_id !== null) {
             $customers_picture = $request->image_id;
-        }	else{
+        } else {
             $customers_picture = $request->oldImage;
         }
 
-        if($request->image_id){
+        if ($request->image_id) {
             $uploadImage = $request->image_id;
-            $uploadImage = DB::table('image_categories')->where('image_id',$uploadImage)->select('path')->first();
+            $uploadImage = DB::table('image_categories')->where('image_id', $uploadImage)->select('path')->first();
             $customers_picture = $uploadImage->path;
-        }	else{
+        } else {
             $customers_picture = $request->oldImage;
         }
 
         $user_data = array(
-            'gender'   		 	=>   $request->gender,
-            'first_name'		=>   $request->first_name,
-            'last_name'		 	=>   $request->last_name,
-            'dob'	 			 	  =>	 $request->dob,
-            'email'	 		    =>   $request->email,
-            'phone'	 	      =>	 $request->phone,
-            'status'		    =>   $request->status,
-            'avatar'	 		  =>	 $customers_picture,
-            'updated_at'    => date('Y-m-d H:i:s'),
+            'gender' => $request->gender,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'dob' => $request->dob,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'status' => $request->status,
+            'avatar' => $customers_picture,
+            'updated_at' => date('Y-m-d H:i:s'),
         );
         $customer_data = array(
-          'customers_newsletter'   		 	=>   0,
-          'updated_at'    => date('Y-m-d H:i:s'),
+            'customers_newsletter' => 0,
+            'updated_at' => date('Y-m-d H:i:s'),
         );
 
-
-        if($request->changePassword == 'yes'){
+        if ($request->changePassword == 'yes') {
             $user_data['password'] = Hash::make($request->password);
         }
 
         //check email already exists
-        if($request->old_email_address!=$request->email){
+        if ($request->old_email_address != $request->email) {
             $existEmail = $this->Customers->extendemail($request);
-            if(count($existEmail)>0){
+            if (count($existEmail) > 0) {
                 $messages = Lang::get("labels.Email address already exist");
                 return Redirect::back()->withErrors($messages)->withInput($request->all());
-            }else{
-               $this->Customers->updaterecord($customer_data,$user_id,$user_data);
-               return redirect('admin/customers/address/display/'.$user_id);
             }
-        }else{
-            $this->Customers->updaterecord($customer_data,$user_id,$user_data);
+            $this->Customers->updaterecord($customer_data, $user_id, $user_data);
             return redirect('admin/customers/address/display/'.$user_id);
         }
+        $this->Customers->updaterecord($customer_data, $user_id, $user_data);
+        return redirect('admin/customers/address/display/'.$user_id);
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
 //        dd($request->users_id);
-      $this->Customers->destroyrecord($request->users_id);
-      return redirect()->back()->withErrors([Lang::get("labels.DeleteCustomerMessage")]);
+        $this->Customers->destroyrecord($request->users_id);
+        return redirect()->back()->withErrors([Lang::get("labels.DeleteCustomerMessage")]);
     }
 
-    public function filter(Request $request){
-      $filter    = $request->FilterBy;
-      $parameter = $request->parameter;
+    public function filter(Request $request)
+    {
+        $filter = $request->FilterBy;
+        $parameter = $request->parameter;
 
-      $title = array('pageTitle' => Lang::get("labels.ListingCustomers"));
-      $customers  = $this->Customers->filter($request);
+        $title = array('pageTitle' => Lang::get("labels.ListingCustomers"));
+        $customers = $this->Customers->filter($request);
 
-      $result = array();
-      $index = 0;
-      foreach($customers as $customers_data){
-          array_push($result, $customers_data);
+        $result = array();
+        $index = 0;
+        foreach ($customers as $customers_data) {
+            array_push($result, $customers_data);
 
-          $devices = DB::table('devices')->where('user_id','=',$customers_data->id)->orderBy('created_at','DESC')->take(1)->get();
-          $result[$index]->devices = $devices;
-          $index++;
-      }
+            $devices = DB::table('devices')->where('user_id', '=', $customers_data->id)->orderBy(
+                'created_at',
+                'DESC'
+            )->take(1)->get();
+            $result[$index]->devices = $devices;
+            $index++;
+        }
 
-      $customerData = array();
-      $message = array();
-      $errorMessage = array();
+        $customerData = array();
+        $message = array();
+        $errorMessage = array();
 
-      $customerData['message'] = $message;
-      $customerData['errorMessage'] = $errorMessage;
-      $customerData['result'] = $customers;
+        $customerData['message'] = $message;
+        $customerData['errorMessage'] = $errorMessage;
+        $customerData['result'] = $customers;
 
-      return view("admin.customers.index",$title)->with('customers', $customerData)->with('filter',$filter)->with('parameter',$parameter);
+        return view("admin.customers.index", $title)->with('customers', $customerData)->with(
+            'filter',
+            $filter
+        )->with('parameter', $parameter);
     }
 }
