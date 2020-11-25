@@ -7,6 +7,11 @@
     .wrapper {
         display: none;
     }
+    @page {
+        size: auto;
+        margin-top: 0;
+        margin-bottom: 0;s
+    }
 </style>
 <body onload="window.print();">
 <div class="wrapper wrapper2">
@@ -38,8 +43,9 @@
                 </h2>
                 <h2 class="page-header" style="padding-bottom: 25px">
                     <i class="fa fa-globe"></i> {{ trans('labels.OrderID') }}# {{ $data['orders_data'][0]->orders_id }}
-                    <small class="pull-right">{{ trans('labels.OrderedDate') }}
-                        : {{ date('d-M-Y h:i A', strtotime($data['orders_data'][0]->date_purchased)) }}</small>
+                    <small class="pull-right" style="margin-right: 2rem">{{ trans('labels.OrderedDate') }}
+                        : {{ date('d-M-Y h:i A', strtotime($data['orders_data'][0]->date_purchased)) }}
+                    </small>
                 </h2>
             </div>
             <!-- /.col -->

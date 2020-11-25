@@ -806,9 +806,9 @@ class Products extends Model
                 'products_options_descriptions.options_name as products_options_name',
                 'products_options_descriptions.language_id'
             )->where(
-                    'products_options_descriptions.language_id',
-                    '1'
-                )->get();
+                'products_options_descriptions.language_id',
+                '1'
+            )->get();
 
         $result['options'] = $options;
         $options_value = DB::table('products_options_values')
