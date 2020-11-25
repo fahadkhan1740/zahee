@@ -44,7 +44,7 @@
                         <i class="fa fa-globe"></i> {{ trans('labels.OrderID') }}
                         # {{ $data['orders_data'][0]->orders_id }}
                         <small style="display: inline-block">{{ trans('labels.OrderedDate') }}
-                            : {{ date('d-M-Y', strtotime($data['orders_data'][0]->date_purchased)) }}</small>
+                            : {{ date('d-M-Y h:i A', strtotime($data['orders_data'][0]->date_purchased)) }}</small>
                         <a href="{{ URL::to('admin/orders/invoiceprint/'.$data['orders_data'][0]->orders_id)}}"
                            target="_blank" class="btn btn-default pull-right"><i
                                 class="fa fa-print"></i> {{ trans('labels.Print') }}</a>
