@@ -112,7 +112,20 @@ class OrdersController extends Controller
                                 ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                         });
                 })
-                ->select('orders_products.*', 'image_categories.path as image', 'products.products_price')
+                ->leftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+                ->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
+                ->leftJoin(
+                    'categories_description',
+                    'categories.categories_id',
+                    '=',
+                    'categories_description.categories_id'
+                )
+                ->select(
+                    'orders_products.*',
+                    'image_categories.path as image',
+                    'products.products_price',
+                    'categories_description.categories_name'
+                )
                 ->where('orders_products.orders_id', '=', $orders_id)->get();
             $i = 0;
             $total_price = 0;

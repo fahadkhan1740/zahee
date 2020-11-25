@@ -109,6 +109,7 @@
                             <th>{{ trans('labels.Qty') }}</th>
                             <th>{{ trans('labels.Image') }}</th>
                             <th>{{ trans('labels.ProductName') }}</th>
+                            <th>{{ trans('labels.Category') }}</th>
                             <th>{{ trans('labels.ProductModal') }}</th>
                             <th>{{ trans('labels.Options') }}</th>
                             <th>{{ trans('labels.Unit Price') }}</th>
@@ -128,16 +129,20 @@
                                     {{  $products->products_name }}<br>
                                 </td>
                                 <td>
+                                    {{  $products->categories_name }}
+                                </td>
+                                <td>
                                     {{  $products->products_model }}
                                 </td>
                                 <td>
-                                @foreach($products->attribute as $attributes)
+                                    @foreach($products->attribute as $attributes)
                                     <!-- <b>{{ trans('labels.Name') }}:</b> <br> -->
                                         <b>{{ $attributes->products_options }}
                                             :</b> {{ $attributes->products_options_values }}<br>
                                     <!-- <b>{{ trans('labels.Price') }}:</b> {{ $data['currency'][19]->value }}{{ $attributes->options_values_price }}<br> -->
 
-                                    @endforeach</td>
+                                    @endforeach
+                                </td>
                                 <td>{{ $data['currency'][19]->value }} {{ (float)($products->final_price/$products->products_quantity) }}</td>
                                 <td>{{ $data['currency'][19]->value }} {{ $products->final_price }}</td>
 
