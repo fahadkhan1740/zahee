@@ -29,12 +29,13 @@
                         {{ session()->get('error') }}
                     </div>
                 @endif
-
-
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
+                <h2 class="page-header" style="padding-bottom: 25px">
+                    <img src="{{ asset('web/images/cus/logo.png') }}" height="75px" alt="Zaahee Logo">
+                </h2>
                 <h2 class="page-header" style="padding-bottom: 25px">
                     <i class="fa fa-globe"></i> {{ trans('labels.OrderID') }}# {{ $data['orders_data'][0]->orders_id }}
                     <small class="pull-right">{{ trans('labels.OrderedDate') }}
