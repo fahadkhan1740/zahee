@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Http\Controllers\AdminControllers\SiteSettingController;
 use App\Http\Controllers\Controller;
 use App\Models\Core\Setting;
 use Illuminate\Http\Request;
@@ -15,13 +14,11 @@ class OrdersController extends Controller
     public function __construct(Setting $setting)
     {
         $this->myVarsetting = new SiteSettingController($setting);
-
     }
 
     //add listingOrders
     public function display()
     {
-
         $title = array('pageTitle' => Lang::get("labels.ListingOrders"));
         //$language_id                            =   $request->language_id;
         $language_id = '1';
@@ -40,25 +37,33 @@ class OrdersController extends Controller
             // $orders_products = DB::table('orders_products')->sum('final_price');
 
             $prod_name = DB::table('orders_products')
-            ->select('orders_products.*',DB::raw('sum(final_price) as final_price, orders_products.products_name'))
-            ->where('orders_products.orders_id', '=', $orders_data->orders_id)->first();
+                ->select('orders_products.*', DB::raw('sum(final_price) as final_price, orders_products.products_name'))
+                ->where('orders_products.orders_id', '=', $orders_data->orders_id)->first();
 
             $orders[$index]->customers_company = $prod_name->products_name;
             $orders[$index]->total_price = $prod_name->final_price;
 
             $orders_status_history = DB::table('orders_status_history')
-                ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-                ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+                ->LeftJoin(
+                    'orders_status',
+                    'orders_status.orders_status_id',
+                    '=',
+                    'orders_status_history.orders_status_id'
+                )
+                ->LeftJoin(
+                    'orders_status_description',
+                    'orders_status_description.orders_status_id',
+                    '=',
+                    'orders_status.orders_status_id'
+                )
                 ->select('orders_status_description.orders_status_name', 'orders_status_description.orders_status_id')
                 ->where('orders_status_description.language_id', '=', $language_id)
                 ->where('orders_id', '=', $orders_data->orders_id)
                 ->orderby('orders_status_history.date_added', 'DESC')->limit(1)->get();
 
-
             $orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
             $orders[$index]->orders_status = $orders_status_history[0]->orders_status_name;
             $index++;
-
         }
 
         $ordersData['message'] = $message;
@@ -72,7 +77,6 @@ class OrdersController extends Controller
     //view order detail
     public function vieworder(Request $request)
     {
-
         $title = array('pageTitle' => Lang::get("labels.ViewOrder"));
         $language_id = '1';
         $orders_id = $request->id;
@@ -80,14 +84,18 @@ class OrdersController extends Controller
         $message = array();
         $errorMessage = array();
 
-
         DB::table('orders')->where('orders_id', '=', $orders_id)
             ->where('customers_id', '!=', '')->update(['is_seen' => 1]);
 
         $order = DB::table('orders')
             ->LeftJoin('orders_status_history', 'orders_status_history.orders_id', '=', 'orders.orders_id')
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-            ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+            ->LeftJoin(
+                'orders_status_description',
+                'orders_status_description.orders_status_id',
+                '=',
+                'orders_status.orders_status_id'
+            )
             ->where('orders_status_description.language_id', '=', $language_id)
             ->where('orders.orders_id', '=', $orders_id)->orderby('orders_status_history.date_added', 'DESC')->get();
 
@@ -104,7 +112,7 @@ class OrdersController extends Controller
                                 ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                         });
                 })
-                ->select('orders_products.*', 'image_categories.path as image','products.products_price')
+                ->select('orders_products.*', 'image_categories.path as image', 'products.products_price')
                 ->where('orders_products.orders_id', '=', $orders_id)->get();
             $i = 0;
             $total_price = 0;
@@ -133,14 +141,24 @@ class OrdersController extends Controller
 
         $orders_status_history = DB::table('orders_status_history')
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-            ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+            ->LeftJoin(
+                'orders_status_description',
+                'orders_status_description.orders_status_id',
+                '=',
+                'orders_status.orders_status_id'
+            )
             ->where('orders_status_description.language_id', '=', $language_id)
 //            ->where('role_id', '<=', 2)
             ->orderBy('orders_status_history.date_added', 'desc')
             ->where('orders_id', '=', $orders_id)->get();
 
         $orders_status = DB::table('orders_status')
-            ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+            ->LeftJoin(
+                'orders_status_description',
+                'orders_status_description.orders_status_id',
+                '=',
+                'orders_status.orders_status_id'
+            )
             ->where('orders_status_description.language_id', '=', $language_id)->get();
 
         $ordersData['message'] = $message;
@@ -160,108 +178,120 @@ class OrdersController extends Controller
     //update order
     public function updateOrder(Request $request)
     {
+        $orders_status = $request->orders_status;
+        $comments = $request->comments;
+        $orders_id = $request->orders_id;
+        $old_orders_status = $request->old_orders_status;
+        $date_added = date('Y-m-d h:i:s');
 
-            $orders_status = $request->orders_status;
-            $comments = $request->comments;
-            $orders_id = $request->orders_id;
-            $old_orders_status = $request->old_orders_status;
-            $date_added = date('Y-m-d h:i:s');
+        //get function from other controller
 
-            //get function from other controller
+        $setting = $this->myVarsetting->getSetting();
 
-            $setting = $this->myVarsetting->getSetting();
+        $status = DB::table('orders_status')->LeftJoin(
+            'orders_status_description',
+            'orders_status_description.orders_status_id',
+            '=',
+            'orders_status.orders_status_id'
+        )
+            ->where(
+                'orders_status_description.language_id',
+                '=',
+                1
+            )->where('orders_status_description.orders_status_id', '=', $orders_status)->get();
 
-            $status = DB::table('orders_status')->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
-                ->where('orders_status_description.language_id', '=', 1)->where('orders_status_description.orders_status_id', '=', $orders_status)->get();
+        if ($old_orders_status == $orders_status) {
+            return redirect()->back()->with('error', Lang::get("labels.StatusChangeError"));
+        }
+        //orders status history
+        $orders_history_id = DB::table('orders_status_history')->insertGetId(
+            [
+                    'orders_id' => $orders_id,
+                    'orders_status_id' => $orders_status,
+                    'date_added' => $date_added,
+                    'customer_notified' => '1',
+                    'comments' => $comments,
+                ]
+        );
 
-            if ($old_orders_status == $orders_status) {
-                return redirect()->back()->with('error', Lang::get("labels.StatusChangeError"));
-            } else {
+        if ($orders_status == '2') {
+            $orders_products = DB::table('orders_products')->where('orders_id', '=', $orders_id)->get();
 
-                //orders status history
-                $orders_history_id = DB::table('orders_status_history')->insertGetId(
-                    ['orders_id' => $orders_id,
-                        'orders_status_id' => $orders_status,
-                        'date_added' => $date_added,
-                        'customer_notified' => '1',
-                        'comments' => $comments,
+            foreach ($orders_products as $products_data) {
+                DB::table('products')->where('products_id', $products_data->products_id)->update([
+                        'products_quantity' => DB::raw('products_quantity - "'.$products_data->products_quantity.'"'),
+                        'products_ordered' => DB::raw('products_ordered + 1'),
                     ]);
-
-                if ($orders_status == '2') {
-
-                    $orders_products = DB::table('orders_products')->where('orders_id', '=', $orders_id)->get();
-
-                    foreach ($orders_products as $products_data) {
-                        DB::table('products')->where('products_id', $products_data->products_id)->update([
-                            'products_quantity' => DB::raw('products_quantity - "' . $products_data->products_quantity . '"'),
-                            'products_ordered' => DB::raw('products_ordered + 1'),
-                        ]);
-                    }
-                }
-
-                if ($orders_status == '3') {
-
-                    $orders_products = DB::table('orders_products')->where('orders_id', '=', $orders_id)->get();
-
-                    foreach ($orders_products as $products_data) {
-
-                      $product_detail = DB::table('products')->where('products_id',$products_data->products_id)->first();
-                      //dd($product_detail);
-                      $date_added	= date('Y-m-d h:i:s');
-                      $inventory_ref_id = DB::table('inventory')->insertGetId([
-                          'products_id' => $products_data->products_id,
-                          'stock' => $products_data->products_quantity,
-                          'admin_id' => auth()->user()->id,
-                          'created_at' => $date_added,
-                          'stock_type'  			=>   'in'
-
-                      ]);
-                      //dd($product_detail);
-                      if($product_detail->products_type==1){
-                          $product_attribute = DB::table('orders_products_attributes')
-                              ->where([
-                                  ['orders_products_id', '=', $products_data->orders_products_id],
-                                  ['orders_id', '=', $products_data->orders_id],
-                              ])
-                              ->get();
-
-                              foreach($product_attribute as $attribute){
-                                //dd($attribute->products_options,$attribute->products_options_values);
-                                $prodocuts_attributes = DB::table('products_attributes')
-                                  ->join('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_attributes.options_id')
-                                  ->join('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'options_values_id')
-                                  ->where('products_options_values_descriptions.options_values_name', $attribute->products_options_values)
-                                  ->where('products_options_descriptions.options_name', $attribute->products_options)
-                                  ->select('products_attributes.products_attributes_id')
-                                  ->first();
-                                  //dd($prodocuts_attributes);
-
-                                  DB::table('inventory_detail')->insert([
-                                      'inventory_ref_id' => $inventory_ref_id,
-                                      'products_id' => $products_data->products_id,
-                                      'attribute_id' => $prodocuts_attributes->products_attributes_id,
-                                  ]);
-
-                              }
-
-
-                    }
-                  }
-                }
-
-                $orders = DB::table('orders')->where('orders_id', '=', $orders_id)
-                    ->where('customers_id', '!=', '')->get();
-
-                $data = array();
-                $data['customers_id'] = $orders[0]->customers_id;
-                $data['orders_id'] = $orders_id;
-                $data['status'] = $status[0]->orders_status_name;
-
-                return redirect()->back()->with('message', Lang::get("labels.OrderStatusChangedMessage"));
             }
+        }
 
+        if ($orders_status == '3') {
+            $orders_products = DB::table('orders_products')->where('orders_id', '=', $orders_id)->get();
 
+            foreach ($orders_products as $products_data) {
+                $product_detail = DB::table('products')->where('products_id', $products_data->products_id)->first();
+                //dd($product_detail);
+                $date_added = date('Y-m-d h:i:s');
+                $inventory_ref_id = DB::table('inventory')->insertGetId([
+                        'products_id' => $products_data->products_id,
+                        'stock' => $products_data->products_quantity,
+                        'admin_id' => auth()->user()->id,
+                        'created_at' => $date_added,
+                        'stock_type' => 'in'
 
+                    ]);
+                //dd($product_detail);
+                if ($product_detail->products_type == 1) {
+                    $product_attribute = DB::table('orders_products_attributes')
+                            ->where([
+                                ['orders_products_id', '=', $products_data->orders_products_id],
+                                ['orders_id', '=', $products_data->orders_id],
+                            ])
+                            ->get();
+
+                    foreach ($product_attribute as $attribute) {
+                        //dd($attribute->products_options,$attribute->products_options_values);
+                        $prodocuts_attributes = DB::table('products_attributes')
+                                ->join(
+                                    'products_options_descriptions',
+                                    'products_options_descriptions.products_options_id',
+                                    '=',
+                                    'products_attributes.options_id'
+                                )
+                                ->join(
+                                    'products_options_values_descriptions',
+                                    'products_options_values_descriptions.products_options_values_id',
+                                    '=',
+                                    'options_values_id'
+                                )
+                                ->where(
+                                    'products_options_values_descriptions.options_values_name',
+                                    $attribute->products_options_values
+                                )
+                                ->where('products_options_descriptions.options_name', $attribute->products_options)
+                                ->select('products_attributes.products_attributes_id')
+                                ->first();
+                        //dd($prodocuts_attributes);
+
+                        DB::table('inventory_detail')->insert([
+                                'inventory_ref_id' => $inventory_ref_id,
+                                'products_id' => $products_data->products_id,
+                                'attribute_id' => $prodocuts_attributes->products_attributes_id,
+                            ]);
+                    }
+                }
+            }
+        }
+
+        $orders = DB::table('orders')->where('orders_id', '=', $orders_id)
+                ->where('customers_id', '!=', '')->get();
+
+        $data = array();
+        $data['customers_id'] = $orders[0]->customers_id;
+        $data['orders_id'] = $orders_id;
+        $data['status'] = $status[0]->orders_status_name;
+
+        return redirect()->back()->with('message', Lang::get("labels.OrderStatusChangedMessage"));
     }
 
     //deleteorders
@@ -275,7 +305,6 @@ class OrdersController extends Controller
     //view order detail
     public function invoiceprint(Request $request)
     {
-
         $title = array('pageTitle' => Lang::get("labels.ViewOrder"));
         $language_id = '1';
         $orders_id = $request->id;
@@ -289,7 +318,12 @@ class OrdersController extends Controller
         $order = DB::table('orders')
             ->LeftJoin('orders_status_history', 'orders_status_history.orders_id', '=', 'orders.orders_id')
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-            ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+            ->LeftJoin(
+                'orders_status_description',
+                'orders_status_description.orders_status_id',
+                '=',
+                'orders_status.orders_status_id'
+            )
             ->where('orders_status_description.language_id', '=', $language_id)
             ->where('orders.orders_id', '=', $orders_id)->orderby('orders_status_history.date_added', 'DESC')->get();
 
@@ -306,12 +340,21 @@ class OrdersController extends Controller
             $product = array();
             $subtotal = 0;
             foreach ($orders_products as $orders_products_data) {
-
                 //categories
                 $categories = DB::table('products_to_categories')
                     ->leftjoin('categories', 'categories.categories_id', 'products_to_categories.categories_id')
-                    ->leftjoin('categories_description', 'categories_description.categories_id', 'products_to_categories.categories_id')
-                    ->select('categories.categories_id', 'categories_description.categories_name', 'categories.categories_image', 'categories.categories_icon', 'categories.parent_id')
+                    ->leftjoin(
+                        'categories_description',
+                        'categories_description.categories_id',
+                        'products_to_categories.categories_id'
+                    )
+                    ->select(
+                        'categories.categories_id',
+                        'categories_description.categories_name',
+                        'categories.categories_image',
+                        'categories.categories_icon',
+                        'categories.parent_id'
+                    )
                     ->where('products_id', '=', $orders_products_data->orders_products_id)
                     ->where('categories_description.language_id', '=', $language_id)->get();
 
@@ -338,12 +381,22 @@ class OrdersController extends Controller
 
         $orders_status_history = DB::table('orders_status_history')
             ->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
-            ->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+            ->LeftJoin(
+                'orders_status_description',
+                'orders_status_description.orders_status_id',
+                '=',
+                'orders_status.orders_status_id'
+            )
             ->where('orders_status_description.language_id', '=', $language_id)
             ->orderBy('orders_status_history.date_added', 'desc')
             ->where('orders_id', '=', $orders_id)->get();
 
-        $orders_status = DB::table('orders_status')->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
+        $orders_status = DB::table('orders_status')->LeftJoin(
+            'orders_status_description',
+            'orders_status_description.orders_status_id',
+            '=',
+            'orders_status.orders_status_id'
+        )
             ->where('orders_status_description.language_id', '=', $language_id)->get();
 
         $ordersData['message'] = $message;
@@ -359,7 +412,5 @@ class OrdersController extends Controller
         $ordersData['currency'] = $this->myVarsetting->getSetting();
 
         return view("admin.Orders.invoiceprint", $title)->with('data', $ordersData);
-
     }
-
 }
