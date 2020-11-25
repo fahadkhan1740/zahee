@@ -505,6 +505,28 @@
                                         </div>
                                     </div>
                                 @endif
+
+                                @if($result['delivery_orders_count']>0)
+                                    <div class="progress-group">
+                                        <span class="progress-text">{{ trans('labels.OurForDelivery') }}</span>
+                                        <span class="progress-number"><b>{{ $result['delivery_orders_count'] }}</b>/{{ $result['total_orders'] }}</span>
+                                        <div class="progress sm">
+                                            <div class="progress-bar progress-bar-green"
+                                                 style="width: {{ $result['delivery_orders_count']*100/$result['total_orders'] }}%"></div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if($result['cancelled_orders_count']>0)
+                                    <div class="progress-group">
+                                        <span class="progress-text">{{ trans('labels.CancelledOrder') }}</span>
+                                        <span class="progress-number"><b>{{ $result['cancelled_orders_count'] }}</b>/{{ $result['total_orders'] }}</span>
+                                        <div class="progress sm">
+                                            <div class="progress-bar progress-bar-red"
+                                                 style="width: {{ $result['cancelled_orders_count']*100/$result['total_orders'] }}%"></div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.box-body -->
                         </div>

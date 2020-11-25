@@ -225,6 +225,8 @@ return [
 	'CompleteOrders' => 'Complete Orders',
 	'PendingOrders' => 'Pending Orders',
 	'InprocessOrders' => 'Inprocess Orders',
+	'OurForDelivery' => 'Our For Delivery',
+	'CancelledOrder' => 'Cancelled Order',
 	'RecentlyAddedProducts' => 'Recently Added Products',
 
 	//languages / labels

@@ -48,6 +48,11 @@ class AdminController extends Controller
             ->whereDate('date_purchased', today())
             ->first();
 
+        $ordersStatusBasedCount = DB::table('orders_status_history')
+            ->selectRaw('count(case when orders_status_id = 3 then orders_id end) as cancelled_orders_count')
+            ->selectRaw('count(case when orders_status_id = 4 then orders_id end) as delivery_orders_count')
+            ->first();
+
         $index = 0;
         $purchased_price = 0;
         $sold_cost = 0;
@@ -141,8 +146,10 @@ class AdminController extends Controller
         $cart = DB::table('customers_basket')->get();
 
         $result['cart'] = count($cart);
+        $result['cancelled_orders_count'] = $ordersStatusBasedCount->cancelled_orders_count ?? 0;
+        $result['delivery_orders_count'] = $ordersStatusBasedCount->delivery_orders_count ?? 0;
 
-        //Rencently added products
+        //Recently added products
         $recentProducts = DB::table('products')
             ->LeftJoin('image_categories', function ($join) {
                 $join->on('image_categories.image_id', '=', 'products.products_image')
