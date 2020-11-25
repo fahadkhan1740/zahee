@@ -34,7 +34,7 @@
                                             <th>{{ trans('labels.ID') }}</th>
                                             <th>{{ trans('labels.Image') }}</th>
                                             <th>{{ trans('labels.Products') }}</th>
-                                        <!--<th>{{ trans('labels.Quantity') }}</th>-->
+                                            <th>{{ trans('labels.Category') }}</th>
                                             <th>{{ trans('labels.ViewStock') }}</th>
                                         </tr>
                                         </thead>
@@ -48,10 +48,9 @@
                                                     <td width="45%">
                                                         <strong>{{ $outOfStockData->products_name }}</strong><br>
                                                     </td>
-                                                <!--<td>
-                                    {{ $outOfStockData->products_quantity }}
-                                                    </td>-->
-
+                                                    <td>
+                                                        {{ $outOfStockData->categories_name }}
+                                                    </td>
                                                     <td>
                                                         <a data-toggle="tooltip" data-placement="bottom"
                                                            title="{{ trans('labels.View') }}"
