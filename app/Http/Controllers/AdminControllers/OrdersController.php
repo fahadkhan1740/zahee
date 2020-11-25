@@ -206,12 +206,12 @@ class OrdersController extends Controller
         //orders status history
         $orders_history_id = DB::table('orders_status_history')->insertGetId(
             [
-                    'orders_id' => $orders_id,
-                    'orders_status_id' => $orders_status,
-                    'date_added' => $date_added,
-                    'customer_notified' => '1',
-                    'comments' => $comments,
-                ]
+                'orders_id' => $orders_id,
+                'orders_status_id' => $orders_status,
+                'date_added' => $date_added,
+                'customer_notified' => '1',
+                'comments' => $comments,
+            ]
         );
 
         if ($orders_status == '2') {
@@ -219,9 +219,9 @@ class OrdersController extends Controller
 
             foreach ($orders_products as $products_data) {
                 DB::table('products')->where('products_id', $products_data->products_id)->update([
-                        'products_quantity' => DB::raw('products_quantity - "'.$products_data->products_quantity.'"'),
-                        'products_ordered' => DB::raw('products_ordered + 1'),
-                    ]);
+                    'products_quantity' => DB::raw('products_quantity - "'.$products_data->products_quantity.'"'),
+                    'products_ordered' => DB::raw('products_ordered + 1'),
+                ]);
             }
         }
 
@@ -233,58 +233,58 @@ class OrdersController extends Controller
                 //dd($product_detail);
                 $date_added = date('Y-m-d h:i:s');
                 $inventory_ref_id = DB::table('inventory')->insertGetId([
-                        'products_id' => $products_data->products_id,
-                        'stock' => $products_data->products_quantity,
-                        'admin_id' => auth()->user()->id,
-                        'created_at' => $date_added,
-                        'stock_type' => 'in'
+                    'products_id' => $products_data->products_id,
+                    'stock' => $products_data->products_quantity,
+                    'admin_id' => auth()->user()->id,
+                    'created_at' => $date_added,
+                    'stock_type' => 'in'
 
-                    ]);
+                ]);
                 //dd($product_detail);
                 if ($product_detail->products_type == 1) {
                     $product_attribute = DB::table('orders_products_attributes')
-                            ->where([
-                                ['orders_products_id', '=', $products_data->orders_products_id],
-                                ['orders_id', '=', $products_data->orders_id],
-                            ])
-                            ->get();
+                        ->where([
+                            ['orders_products_id', '=', $products_data->orders_products_id],
+                            ['orders_id', '=', $products_data->orders_id],
+                        ])
+                        ->get();
 
                     foreach ($product_attribute as $attribute) {
                         //dd($attribute->products_options,$attribute->products_options_values);
                         $prodocuts_attributes = DB::table('products_attributes')
-                                ->join(
-                                    'products_options_descriptions',
-                                    'products_options_descriptions.products_options_id',
-                                    '=',
-                                    'products_attributes.options_id'
-                                )
-                                ->join(
-                                    'products_options_values_descriptions',
-                                    'products_options_values_descriptions.products_options_values_id',
-                                    '=',
-                                    'options_values_id'
-                                )
-                                ->where(
-                                    'products_options_values_descriptions.options_values_name',
-                                    $attribute->products_options_values
-                                )
-                                ->where('products_options_descriptions.options_name', $attribute->products_options)
-                                ->select('products_attributes.products_attributes_id')
-                                ->first();
+                            ->join(
+                                'products_options_descriptions',
+                                'products_options_descriptions.products_options_id',
+                                '=',
+                                'products_attributes.options_id'
+                            )
+                            ->join(
+                                'products_options_values_descriptions',
+                                'products_options_values_descriptions.products_options_values_id',
+                                '=',
+                                'options_values_id'
+                            )
+                            ->where(
+                                'products_options_values_descriptions.options_values_name',
+                                $attribute->products_options_values
+                            )
+                            ->where('products_options_descriptions.options_name', $attribute->products_options)
+                            ->select('products_attributes.products_attributes_id')
+                            ->first();
                         //dd($prodocuts_attributes);
 
                         DB::table('inventory_detail')->insert([
-                                'inventory_ref_id' => $inventory_ref_id,
-                                'products_id' => $products_data->products_id,
-                                'attribute_id' => $prodocuts_attributes->products_attributes_id,
-                            ]);
+                            'inventory_ref_id' => $inventory_ref_id,
+                            'products_id' => $products_data->products_id,
+                            'attribute_id' => $prodocuts_attributes->products_attributes_id,
+                        ]);
                     }
                 }
             }
         }
 
         $orders = DB::table('orders')->where('orders_id', '=', $orders_id)
-                ->where('customers_id', '!=', '')->get();
+            ->where('customers_id', '!=', '')->get();
 
         $data = array();
         $data['customers_id'] = $orders[0]->customers_id;
