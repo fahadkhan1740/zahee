@@ -38,7 +38,7 @@
                 <h2 class="page-header" style="padding-bottom: 25px">
                     <i class="fa fa-globe"></i> {{ trans('labels.OrderID') }}# {{ $data['orders_data'][0]->orders_id }}
                     <small class="pull-right">{{ trans('labels.OrderedDate') }}
-                        : {{ date('d-M-Y', strtotime($data['orders_data'][0]->date_purchased)) }}</small>
+                        : {{ date('d-M-Y h:i A', strtotime($data['orders_data'][0]->date_purchased)) }}</small>
                 </h2>
             </div>
             <!-- /.col -->
