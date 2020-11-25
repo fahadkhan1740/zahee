@@ -136,6 +136,14 @@ class ReportsController extends Controller
         $products = DB::table('products')
             ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
             ->leftJoin('image_categories', 'image_categories.image_id', '=', 'products.products_image')
+            ->leftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+            ->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
+            ->leftJoin(
+                'categories_description',
+                'categories.categories_id',
+                '=',
+                'categories_description.categories_id'
+            )
             ->where('products_description.language_id', '=', $language_id)
             ->where('image_categories.image_type', '=', 'THUMBNAIL')
             ->orderBy('products.products_id', 'DESC')
