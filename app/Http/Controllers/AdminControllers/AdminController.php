@@ -43,6 +43,11 @@ class AdminController extends Controller
             ->orderBy('date_purchased', 'DESC')
             ->get();
 
+        $todayOrdersCount = Order::query()
+            ->selectRaw('count(*) as today_orders_count')
+            ->whereDate('date_purchased', today())
+            ->first();
+
         $index = 0;
         $purchased_price = 0;
         $sold_cost = 0;
@@ -129,6 +134,7 @@ class AdminController extends Controller
         $result['pending_orders'] = $pending_orders;
         $result['compeleted_orders'] = $compeleted_orders;
         $result['total_orders'] = count($orders);
+        $result['today_total_orders'] = $todayOrdersCount->today_orders_count;
 
         $result['inprocess'] = count($orders) - $pending_orders - $compeleted_orders;
         //add to cart orders
