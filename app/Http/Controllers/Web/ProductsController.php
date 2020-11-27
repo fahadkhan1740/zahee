@@ -410,7 +410,7 @@ class ProductsController extends Controller
 
         $reviews = $this->products->productReviews($products[0]->products_id);
 
-        if (!empty($category)) {
+        if ($category !== null) {
             $category_slug = $category[0]->categories_slug;
             $category_name = $category[0]->categories_name;
         } else {
@@ -419,7 +419,7 @@ class ProductsController extends Controller
         }
         $sub_category = $this->products->getSubCategoryByParent($products[0]->products_id);
 
-        if (!empty($sub_category) and count($sub_category) > 0) {
+        if ($sub_category !== null && count($sub_category) > 0) {
             $sub_category_name = $sub_category[0]->categories_name;
             $sub_category_slug = $sub_category[0]->categories_slug;
         } else {
@@ -434,7 +434,7 @@ class ProductsController extends Controller
 
         $isFlash = $this->products->getFlashSale($products[0]->products_id);
 
-        if (!empty($isFlash) and count($isFlash) > 0) {
+        if ($isFlash !== null && count($isFlash) > 0) {
             $type = "flashsale";
         } else {
             $type = "";
