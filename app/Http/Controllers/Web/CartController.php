@@ -212,8 +212,22 @@ class CartController extends Controller
     //addToCart
     public function addToCart(Request $request)
     {
+        $checkAttributes = true;
+
+        if (count($request->input('option_id')) > 0) {
+            foreach ($request->input('option_id') as $optionKey => $value) {
+                if ($request->$value === null || trim($request->$value) === '') {
+                    $checkAttributes = false;
+                }
+            }
+        }
+
+        if (!$checkAttributes) {
+            return ['status' => 'exceed'];
+        }
+
         $result = $this->cart->addToCart($request);
-        if (!empty($result['status']) && $result['status'] == 'exceed') {
+        if (!empty($result['status']) && $result['status'] === 'exceed') {
             return $result;
         }
         return view("web.headers.cartButtons.cartButton")->with('result', $result);
