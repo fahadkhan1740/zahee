@@ -99,9 +99,17 @@
                     data: '&products_id=' + products_id,
                     success: function (res) {
                         if (res.status == 'exceed') {
+                            let message = '';
+
+                            if (res['message']) {
+                                message = res['message'];
+                            } else {
+                                message = "@lang('website.product_available_not_for_sale')<br><a href='mailto:?subject=Query regarding product &amp;body=anuva.kataria@imarkinfotech.com'>Send Mail<i class='fa fa-envelope' aria-hidden='true'></i></a>";
+                            }
+
                             swal({
-                                title: "Something Happened To Stock",
-                                text: "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')&nbsp;&nbsp;<a href='mailto:anuva.kataria@imarkinfotech.com'><i class='fa fa-envelope-o' aria-hidden='true'></i></a>",
+                                title: "@lang('website.something_happened')",
+                                text: message,
                                 html: true, // add this if you want to show HTML
                                 type: "error" // type can be error/warning/success
                             });
@@ -133,7 +141,7 @@
                         if (res['status'] == 'exceed') {
                             swal({
                                 title: "Something Happened To Stock",
-                                text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')</a>",
+                                text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.product_available_not_for_sale')</a>",
                                 html: true, // add this if you want to show HTML
                                 type: "error" // type can be error/warning/success
                             });
@@ -403,17 +411,25 @@
                         // swal( title: "Something Happened To Stock", content: "", icon:"error");
 
                         if (res['status'] == 'exceed') {
+                            let message = '';
+
+                            if (res['message']) {
+                                message = res['message'];
+                            } else {
+                                message = "@lang('website.product_available_not_for_sale')<br><a href='mailto:?subject=Query regarding product &amp;body=anuva.kataria@imarkinfotech.com'>Send Mail<i class='fa fa-envelope' aria-hidden='true'></i></a>";
+                            }
+
                             swal({
-                                title: "Something Happened To Stock",
-                                text: "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')<br><a href='mailto:?subject=Query regarding product &amp;body=anuva.kataria@imarkinfotech.com'>Send Mail<i class='fa fa-envelope' aria-hidden='true'></i></a>",
+                                title: "@lang('website.something_happened')",
+                                text: message,
                                 html: true, // add this if you want to show HTML
                                 type: "error" // type can be error/warning/success
                             });
-                            // swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin') <a>Contact through Email with admin</a>", "error");
+                            // swal("Something Happened To Stock", "@lang('website.product_available_not_for_sale') <a>Contact through Email with admin</a>", "error");
                         } else {
                             jQuery('.head-cart-content').html(res);
                             jQuery(parent).addClass('active');
-                            swal('', "Product Added Successfully Thanks.Continue Shopping", "success", {button: false});
+                            swal('', "@lang('website.product_added_to_card')", "success", {button: false});
 
                         }
                     }

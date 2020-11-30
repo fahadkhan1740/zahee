@@ -13,10 +13,13 @@ return [
     |
     */
     'Guest Checkout' => 'Guest Checkout',
-    'Ops! Product is available in stock But Not Active For Sale. Please contact to the admin' => 'Ops! Product is available in stock But Not Active For Sale. Please contact to the admin',
+    'something_happened' => 'Something Happened',
+    'product_available_not_for_sale' => 'Ops! Product is available in stock But Not Active For Sale. Please contact to the admin',
     'Ops! you have already bought full stock. If you like this product and want more contact to the admin' => 'Ops! you have already bought full stock. If you like this product and want more contact to the admin',
     'Ops! The amount you can add more is' => 'Ops! The amount you can add more is',
     'If you do not want to apply this coupon just click cross button of this alert.' => 'If you do not want to apply this coupon just click cross button of this alert.',
+    'select_attribute' => 'Select Size, Colour etc',
+    'product_added_to_card' => 'Product Added to Cart Successfully. Thanks! Continue Shopping.',
     'Your address has been changed successfully' => 'Your address has been changed successfully',
     'payment method' => 'payment method',
     'DOWNLOAD OUR APPS' => 'DOWNLOAD OUR APPS',
@@ -173,7 +176,7 @@ return [
 
     'Cart has been updated successfully' => 'Cart has been updated successfully!',
 
-    'Coupon can not be apllied to empty cart' => 'Coupon can not be apllied to empty cart.',
+    'Coupon can not be apllied to empty cart' => 'Coupon can not be applied to empty cart.',
 
     'cartEmptyText' => 'You have no items in your shopping cart.<br>Click <a href="shop">here</a> to continue shopping.',
 

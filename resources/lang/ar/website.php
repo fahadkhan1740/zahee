@@ -13,6 +13,32 @@ return [
     |
     */
 
+    'Guest Checkout' => 'Guest Checkout',
+    'something_happened' => 'شيء ما حصل',
+    'product_available_not_for_sale' => 'عفواً !هذا المنتج مُتاح للبيع، لكنه غير نشط، يُرجى الإتصال بالمسؤول و الإبلاغ عن الخلل لإصلاحه.شكراً لتفهمك.',
+    'Ops! you have already bought full stock. If you like this product and want more contact to the admin' => 'Ops! you have already bought full stock. If you like this product and want more contact to the admin',
+    'Ops! The amount you can add more is' => 'Ops! The amount you can add more is',
+    'If you do not want to apply this coupon just click cross button of this alert.' => 'If you do not want to apply this coupon just click cross button of this alert.',
+    'select_attribute' => 'يرجى إختيار المقاس واللون والحجم الذي يناسبك.',
+    'product_added_to_card' => 'لقد تم إضافة المنتج بنجاح، إستمر في التسوق !',
+    'Your address has been changed successfully' => 'Your address has been changed successfully',
+    'payment method' => 'payment method',
+    'DOWNLOAD OUR APPS' => 'DOWNLOAD OUR APPS',
+    'SUBSCRIBE NOW FOR THE LATEST NEWS AND GET 10% DISCOUNT ON SPECIAL ITEMS' => 'SUBSCRIBE NOW FOR THE LATEST NEWS AND GET 10% DISCOUNT ON SPECIAL ITEMS',
+    'Hotline' => 'Hot Line',
+    'Call Us Now' => 'Call Us Now',
+    'Product Is Ready To Comapre!' => 'Product Is Ready To Comapre!',
+    'Product Quantity Exceeding From Current Stock Please Enter A Valid Quantity!' => 'Product Quantity Exceeding From Current Stock Please Enter A Valid Quantity!',
+    'bannerLabel1' => 'Free Shipping',
+    'Compare' => 'Compare',
+    'Product Is Liked!' => 'Product is Liked',
+    'Please Login First!' => 'Please Login First',
+    'Product Is DisLiked!' => 'Product is DisLiked!',
+    'Product added successfully!' => 'Product added successfully!',
+    'Choose Any Category' => 'Choose Category',
+    'bannerLabel1Text' => 'On order over $99',
+
+
     'Hotline' => 'الشحن مجانا',
 
     'SPECIAL DEALS' => 'الشحن مجانا',

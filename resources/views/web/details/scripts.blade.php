@@ -119,7 +119,7 @@ jQuery(document).on('click', '.cart', function(e){
 			if(res.status == 'exceed'){
 				swal({
 						title: "Something Happened To Stock",
-						text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')</a>",
+						text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.product_available_not_for_sale')</a>",
 						html: true, // add this if you want to show HTML
 						type: "error" // type can be error/warning/success
 					});
@@ -152,7 +152,7 @@ jQuery(document).on('click', '.buy-now', function(e){
                 if(res['status'] == 'exceed'){
 					swal({
 						title: "Something Happened To Stock",
-						text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')</a>",
+						text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.product_available_not_for_sale')</a>",
 						html: true, // add this if you want to show HTML
 						type: "error" // type can be error/warning/success
 					});
@@ -427,11 +427,11 @@ jQuery(document).on('click', '.add-to-Cart', function(e){
                 if(res['status'] == 'exceed'){
 					swal({
 						title: "Something Happened To Stock",
-						text: "<a href='mailto:?subject=Query regarding product &amp;body=anuva.kataria@imarkinfotech.com'>@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')</a>",
+						text: "<a href='mailto:?subject=Query regarding product &amp;body=anuva.kataria@imarkinfotech.com'>@lang('website.product_available_not_for_sale')</a>",
 						html: true, // add this if you want to show HTML
 						type: "error" // type can be error/warning/success
 					});
-                    // swal("Something Happened To Stock", "@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin') <a>Contact through Email with admin</a>", "error");
+                    // swal("Something Happened To Stock", "@lang('website.product_available_not_for_sale') <a>Contact through Email with admin</a>", "error");
                 }
                 else {
                     jQuery('.head-cart-content').html(res);

@@ -467,18 +467,14 @@ class ProductsController extends Controller
 
         //Add to recently Viewed
 
-        if (!is_null(session()->get('recently_viewed'))) {
-            if (count(session()->get('recently_viewed'))) {
-                // check if product already exists
-                $recently_viewed_data = session()->get('recently_viewed');
-                $valueCheck = $this->find_key_value($recently_viewed_data, $detail['product_data'][0]->products_id);
-                if (!$valueCheck) {
-                    session()->push('recently_viewed', $detail['product_data'][0]);
-                }
-//            dd($valueCheck);
-            } else {
+        if (!is_null(session()->get('recently_viewed')) && count(session()->get('recently_viewed'))) {
+            // check if product already exists
+            $recently_viewed_data = session()->get('recently_viewed');
+            $valueCheck = $this->find_key_value($recently_viewed_data, $detail['product_data'][0]->products_id);
+            if (!$valueCheck) {
                 session()->push('recently_viewed', $detail['product_data'][0]);
             }
+//            dd($valueCheck);
         } else {
             session()->push('recently_viewed', $detail['product_data'][0]);
         }

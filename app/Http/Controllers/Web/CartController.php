@@ -214,7 +214,7 @@ class CartController extends Controller
     {
         $checkAttributes = true;
 
-        if (count($request->input('option_id')) > 0) {
+        if ($request->has('option_id') && count($request->input('option_id')) > 0) {
             foreach ($request->input('option_id') as $optionKey => $value) {
                 if ($request->$value === null || trim($request->$value) === '') {
                     $checkAttributes = false;
@@ -223,7 +223,7 @@ class CartController extends Controller
         }
 
         if (!$checkAttributes) {
-            return ['status' => 'exceed'];
+            return ['status' => 'exceed', 'message' => __('website.select_attribute')];
         }
 
         $result = $this->cart->addToCart($request);

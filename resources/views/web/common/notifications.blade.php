@@ -35,7 +35,7 @@
   <div class="top-alert" id="alert-exceed" style="display:none;">
     <div class="alert alert-danger ">
       <i class="glyphicon glyphicon-exclamation-sign"></i>
-      @lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')
+      @lang('website.product_available_not_for_sale')
     </div>
   </div>
   <div class="top-alert" id="alert-compare" style="display:none;">
