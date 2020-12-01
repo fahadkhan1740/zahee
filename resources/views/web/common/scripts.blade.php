@@ -126,6 +126,8 @@
             });
         });
         jQuery(document).on('click', '.buy-now', function (e) {
+            var formData = jQuery("#add-Product-form").serialize();
+
             if (jQuery('#number').val() > 0) {
                 var parent = jQuery(this);
                 var products_id = jQuery(this).attr('products_id');
@@ -135,17 +137,24 @@
                     url: '{{ URL::to("/addToCart")}}',
                     headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
                     type: "POST",
-                    data: '&products_id=' + products_id + '&quantity=' + qty,
+                    data: formData,
 
                     success: function (res) {
                         if (res['status'] == 'exceed') {
+                            let message = '';
+
+                            if (res['message']) {
+                                message = res['message'];
+                            } else {
+                                message = "@lang('website.product_available_not_for_sale')<br><a href='mailto:?subject=Query regarding product &amp;body=anuva.kataria@imarkinfotech.com'>Send Mail<i class='fa fa-envelope' aria-hidden='true'></i></a>";
+                            }
+
                             swal({
-                                title: "Something Happened To Stock",
-                                text: "<a href='mailto:anuva.kataria@imarkinfotech.com'>@lang('website.product_available_not_for_sale')</a>",
+                                title: "@lang('website.something_happened')",
+                                text: message,
                                 html: true, // add this if you want to show HTML
                                 type: "error" // type can be error/warning/success
-                            });
-                        } else {
+                            });                        } else {
                             jQuery('.head-cart-content').html(res);
                             jQuery(parent).addClass('active');
                             location.href = "{{ URL::to('/viewcart') }}"
