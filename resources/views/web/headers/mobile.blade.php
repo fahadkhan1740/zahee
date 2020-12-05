@@ -9,15 +9,15 @@
                     <li>
                         <select class="selectpicker" data-width="fit">
                             <option data-content='<span class="flag-icon flag-icon-us"></span> English'></option>
-                            <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'></option>
+                            <option data-content='<span class="flag-icon flag-icon-mx"></span> Español'></option>
                         </select>
                     </li>
-			<li>
-		 <select>
+                    <li>
+                        <select>
                             <option> Kuwait</option>
-                            <option  > Qatar</option>
-			    <option> UAE</option>
-                            <option  > Bahrain</option>
+                            <option> Qatar</option>
+                            <option> UAE</option>
+                            <option> Bahrain</option>
                             <option> Saudi Arabia</option>
                             <option> Oman</option>
                         </select>
@@ -36,7 +36,7 @@
                     <form>
                         <div class="input-field">
                             <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" class="form-control" placeholder="Search" />
+                            <input type="text" class="form-control" placeholder="Search"/>
                         </div>
                     </form>
                 </div>
@@ -55,9 +55,11 @@
     <nav class="navbar navbar-expand-md">
         <div class="container">
             <div class="logo-wrap">
-                <a href="{{ URL::to('/')}}" class="site-logo"><img src="{{asset('web/images/cus/logo.png')}}" alt="logo1.png" /></a>
+                <a href="{{ URL::to('/')}}" class="site-logo"><img src="{{asset('web/images/cus/logo.png')}}"
+                                                                   alt="logo1.png"/></a>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -72,7 +74,7 @@
                         <a class="nav-link" href="#">Grocery</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Cosmetic & Perfumes   </a>
+                        <a class="nav-link" href="#">Cosmetic & Perfumes </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Health Supplements</a>
